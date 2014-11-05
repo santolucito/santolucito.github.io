@@ -69,6 +69,14 @@ title: Vocab
 - 여쁘다 - to be pretty
 - 쓰다 - to write/be bitter
 
+###Coupula 이다
+followed by vowel
+- 예요 - present
+- 였어요 - past
+followed by consonant or negation (아니)
+- 이에요 - present
+- 었어요 - past
+
 ## Verb constructs
 Used to modify verbs. If a verb construct ends with 다 it can be combined with further verb constructs.
 
