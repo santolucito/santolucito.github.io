@@ -32,7 +32,6 @@ title: Vocab
 - 춤을 추다 - to dance
 - 있다 - to have
 - 없다 - to not have
-
 - 청수하다 - to clean
 - 좋아하다 - to like
 - 싫어하다 - to dislike
