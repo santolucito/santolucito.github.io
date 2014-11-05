@@ -1,7 +1,6 @@
 ---
-layout: site.css
+layout: page
 title: Vocab
-css: site
 ---
 
 
@@ -35,6 +34,7 @@ css: site
 - 좋아하다 - to like
 - 싫어하다 - to dislike
 - 마나다 - to meet
+- 쓰다 - to write/be bitter
 
 ## Nouns
 
