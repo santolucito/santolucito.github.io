@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: site.css
 title: Vocab
+css: site
 ---
 
 
