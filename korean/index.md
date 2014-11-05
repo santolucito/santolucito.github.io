@@ -3,10 +3,22 @@ layout: default
 title: Vocab
 ---
 
+#Adverbs
+- 자주 - often
+- 정말 - very
+- 아주 - quite
+- 참 - really
+- 빨리 - fast
+- 혼자 - alone
+- 같이 (pr. 가치)- together
+- 보통 - usually
+- 가끔 - sometimes
+- 벌써 - already
+- 일찍 - early
 
 # Verbs
 
-## Action Verbs
+## Proper Verbs
 - 먹다 - to eat
 - 가다 - to go
 - 보다 - to watch
@@ -47,6 +59,7 @@ title: Vocab
 
 ### Adjectives (function like verbs)
 - 좋다 - to be good
+- 기분이 좋다 - to be in a good mood
 - 조용하다 - to be quiet
 - 많다 - to be a lot
 - 바쁘다 - to be busy
@@ -56,16 +69,13 @@ title: Vocab
 - 여쁘다 - to be pretty
 - 쓰다 - to write/be bitter
 
-### ???
-- 기분이 좋다 - to be in a good mood
-
----
-
 ## Verb constructs
+Used to modify verbs. If a verb construct ends with 다 it can be combined with further verb constructs.
 
 ### Category 1 (아/어) - conjugate verb if possible. Verbs ending with ㄷ change to ㄹ.
 - 아/어 present tense
 - 았어 past tense
+- (아/어)야되다(돼요) to need to
 
 ### Category 2 (으) - Use unchanged verb stem. Verbs ending with ㄷ change to ㄹ.
 - (으)ㄹ 거예요 future tense
@@ -76,7 +86,7 @@ title: Vocab
 - (으)ㄹ 수 있다 to be able to
 - (으)ㄹ 수 없다 to not be able to
 
-###Category 3 (consanant)- Use unchanged verb stem.
+###Category 3 (consonant)- Use unchanged verb stem.
 - 고 verb conjunction
 - 고 있다 gerund, -ing
 - 기 전에 before (I eat before I go = 먹기 전에 가요)
