@@ -39,6 +39,19 @@ title: Vocab
 - 조용하다 - to be quiet
 - 많다 - to be a lot
 - 바쁘다 - to be busy
+- 아프다 - to be sick
+- 슬프다 - to be sad
+- 보내다 - to send
+- 갇다 - to walk
+- 여쁘다 - to be pretty
+- 여행을 하다 - to travel
+- 너래하다 - to sing
+- 요리하다 - to cook
+- 결혼 하다 - to marry
+- 기분이 좋다 - to be in a good mood
+- 빨래하다 - to do laundry
+- (학교) 졸업하다 - to graduate (from school)
+- 이사하다 - to move (to a location)
 
 
 ## Nouns
