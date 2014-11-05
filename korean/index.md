@@ -1,8 +1,8 @@
 ---
 layout: page
 title: Vocab
-googlewebfonts: Gloria+Hallelujah
 ---
+
 
 # Vocab
 
