@@ -1,15 +1,16 @@
 ---
 layout: page
 title: Vocab
+googlewebfonts: Gloria+Hallelujah
 ---
 
 # Vocab
 
 ## Verbs
 - 공부하다 - to study
-- 먹다 -     to eat
-- 가다 -     to go
-- 보다 -     to watch
+- 먹다 - to eat
+- 가다 - to go
+- 보다 - to watch
 - 숙제하다 - to do homework
 - 식사하다 - to eat a meal
 - 연습하다 - to practice
