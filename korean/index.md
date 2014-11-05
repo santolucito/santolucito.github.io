@@ -1,5 +1,4 @@
 ---
-layout: page
 title: Vocab
 ---
 
@@ -35,6 +34,11 @@ title: Vocab
 - 싫어하다 - to dislike
 - 마나다 - to meet
 - 쓰다 - to write/be bitter
+- 첳다 - to be good
+- 조용하다 - to be quiet
+- 많다 - to be a lot
+- 바쁘다 - to be busy
+
 
 ## Nouns
 
