@@ -37,7 +37,8 @@ title: Vocab
 - 사다 - to buy
 - 마시다 - to drink
 - 마나다 - to meet
-- 기다리다 - to teach
+- 기다리다 - to wait
+- 가르치다 -to teach
 - 배우다 - to learn
 - 빌리다 - to borrow
 - 받다 - to receive
