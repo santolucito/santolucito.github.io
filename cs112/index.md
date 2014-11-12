@@ -27,7 +27,7 @@ Methods to edit
 Let's start with building an initial board. To do this we will just be randomly filling the board with new Squares. We have already given you code to create a square at position [0][0] and make it fall into place. Extrapolate this to fill in the whole board. Once you have done this you can run the program and see a board full of squares! (NB: you need to double click on the menu items for them to work).
 
 #Part 2
-5 points
+3 points
 
 Methods to edit
 
@@ -35,12 +35,14 @@ Methods to edit
 
 Now we need to be able to swap two squares. To do that we write a method that two elements in an two-dimensional array. Remember that Arrays are pass-by-reference. That means we can make changes to the board's two-dimensional array "_squares" (which represents the squares currently on the board).
 
+But wait, you still can't swap the squares. Remember all those other files? They prevent you from making swaps unless it is a valid match, but we haven't yet defined what it means to be a valid match. Let'e get to it!
+
 #Part 3
 20 points
 
 Methods to edit
 
-- fillInitialBoard
+- fillInitialBoard (only a bit)
 - buildPossibleMatchHorizontal
 - buildPossibleMatchHorizontal
 - expandArray
@@ -61,7 +63,7 @@ Notice that we don't know how long our match is going to be when we start. It co
 15 points
 
 Methods to edit
-
+- fillInitialBoard (only a bit)
 - findSolutions
 
 Great, now you can play the game! There is only one (major) problem left. If you run out of moves you are just stuck. In fact the initial board could even be generated in such a way that there are no solutions right from the begining. We certainly don't want that.
