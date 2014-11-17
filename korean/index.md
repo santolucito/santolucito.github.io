@@ -14,6 +14,7 @@ title: Vocab
 - 보통 - usually
 - 가끔 - sometimes
 - 벌써 - already
+- 늦게 - late
 - 일찍 - early
 
 # Verbs
@@ -85,6 +86,8 @@ Used to modify verbs. If a verb construct ends with 다 it can be combined with 
 - 아/어 present tense
 - 았어 past tense
 - (아/어)야되다(돼요) to need to
+- (아/어)도 even though
+- (아/어)도되다 to be allowed to/have permission to
 
 ### Category 2 (으) - Use unchanged verb stem. Verbs ending with ㄷ change to ㄹ.
 - (으)ㄹ 거예요 future tense
@@ -92,8 +95,11 @@ Used to modify verbs. If a verb construct ends with 다 it can be combined with 
 - (으)ㄹ 때마다 whenever/everytime I
 - (으)면 if
 - (으)면서 while,concurrent verbs
+- (으)면 안되다 to not be allowed to/to not have permission to
 - (으)ㄹ 수 있다 to be able to
 - (으)ㄹ 수 없다 to not be able to
+- (으)러 가다/오다 to go/come to a place do something
+- (으)세 command form
 
 ###Category 3 (consonant)- Use unchanged verb stem.
 - 고 verb conjunction
@@ -101,3 +107,5 @@ Used to modify verbs. If a verb construct ends with 다 it can be combined with 
 - 기 전에 before (I eat before I go = 먹기 전에 가요)
 - 고 나서 after (after I eat, I go = 먹고 나서 가요)
 - 고 싶다(1st,2nd person)/고 싶어하다(3rd person) to want to
+#####Formal
+- ㅂ/습니다 - present
