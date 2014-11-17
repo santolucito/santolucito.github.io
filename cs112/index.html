@@ -1058,7 +1058,7 @@ body .markdown-body
 
 <p>buildPossibleMatchRow/Column is going to take in an &lsquo;x&rsquo; and a &lsquo;y&rsquo; that specify a position on the board, and return an array of Points, which indicate the location of matches including that square. For example, if we had the following board, calling buildPossibleMatchColumn(0,0) should return an array [(0,0),(0,1)] and calling buildPossibleMatchRow(0,0) should return an array [(0,0)]. To save a new point into an array use &ldquo;possibleMatch[0] = new Point(x,y);&rdquo;</p>
 
-<p><img src="\Board1.png" alt="Alt Board" /></p>
+<p><img src="cs112\Board1.png" alt="Alt Board" /></p>
 
 <p>We have provided you with a call to the method helper.getColumnBools() and helper.getRowBools(). These return an array of booleans that represent which items in that row match a given square. For example calling helper.getRowBools(0,0) on the above board will return [True,False,False,True,True]. Similarly, calling helper.getColumnBools(0,0) on the above board will return [True,True,False,True].</p>
 
@@ -1068,7 +1068,7 @@ body .markdown-body
 
 <p>Once you have buildPossibleMatchRow/Column written, you can get started on  find_matches. find_matches will return a two dimensional &ldquo;jagged&rdquo; array of all the matches on a board. For example, if we had following board, calling find_matches() should return [[(0,0),(1,0),(2,0)],[(0,1),(1,1),(2,1),(3,1)]]. The order doesn&rsquo;t matter.</p>
 
-<p><img src="\Board3.jpg" alt="Alt Board" /></p>
+<p><img src="cs112\Board3.jpg" alt="Alt Board" /></p>
 
 <p>The &ldquo;find_matches&rdquo; method is called from &ldquo;has_matches&rdquo;. When you are ready to get started on this method, enable the has_matches method by removing &lsquo;return false&rsquo; and uncommenting the return line.</p>
 
@@ -1103,7 +1103,7 @@ body .markdown-body
 
 <p>When we click the hint button, all the squares that can be swapped to create a match should be highlighted. We have taken care of the highlighting, you just need to implement the &ldquo;findSolutions&rdquo; method so that it returns a list of all the squares that could be swapped. So calling findSolutions() with the following board should return [(0,0),(0,1),(1,0),(1,1), etc.]. The order doesn&rsquo;t matter, and there can be duplicates.</p>
 
-<p><img src="\Board2.png" alt="Alt Board" /></p>
+<p><img src="cs112\Board2.png" alt="Alt Board" /></p>
 
 <h3>How to write findSolutions</h3>
 
