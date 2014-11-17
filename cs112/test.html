@@ -1019,237 +1019,125 @@ body .markdown-body
     }
 </style>
 
-<h1 id="assignment-3">Assignment 3</h1>
-<p>Points: 20</p>
-<p>
-  For this assignment we have given you a <code>.zip</code> file called <code>CPSC112_Assignment3.zip</code> which can be imported into your workspace as per the instructions in
-  <a href="https://classesv2.yale.edu/access/content/group/cpsc112_f14/app_setup.html">Resources/app_setup.html</a>.
-  Note that this assignment is a bit more complicated than the previous onces, and will further test your ability to follow instructions precisely.
-</p>
-<p>
-  <code>CPSC112_Assignment3.zip</code> is a complete Android project so that if you complete the methods requested as part of this assignment, you can actually play this game on an Android phone or an Android emulator. However, the only file you need to edit for this assignment is CPSC112_Assignment3.java, and you can test your code via calls to the requested methods from the main method instead of from an Android phone/emulator if you prefer. While you can change the main method during testing, the one you submit should be exactly the one in the template file. You shouldn't need to change any of the method stubs.
-</p>
-<h4>Submission</h4>
-<p>
-  Since this project involves git, the submission process is a bit
-  different. Please re-zip the entire project that you imported, which should
-  contain the exact same files we gave you, plus the .git folder created by
-  git. (Note that you may not be able to see this folder in Finder or Windows
-  Explorer, but if you type <code>ls -a</code> in the project folder in
-  Terminal (Mac) or <code>dir \ad</code> on cmd (Windows), it should be
-  listed.) If you do not know how to zip a folder on your computer, please see a member of
-  the teaching staff during office hours. Submit the newly zipped folder, still called <code>CPSC112_Assignment3</code>. You should be able to find the directory in your Eclipse workspace.
-</p>
-<p>
-  <em>Please make sure you submit the correct files in the correct format for your submission. Every year there are students who don’t submit anything because they uploaded their program to Classes*v2, but didn’t officially submit the assignment and therefore get a 0. It is your responsibility to double check that the file that you submitted to Classes*v2 is the correct version - you can always see what Classes*v2 thinks your submission is. It is very painful for us to not be able to give students that have actually done the assignment full credit for their work.</em>
-</p>
-<h4>Caution: Methods and variable names</h4>
-<p>
-  While implementing this homework, you should not change any of the given
-  method signatures or variable names, including <code>DEBUG</code>. The
-  graders will use the <code>DEBUG</code> variable to make sure your responses
-  are
-  correct. Furthermore, we have created a global variable called <code>r</code>
-  of type <code>Random</code> for you. Plese use always use <code>r</code> to
-  create random numbers. Do not create another variable of
-  type <code>Random</code>, and always use <code>r.nextInt</code> to generate random
-  numbers. Again, this is because it will make grading your assignment easier
-  for John and Kun.
-</p>
-<p>All questions should  go to one of the grading TA’s, John Maheswaran
-  (john.maheswaran@yale.edu) and Kun Ren (kun.ren@yale.edu).</p>
-<hr>
-<h2>Assignment 3: Mastermind</h2>
-<p>
-  In this assignment, we're going to leave our friendly snakes aside and program a version of the game Mastermind. This is how this variation works:
-</p>
-<ol>
-  <li>There are two players</li>
-  <li>Player 1 picks 4 random distinct digits between 1 and 7, and remembers their order (call it the secret)</li>
-  <li>Player 2 continually guesses 4-distinct-digit strings.</li>
-  <li>Player 1 responds with 2 numbers: the number of digits in Player 2's guess that appear in the secret, and the number of numbers that are in the right place within the secret. For example, if the secret is <code>"1234"</code> and the guess is <code>"1467"</code>, the response will be <code>"2,1"</code> because 1 and 4 are in both strings, but only 1 is in the right place.</li>
-</ol>
-<h4>Making it tougher</h4>
-<p>What's described above is almost the same as regular Mastermind. But since
-  we are creative Yalies, we're going to add some tricky features to make the
-  game more fun and challenging:</p>
-<ol>
-  <li>
-    Player 1 can lie with 33% probability. If Player 1 lies, only one number can be changed (i.e. from <code>"1,0"</code> to <code>"1,1"</code>, but not to <code>"2,1"</code>. Player 1 may not lie twice in a row. Lastly, lies must be valid responses, that is, both numbers must be between 0 and 4 and the second one must be less than or equal to the first. <code>"1,2"</code> and <code>"5,3"</code> are both impossible and cannot be lies.
-  </li>
-  <li>
-    <p>Player 2 must always make a guess that's <b>greater</b> than all of his or her previous guesses, with 3 exceptions. If all three of these exceptions are used up, and <code>mySecret</code> is less than the player's last guess, the player loses. </p>
-    <p>
-      For example, if the secret is <code>"4356"</code>:
-      <ol>
-        <li><code>"4123"</code> (valid)</li>
-        <li><code>"1567"</code> (valid, 2 exceptions left)</li>
-        <li><code>"2345"</code> (valid, 1 exception left; exceptions are
-	  counted from the greatest guess thus far, so even though this guess
-	  is larger than the previous guess, it still uses up an exception)</li>
-        <li><code>"3251"</code> (valid, 0 exceptions left)</li>
-        <li><code>"4125"</code> (valid, it's greater than 4123)</li>
-        <li><code>"4124"</code> (invalid, it's less than 4125)</li>
-        <li><code>"5213"</code> (valid, but player loses because 5203 > 4356)</li>
-      </ol>
-    </p>
-  </li>
-</ol>
-<h2>Part 0: Git up (2 points)</h2>
-<p>Make this project into a git repository. Every time you finish one of the
-  parts, make a commit with a message saying what part you completed (i.e. "Finished Part 1", or
-  "Finished Part 2"). You can learn more about git using the below links.</p>
-<ol>
-  <li><a href="http://git-scm.com/downloads">Install git</a></li>
-  <li><a href="http://git-scm.com/book/en/v2/Getting-Started-Git-Basics">The Git book</a>, a great overview of what git is</li>
-  <li><a href="https://try.github.io/levels/1/challenges/1">A CodeSchool interactive tutorial</a></li>
-  <li>The basic commands you need to know are <code>git init</code>, <code>git
-      add</code>, and <code>git commit</code>. You will type these into your
-    Terminal (Mac users) or cmd prompt (Windows), once you've installed
-    git. Feel free to research them on your own or seek help from a member of
-    the teaching staff during office hours.</li>
-</ol>
-<h2>Part 1: My Little Secret (4 points)</h2>
-<p>
-  Implement the method <code>makeMySecret</code>. The method should set the static variable <code>mySecret</code> to a random 4-character string, where each "letter" is a digit between 1 and 7. No digit may appear twice, and only the 7 digits from 1 - 7, inclusive, are allowed. You'll notice that when <code>DEBUG</code> is true, the template code prints the secret to the console. Please do not change this line. This will be helpful to you when testing, as well as to the TAs when grading.
-</p>
-<p>
-  Valid examples: <code>"1234"</code>, <code>"7653"</code>
-</p>
-<p>
-  Invalid examples: <code>"1123"</code>, <code>"12345"</code>, <code>"1a34"</code>, <code>"123"</code>, <code>"0123"</code>, <code>"8651"</code>
-</p>
-<h2>Part 2: Check Validity (2 points)</h2>
-<p>
-  Implement the <code>isGuessValid</code> method, which takes as an input the string the user has input.
-  Check if the input string is a valid input, that is, a 4-letter string where all the characters are distinct digits between 1 and 7 (inclusive)—the guess must meet the same criteria as <code>mySecret</code>. If the guess is invalid, print the message <code>"Input must be a 4-digit number with digits between 1 and 7."</code> and return <code>false</code>. Otherwise, print nothing and return true.
-</p>
-<h2>Part 3: Process the Guess (7 points)</h2>
-<p>
-  Implement the method <code>isGameOver</code>, which takes as an input the string the user has input, and returns a boolean.
-  <ol>
-    <li>Call <code>isGuessValid</code> with the input. If the return value is false, then return false without doing anything. The game should then just proceed to the next turn.</li>
-    <li>
-      <p>Compare the input against <code>mySecret</code>. Print out the guess
-	and the two number response, separated by a comma (and no spaces). The first number is the number of digits the input and <code>mySecret</code> have in common. The second number is the number of digits that are in common and in the correct position. Note that the second number is always less than or equal to the first number. </p>
-      <p>
-        For example, if the secret is "6573"
-        <ol>
-          <li>Guess: <code>"1234"</code>. Response: <code>Guess: 1234; Result: 1,0</code> (3 appears in both strings, but no digits are in the correct place)</li>
-          <li>Guess: <code>"6132"</code>. Response: <code>Guess: 6132; Result: 2,1</code> (6 and 3 both match, but only 6 is in the right place)</li>
-          <li>Guess: <code>"5673"</code>. Response: <code>Guess: 5673; Result: 4,2</code></li>
-        </ol>
-      </p>
-    </li>
-    <li>If the user gets the input correct, print "You won!" instead of "4,4", and return <code>true</code>. Otherwise, return <code>false</code>.</li>
-  </ol>
-</p>
-<h2>Part 4: Extras (5 points)</h2>
-<p>
-  Implement the extra features.
-</p>
-<ol>
-  <li>
-    Keep track of the number of exceptions remaining and use an exception up if
-    the current guess is lower than
-    the highest guess that player 2 has guessed thus far. This check should
-    happen before the comparison in Part 3 (2). If the guess is lower than a
-    previous guess, print <code>"Your guess was lower than allowed. You have 2
-      exceptions remaining."</code> (replace 2 with the actual number
-    remaining). You should say <code>"1 exceptions remaining."</code> even
-    though that's not grammatical. If the user makes an invalid guess and has
-    no exceptions remaining, then you should still print out <code>"Your guess
-      was lower than allowed. You have 0 exceptions
-      remaining."</code>. However, if the user has no exceptions remaining and
-    has guessed a number higher than the correct one, you should also print <code>"You're out of exceptions and you've guessed too high! The secret was 1234."</code> and return <code>true</code>, indicating that the game is over. (Of course, replace 1234 with the value of <code>mySecret</code>).
-  </li>
-  <li>
-    When responding in <code>isGameOver</code>, lie with a 33% probability if
-    you didn't lie the turn before. The lie should be a valid, but incorrect,
-    response that changes only one of the two numbers. The number it changes
-    should be chosen randomly, as well as the new value. (Make sure that the
-    value that is randomly generated by the computer is, in fact, a lie. In other words,
-    you should regenerate the random number if the random number generated by
-    the compuer is accidentally correct and not acutally a lie.) If your guess is a lie
-    and the global variable <code>DEBUG</code> is true, your program should
-    additionally print "Lie" to the screen. Note that the computer can still lie, even if
-    the user has won! But the computer should never lie
-    with <code>"4,4"</code> or <code>"4,3"</code> because, well, then it's just obvious that it's a
-    lie.
-  </li>
-</ol>
-<h2>Messages</h2>
-<p>For convenience, here are all the messages you should make sure your program outputs <b>exactly</b> at the right times. Whenever x's are used below, please replace with the appropriate value.</p>
-<ol>
-  <li><code>"Secret: xxxx"</code>, when <code>DEBUG</code> is on, right after the program generates <code>mySecret</code> (this is given to you in the template)</li>
-  <li><code>"Input must be a 4-digit number with digits between 1 and 7."</code>, when there is an invalid input</li>
-  <li><code>Guess: xxxx; Result: "x,x"</code> when a proper input is given</li>
-  <li><code>"Your guess was lower than allowed. You have x exceptions remaining."</code>, when the guess is lower than any previously guessed number.</li>
-  <li><code>"You're out of exceptions and you've guessed too high! The secret was xxxx."</code> when the above applies, but the user has no exceptions left. Note that the game ends after this message is displayed.</li>
-  <li><code>"Lie"</code>, when <code>DEBUG</code> is true and the computer responds with a lie.</li>
-  <li><code>"You won!"</code>, when the correct number is guessed. The game ends after this message.</li>
-</ol>
-<h2>Examples</h2>
-<p>
-  You can use these examples as test cases—manually set <code>mySecret</code> to the value in the example and see if your code matches up! Of course it's hard to "force" a lie, so you'll have to test that yourself.
-</p>
-<p>In the following example, <code>DEBUG</code> is true.</p>
-<pre><code><span style="color: #49afcd;">Secret: 5362</span>
-1234
-<span style="color: #49afcd;">Guess: 1234; Result: 2,0</span>
-asdf
-<span style="color: #49afcd;">Input must be a 4-digit number with digits between 1 and 7.</span>
-1239
-<span style="color: #49afcd;">Input must be a 4-digit number with digits between 1 and 7.</span>
-2345
-<span style="color: #49afcd;">Guess: 2345; Result: 3,1</span>
-4327
-<span style="color: #49afcd;">Guess: 4327; Result: 2,1</span>
-6325
-<span style="color: #49afcd;">Guess: 6325; Result: 3,2</span>
-<span style="color: #49afcd;">Lie</span>
-2356
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 2 exceptions remaining.</span>
-<span style="color: #49afcd;">Guess: 2356; Result: 4,1</span>
-5362
-<span style="color: #49afcd;">You won!</span></code></pre>
-<p>In this example, <code>DEBUG</code> is false, and secret is 2563. Can you tell which lines are lies?</p>
-<pre><code>1234
-<span style="color: #49afcd;">Guess: 1234; Result: 2,0</span>
-4567
-<span style="color: #49afcd;">Guess: 4567; Result: 2,2</span>
-4627
-<span style="color: #49afcd;">Guess: 4627; Result: 2,0</span>
-6745
-<span style="color: #49afcd;">Guess: 6745; Result: 2,1</span>
-3567
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 2 exceptions remaining.</span>
-<span style="color: #49afcd;">Guess: 3567; Result: 3,2</span>
-5632
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 1 exceptions remaining.</span>
-<span style="color: #49afcd;">Guess: 5632; Result: 4,0</span>
-3256
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 0 exceptions remaining.</span>
-<span style="color: #49afcd;">You're out of exceptions and you've guessed too high! The secret was 2563.</span></code></pre>
 
-<p>One more example without lies (the secret is <code>"4765"</code>).</p>
-<pre><code>1234
-<span style="color: #49afcd;">Guess: 1234; Result: 1,0</span>
-4562
-<span style="color: #49afcd;">Guess: 4562; Result: 3,2</span>
-2563
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 2 exceptions remaining.</span>
-<span style="color: #49afcd;">Guess: 2563; Result: 2,1</span>
-3456
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 1 exceptions remaining.</span>
-<span style="color: #49afcd;">Guess: 3456; Result: 3,0</span>
-4561
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 0 exceptions remaining.</span>
-<span style="color: #49afcd;">Guess: 4561; Result: 3,2</span>
-1234
-<span style="color: #49afcd;">Your guess was lower than allowed. You have 0 exceptions remaining.</span>
-<span style="color: #49afcd;">Guess: 1234; Result: 1,0</span>
-4567
-<span style="color: #49afcd;">Guess: 4567; Result: 4,2</span>
-4765
-<span style="color: #49afcd;">You won!</span>
+<h1>Code Crush</h1>
+
+<p>This is intended as an instruction module to teach intro students about
+loops, arrays, objects, and the like.
+This is based off David Saltares&rsquo;s <a href="https://github.com/siondream/freegemas-gdx">code</a>,
+which is based off José Tomás Tocino García&rsquo;s <a href="http://code.google.com/p/freegemas/">code</a>,
+which is based off the classic game of Bejeweled.</p>
+
+<h3>Setup/Installation</h3>
+
+<p>follow the instructions on how to <a href="https://developer.android.com/sdk/index.html?hl=i">set up</a>
+the development environment. Then download the github project as a zip file and import in Eclipse.</p>
+
+<h3>Assignments</h3>
+
+<p>Just delete sections of the code and ask students to fill in the blanks.
+Most likely, you will be interested in asking students to rewrite part of
+Board.java or possibly other files in the cpsc112 folder (the logic)</p>
+
+<h1>Example Assignment</h1>
+
+<p>Total points: 20</p>
+
+<p>You may be familiar with Candy Crush or Bewjewled. The goal is to swap items on a board to create matches of three or more. When such a match is created, those items disappear and you are awarded points. In our game the only goal is to score points. We are going to be building this game ourselves!</p>
+
+<p>For this assignment we have given you a .zip file called Assignment4.zip which can be imported into your workspace. File -> Import then import &ldquo;General -> Existing Projects into Workspace.&rdquo;</p>
+
+<p>CPSC112_Assignment4.zip is a complete project that can be run as an Android or Desktop app. To run the desktop version, you open the frontend-desktop folder in the sidebar (package explorer) in eclipse then click on src and press run. Likewise with Android. Feel free to test your code using either method.</p>
+
+<p>The whole project has a bit of a complicated structure - there are three different folders. The one titled &ldquo;cs112game&rdquo; contains the file you will be editing and is where all the logic is handled, while the other two &ldquo;frontend-_____&rdquo; are for the front end and you won&rsquo;t need to touch. Specifically, you need to only need to edit cpsc112/src/cpsc112.game/BoardHelper.java</p>
+
+<p>To be clear, the only file you will need to edit is BoardHelper.java located in the &ldquo;cs112game&rdquo; folder (cpsc112/src/cpsc112.game/BoardHelper.java). The following instructions will be in reference to this file. The file has a collection of method headers that you will need to complete. These methods will be called by the rest of the project, in ways you don&rsquo;t need to worry about, to make the game fully functional.</p>
+
+<h1>Part 1</h1>
+
+<p>13 points</p>
+
+<p>Methods to edit</p>
+
+<ul>
+<li>find_matches</li>
+<li>buildPossibleMatchRow</li>
+<li>buildPossibleMatchColumn</li>
+<li>expandArray</li>
+</ul>
+
+
+<p>Before you get started coding, let&rsquo;s take a look at the program as it is right now. In eclipse, select the frontend-desktop folder, then click the run button in eclipse. Up comes an initial board, but there are two problems.</p>
+
+<p>The first problem is that we haven&rsquo;t definined what it means to be a valid match. This means 1) initial board could have matches already in it, and 2) we don&rsquo;t know when we are allowed to swap two items (since we can only swap when it creates a valid match). Your job is then to write the methods &ldquo;find_matches&rdquo;, and its two required methods, &ldquo;buildPossibleMatchHorizontal&rdquo; and &ldquo;buildPossibleMatchVertical&rdquo;. The rest of the files in the project will use these methods to correct the aformentioned problems.</p>
+
+<p>We will start by writing buildPossibleMatchRow/Column first then, work on find_matches.</p>
+
+<h3>How to write buildPossibleMatchRow/Column</h3>
+
+<p>buildPossibleMatchRow/Column is going to take in an &lsquo;x&rsquo; and a &lsquo;y&rsquo; that specify a position on the board, and return an array of Points, which indicate the location of matches including that square. For example, if we had the following board, calling buildPossibleMatchColumn(0,0) should return an array [(0,0),(0,1)] and calling buildPossibleMatchRow(0,0) should return an array [(0,0)]. To save a new point into an array use &ldquo;possibleMatch[0] = new Point(x,y);&rdquo;</p>
+
+<p><img src="/Board1.png" alt="Alt Board" /></p>
+
+<p>We have provided you with a call to the method helper.getColumnBools() and helper.getRowBools(). These return an array of booleans that represent which items in that row match a given square. For example calling helper.getRowBools(0,0) on the above board will return [True,False,False,True,True]. Similarly, calling helper.getColumnBools(0,0) on the above board will return [True,True,False,True].</p>
+
+<p>You need to use this Boolean[] to figure out the length of your Point[] when it is initialized. Then fill in the Point[] with the appropriate points. You can test this method by useing the provided &ldquo;tester&rdquo; method which will be called everytime you generate a new board (you can use the &ldquo;reset&rdquo; button in game for this).</p>
+
+<h3>How to write find_matches</h3>
+
+<p>Once you have buildPossibleMatchRow/Column written, you can get started on  find_matches. find_matches will return a two dimensional &ldquo;jagged&rdquo; array of all the matches on a board. For example, if we had following board, calling find_matches() should return [[(0,0),(1,0),(2,0)],[(0,1),(1,1),(2,1),(3,1)]]. The order doesn&rsquo;t matter.</p>
+
+<p><img src="/Board3.jpg" alt="Alt Board" /></p>
+
+<p>The &ldquo;find_matches&rdquo; method is called from &ldquo;has_matches&rdquo;. When you are ready to get started on this method, enable the has_matches method by removing &lsquo;return false&rsquo; and uncommenting the return line.</p>
+
+<pre><code> public Boolean has_matches(){
+    return b.find_matches().size()!=0;
+ }
+</code></pre>
+
+<p>Here is the basic algorithm:</p>
+
+<ol>
+<li>loop through every square</li>
+<li>buildPossibleMatchRow on that square</li>
+<li>If the built match is of length more than three add it to foundMatches*</li>
+<li>continue looking for matches at the end of the match you just found</li>
+<li>do the same thing for buildPossibleMatchColumns</li>
+</ol>
+
+
+<p>*When we try to add a match to foundMatches, we will need make sure it is the corrrect length. In order to do this we will write a method called expandArray. You will need to fill in the &lsquo;expandArray&rsquo; method that takes an old_array and return a new_array such that &ldquo;new_array.length==old_array.length*2&rdquo; and all the elements are copied over from the old_array. You could just create the array to be big enough to hold all the possible matches (or just a huge number like 9999), but that could lead to poor preformance, it bad coding style, and doesn&rsquo;t make for a good homework assignment (so don&rsquo;t do it).</p>
+
+<p>If this method is working correctly, the initial board will have no matches, and you should be able to play the game!</p>
+
+<h1>Part 2</h1>
+
+<p>7 points</p>
+
+<p>Methods to edit
+- findSolutions</p>
+
+<p>Great, now you can play the game! There is only one (major) problem left. If you run out of moves you are just stuck. We should be able to generate a new board in the middle of the game if you run out of possible swaps. Also, have you noticed that &ldquo;Hint&rdquo; button in the game? It would be nice if that actually worked too.</p>
+
+<p>When we click the hint button, all the squares that can be swapped to create a match should be highlighted. We have taken care of the highlighting, you just need to implement the &ldquo;findSolutions&rdquo; method so that it returns a list of all the squares that could be swapped. So calling findSolutions() with the following board should return [(0,0),(0,1),(1,0),(1,1), etc.]. The order doesn&rsquo;t matter, and there can be duplicates.</p>
+
+<p><img src="/Board2.png" alt="Alt Board" /></p>
+
+<h3>How to write findSolutions</h3>
+
+<p>You should swap every square in every direction and checking to see if it makes a match using the has_matches() method. If there are matches, add the square&rsquo;s location (new Point(x,y)) to the squaresThatCanBeSwapped[], then swap it back to its original position.</p>
+
+<p>Notice that we don&rsquo;t know how big how list of solutions is going to be when we start. You will to write another expandArray function. This time it will be operating on Point[] instead of Point[][]. The actual code will look <strong>very</strong> similar to the previous expandArray function you wrote.</p>
+
+<h1>Cool lessons</h1>
+
+<p>Here are some fun extra things for you to think about. They aren&rsquo;t needed to complete the assignment though.</p>
+
+<h3>Dynamic Arrays/Lists</h3>
+
+<p>By writing the expandArray function, you have just invented a version of  dynamic arrays, or lists. These are special arrays that you can use without worrying about making the array the right size. In java one implementation of this is called ArrayLists. We won&rsquo;t go into depth now, but feel free to investigate on your own (chapter 7.5 in the textbook)!</p>
+
+<h3>Method Overloading</h3>
+
+<p>Did you notice that we wrote two method with the same name (expandArray) but different parameter types? This is called method overloading. As long as the parameter types or number of parameters is different, Java is smart enough to figure out which one to use on its own. you have already seen this with System.out.println which can print out a String or an int for you (or many other things).</p>
