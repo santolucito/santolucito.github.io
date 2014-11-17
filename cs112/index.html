@@ -1022,25 +1022,6 @@ body .markdown-body
 
 <h1>Code Crush</h1>
 
-<p>This is intended as an instruction module to teach intro students about
-loops, arrays, objects, and the like.
-This is based off David Saltares&rsquo;s <a href="https://github.com/siondream/freegemas-gdx">code</a>,
-which is based off José Tomás Tocino García&rsquo;s <a href="http://code.google.com/p/freegemas/">code</a>,
-which is based off the classic game of Bejeweled.</p>
-
-<h3>Setup/Installation</h3>
-
-<p>follow the instructions on how to <a href="https://developer.android.com/sdk/index.html?hl=i">set up</a>
-the development environment. Then download the github project as a zip file and import in Eclipse.</p>
-
-<h3>Assignments</h3>
-
-<p>Just delete sections of the code and ask students to fill in the blanks.
-Most likely, you will be interested in asking students to rewrite part of
-Board.java or possibly other files in the cpsc112 folder (the logic)</p>
-
-<h1>Example Assignment</h1>
-
 <p>Total points: 20</p>
 
 <p>You may be familiar with Candy Crush or Bewjewled. The goal is to swap items on a board to create matches of three or more. When such a match is created, those items disappear and you are awarded points. In our game the only goal is to score points. We are going to be building this game ourselves!</p>
@@ -1077,7 +1058,7 @@ Board.java or possibly other files in the cpsc112 folder (the logic)</p>
 
 <p>buildPossibleMatchRow/Column is going to take in an &lsquo;x&rsquo; and a &lsquo;y&rsquo; that specify a position on the board, and return an array of Points, which indicate the location of matches including that square. For example, if we had the following board, calling buildPossibleMatchColumn(0,0) should return an array [(0,0),(0,1)] and calling buildPossibleMatchRow(0,0) should return an array [(0,0)]. To save a new point into an array use &ldquo;possibleMatch[0] = new Point(x,y);&rdquo;</p>
 
-<p><img src="/Board1.png" alt="Alt Board" /></p>
+<p><img src="c:\Users\Mark Santolucito\Documents\santolucito.github.io\cs112\Board1.png" alt="Alt Board" /></p>
 
 <p>We have provided you with a call to the method helper.getColumnBools() and helper.getRowBools(). These return an array of booleans that represent which items in that row match a given square. For example calling helper.getRowBools(0,0) on the above board will return [True,False,False,True,True]. Similarly, calling helper.getColumnBools(0,0) on the above board will return [True,True,False,True].</p>
 
@@ -1087,7 +1068,7 @@ Board.java or possibly other files in the cpsc112 folder (the logic)</p>
 
 <p>Once you have buildPossibleMatchRow/Column written, you can get started on  find_matches. find_matches will return a two dimensional &ldquo;jagged&rdquo; array of all the matches on a board. For example, if we had following board, calling find_matches() should return [[(0,0),(1,0),(2,0)],[(0,1),(1,1),(2,1),(3,1)]]. The order doesn&rsquo;t matter.</p>
 
-<p><img src="/Board3.jpg" alt="Alt Board" /></p>
+<p><img src="c:\Users\Mark Santolucito\Documents\santolucito.github.io\cs112\Board3.jpg" alt="Alt Board" /></p>
 
 <p>The &ldquo;find_matches&rdquo; method is called from &ldquo;has_matches&rdquo;. When you are ready to get started on this method, enable the has_matches method by removing &lsquo;return false&rsquo; and uncommenting the return line.</p>
 
@@ -1122,7 +1103,7 @@ Board.java or possibly other files in the cpsc112 folder (the logic)</p>
 
 <p>When we click the hint button, all the squares that can be swapped to create a match should be highlighted. We have taken care of the highlighting, you just need to implement the &ldquo;findSolutions&rdquo; method so that it returns a list of all the squares that could be swapped. So calling findSolutions() with the following board should return [(0,0),(0,1),(1,0),(1,1), etc.]. The order doesn&rsquo;t matter, and there can be duplicates.</p>
 
-<p><img src="/Board2.png" alt="Alt Board" /></p>
+<p><img src="c:\Users\Mark Santolucito\Documents\santolucito.github.io\cs112\Board2.png" alt="Alt Board" /></p>
 
 <h3>How to write findSolutions</h3>
 
