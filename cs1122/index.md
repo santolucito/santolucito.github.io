@@ -11,11 +11,24 @@ You may be familiar with Candy Crush or Bewjewled. The goal is to swap items on 
 
 For this assignment we have given you a .zip file called Assignment4.zip which can be imported into your workspace. File -> Import then import "General -> Existing Projects into Workspace."
 
-CPSC112_Assignment4.zip is a complete project that can be run as an Android or Desktop app. To run the desktop version, you open the frontend-desktop folder in the sidebar (package explorer) in eclipse then click on src and press run. Likewise with Android. Feel free to test your code using either method. The first time your run, you will want to "Run As" a "Java application" for the desktop version and a "Android application" for Android. the game doesn't work yet since you haven't written the code!
+#Testing your code
 
 The whole project has a bit of a complicated structure - there are three different folders. The one titled "cs112game" contains the file you will be editing and is where all the logic is handled, while the other two "frontend-_____" are for the front end and you won't need to touch. Specifically, you need to only need to edit cpsc112/src/cpsc112.game/BoardHelper.java
 
 To be clear, the only file you will need to edit is BoardHelper.java located in the "cs112game" folder (cpsc112/src/cpsc112.game/BoardHelper.java). The following instructions will be in reference to this file. The file has a collection of method headers that you will need to complete. These methods will be called by the rest of the project, in ways you don't need to worry about, to make the game fully functional.
+
+You will see a main method inside of BoardHelper.java. If you run this method, you can see some test code run in the terminal. Initially, most of the tests will fail, but as you write your code it will start passing more of these tests. Once all of these tests pass you are done with the assignment.
+
+WINDOWS LINUX AND ANDROID OWNERS
+CPSC112_Assignment4.zip is a complete project that can be run as an Android or Desktop app. To run the desktop version, you open the frontend-desktop folder in the sidebar (package explorer) in eclipse then click on src and press run. Likewise with Android. Feel free to test your code using either method. The first time your run, you will want to "Run As" a "Java application" for the desktop version and a "Android application" for Android. The game doesn't work yet since you haven't written the code!
+
+The desktop and android version (with emulator) only work on Windows and Linux. If you have a Mac and an Android device, you can run the android version on the physical phone. This is entirely unnecessary for the assignment.
+
+In the instructions below we will use the graphical interface to demonstrate how the game works. The same game play principles apply to testing in the terminal, except instead of a images for the board you get the numbers 1-3 printed to the terminal.
+
+We also use the game to motivate why we want to write certain methods in a certain way. If you are just using the terminal to test, your motivation will just have to be the joy of learning (and finishing the assignment).
+
+
 
 #Part 1
 13 points
@@ -43,14 +56,13 @@ Instead of taking a string in its construction, it takes an 'x' and a 'y' coordi
 	int l = somePreviouslyCreatedArray.length;
 	int x = somePreviouslyCreatedPoint.x;
 
-One more thing. To access the size on the current board, we have a global variable "int size" that has already been set for you.
+One more thing. To access the size on the current board, use "b.getSize()" which will return an int.
 
 buildPossibleMatchRow/Column is going to take in an 'x' and a 'y' that specify a position on the board, and return an array of Points, which indicate the location of matching positions on the board in the same row/column involving that square. For example, if we had the following board, calling buildPossibleMatchColumn(0,0) should return an array [(0,0),(0,1)] and calling buildPossibleMatchRow(0,0) should return an array [(0,0)]. To save a new point into an array use "possibleMatch[0] = new Point(x,y);"
 
 ![Alt Board](cs112/Board1.png)
 
 We have provided you two methods that will help you in this task: getColumnBools() and getRowBools(). These methods take a particular location on the board, and return an array of booleans that represent which items in that row (or column) match the square at the given location. For example calling helper.getRowBools(0,0) on the above board will return [True,False,False,True,True]. Calling helper.getColumnBools(0,0) on the above board will return [True,True,False,True]. Calling helper.getColumnBools(0,2) on the above board will return [True,False,False,False].
-
 
 You need to use the boolean[] returned from these methods to figure out the length of your Point[] when it is initialized. Then fill in the Point[] with the appropriate points.
 
@@ -70,10 +82,7 @@ Here is the basic algorithm:
 
 \*When we try to add a match to foundMatches, we will need make sure it is large enough to hold all our entries. In order to do this, we will can use a method called expandArray(Point[][]).
 
-If this method is working correctly, the initial board will have no matches, and you should be able to play the game!
-
-
-
+If this method is working correctly, the initial board will have no matches, and you should be able to play the game (or see lots of tests passing)!
 
 
 #Part 2
@@ -90,7 +99,7 @@ Note that while (1) only requires detecting whether there are any legal swaps at
 ![Alt Board](cs112/Board2.png)
 
 ###How to write findSolutions
-You should swap every square in right and down and check to see if it makes a match using the hasMatches() method. If there is a match, add the square's location (new Point(x,y)) to the squaresThatCanBeSwapped[], then swap it back to its original position.
+You should swap every square once in the right direction and once in the down direction and check to see if it makes a match using the hasMatches() method. If there is a match, add the square's location (new Point(x,y)) to the squaresThatCanBeSwapped[], then swap it back to its original position.
 
 Notice that we don't know how big how list of solutions is going to be when we start. You will to write another expandArray(Point[]) method. This time it will be operating on Point[] instead of Point[][]. The actual code will look **very** similar to the previous expandArray(Point[][]) method from Part 1.
 
@@ -100,11 +109,14 @@ Notice that we don't know how big how list of solutions is going to be when we s
 
 Here are some fun extra things. They aren't needed to complete the assignment though.
 
+###Test Driven Development
+Was it fun to finish your code and see all those tests pass? Well, was it gratifying at least. This is a method of software development called "Test Driven Development." Basically we write some tests to define how we expect the program to work, then keep coding until the code does what it is supposed to do. This can be helpful for setting clear goals for a project and making sure as you add functionality, it doesn't break what you once had working. You might even consider using this technique for your group project!
+
 ###Hidden Bug
 There is a bit of a bug in the interface ("It's not a bug, it's a feature"). When you swap two squares, you can actually move one of those squares anywhere on the board you want. Click a square to swap it. As the swap animation happens, quickly drag your mouse somewhere else on the board. The original square you were trying to swap will end up wherever your mouse is at the end of the swap animation. It can make the game a bit more interesting. Also be carfeul of this as you test your own code!
 
 ###Tester
-You can test your code using the tester() method. It will be called every time you press the "Run Tester()" buttin in the game. This would be a good place to put some print lines and have your code print to the console.
+If you are using the GUI (Graphical user Interface), you can test your code using the tester() method. It will be called every time you press the "Run Tester()" buttin in the game. This would be a good place to put some print lines and have your code print to the console.
 
 ###Dynamic Arrays/Lists
 By writing the expandArray function, you have just invented a version of  dynamic arrays, or lists. These are special arrays that you can use without worrying about making the array the right size. In java one implementation of this is called ArrayLists. We won't go into depth now, but feel free to investigate on your own (chapter 7.5 in the textbook)!
