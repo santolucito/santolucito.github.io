@@ -1082,7 +1082,7 @@ body .markdown-body
 <pre><code>swapSquares(Point p1, Point p2)
 </code></pre>
 <p>To swap (0,0) with (0,1) you would use (including the "b.")</p>
-<pre><code>b.swapSquares(new Point(0,0), new Point(0,1);
+<pre><code>b.swapSquares(new Point(0,0), new Point(0,1));
 </code></pre>
 
 <p>You should iterate through every square on the board and swap that square with the square to its immediate right. Then, check to see if as a result of the swap a match will exist on the board using the hasMatches() method that we have provided for you. If such a match will exist as a result of the swap, add the square&#39;s location (new Point(x,y)) to the array that you will return from this method, then swap it back to its original position. Then swap that square with the square immediately below it and do the same hasMatches() check and swap back.</p>
