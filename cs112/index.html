@@ -1078,6 +1078,13 @@ body .markdown-body
 <p>Note that while (1) only requires detecting whether there are any legal swaps at all, (2) requires enumerating all legal swaps the user can take. In particular, when the user clicks on the hint button, all the squares that can be swapped to create a match should be highlighted. The code that we have pre-written has already taken care of the highlighting, but you just need to implement the &quot;findPossibleSwaps&quot; method that will return a list of all squares that can be swapped. For example, calling findPossibleSwaps() with the following board should return [(0,0),(0,1),(1,0),(1,1), etc.]. The order doesn&#39;t matter, and there can be duplicates. Furthermore, it is up to you whether you want to return both elements of every pair that can be swapped or just one element of that pair.</p>
 <p><img src="/cs112/Board2.png" alt="Alt Board"></p>
 <h3 id="how-to-write-findpossibleswaps">How to write findPossibleSwaps</h3>
+<p>Use the the follwoing method to swap two squares on the board.</p>
+<pre><code>swapSquares(Point p1, Point p2)
+</code></pre>
+<p>To swap (0,0) with (0,1) you would use (including the "b.")</p>
+<pre><code>b.swapSquares(new Point(0,0), new Point(0,1);
+</code></pre>
+
 <p>You should iterate through every square on the board and swap that square with the square to its immediate right. Then, check to see if as a result of the swap a match will exist on the board using the hasMatches() method that we have provided for you. If such a match will exist as a result of the swap, add the square&#39;s location (new Point(x,y)) to the array that you will return from this method, then swap it back to its original position. Then swap that square with the square immediately below it and do the same hasMatches() check and swap back.</p>
 <p>Notice that we don&#39;t know how big the list of possible swaps is going to be at the beginning of this method. Therfore you should make an initial guess, and and write an expandArray(Point[]) method that will dynamically expand your initial array if your guess was too small. Note that this time, the expandArray method will be operating on a Point[] instead of a Point[][]. The actual code will look <strong>very</strong> similar to the expandArray(Point[][]) method that we gave you for Part 1.</p>
 <h1 id="cool-lessons-hints">Cool lessons/Hints</h1>
