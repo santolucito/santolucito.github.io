@@ -6,7 +6,8 @@ title: Syntax
 #StriSynth Tutorial
 
 For this study we will use StriSynth to generate PowerShell commands to complete a scripting task.
-A typical workflow with StriSynth be as follows
+A typical workflow with StriSynth would be as follows
+
 - Open StriSynth 
 - Start learning a new operation 
 - Provide examples 
