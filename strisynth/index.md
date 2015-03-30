@@ -3,6 +3,7 @@ layout: default
 title: Syntax
 ---
 
+#StriSynth Tutorial
 
 For this study we will use StriSynth to generate PowerShell commands to complete a scripting task.
 A typical workflow with StriSynth be as follows
@@ -15,7 +16,8 @@ A typical workflow with StriSynth be as follows
 
 Here is an example run of task 0 to generate a script that appends the letter "A" to every file.
 
-```scala> NEW 
+```
+scala> NEW 
 scala> "file.txt" ==> "mv file.txt fileA.txt; "
 scala> "test.pdf" ==> "mv test.pdf testA.pdf; "
 scala> (TRANSFORM as map) in PowerShell to "task0/transf_Script.ps1"
@@ -32,24 +34,26 @@ In general, given more examples, the synthesised script will be more accurate.
 To this end, it may be advised to err on the side of caution and provide plenty of examples, but please feel free to develop a feel for the system as you see fit. 
 Every task we will ask you to complete is possible to accomplish with StriSynth. 
 
-#TRANSFORM :: String -> String
+##TRANSFORM :: String -> String
 Transforms a single string into another string.
 
-```scala> NEW 
+```
+scala> NEW 
 scala> "file.txt" ==> "mv file.txt fileA.txt"
 scala> "test.pdf" ==> "mv test.pdf testA.pdf"
 scala> TRANSFORM
 ```
 
-#REDUCE :: List(String) -> String 
+##REDUCE :: List(String) -> String 
 Transforms a list or tuple of strings into another string.  To use 5 or more elements, you need to prefix the tuple with the \verb+List+ keyword.  \touse{the reduce algorithm}{REDUCE}.
 
-```scala> NEW 
+```
+scala> NEW 
 scala> ("file.txt", "2015", "folder") ==> "mv file.txt folder/file2015.txt"
 scala> REDUCE
 ```
 
-#"..." (meta-string)
+##"..." (meta-string)
 You can use the meta-string "..." to invoke auto-completion. An example of the use of the meta-string "..." with REDUCE is the following:
 
 ```
@@ -58,7 +62,7 @@ scala> ("a.1.pdf", "a.2.pdf", "a.3.pdf") ==> "convert a.1.pdf a.2.pdf... a.pdf"
 scala> REDUCE
 ```
 
-#SPLIT :: String -> List(String)
+##SPLIT :: String -> List(String)
 Splits a string into a list of strings  The meta-string "..." can be also be used with SPLIT to say that the extraction continues. 
 
 ```
@@ -77,7 +81,7 @@ scala> NO ==> ("1.a.pdf")
 scala> FILTER
 ```
 
-#PARTITION :: List(String) -> List(List(String))
+##PARTITION :: List(String) -> List(List(String))
 Splits a list of strings into multiple sublists. The syntax is similar to FILTER except that it does not use the YES or NO keywords. It requires at least two partition examples with two elements in each.
 
 ```
@@ -98,7 +102,7 @@ scala> (TRANSFORM as map)(List("document.txt", "report.pdf", "legend.jpg"))
 List("document496.txt", "report498.pdf", "legend500.jpg")
 ```
 
-#| :: (a-> b) -> (b -> c) -> (a -> c)
+##| :: (a-> b) -> (b -> c) -> (a -> c)
 Infix operator to compose two transformations. Either assign the result to a variable or export it directly. If the composition is not possible, a warning will be issued explaining why and script exportation will be empty. \textbf{NB} If you have used composition in a functional language before this is the reverese order. You might think of our composition operator as expressing "andThen".
 
 ```
