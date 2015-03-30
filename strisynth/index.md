@@ -13,7 +13,8 @@ A typical workflow with StriSynth be as follows
 - Run the learned script from PowerShell to generate a sequence of PowerShell commands (a .ps1 script) or a .txt file.
 
 
-Here is an example run of task 0 to generate a script that appends the letter ```A``` to every file.
+Here is an example run of task 0 to generate a script that appends the letter "A" to every file.
+
 ```scala> NEW 
 scala> "file.txt" ==> "mv file.txt fileA.txt; "
 scala> "test.pdf" ==> "mv test.pdf testA.pdf; "
@@ -31,7 +32,7 @@ In general, given more examples, the synthesised script will be more accurate.
 To this end, it may be advised to err on the side of caution and provide plenty of examples, but please feel free to develop a feel for the system as you see fit. 
 Every task we will ask you to complete is possible to accomplish with StriSynth. 
 
-#TRANSFORM String -> String
+#TRANSFORM :: String -> String
 Transforms a single string into another string.
 
 ```scala> NEW 
