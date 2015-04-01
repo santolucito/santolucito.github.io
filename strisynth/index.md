@@ -103,8 +103,8 @@ scala> (TRANSFORM as map)(List("document.txt", "report.pdf", "legend.jpg"))
 List("document496.txt", "report498.pdf", "legend500.jpg")
 ```
 
-###| :: (a-> b) -> (b -> c) -> (a -> c)
-Infix operator to compose two transformations. Either assign the result to a variable or export it directly. If the composition is not possible, a warning will be issued explaining why and script exportation will be empty. \textbf{NB} If you have used composition in a functional language before this is the reverese order. You might think of our composition operator as expressing "andThen".
+###andThen :: (a-> b) -> (b -> c) -> (a -> c)
+Infix operator to compose two transformations. Either assign the result to a variable or export it directly. If the composition is not possible, a warning will be issued explaining why and script exportation will be empty. \textbf{NB} If you have used composition in a functional language before this is the reverese order. 
 
 ```
 scala> NEW; "(file).txt" ==> "file.txt"; val t = TRANSFORM
