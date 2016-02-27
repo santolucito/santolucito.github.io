@@ -46,8 +46,7 @@ These students will become your friends, your critics, and your mentors for the 
 The professors here can only do so much for you.
 There is a saying in English, you can lead a horse to water, but you can't make it drink.
 Your professors will guide you to knowledge, but you must take learning into your own hands.
-Reach beyond the homework, discuss ideas outside the classroom.
-Be the leader, encourge
+Reach beyond the homework, discuss ideas outside the classroom, become an academic in every waking moment.
 
 ## So, as you move in, I encourage you to consider what sort of home you want to build here.
 Your Alma Mater will be a nurturing mother to you, but you will also become part of the Alma Mater.
@@ -55,8 +54,8 @@ Always look to what you can do to make this place better for yourself and your f
 
 Yesterday at graduation, President Han said to the graduating students -
   "In your heart, Geumgang will always be your hometown."
-Kim So Wol also said in a poem of his  
-  "In dreams, we are always in our hometown."
+김소월 also said in a poem of his  
+  "In dreams, we are always in our hometown." (꿈에서는, 항상 고향입니다.)
 So, in these next four years, take it upon yourself to build the hometown of your dreams.
 
 Thank you
