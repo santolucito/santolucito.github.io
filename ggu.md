@@ -54,7 +54,7 @@ Always look to what you can do to make this place better for yourself and your f
 
 Yesterday at graduation, President Han said to the graduating students -
   "In your heart, Geumgang will always be your hometown."
-김소월 also said in a poem of his  
+김소월 also said in a poem of his
   "In dreams, we are always in our hometown." (꿈에서는, 항상 고향입니다.)
 So, in these next four years, take it upon yourself to build the hometown of your dreams.
 
