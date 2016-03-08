@@ -1,28 +1,19 @@
-What does the str() function do?
-- It measures the length of a string
-- It wraps the input in quotation marks ("")
-- It converts from strings to other types
-- It converts it's contents into a string
+# Quiz 2
 
-What will this code print?
-```python
-time = datetime.now() #2014-07-08 13:08:09
-print time.day```
-- 8
-- 7
-- 13
-- 9
+Write your name on a piece of paper and answer the following questions. When you are finished bring the paper to the front of the class.
 
-What will this code print?
+### 1
+Consider this program
 ```python
-now = datetime.now() #2013-01-04 19:22:43
-print '%s/%s/%s %s:%s:%s' % (now.day, now.month, now.year, now.hour, now.minute, now.second)
+print "I am "+str(30)
+print "I am "+30
 ```
-- 4/1/2001 19:22:43
-- 4/1/2013 19:22:43
-- 1/4/2013 19:22:13
-- 1/4/2013 19:22:43
+- line 1 is correct and line 2 is correct
+- line 1 is correct and line 2 is wrong
+- line 1 is wrong and line 2 is correct
+- line 1 is wrong and line 2 is wrong
 
+### 2
 What will the lines of code below print to the console?
 ```python
 my_variable = "Monty Python".lower()
@@ -33,31 +24,27 @@ print len(my_variable)
 - 12
 - 11
 
+### 3
 What is the correct way to output a string to the console?
 - console.log "The string to be printed"
 - echo "The string to be printed"
 - print "The string to be printed"
 - puts "The string to be printed"
 
+### 4
 What will the lines of code below print to the console?
+```python
 my_variable = "1234"
 print my_variable[2]
-3
-4
-2
-12
+```
+- 3
+- 4
+- 2
+- 12
 
+### 5
 What is the correct way of writing a single line comment?
 - //This is a comment
 - "This is a comment"
 - #This is a comment
 - /\*This is a comment\*/
-
-What will happen if the following phrase is used?
-```python
-from datetime import datetime
-```
-- A random amount of functions are imported
-- Nothing is imported
-- All functions from datetime are imported
-- Only functions used in the program are imported
