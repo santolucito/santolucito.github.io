@@ -31,7 +31,7 @@ One example of sampling is again [Kanye West](http://www.whosampled.com/sample/1
 You can [download](http://www.youtube-mp3.org/) these tracks from youtube.
 Try to recreate the beginning of Kanye West's song from Daft Punk.
 
-## Do this on your own
+## Do this on your own (Homework for next week, due 3/8 )
 
 Choose a song you like and create a short piece by using samples.
 If the song you like is on youtube, you can [download the audio](http://www.youtube-mp3.org/).
