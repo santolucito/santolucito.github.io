@@ -22,4 +22,8 @@ This is not required right now, but will be needed later in the semester.
 [korean python](https://www.codecademy.com/en/tracks/python-ko) ­ If the english is challenging, this site has similar materials in
 korean that may be used as a supplement, but not a replacement
 
-do lesson 1 & 2
+Complete lesson 1 & 2
+
+## 03/04
+
+Complete [lesson 3](https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096)
