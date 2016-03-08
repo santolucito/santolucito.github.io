@@ -31,7 +31,14 @@ One example of sampling is again [Kanye West](http://www.whosampled.com/sample/1
 You can [download](http://www.youtube-mp3.org/) these tracks from youtube.
 Try to recreate the beginning of Kanye West's song from Daft Punk.
 
-## Do this on your own (Homework for next week, due 3/8 )
+## Do this on your own (Homework for next week, due before class on 3/15 )
 
 Choose a song you like and create a short piece by using samples.
 If the song you like is on youtube, you can [download the audio](http://www.youtube-mp3.org/).
+
+I would suggest mixing together a drum track and a ballad - that is the easiest combination to make. Think about the time signature too! If the ballad is 3/4, you need a 3/4 drum track.
+
+Once you finish your piece, do *File -> Export Audio*. Save the audio as a .wav file and email it to me with your name and your partner's name. My email is mark.santolucito@yale.edu.
+
+Here is an example of what I expect from you.
+[Arirang + Drums](/ggu/FUNK_Arirang.wav)
