@@ -26,10 +26,10 @@ print len(my_variable)
 
 ### 3
 What is the correct way to output a string to the console?
-- console.log "The string to be printed"
-- echo "The string to be printed"
-- print "The string to be printed"
-- puts "The string to be printed"
+- ```console.log "The string to be printed"```
+- ```echo "The string to be printed"```
+- ```print "The string to be printed"```
+- ```puts "The string to be printed"```
 
 ### 4
 What will the lines of code below print to the console?
