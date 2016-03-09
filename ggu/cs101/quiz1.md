@@ -1,3 +1,8 @@
+---
+layout: default
+title: CS101
+---
+
 # Quiz 1
 
 Write your name on a piece of paper and answer the following questions. When you are finished bring the paper to the front of the class.
