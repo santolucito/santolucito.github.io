@@ -27,3 +27,13 @@ Complete lesson 1 & 2
 ## 03/04
 
 Complete [lesson 3](https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096)
+
+### 03/09
+
+Click the "accept" button so you are part of the class.
+
+Complete the following lessons:
+
+- Python Syntax
+- Tip Calculator
+- Strings & Console Output
