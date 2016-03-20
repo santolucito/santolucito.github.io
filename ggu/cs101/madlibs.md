@@ -1,3 +1,8 @@
+---
+layout: default
+title: CS101
+---
+
 # Madlibs
 Python can be used for a variety of different tasks. In this project, we'll use Python to write a Mad Libs story! Mad Libs are stories with blank spaces that a reader can fill in with their own words. The result is usually a funny (or strange) story.
 
