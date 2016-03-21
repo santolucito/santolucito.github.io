@@ -14,14 +14,14 @@ Here are a few examples that I especially liked.
 
 **김은경**
 <p>
-Original File #1
+Original File #1 (2:22)
 <audio controls>
   <source src="/ggu/music/samples/BIGBANG_BAE_BAE.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio></p>
 
 <p>
-Original File #2
+Original File #2 (0:45)
 <audio controls>
   <source src="/ggu/music/samples/IF_YOU_BIGBANG.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
@@ -60,14 +60,14 @@ Your browser does not support the audio element.
 
 **김지후 & 노영선**
 <p>
-Original File #1
+Original File #1 (0:00)
 <audio controls>
   <source src="/ggu/music/samples/Jim_Dooley.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
 </audio></p>
 
 <p>
-Original File #2
+Original File #2 (0:00)
 <audio controls>
   <source src="/ggu/music/samples/MAMAMOO.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
