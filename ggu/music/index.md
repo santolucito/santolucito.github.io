@@ -91,7 +91,7 @@ First, [download Max7](https://cycling74.com/max7/).
 
 Then, open the program and follow me as we build the below program.
 
-![Max_program](/ggu/music/max.png)
+![Max_program](/ggu/music/Max.PNG)
 
 #### Homework (due 3/29)
 
