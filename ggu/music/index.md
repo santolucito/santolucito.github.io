@@ -96,6 +96,7 @@ Then, open the program and follow me as we build the below program.
 #### Homework (due 3/29)
 
 Improve the program we wrote in class, then make a recording in Audacity.
+Your recording should be approximately 30 seconds long.
 Export the audio to a .wav file, and upload the audio to the LMS.
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/LVaETZgpz5U" frameborder="0" allowfullscreen></iframe>
