@@ -12,10 +12,51 @@ title: Music
 You all did a great job on the homework.
 Here are a few examples that I liked.
 
+**김은경**
+<p>
+Original File #1
 <audio controls>
-  <source src="/ggu/FUNK_Arirang.wav" type="audio/wav">
+  <source src="/ggu/samples/BIGBANG_BAE_BAE.mp3" type="audio/mpeg">
 Your browser does not support the audio element.
-</audio>
+</audio></p>
+
+<p>
+Original File #2
+<audio controls>
+  <source src="/ggu/samples/IF_YOU_BIGBANG.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio></p>
+
+<p>
+Mixed File
+<audio controls>
+  <source src="/ggu/samples/Acapella_and_drums.wav" type="audio/wav">
+Your browser does not support the audio element.
+</audio></p>
+
+**갈지승**
+<p>
+Mixed File
+<audio controls>
+  <source src="/ggu/samples/갈지승.wav" type="audio/wav">
+Your browser does not support the audio element.
+</audio></p>
+
+**Park Jae-yun**
+<p>
+Mixed File
+<audio controls>
+  <source src="/ggu/samples/Park-Jae-yun.wav" type="audio/wav">
+Your browser does not support the audio element.
+</audio></p>
+
+**지수현**
+<p> Mixed File
+<audio controls>
+  <source src="/ggu/samples/지수현.wav" type="audio/wav">
+Your browser does not support the audio element.
+</audio></p>
+
 
 
 #### Intro to Max7
@@ -30,8 +71,12 @@ Then, open the program and follow me as we build the below program.
 
 ![Max_program](/ggu/music/max.png)
 
+#### Homework (due 3/29)
 
+Improve the program we wrote in class, then make a recording in Audacity.
+Export the audio to a .wav file, and upload the audio to the LMS.
 
+<iframe width="420" height="315" src="https://www.youtube.com/embed/LVaETZgpz5U" frameborder="0" allowfullscreen></iframe>
 ## 3/15
 
 No class today, we will make up class later in the semester.
