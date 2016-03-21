@@ -10,7 +10,7 @@ title: Music
 #### Listening to your music
 
 You all did a great job on the homework.
-Here are a few examples that I liked.
+Here are a few examples that I especially liked.
 
 **김은경**
 <p>
@@ -42,7 +42,7 @@ Mixed File
 Your browser does not support the audio element.
 </audio></p>
 
-**Park Jae-yun**
+**박재윤**
 <p>
 Mixed File
 <audio controls>
