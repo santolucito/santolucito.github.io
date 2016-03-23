@@ -1,3 +1,8 @@
+---
+layout: default
+title: CS102
+---
+
 # Homework due 3/28
 
 What do these programs print?
