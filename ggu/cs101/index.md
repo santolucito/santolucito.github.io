@@ -7,8 +7,8 @@ title: CS101
 
 ## 03/28
 
-Look into the [worksheet](ggu/cs101/worksheet) and fix the errors.
-Then, start writing [NIM](ggu/cs101/nim).
+Look into the [worksheet](/ggu/cs101/worksheet) and fix the errors.
+Then, start writing [NIM](/ggu/cs101/nim).
 
 ## 03/23
 
