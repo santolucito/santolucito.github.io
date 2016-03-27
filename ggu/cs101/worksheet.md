@@ -227,7 +227,7 @@ right = "Tomato"
     print len(right)
 ```
 
-# 이민우 - 201681011
+# 이민우
 
 ```python
 spam = 8
@@ -356,7 +356,7 @@ else:
    print “Baby”
 ```
 
-# 이 서연 - 201661044
+# 이서연
 
 ```python
 2**3 = 8  and   -(-(-2)) = -2
