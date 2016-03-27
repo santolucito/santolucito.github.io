@@ -91,8 +91,6 @@ else:
 ### MARIAHWANG
 ```
 
-# 문제 2번
-
 ```python
 cat = "PRETTY"
 pet = 'musthave32'
