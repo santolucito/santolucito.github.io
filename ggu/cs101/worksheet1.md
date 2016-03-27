@@ -1,3 +1,8 @@
+---
+layout: default
+title: CS102
+---
+
 # 박수현
 
 ```python

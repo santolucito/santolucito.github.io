@@ -5,16 +5,33 @@ title: CS101
 
 # CS101 - Intro to Programming - Python
 
-## Do this now
-Download the [Syllabus](/ggu/CS101.pdf).
+## 03/28
 
-We will use [codecademy.com](https://www.codecademy.com), please create an account.
-After you create an account, please take this [survey](http://goo.gl/forms/6XSFltmVtg), where you will be asked to input your username from codecademy.com.
+Look into the [worksheet](ggu/cs101/worksheet1)
 
-## Do this later
+## 03/23
 
-In your free time, [install python](https://www.python.org/downloads/) on your local computer.
-This is not required right now, but will be needed later in the semester.
+*Functions*
+
+## 3/21
+
+Presentations. Well done!
+
+## 03/14, 03/16
+
+## 03/09
+
+Click the "accept" button so you are part of the class.
+
+Complete the following lessons:
+
+- Python Syntax
+- Tip Calculator
+- Strings & Console Output
+
+## 03/07
+
+Complete [lesson 3](https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096)
 
 ## 03/04
 
@@ -24,16 +41,14 @@ korean that may be used as a supplement, but not a replacement
 
 Complete lesson 1 & 2
 
-## 03/04
 
-Complete [lesson 3](https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096)
+#### Do this now
+Download the [Syllabus](/ggu/CS101.pdf).
 
-### 03/09
+We will use [codecademy.com](https://www.codecademy.com), please create an account.
+After you create an account, please take this [survey](http://goo.gl/forms/6XSFltmVtg), where you will be asked to input your username from codecademy.com.
 
-Click the "accept" button so you are part of the class.
+#### Do this later
 
-Complete the following lessons:
-
-- Python Syntax
-- Tip Calculator
-- Strings & Console Output
+In your free time, [install python](https://www.python.org/downloads/) on your local computer.
+This is not required right now, but will be needed later in the semester.

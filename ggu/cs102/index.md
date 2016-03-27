@@ -8,11 +8,11 @@ title: CS102
 
 ## 3/28
 
-We introduce [recursion](/ggu/cs102/recursion.md).
+We introduce [recursion](/ggu/cs102/recursion).
 
 ## 3/21
 
-We [started with java](/ggu/cs102/starting_java.md).
+We [started with java](/ggu/cs102/starting_java).
 
 ## 3/16
 
