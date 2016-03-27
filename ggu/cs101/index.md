@@ -7,7 +7,7 @@ title: CS101
 
 ## 03/28
 
-Look into the [worksheet](ggu/cs101/worksheet1)
+Look into the [worksheet](ggu/cs101/worksheet)
 
 ## 03/23
 
