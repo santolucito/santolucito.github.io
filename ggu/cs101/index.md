@@ -9,7 +9,7 @@ Submit all homework before class on the LMS.
 
 ## 03/30
 
-### In class
+#### In class
 
 Finish the NIM game together.
 Then, review what we have learned so far.
@@ -25,17 +25,17 @@ New topics
 - Loops ```while```
 - Functions ```def```, ```return```
 
-### Homework
+#### Homework
 Review/finish the functions lesson on codecademy.
 
 
 ## 03/28
 
-### In class
+#### In class
 
 We reviewed the [worksheet](/ggu/cs101/worksheet) that you made as a class.
 
-### Homework
+#### Homework
 (due 3/30)
 
 1. Fix any mistakes you made from the previous homework (Practice Problem 1).
@@ -43,27 +43,28 @@ We reviewed the [worksheet](/ggu/cs101/worksheet) that you made as a class.
 
 ## 03/23
 
-### In class
+#### In class
 
 We introduced functions.
 
-### Homework (due 3/28)
+#### Homework
+Enjoy your weekend.
 
 ## 3/21
 
-### In class
+#### In class
 
 Presentations. Well done! Topics presented include variables, Booleans, Strings, ```and```, ```toAlpha```
 
-### Homework
+#### Homework
 (due 3/23) Practice problem 1 -
 Write a "what does this program print" exercise for your classmates. Your program should use some of the ideas from the presentations today. When the program runs it should print something and your classmates will guess what it prints. The best 3 submissions will be used on the mid-term exam.
 
 ## 03/16
 
-### In class
+#### In class
 
-### Homework  -
+#### Homework  -
 (due 3/21) Prepare a group presentation for Monday on a programming topic.
 The presentation should be in Korean. Explain your topic in detail. Show how to code with your topic. Give many (5+) examples of different ways to use your topic. For example:
 
@@ -78,7 +79,7 @@ True AND False
 
 ## 03/09
 
-### Homework
+#### Homework
 
 Make sure you have completed the following lessons on Codecademy:
 - Python Syntax
@@ -87,19 +88,19 @@ Make sure you have completed the following lessons on Codecademy:
 
 ## 03/07
 
-### Homework
+#### Homework
 
 Complete [lesson 3](https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096) on Codecademy.
 
 ## 03/04
 
-### In class
+#### In class
 
 [english python](https://www.codecademy.com/learn/python) ­ Some of our work will be done on this site, in English.
 [korean python](https://www.codecademy.com/en/tracks/python-ko) ­ If the English is challenging, this site has similar materials in
 Korean that may be used as a supplement, but not a replacement
 
-### Homework
+#### Homework
 Complete lesson 1 & 2
 
 
