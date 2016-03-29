@@ -53,6 +53,7 @@ public class GetInputFromUser
 }
 ```
 ### Homework
+(due 4/4)
 Add a loop to our version of blackjack so the user can choose to play another round based on input.
 
 ## 3/28
@@ -60,21 +61,21 @@ Add a loop to our version of blackjack so the user can choose to play another ro
 ### In class
 We introduced [recursion](/ggu/cs102/recursion).
 
-### Homework
-
-
 ## 3/23
 
+### In class
+We introduced functions in java and compared them to python functions.
+
 ### Homework
-Loops and Functions [worksheet](/ggu/cs102/loop_fun).
+(due 3/28) Loops and Functions [worksheet](/ggu/cs102/loop_fun).
 
 ## 3/21
 
 ### In class
-We [started with java](/ggu/cs102/starting_java).
+We [started with drjava](/ggu/cs102/starting_java) to program on the local computer.
 
 ### Homework
-
+Install drjava and try it out.
 
 ## 3/16
 
@@ -82,6 +83,15 @@ We [started with java](/ggu/cs102/starting_java).
 We reviewed *if statements*.
 
 ### Homework
+Java on codecademy.
+
+## 3/16
+
+### In class
+We started java syntax and compared it to python.
+
+### Homework
+Java on codecademy.
 
 ## Week 1-2
 
