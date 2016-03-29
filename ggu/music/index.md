@@ -50,8 +50,8 @@ We will start with the [program we build last week](/ggu/music/samples/midi_step
 
 #### Homework due (4/5)
 
-Create a program that plays pleasant music like the one we made in class (see below). Make a recording with audacity and post it to youtube. This will require that you make a youtube account.
-Once you have uploaded the video, post the link on the LMS page.
+Create a program that plays pleasant music like the one we made in class (see below). Make a recording with audacity and post it to [soundcloud](https://soundcloud.com). This will require that you make a soundcloud account.
+Once you have uploaded the audio file, post the link on the LMS page.
 
 ![prelude](/ggu/music/imgs/prelude.PNG)
 
