@@ -11,19 +11,29 @@ title: CS102
 ```Math.random()``` and type-casting with ```int(3.7)``` to build a card game.
 
 ```java
+import java.util.Scanner;
 public class BlackJack{
 
-
   public static void main(String[] args){   
-    int human_card1 = (int)(Math.random()*10)+2;
-    int human_card2 = (int)(Math.random()*10)+2;
+    //Don't change this line
+    Scanner in = new Scanner(System.in);
+
+    int human_card1 = (int)(Math.random()*11)+1;
+    int human_card2 = (int)(Math.random()*11)+1;
     int human_total = human_card1 + human_card2;
     System.out.println("Human player got");
     System.out.println(human_card1+" and "+human_card2);
 
+    System.out.println("Do you want another card (Y/N)");
+    String s = in.nextLine();
+    if(s.equals("Y")){
+        human_total = human_total + (int)(Math.random()*11)+1;
+        System.out.println("new human_total "+ human_total);
 
-    int computer_card1 = (int)(Math.random()*10)+2;
-    int computer_card2 = (int)(Math.random()*10)+2;
+    }
+
+    int computer_card1 = (int)(Math.random()*11)+1;
+    int computer_card2 = (int)(Math.random()*11)+1;
     int computer_total = computer_card1 + computer_card2;
     System.out.println("Computer player got");
     System.out.println(computer_card1+" and "+computer_card2);
@@ -39,22 +49,27 @@ public class BlackJack{
 }
 ```
 
-Also, how to read input from the user
-```Java
-import java.util.Scanner;
-public class GetInputFromUser
-{
-   public static void main(String args[])
-   {
-      String s;
-      Scanner in = new Scanner(System.in);
-      s = in.nextLine();
-    }
-}
-```
+
 ### Homework
 (due 4/4)
-Add a loop to our version of blackjack so the user can choose to play another round based on input.
+Add a loop to our version of blackjack so the user can ask for more than one more card.
+Here is an example of how the program could run.
+
+```
+Human player got
+3 and 1
+Do you want another card (Y/N)
+>>> Y
+new human_total 9
+Do you want another card (Y/N)
+>>> Y
+new human_total 18
+Do you want another card (Y/N)
+>>> N
+Computer player got
+10 and 3
+Human Wins
+```
 
 ## 3/28
 
