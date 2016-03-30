@@ -52,7 +52,10 @@ public class BlackJack{
 
 ### Homework
 (due 4/4)
-Add a loop to our version of blackjack so the user can ask for more than one more card.
+Add a loop to our version of blackjack.
+The user can ask for more than one more card.
+Keep asking until the user says "N".
+*HINT* You might need to use a ```break;``` or a ```while()``` .
 Here is an example of how the program could run.
 
 ```
@@ -82,7 +85,7 @@ We introduced [recursion](/ggu/cs102/recursion).
 We introduced functions in java and compared them to python functions.
 
 ### Homework
-(due 3/28) Loops and Functions [worksheet](/ggu/cs102/loop_fun).
+(due 3/28) Loops and Functions [worksheet](/ggu/cs102/loops_fun).
 
 ## 3/21
 
