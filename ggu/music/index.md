@@ -50,41 +50,13 @@ We will start with the [program we build last week](/ggu/music/samples/midi_step
 
 #### Homework due (4/5)
 
-Create a program that plays pleasant music like the one we made in class (see below). Make a recording with audacity and post it to [soundcloud](https://soundcloud.com). This will require that you make a soundcloud account.
+Create a program that plays pleasant music like the one we made in class. Make a recording with audacity and post it to [soundcloud](https://soundcloud.com). This will require that you make a soundcloud account.
 Once you have uploaded the audio file, post the link on the LMS page.
+
+If you like, you can model your program off of [this one](/ggu/music/samples/prelude2.maxpat)
 
 ![prelude](/ggu/music/imgs/prelude.PNG)
 
-The notes we used in class for the ```coll``` object are:
-
-```
-1, 60 64 67 72 76 67 72 76;
-2, 60 64 67 72 76 67 72 76;
-3, 60 62 69 74 77 69 74 77;
-4, 60 62 69 74 77 69 74 77;
-5, 59 62 67 71 77 67 71 77;
-6, 59 62 67 71 77 67 71 77;
-7, 60 64 67 72 76 67 72 76;
-8, 60 64 67 72 76 67 72 76;
-9, 60 64 69 76 81 69 76 81;
-10, 60 64 69 76 81 69 76 81;
-11, 60 62 66 69 74 66 69 74;
-12, 60 62 66 69 74 66 69 74;
-13, 59 62 67 74 79 67 74 79;
-14, 59 62 67 74 79 67 74 79;
-15, 59 60 64 67 72 64 67 72;
-16, 59 60 64 67 72 64 67 72;
-17, 57 60 64 67 72 64 67 72;
-18, 57 60 64 67 72 64 67 72;
-19, 50 57 62 66 72 62 66 72;
-20, 50 57 62 66 72 62 66 72;
-21, 55 59 62 67 71 62 67 71;
-22, 55 59 62 67 71 62 67 71;
-23, 55 58 64 67 73 64 67 73;
-24, 55 58 64 67 73 64 67 73;
-25, 53 57 62 69 74 62 69 74;
-26, 53 57 62 69 74 62 69 74;
-```
 
 ## 3/22
 
