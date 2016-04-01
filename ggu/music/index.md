@@ -23,6 +23,7 @@ Black Midi is a type of computer music that relies on using many notes. It can o
 <iframe width="420" height="315" src="https://www.youtube.com/embed/EPN4oyvWzvk" frameborder="0" allowfullscreen></iframe>
 
 ### Max Programming
+
 #### Types
 
 Can you spot the difference in these two patches?
