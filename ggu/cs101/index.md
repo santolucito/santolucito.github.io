@@ -7,28 +7,62 @@ title: CS101
 
 Submit all homework before class on the LMS.
 
+
+<hr>
 ## 03/30
 
 #### In class
 
-Finish the NIM game together.
+We will program the game *Rock, Paper, Scissors* today.
+Start by filling in the basic template here - then we will add new features.
+
+```Python
+import random
+
+#a loop
+  #get the human input
+
+  #generate a random number between 1-3 for the computer input
+
+  #change the number to (R,P,S) for the computer input
+
+  #print the computer's choice
+
+  #if(???):
+  #   print ("its a tie")
+  #elif (???):
+  #  print ("computer wins")
+  #elif (???):
+  #  print ("human wins")
+```
+
+Now let's add the ability to keep score - how many games has the computer won, and how many games did the human win?
+Now we will use functions to make the code look a little nicer.
+
+#### Homework
+Fill out the worksheet.
+
+<hr>
+## 03/30
+
+#### In class
+
+Finish the NIM game together - you can download the [final code](/ggu/cs101/nim.py).
 Then, review what we have learned so far.
 
 - Variables vs Values
 - Booleans ```True```, ```False```, ```and```, ```or```
-- Integers ```+ * / - % ** ```, ```str(3)```
+- Integers ```+ * / - % ** ```, ```str(3)```, ```==```, ```>```
 - Strings ```""```, ```len("test")```,  ```"test".lower()```
 - If Statements ```if elif else```
-- Loops ```for```, ```range```
-
-New topics
-- Loops ```while```
+- Loops ```for```, ```range```, ```while```, ```break```
+- Input and output - ```input()``` and ```print()```
 - Functions ```def```, ```return```
 
 #### Homework
 Review/finish the functions lesson on codecademy.
 
-
+<hr>
 ## 03/28
 
 #### In class
@@ -41,6 +75,7 @@ We reviewed the [worksheet](/ggu/cs101/worksheet) that you made as a class.
 1. Fix any mistakes you made from the previous homework (Practice Problem 1).
 2. Start writing the code for [NIM](/ggu/cs101/nim).
 
+<hr>
 ## 03/23
 
 #### In class
@@ -50,6 +85,7 @@ We introduced functions.
 #### Homework
 Enjoy your weekend.
 
+<hr>
 ## 3/21
 
 #### In class
@@ -60,6 +96,7 @@ Presentations. Well done! Topics presented include variables, Booleans, Strings,
 (due 3/23) Practice problem 1 -
 Write a "what does this program print" exercise for your classmates. Your program should use some of the ideas from the presentations today. When the program runs it should print something and your classmates will guess what it prints. The best 3 submissions will be used on the mid-term exam.
 
+<hr>
 ## 03/16
 
 #### In class
@@ -74,9 +111,10 @@ True AND False
 (x==y OR y>x) AND (len("Hello")==4)
 ```
 
-
+<hr>
 ## 03/14
 
+<hr>
 ## 03/09
 
 #### Homework
@@ -86,12 +124,14 @@ Make sure you have completed the following lessons on Codecademy:
 - Tip Calculator
 - Strings & Console Output
 
+<hr>
 ## 03/07
 
 #### Homework
 
 Complete [lesson 3](https://www.codecademy.com/courses/python-beginner-sRXwR/0/1?curriculum_id=4f89dab3d788890003000096) on Codecademy.
 
+<hr>
 ## 03/04
 
 #### In class

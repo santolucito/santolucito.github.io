@@ -5,6 +5,7 @@ title: Music
 
 # Computer Music
 
+<hr>
 ## 3/29
 
 #### Computer Music History
@@ -58,15 +59,17 @@ If you like, you can model your program off of [this one](/ggu/music/samples/pre
 
 ![prelude](/ggu/music/imgs/prelude.PNG)
 
-
+<hr>
 ## 3/22
 
 We had an [introduction to Max](/ggu/music/intro_to_max)
 
+<hr>
 ## 3/15
 
 No class today, we will make up class later in the semester.
 
+<hr>
 ## 3/8
 
 We [learned how to use Audacity](ggu/music/intro_to_aud) and listened to examples of *sampling*.
