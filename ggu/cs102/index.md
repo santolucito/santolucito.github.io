@@ -5,6 +5,24 @@ title: CS102
 
 # CS102 - Object Oriented Programming
 
+<hr>
+## 4/05
+
+### In class
+
+How to be successful on your own
+
+- Make a [Github](https://github.com/) account.
+- Make a [Stackoverflow](http://stackoverflow.com/) account
+- Learn to read other peoples' resumes.
+- Use the internet (like OCW)
+
+What is **scope** and how is it related to functions?
+
+### Homework
+Continue working on BlackJack.
+
+<hr>
 ## 3/30
 
 ### In class
@@ -74,11 +92,13 @@ Computer player got
 Human Wins
 ```
 
+<hr>
 ## 3/28
 
 ### In class
 We introduced [recursion](/ggu/cs102/recursion).
 
+<hr>
 ## 3/23
 
 ### In class
@@ -87,6 +107,7 @@ We introduced functions in java and compared them to python functions.
 ### Homework
 (due 3/28) Loops and Functions [worksheet](/ggu/cs102/loops_fun).
 
+<hr>
 ## 3/21
 
 ### In class
@@ -95,6 +116,7 @@ We [started with drjava](/ggu/cs102/starting_java) to program on the local compu
 ### Homework
 Install drjava and try it out.
 
+<hr>
 ## 3/16
 
 ### In class
@@ -103,7 +125,8 @@ We reviewed *if statements*.
 ### Homework
 Java on codecademy.
 
-## 3/16
+<hr>
+## 3/14
 
 ### In class
 We started java syntax and compared it to python.
@@ -111,6 +134,7 @@ We started java syntax and compared it to python.
 ### Homework
 Java on codecademy.
 
+<hr>
 ## Week 1-2
 
 We learned about [Discrete Math](/ggu/cs102/discrete.md).
