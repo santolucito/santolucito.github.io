@@ -9,7 +9,7 @@ Submit all homework before class on the LMS.
 
 
 <hr>
-## 03/30
+## 04/05
 
 #### In class
 
@@ -22,11 +22,9 @@ import random
 #a loop
   #get the human input
 
-  computerChoice = random.randInt(1,3)
+  #generate a random number between 1-3 for the computer input
 
-  #if the computerChopie is 1 then 'R'
-  #if the computerChopie is 2 then 'P'
-  #if the computerChopie is 3 then 'S'
+  #change the number to (R,P,S) for the computer input
 
   #print the computer's choice
 
@@ -42,7 +40,7 @@ Now let's add the ability to keep score - how many games has the computer won, a
 Now we will use functions to make the code look a little nicer.
 
 #### Homework
-Fill out the worksheet.
+Write the RPS game code.
 
 <hr>
 ## 03/30
