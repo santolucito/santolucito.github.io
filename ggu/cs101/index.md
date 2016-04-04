@@ -22,9 +22,11 @@ import random
 #a loop
   #get the human input
 
-  #generate a random number between 1-3 for the computer input
+  computerChoice = random.randInt(1,3)
 
-  #change the number to (R,P,S) for the computer input
+  #if the computerChopie is 1 then 'R'
+  #if the computerChopie is 2 then 'P'
+  #if the computerChopie is 3 then 'S'
 
   #print the computer's choice
 
