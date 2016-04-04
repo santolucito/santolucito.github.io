@@ -16,7 +16,10 @@ We are learning about wave forms today.
 This is the most basic unit of sound.
 The sine wave is the most famous.
 
-![sine](sine-plot.gif)
+![sine](/ggu/music/sine-plot.gif)
+
+A record player uses waves to mimic this natural sound.
+![record](/ggu/music/recordPlayer.gif)
 
 ![mic](https://j.gifs.com/pYL4O2.gif)
 
@@ -24,6 +27,7 @@ The Theremin plays sounds that are close to sine waves.
 Here is a video, and an [online demo](http://www.google.com/doodles/clara-rockmores-105th-birthday) of how it works.
 
 <iframe width="420" height="315" src="https://www.youtube.com/embed/pSzTPGlNa5U" frameborder="0" allowfullscreen></iframe>
+
 
 ### Max programming
 
