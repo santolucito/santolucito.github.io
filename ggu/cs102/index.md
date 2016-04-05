@@ -12,6 +12,7 @@ title: CS102
 Review of Blackjack. We will look at every single person's code and fix it.
 
 Then we learn lists.
+
 ```python
 import java.util.Scanner;
 public class BlackJackList{
