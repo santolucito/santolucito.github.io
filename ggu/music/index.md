@@ -37,6 +37,8 @@ When using signals, we will need some new objects. Look at the help files for th
 - +~
 - buffer~
 - groove~
+- 
+Also try looking at the first MSP tutorial on *Recording and Playback*
 
 ### Homework
 
