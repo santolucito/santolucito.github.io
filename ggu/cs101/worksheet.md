@@ -7,41 +7,38 @@ title: CS102
 
 ```python
 a=7
-b=imsotired
+b=imsotired #INCORRECT - should be "imsotired"
 
-c=[len(imsotired)-a]
+c=[len(b)-a]
 
-print c
+print (c)
 ```
 
 ```python
 def the_sunny_day():
+  if 3**4>21 or not False and 3!=4:
+     return True
+  elif 54 >=54 or False and not True:
+      return False
 
-if 3**4>21 or not False and 3!=4:
-   return True
+print (the_sunny_day())
 
-elif 54 >=54 or False and not True:
-    return False
-
-the_sunny_day()
-    return
 ```
 
 # 구성모
 
 ```python
-milk = x
-juice = y
-pie = z
+x = "milk"
+y = "juice"
+z = "pie"
 
-if 8 % 2 == 4
-  print z
-if 1 >= 3
-  print x
-else 3**3 == 27
-  print y
+if 8 % 2 == 4:
+  print (z)
+elif 1 >= 3:
+  print (x)
+else 3**3 == 27:
+  print (y)
 
-### "pie juice"
 ```
 
 # 박은빛
@@ -50,9 +47,7 @@ else 3**3 == 27
 a=(7==8)
 b=(3==3)
 b=a
-print b
-
-### false
+print (b)
 ```
 
 # 전경주
@@ -61,9 +56,7 @@ print b
 x=8
 y=x
 x=y
-print x
-
-### 8
+print (x)
 ```
 
 # 황어준
@@ -115,61 +108,67 @@ elif cow>=dragon:
 else:
    print(int(dragon))
 
-### CAT
-### pretty
-### 13579
 ```
 
 
 # 지도훈
 
 ```python
-signal_color = input(“색을 영문으로 입력하세요.”)
+signal_color = input("색을 영문으로 입력하세요.")
 
-if signal_color == ‘blue’:
-   print(“신호등은 파란색입니다. 건너세요”)
-elif signal_color == ‘red’:
-   print(“신호등은 빨간색입니다. 기다리세요.”)
+if signal_color == "blue":
+   print ("신호등은 파란색입니다. 건너세요")
+elif signal_color == "red":
+   print ("신호등은 빨간색입니다. 기다리세요.")
 else:
-   print
+   print ("nothing")
 ```
 
 # 김상민
 
 ```python
-if 10>11
+if 10>11:
 	print "5"
-elif 10>9
+elif 10>9:
 	print "8"
-else
+else:
 	print "10"
 ```
 
 # 홍성민
 
 ```python
-if x>8
-  print “Excellent”
+if x>8:
+  print ("Excellent")
 
-elif 8>=x>5
-  print “Good”
+elif 8>=x>5:
+  print ("Good")
 
-elif 5>=x>3
-  print “Oh”
+elif 5>=x>3:
+  print ("Oh")
 
 else
-  print “Haha”
+  print ("Haha")
+```
+
+#정희윤
+
+```python
+def cat_woman(a, b):
+    return a * b, a / b
+cat,woman = cat_woman(10, 5)
+print(cat, woman)
 ```
 
 # 김성태
 
 ```python
 if len(friend)<=0 or hello.isalpha()
-   print mouse
+   print ("mouse")
 elif 10>3 and True
-   print card
-else hello.upper()=“HELLO”
-   print window
+   print ("card")
+else hello.upper()="HELLO" #INCORRECT - should be ==
+   print ("window")
 ```
 
 # 김태선
@@ -178,26 +177,24 @@ else hello.upper()=“HELLO”
 a = 7
 b = "underground"
 c = b[len(b)-a]
-
-print c
-
-### r
+print (c)
 ```
 
 # who?
 
+INCORRECT - need : after ```if```
 ```python
 if x>=90
-   print “A”
+   print ("A")
 
 else if 80<x<=90
-   print “B”
+   print ("B")
 
 else if 70<x<=80
-   print “C”
+   print ("C")
 
 else
-   print “D”
+   print ("D")
 ```
 
 # 백기찬
@@ -211,9 +208,6 @@ elif s < b:
 	print ('superman is weaker than batman')
 else:
 	print ('superman and batman are equal')
-
-
-### superman is stronger than batman
 ```
 
 # 김이건
@@ -221,10 +215,10 @@ else:
 ```python
 left = "Grape"
 right = "Tomato"
-  if 8>9:
-    print len(left)
-  else:
-    print len(right)
+if 8>9:
+  print len(left)
+else:
+  print len(right)
 ```
 
 # 이민우
@@ -235,63 +229,72 @@ egg = 7
 spam = 3
 egg = 6
 print(spam%egg)
-
-### 3
 ```
 
+
+
 ```python
-x = “python”
+x = "python"
 y = 2
 print(x*y)
-
-### pythonpython
 ```
 
 ```python
-s = ‘pineapple’
-t = ‘orange’
+s = "pineapple"
+t = "orange"
 if len(s)> 11 and t.isalpha():
-  print(“ellite”)
+  print("elite")
 elif t[2]==s[4]:
-   print(“great”)
+   print("great")
 else:
-    print(“excellent”)
-
-### great
+    print("excellent")
 ```
 
 ```python
-s = “pineapple42”
-t = “orange”
+s = "pineapple42"
+t = "orange"
 if len(t)==5:
-  t = “water”
+  t = "water"
 elif t[1] == s[4]:
-   print (“thrilled”)
+   print ("thrilled")
 elif s.isalpha() or t.isalpha():
-   print (“happy”)
+   print ("happy")
 else:
-    print (“nothing”)
+    print ("nothing")
 
-### happy
 ```
+
+# 심윤섭
+
+```python
+a = 3
+b = 5
+c = "my name is yunseop"
+d = c[len(c)-(a+b)]
+print (d)
+```
+
+
+
+
 
 # 김동원
 
 ```python
-If (3==4) and (10 % 3 = 1);
-  If 4 >3 and 19851 > 1238;
-     print “this is correct”
-If (1238 + 1239 = 2567) or (128391 != 1);
-  print “You are a good person”
-else;
-  print “hhhhhhhhhhhhhhhh”
+if (3==4) and (10 % 3 = 1):
+  if 4 >3 and 19851 > 1238:
+     print ("this is correct")
+if (1238 + 1239 = 2567) or (128391 != 1):
+  print ("You are a good person")
+else:
+  print "hh"
 If (6==5) and (10 ? 1 = 9);
   if (3=3) and (4-4=0);
-     print “how”
+     print "how"
   else;
-     print “how to”
+     print "how to"
   else;
-     print “howhow”
+     print "hello"
 ```
 
 # 김현아
@@ -299,33 +302,23 @@ If (6==5) and (10 ? 1 = 9);
 ```python
 a=2
 b="higuys"
-
 d=b[len(b)-a]
+print (d)
 
-print  d
-
-### Y
 ```
 
 ```python
 a=18
 b="kindergarten"
 c= b[a-len(b)]
-
-Print c
-
-### g
+print (c)
 ```
 
 ```python
 cup="white"
 bottle="black"
-
 cup="black"
-
 print cup
-
-### black
 ```
 
 
@@ -344,59 +337,63 @@ else Y or Z :
   print "I'm very happy!"
 ```
 
-# Jeongmi Lee
+# 이정미
 
 ```python
-age = int(input(‘Input Age:’))
+age = int(input("Input Age:"))
 if age >= 20:
-  print “Adult”
-elif 10 <= age < 20:
-   print “Teenager”
+  print "Adult"
+elif 10 <= age and age < 20:
+   print "Teenager"
 else:
-   print “Baby”
+   print "Baby"
 ```
 
 # 이서연
 
 ```python
 2**3 = 8  and   -(-(-2)) = -2
-### True
 ```
 
 ```python
 16 % 4 = 0    and    7 == 6 +3
-### False
 ```
 
 ```python
 35 / 5 != 7   and    3 + 4 = 7
-### False
 ```
 
 ```python
 30 < 20   or   3 *2 = 6
-### True
 ```
 
 ```python
 7*200 == 200*7   or   100*0.5  >= 50
-### True
+```
+
+```python
+if 10>11 :
+  print "5"
+elif 10>9 :
+  print "8"
+else:
+  print "10"
 ```
 
 # 차민건
+<!--- this one made no sense --->
 
 ```python
-string_1 = ”GeumGang”
-string_2 = ”wonderful”
-string_3 = “economic”[5]
-if CO2.isalpha( ) or len(GeumGang)=str(7)
-  print Gorani1
-elif  GeumGang University have wonderful campus.lower() = %s university have %s campus% (string1,string2) and Pratice Make Pratice = “Practice” + “ and “ + “Make” + “and “ + “Practice”
-  print Gorani2
-else True and print string_3 = str(m)
-  print Gorani3
+string_1 = "GeumGang"
+string_2 = "wonderful"
+string_3 = "economic"[5]
+if "CO2".isalpha() or len("GeumGang")==str(7)
+  print "Gorani1"
+elif  "GeumGang University have wonderful campus".lower() = "%s university have %s campus" % (string1,string2) and "Pratice Make Pratice" == "Practice" + "and" + "Make" + "and" + "Practice"
+  print "Gorani2"
+else:
+  print "Gorani3"
 
-#  Gorani3
 ```
 
 
@@ -417,20 +414,19 @@ else:
 # 김건호
 
 ```python
-35 / 5  != 7  and   25**0.5 = 53 % 8
-# False
+print (35 / 5  != 7  and   25**0.5 == 53 % 8)
 ```
 
 ```python
-len(“Hi”) > len(“Bye”) and (False or 3+4 =7)
-#          False
+print (len("Hi") > len("Bye") and (False or 3+4 ==7))
+
 ```
 
 ```python
-a=’b’
-b=’a’
+a='b'
+b='a'
 a=b
-  Print a
+print (a)
 ```
 
 # 허정우

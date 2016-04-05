@@ -9,6 +9,21 @@ Submit all homework before class on the LMS.
 
 
 <hr>
+## 04/07
+
+# Midterm Exam on 4/11! Next week!
+
+#### In class
+
+We will review functions by working on Rock, Paper, Scissors.
+If you have any questions about the exam, ask them today!
+
+#### Homework
+
+Review for the test - you can use the [worksheet](/ggu/cs101/worksheet).
+If you don't know the answer to a question, ask the person who wrote it!
+
+<hr>
 ## 04/05
 
 #### In class
