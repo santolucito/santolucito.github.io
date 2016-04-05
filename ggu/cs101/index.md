@@ -11,22 +11,67 @@ Submit all homework before class on the LMS.
 <hr>
 ## 04/07
 
-# Midterm Exam on 4/11! Next week!
+# Midterm Exam on 4/11 - next week!
 
-#### In class
+### In class
 
 We will review functions by working on Rock, Paper, Scissors.
-If you have any questions about the exam, ask them today!
+If you have any questions about the exam, ask them today.
 
-#### Homework
+Some example questions.
+You might be asked what a program will print:
+
+```python
+def triple(x):
+  print("Tripling", x)
+  return x * 3
+def subtract(y, z):
+  print("Subtracting", y, z)
+  return y - z
+
+if subtract(20, triple(10)) > 0 and subtract(-25, triple(5)) > 0:
+  print("Woot!")
+else:
+  print("Yikes!", subtract(triple(3), 0))
+```
+
+```python
+(min(2, 13, 3, 7)) * max(2, -34, 4)) - abs(-3)
+```
+
+You might be asked to write a program:
+
+- Write a program to calculate the sum of all the odd numbers less than 1000 (1 + 3 + 5 + ... + 999)
+- Write a program to print the numbers 1-100 (1,2,3...100)
+
+Or you might be asked to identify the error in bad code:
+
+```python
+  "april"+16 ```
+
+```python
+word = "computer"
+word[8]
+```
+
+```python
+5.lower()
+```
+
+```python
+(13+9)/0
+```
+### Homework
 
 Review for the test - you can use the [worksheet](/ggu/cs101/worksheet).
 If you don't know the answer to a question, ask the person who wrote it!
 
+You can also redo lessons on codecademy. There are also many lessons on the internet.
+
 <hr>
 ## 04/05
 
-#### In class
+### In class
 
 We will program the game *Rock, Paper, Scissors* today.
 Start by filling in the basic template here - then we will add new features.
@@ -56,7 +101,7 @@ import random
 Now let's add the ability to keep score - how many games has the computer won, and how many games did the human win?
 Now we will use functions to make the code look a little nicer.
 
-#### Homework
+### Homework
 Write the RPS game code.
 
 <hr>
