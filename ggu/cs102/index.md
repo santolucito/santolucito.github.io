@@ -6,6 +6,18 @@ title: CS102
 # CS102 - Object Oriented Programming
 
 <hr>
+## 4/07
+
+### In class
+Review of Blackjack. We will look at every single person's code and fix it.
+
+We might get to lists.
+
+### Homework
+Make a loop so that the user can play the game as many times as they want.
+Test your program!
+
+<hr>
 ## 4/05
 
 ### In class
@@ -20,7 +32,7 @@ How to be successful on your own
 What is **scope** and how is it related to functions?
 
 ### Homework
-Continue working on BlackJack.
+None - lucky you.
 
 <hr>
 ## 3/30
