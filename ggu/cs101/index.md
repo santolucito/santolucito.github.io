@@ -47,7 +47,8 @@ You might be asked to write a program:
 Or you might be asked to identify the error in bad code:
 
 ```python
-  "april"+16 ```
+  "april"+16
+```
 
 ```python
 word = "computer"
