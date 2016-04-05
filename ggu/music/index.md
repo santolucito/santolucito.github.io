@@ -25,10 +25,18 @@ Here is a video, and an [online demo](http://www.google.com/doodles/clara-rockmo
 
 ### Max programming
 
-We can create these in Max, and listen to them.
+We can create these waves in Max, and listen to them.
 [This patch](/ggu/music/samples/waveDemo.maxpat) plays a triangle wave, a sawtooth wave, and a sine wave.
 
 There are two kinds of cords in Max, green for signals (repeated numbers) and grey for discrete data (single numbers).
+
+When using signals, we will need some new objects. Look at the help files for the following
+
+- cycle~
+- *~
+- +~
+- buffer~
+- groove~
 
 ### Homework
 
