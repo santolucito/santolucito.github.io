@@ -11,55 +11,8 @@ title: CS102
 ### In class
 Review of Blackjack. We will look at every single person's code and fix it.
 
-Then we learn lists.
-
-```python
-import java.util.Scanner;
-public class BlackJackList{
-
-  public static void main(String[] args){   
-    //Don't change this line
-    Scanner in = new Scanner(System.in);
-
-    int[] cards;
-
-    cards = new int [10];
-
-    cards[0] = (int)(Math.random()*11)+1;
-    cards[1] = (int)(Math.random()*11)+1;
-    int human_total = cards[0] + cards[1];
-    System.out.println("Human player got");
-    System.out.println(cards[0]+" and "+cards[1]);
-
-    System.out.println("Do you want another card (Y/N)");
-    String s = in.nextLine();
-    while(s.equals("Y")){
-        human_total = human_total + (int)(Math.random()*11)+1;
-        System.out.println("new human_total "+ human_total);
-        System.out.println("Do you want another card (Y/N)");
-        s = in.nextLine();
-    }
-
-    int computer_card1 = (int)(Math.random()*11)+1;
-    int computer_card2 = (int)(Math.random()*11)+1;
-    int computer_total = computer_card1 + computer_card2;
-    System.out.println("Computer player got");
-    System.out.println(computer_card1+" and "+computer_card2);
-
-    if(human_total<=21 && computer_total<human_total){
-      System.out.println("Human Wins");
-    }
-    else {
-      System.out.println("Computer Wins");
-    }
-
-  }
-}
-```
-
 ### Homework
-Make a loop so that the user can play the game as many times as they want.
-Test your program!
+None.
 
 <hr>
 ## 4/05
