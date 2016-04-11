@@ -5,6 +5,39 @@ title: CS102
 
 # CS102 - Object Oriented Programming
 
+
+<hr>
+## 4/11
+
+### In class
+Ceasear Cipher 
+
+![ceaser](http://1.bp.blogspot.com/-1L0BHN4Qr0s/UieG2he-AOI/AAAAAAAAAGg/Hop2r1Lg0yo/s1600/caesar.png)
+
+Quantum Crytography with Chris Klumpp
+
+### Homework
+Write a java program for the ceasear cipher. Here is some code to help.
+
+```java
+
+public class Cipher {
+  public static void main(String[] args) {
+ 
+    String input = "The quick brown fox Jumped over the lazy Dog";
+      
+    System.out.println (input.charAt(2)); 
+    System.out.println( input.length());
+    System.out.println((char)97);
+    System.out.println((int)'a');
+    System.out.println((char)('a'+1));
+        
+  }
+}
+
+```
+
+
 <hr>
 ## 4/07
 
