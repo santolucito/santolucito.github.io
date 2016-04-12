@@ -60,46 +60,8 @@ Comment on at least 3 songs from other students in the soundcloud group.
 <hr>
 ## 4/05
 
-
-### Computer Music History
-
-We are learning about wave forms today.
-This is the most basic unit of sound.
-The sine wave is the most famous.
-
-![sine](/ggu/music/sine-plot.gif)
-
-A record player uses waves to mimic this natural sound.
-![record](/ggu/music/recordPlayer.gif)
-
-![mic](https://j.gifs.com/pYL4O2.gif)
-
-The Theremin plays sounds that are close to sine waves.
-Here is a video, and an [online demo](http://www.google.com/doodles/clara-rockmores-105th-birthday) of how it works.
-
-<iframe width="420" height="315" src="https://www.youtube.com/embed/pSzTPGlNa5U" frameborder="0" allowfullscreen></iframe>
-
-
-### Max programming
-
-We can create these waves in Max, and listen to them.
-[This patch](/ggu/music/samples/waveDemo.maxpat) plays a triangle wave, a sawtooth wave, and a sine wave.
-
-There are two kinds of cords in Max, green for signals (repeated numbers) and grey for discrete data (single numbers).
-
-When using signals, we will need some new objects. Look at the help files for the following
-
-- cycle~
-- *~
-- +~
-- buffer~
-- groove~
-
-Also try looking at the first MSP tutorial on *Recording and Playback*
-
-### Homework
-
-Make a recording of a wave form you like and post it to soundcloud.
+We listened to the Theremin and learned about wave forms.
+See a record of this class [here](/ggu/music/4_05).
 
 <hr>
 ## 3/29
