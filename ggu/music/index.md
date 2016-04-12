@@ -5,10 +5,61 @@ title: Music
 
 # Computer Music
 
+#### Join the [soundcloud group](https://soundcloud.com/groups/ggu-computer-music)!
+
+All recordings you make should be added to the group.
+
+<hr>
+## 4/12
+
+### Max programming
+
+*NB* - when you turn on audio, every open window will start playing sound!
+Make sure you close windows you no longer need open.
+
+Today we will build a sample player. You can download the [final version](/ggu/samples/samplePlayer.maxpat).
+
+The new objects we will use today are listed here.
+
+- ```play~```
+- ```umenu```
+- ```prepend```
+- ```preset```
+- ```pitchshift~```
+
+#### First
+
+A bit more on the ```buffer~``` object. We need to understand RAM vs disk.  Disk, or the hardrive, is large and slow. RAM is small, easily accessible, and fast. You can think of disk as a library and RAM as books on your desk.
+
+![ram](/ggu/music/imgs/RAM.png)
+
+the ```play~``` object will allow us to play sound in a buffer.
+Using the ```umenu``` and ```prepend``` we can quickly load different files to the buffer.
+
+![buffer](/ggu/music/imgs/buffer.PNG)
+
+### Homework
+
+#### Part 1  - Due 11:59pm Monday 4/18
+
+Create 10 short samples from music you like. Use those 10 samples in the [sample player program](/ggu/samples/samplePlayer.maxpat) we build today. Add ```pitchshift~``` to all of the ```play~``` objects for each sample. Make at least 10 presets using ```preset``` and cycle through them (using ```metro``` and ```counter```) to create a new piece of music.
+
+Make a recording with audacity of at least 30 seconds. Post it to [soundcloud group](https://soundcloud.com/groups/ggu-computer-music) with the title **Recording #3**
+
+Here is an example of you should make.
+
+<audio controls>
+  <source src="/ggu/music/samples/sample_isthatyou.wav" type="audio/wav">
+Your browser does not support the audio element.
+</audio>
+
+#### Part 2  - Due 9:00am Tuesday 4/19
+
+Comment on at least 3 songs from other students in the soundcloud group.
+
 <hr>
 ## 4/05
 
-#### Join the [soundcloud group](https://soundcloud.com/groups/ggu-computer-music)!
 
 ### Computer Music History
 
@@ -43,7 +94,7 @@ When using signals, we will need some new objects. Look at the help files for th
 - +~
 - buffer~
 - groove~
-- 
+
 Also try looking at the first MSP tutorial on *Recording and Playback*
 
 ### Homework
