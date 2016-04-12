@@ -9,6 +9,8 @@ title: Music
 
 All recordings you make should be added to the group.
 
+<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/groups/253205&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+
 <hr>
 ## 4/12
 
