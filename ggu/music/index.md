@@ -17,7 +17,7 @@ All recordings you make should be added to the group.
 *NB* - when you turn on audio, every open window will start playing sound!
 Make sure you close windows you no longer need open.
 
-Today we will build a sample player. You can download the [final version](/ggu/samples/samplePlayer.maxpat).
+Today we will build a sample player. You can download the [final version](/ggu/music/samples/samplePlayer.maxpat).
 
 The new objects we will use today are listed here.
 
@@ -42,7 +42,7 @@ Using the ```umenu``` and ```prepend``` we can quickly load different files to t
 
 #### Part 1  - Due 11:59pm Monday 4/18
 
-Create 10 short samples from music you like. Use those 10 samples in the [sample player program](/ggu/samples/samplePlayer.maxpat) we build today. Add ```pitchshift~``` to all of the ```play~``` objects for each sample. Make at least 10 presets using ```preset``` and cycle through them (using ```metro``` and ```counter```) to create a new piece of music.
+Create 10 short samples from music you like. Use those 10 samples in the [sample player program](/ggu/music/samples/samplePlayer.maxpat) we build today. Add ```pitchshift~``` to all of the ```play~``` objects for each sample. Make at least 10 presets using ```preset``` and cycle through them (using ```metro``` and ```counter```) to create a new piece of music.
 
 Make a recording with audacity of at least 30 seconds. Post it to [soundcloud group](https://soundcloud.com/groups/ggu-computer-music) with the title **Recording #3**
 
