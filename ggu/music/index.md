@@ -55,6 +55,10 @@ Here is an example of you should make.
 Your browser does not support the audio element.
 </audio>
 
+In order to use your own samples, you need to put them in the same folder as your Max program.
+
+![strucutre](/ggu/music/imgs/file_struct.png)
+
 #### Part 2  - Due 9:00am Tuesday 4/19
 
 Comment on at least 3 songs from other students in the soundcloud group.
