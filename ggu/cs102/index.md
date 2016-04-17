@@ -7,6 +7,16 @@ title: CS102
 
 
 <hr>
+## 4/18
+
+Starting objects in blackjack!
+
+<hr>
+## 4/13
+
+No class, go vote.
+
+<hr>
 ## 4/11
 
 ### In class
@@ -15,6 +25,7 @@ Ceasear Cipher
 ![ceaser](http://1.bp.blogspot.com/-1L0BHN4Qr0s/UieG2he-AOI/AAAAAAAAAGg/Hop2r1Lg0yo/s1600/caesar.png)
 
 Quantum Crytography with Chris Klumpp
+You can view the [slides](/ggu/cs102/quantum_cryptography.pdf)
 
 ### Homework
 Write a java program for the ceasear cipher. Here is some code to help.

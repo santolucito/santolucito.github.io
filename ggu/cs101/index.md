@@ -9,9 +9,31 @@ Submit all homework before class on the LMS.
 
 
 <hr>
+## 04/18
+
+Lists and Dictionaries
+
+![list](/ggu/cs101/dict.png)
+
+### Homework
+
+Finish Codecademy lesson *Python Lists and Dictionaries*
+
+<hr>
+## 04/13
+
+No class, go vote.
+
+
+<hr>
+## 04/11
+
+Midterm Exam
+
+<hr>
 ## 04/07
 
-# Midterm Exam on 4/11 - next week!
+ Midterm Exam on 4/11 - next week!
 
 ### In class
 
