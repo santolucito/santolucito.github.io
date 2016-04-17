@@ -7,6 +7,7 @@ title: CS101
 
 Submit all homework before class on the LMS.
 
+Practice problems avaible [here](http://codingbat.com/python). Do as many as you can!
 
 <hr>
 ## 04/18
