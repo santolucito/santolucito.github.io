@@ -7,7 +7,7 @@ title: CS101
 
 Submit all homework before class on the LMS.
 
-Practice problems avaible [here](http://codingbat.com/python). Do as many as you can!
+Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
 <hr>
 ## 04/18
@@ -18,7 +18,7 @@ Lists and Dictionaries
 
 ### Homework
 
-Finish Codecademy lesson *Python Lists and Dictionaries*
+Do sections 1-3 of Codecademy lesson *Python Lists and Dictionaries*
 
 <hr>
 ## 04/13
