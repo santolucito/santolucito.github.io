@@ -24,6 +24,7 @@ Link 5 samples to five keys on the keyboard.
 For example, if I press 'a', Max should play the 'isthatyou.aiff' sound.
 Use a loop and then play your samples on the keyboard to create a 45 second recording.
 Post the recording to soundlcoud and make the image a screenshot of your max patch.
+On the real exam, you will also upload the .maxpat file on the LMS.
 
 After everyone is finished, we will review the ```key``` object together as a class to see how it works.
 
