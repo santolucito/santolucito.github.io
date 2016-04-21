@@ -1,0 +1,45 @@
+QUOTE -----------------
+
+Every day life forces you to make a trade - youth for experience. Make sure the barter the hell out of each day and take life for all its got.
+
+In general youth for experience is a good trade. That experience can be a memory or a skill. Memeories ar ethe real treasure, but skill are not to be overlooked. Skills are very valuable because they lets you create more vivid memories or preserve those memories in a more imgainative way.
+
+Also I have terrible gas right now.
+
+IDEA -----------------
+
+amherst story board game
+
+public class location
+  public boolean checkTransition(Transition t, int roll, int turns){
+   reutn (roll == t.roll && turnsElapsed > t.turnsWhenValid)
+
+  public void MakeMove(int roll, int turn){
+  int i = -1;
+  while(!haveNextMove){
+     i++;
+     haveNextMove checkTransition(transitions[i], r, t);
+  }
+  makeTRansition(i);
+  }
+
+  transitions = [
+   {roll=1,turns=0,message="Visit Alredia and Bob to play in their garden",image="path",destionation="Alread and bob"},
+   {roll=2,turns=0,message="Go out back to Amhetyst Brook",image="path",destination="Amherstyst brook"},
+
+
+IDEA -----------------
+two worlds- dream vs physical
+
+
+ludic dreaming
+dream wizards control other dream people and war woith each ohter
+
+you lucid dream when a dream wizard takes your whole town
+everyone is a zombie and you have to fit in, otherwise you get "woken"
+
+you learn to be a dream wizard and fight the other for the dream freedom of your friends
+
+play the game in two modes, physical vs dreams
+
+
