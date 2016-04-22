@@ -9,7 +9,26 @@ title: CS102
 <hr>
 ## 4/18
 
-Starting objects in blackjack!
+### In class
+
+We reviewed the ceaser shift cipher homework. Well done everyone.
+
+We also started using functions in a more useful way
+
+### Homework
+
+Update your blackjack program so the main method looks like this...
+
+```java
+public class Blackjack {
+  public static void main(String[] args) {
+
+    int human_total = play_human();
+    int computer_total = play_computer();
+    calculate_winner(human_total,computer_total);
+    
+  }
+```
 
 <hr>
 ## 4/13
@@ -20,7 +39,7 @@ No class, go vote.
 ## 4/11
 
 ### In class
-Ceasear Cipher 
+Ceasear Cipher
 
 ![ceaser](http://1.bp.blogspot.com/-1L0BHN4Qr0s/UieG2he-AOI/AAAAAAAAAGg/Hop2r1Lg0yo/s1600/caesar.png)
 
@@ -34,15 +53,15 @@ Write a java program for the ceasear cipher. Here is some code to help.
 
 public class Cipher {
   public static void main(String[] args) {
- 
+
     String input = "The quick brown fox Jumped over the lazy Dog";
-      
-    System.out.println (input.charAt(2)); 
+
+    System.out.println (input.charAt(2));
     System.out.println( input.length());
     System.out.println((char)97);
     System.out.println((int)'a');
     System.out.println((char)('a'+1));
-        
+
   }
 }
 

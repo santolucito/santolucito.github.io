@@ -11,57 +11,64 @@ All recordings you make should be added to the group.
 
 <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/groups/253205&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
 
+
 <hr>
-## 4/12
+## 4/19
+
+Exam next week 4/26. In class programming assignment.
 
 ### Max programming
 
-*NB* - when you turn on audio, every open window will start playing sound!
-Make sure you close windows you no longer need open.
+*Practice for the exam.* You have 30 min to work on a patch using the ```key``` object.
+Link 5 samples to five keys on the keyboard.
+For example, if I press 'a', Max should play the 'isthatyou.aiff' sound.
+Use a loop and then play your samples on the keyboard to create a 45 second recording.
+Post the recording to soundlcoud and make the image a screenshot of your max patch.
+On the real exam, you will also upload the .maxpat file on the LMS.
 
-Today we will build a sample player. You can download the [final version](/ggu/music/samples/samplePlayer.maxpat).
+After everyone is finished, we will review the ```key``` object together as a class to see how it works.
 
-The new objects we will use today are listed here.
+### Homework
+Practice learning new objects and making a patch with it.
+Here are some good ones to practice with:
 
-- ```play~```
+- ```slider```
+- ```mousestate```
+
+All the object we have already learned may also be on the exam.
+
+GENERAL
+
 - ```umenu```
 - ```prepend```
 - ```preset```
-- ```pitchshift~```
+- ```toggle```
+- ```metro```
+- ```counter```
+- ```select```
 
-#### First
+MIDI
 
-A bit more on the ```buffer~``` object. We need to understand RAM vs disk.  Disk, or the hardrive, is large and slow. RAM is small, easily accessible, and fast. You can think of disk as a library and RAM as books on your desk.
+- ```makenote```
+- ```noteout```
+- ```pgmout```
 
-![ram](/ggu/music/imgs/RAM.png)
+WAVES
 
-the ```play~``` object will allow us to play sound in a buffer.
-Using the ```umenu``` and ```prepend``` we can quickly load different files to the buffer.
+- ```cycle~```
+- ```*~```
+- ```+~```
+- ```buffer~```
+- ```groove~```
+- ```buffer~```
+- ```play~```
 
-![buffer](/ggu/music/imgs/buffer.PNG)
 
-### Homework
+<hr>
+## 4/12
 
-#### Part 1  - Due 11:59pm Monday 4/18
-
-Create 10 short samples from music you like. Use those 10 samples in the [sample player program](/ggu/music/samples/samplePlayer.maxpat) we build today. Add ```pitchshift~``` to all of the ```play~``` objects for each sample. Make at least 10 presets using ```preset``` and cycle through them (using ```metro``` and ```counter```) to create a new piece of music.
-
-Make a recording with audacity of at least 30 seconds. Post it to [soundcloud group](https://soundcloud.com/groups/ggu-computer-music) with the title **Recording #3**
-
-Here is an example of you should make.
-
-<audio controls>
-  <source src="/ggu/music/samples/sample_isthatyou.wav" type="audio/wav">
-Your browser does not support the audio element.
-</audio>
-
-In order to use your own samples, you need to put them in the same folder as your Max program.
-
-![strucutre](/ggu/music/imgs/file_struct.png)
-
-#### Part 2  - Due 9:00am Tuesday 4/19
-
-Comment on at least 3 songs from other students in the soundcloud group.
+We learned about RAM vs disk and how to play samples quickly in Max.
+See a record of this class [here](/ggu/music/samples/4_12).
 
 <hr>
 ## 4/05
