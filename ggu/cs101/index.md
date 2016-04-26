@@ -9,6 +9,49 @@ Submit all homework before class on the LMS.
 
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
+
+<hr>
+## 04/27
+
+### In class
+
+More on lists.
+
+- Write a function that selects the largest element from any list.
+
+```
+[1,2,3,4,2] -> 4
+[-5,7,0,3] -> 7```
+
+- Write a function to add all the elements of a list.
+
+```
+[1,2,3,4,2] -> 12
+[-5,7,0,3] -> 5
+```
+
+- Write a function to sort a list.
+
+```
+[1,2,3,4,2] -> [1,2,2,3,4]
+[-5,7,0,3] -> [-5,0,3,7]
+```
+
+### Homework
+
+Finish codecademy lesson on lists.
+
+<hr>
+## 04/25
+
+Review the solutions for the exam.
+
+
+<hr>
+## 04/20
+
+Outdoor activity practicing sorting of lists.
+
 <hr>
 ## 04/18
 

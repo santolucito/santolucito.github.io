@@ -6,6 +6,114 @@ title: CS102
 # CS102 - Object Oriented Programming
 
 
+
+<hr>
+## 4/27
+
+### In class
+
+[Arrays](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html) will let us do more advanced operations. We have already seen some of these concepts in fact. They are similar to strings.
+
+![arrayimg](https://docs.oracle.com/javase/tutorial/figures/java/objects-tenElementArray.gif)
+
+```
+class ArrayDemo {
+  public static void main(String[] args) {
+    // declares an array of integers
+    int[] myArray;
+
+    // allocates memory for 2 integers
+    myArray = new int[2];
+
+    myArray[0] = 100;
+    myArray[1] = 200;
+    myArray[1] = myArray[0];
+
+    System.out.println("Element at index 0: " + anArray[0]);
+    System.out.println("Element at index 1: " + anArray[1]);
+  }
+}
+ ```
+
+ - Write a function that selects the largest element from any list.
+
+ ```
+ [1,2,3,4,2] -> 4
+ [-5,7,0,3] -> 7```
+
+ - Write a function to add all the elements of a list.
+
+ ```
+ [1,2,3,4,2] -> 12
+ [-5,7,0,3] -> 5
+ ```
+
+ - Write a function to sort a list.
+
+ ```
+ [1,2,3,4,2] -> [1,2,2,3,4]
+ [-5,7,0,3] -> [-5,0,3,7]
+ ```
+ 
+### Midterm project - due May 1, 11:59pm
+
+Expand upon the Blackjack game to include betting.
+The player starts with $10 and the computer always has at least $10.
+The player can place a bet before they play a hand.
+If the game is a tie, the computer wins.
+Your game should look as follows.
+
+```
+What is your name?
+ [Mark]
+
+Mark has $10
+Computer has $10
+
+How much will you bet?
+ [5]
+
+Mark got
+7 and 3
+Do you want another card (Y/N)
+ [Y]
+Mark total = 16
+Do you want another card (Y/N)
+ [N]
+Computer player got
+9 and 7
+Computer Wins $10
+Mark Loses $5
+
+Mark has $5
+Computer has $15
+
+Play again?
+ [Y]
+How much will you bet?
+
+...
+```
+
+Once you finish the basic version, add bonus features.
+
+- The player should be able bet more after receiving the first two cards.
+- Make the cards appear with proper frequency (10 is more likely than 2).
+- Give the cards a suit by creating a card object.
+- Make a version for two humans to play together.
+- Anything else you think is cool
+
+<hr>
+## 4/25
+
+More on the player object.
+
+<hr>
+## 4/20
+
+Intro to objects.
+Started writing the Player object.
+
 <hr>
 ## 4/18
 
@@ -26,7 +134,7 @@ public class Blackjack {
     int human_total = play_human();
     int computer_total = play_computer();
     calculate_winner(human_total,computer_total);
-    
+
   }
 ```
 
