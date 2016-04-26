@@ -27,6 +27,7 @@ Exam next week 5/03. In class programming assignment.
 
 
 Start with [this program](/ggu/music/samples/simpleMax.maxpat). You need to add the following components.
+
 - Use the ```slider``` object to control the *velocity*, or volume of the midi notes. The velocity should range from 0-127.
 - Use the ```kslider``` object to play midi notes from a keyboard. The keyboard should display notes 41-59.
 - Use the ```dial``` object to control the *duration* of the midi notes. The lowest setting should be 100, and the highest setting should be 1000.
