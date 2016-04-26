@@ -13,13 +13,37 @@ All recordings you make should be added to the group.
 
 
 <hr>
-## 4/19
+## 4/26
 
-Exam next week 4/26. In class programming assignment.
+Exam next week 5/03. In class programming assignment.
+
+### Remember!
+
+- Use the help files - right click on an object to learn more.
+- Use the inspector to view details about an object.
+- You can always search google or naver for help.
+
+### Practice Exam
+
+
+Start with [this program](/ggu/music/samples/simpleMax.maxpat). You need to add the following components.
+- Use the ```slider``` object to control the *velocity*, or volume of the midi notes. The velocity should range from 0-127.
+- Use the ```kslider``` object to play midi notes from a keyboard. The keyboard should display notes 41-59.
+- Use the ```dial``` object to control the *duration* of the midi notes. The lowest setting should be 100, and the highest setting should be 1000.
+- Use ```metro``` and ```counter``` to play a sequence of notes.
+
+
+Start with [this program](/ggu/music/samples/simpleMSP.maxpat). You need to add the following components.
+
+- Use the ```key``` and ```select``` object to use the keyboard to trigger a sound. Play a sample when you press the 'a' key.
+- Use the ```saw~``` and ```*~``` to combine the sample sound with a sawtooth wave.
+
+<hr>
+## 4/19
 
 ### Max programming
 
-*Practice for the exam.* You have 30 min to work on a patch using the ```key``` object.
+*Practice for the exam.* Work on a patch using the ```key``` object.
 Link 5 samples to five keys on the keyboard.
 For example, if I press 'a', Max should play the 'isthatyou.aiff' sound.
 Use a loop and then play your samples on the keyboard to create a 45 second recording.
