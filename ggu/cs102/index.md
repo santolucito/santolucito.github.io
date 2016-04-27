@@ -34,7 +34,7 @@ class ArrayDemo {
   }
 }
 
- ```
+```
 
  
 ### Midterm project - due May 7, 11:59pm
