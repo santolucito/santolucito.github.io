@@ -38,22 +38,29 @@ class ArrayDemo {
  - Write a function that selects the largest element from any list.
 
  ```
+ 
  [1,2,3,4,2] -> 4
  [-5,7,0,3] -> 7
+ 
  ```
 
  - Write a function to add all the elements of a list.
 
  ```
+ 
  [1,2,3,4,2] -> 12
  [-5,7,0,3] -> 5
+ 
  ```
 
  - Write a function to sort a list.
 
+
  ```
+ 
  [1,2,3,4,2] -> [1,2,2,3,4]
  [-5,7,0,3] -> [-5,0,3,7]
+ 
  ```
  
 ### Midterm project - due May 7, 11:59pm
