@@ -39,7 +39,8 @@ class ArrayDemo {
 
  ```
  [1,2,3,4,2] -> 4
- [-5,7,0,3] -> 7```
+ [-5,7,0,3] -> 7
+ ```
 
  - Write a function to add all the elements of a list.
 
