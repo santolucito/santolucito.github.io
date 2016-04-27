@@ -84,6 +84,9 @@ Once you finish the basic version, add bonus features.
 - Make a version for two humans to play together.
 - Anything else you think is cool
 
+
+To submit, [upload your code to github](https://help.github.com/articles/create-a-repo/) by making a new repository. You will only submit a link on the lms.
+
 <hr>
 ## 4/25
 
