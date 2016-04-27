@@ -93,7 +93,6 @@ Play again?
  [Y]
 How much will you bet?
 
-...
 ```
 
 Once you finish the basic version, add bonus features.
