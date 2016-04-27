@@ -56,7 +56,7 @@ class ArrayDemo {
  [-5,7,0,3] -> [-5,0,3,7]
  ```
  
-### Midterm project - due May 1, 11:59pm
+### Midterm project - due May 7, 11:59pm
 
 Expand upon the Blackjack game to include betting.
 The player starts with $10 and the computer always has at least $10.
