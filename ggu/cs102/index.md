@@ -6,6 +6,24 @@ title: CS102
 # CS102 - Object Oriented Programming
 
 
+<hr>
+## 5/02
+
+### In class
+
+Make a program to grade a class. We will need two files...
+
+- Student.java - the student object should have two fields, a name and list of grades.
+- Grader.java - the main method will create a list of students and assign grades to each student. Then compute the final grades for each student.
+
+The student object has a list of grades, but we need be careful how we edit them.
+For this, we introduce the ```private``` keyword and object functions.
+
+
+### Homework
+
+Work on the [Midterm](ggu/cs102/midterm)
+
 
 <hr>
 ## 4/27
@@ -36,67 +54,53 @@ class ArrayDemo {
 
 ```
 
- 
-### Midterm project - due May 7, 11:59pm
-
-Expand upon the Blackjack game to include betting.
-The player starts with $10 and the computer always has at least $10.
-The player can place a bet before they play a hand.
-If the game is a tie, the computer wins.
-Your game should look as follows.
+- Write a function that selects the largest element from any list.
 
 ```
-What is your name?
- [Mark]
-
-Mark has $10
-Computer has $10
-
-How much will you bet?
- [5]
-
-Mark got
-7 and 3
-Do you want another card (Y/N)
- [Y]
-Mark total = 16
-Do you want another card (Y/N)
- [N]
-Computer player got
-9 and 7
-Computer Wins $10
-Mark Loses $5
-
-Mark has $5
-Computer has $15
-
-Play again?
- [Y]
-How much will you bet?
-
+[1,2,3,4,2] -> 4
+[-5,7,0,3] -> 7
 ```
 
-Once you finish the basic version, add bonus features.
+- Write a function to add all the elements of a list.
 
-- The player should be able bet more after receiving the first two cards.
-- Make the cards appear with proper frequency (10 is more likely than 2).
-- Give the cards a suit by creating a card object.
-- Make a version for two humans to play together.
-- Anything else you think is cool
+```
+[1,2,3,4,2] -> 12
+[-5,7,0,3] -> 5
+```
 
+### [Midterm Project](ggu/cs102/midterm) - due May 7, 11:59pm
 
-To submit, [upload your code to github](https://help.github.com/articles/create-a-repo/) by making a new repository. You will only submit a link on the lms.
 
 <hr>
 ## 4/25
 
-More on the player object.
+Use the Player field ```name``` in the new methods we have.
 
 <hr>
 ## 4/20
 
+Review of the refactoring homework. How do we use methods for organization?
+
+- ```human_play```
+- ```computer_play```
+- ```calculate_win```
+
 Intro to objects.
 Started writing the Player object.
+
+How to use a *constructor method*.
+
+```java
+//In Main.java
+Player p1 = new Player("Mark");
+
+//In Player.java
+String name;
+
+public Player(name){
+ this.name = name;
+}
+```
 
 <hr>
 ## 4/18

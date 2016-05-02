@@ -9,6 +9,30 @@ Submit all homework before class on the LMS.
 
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
+<hr>
+## 05/02
+
+### In class
+
+We will talk about two ways to sort a list. We will write this code in class.
+
+```
+[1,2,3,4,2] -> [1,2,2,3,4]
+[-5,7,0,3] -> [-5,0,3,7]
+
+def sort_a_list(x):
+  # your code
+  return x
+```
+
+#### Dictionaries
+
+Like lists, but more fun! Now we can reference items by name, rather than index.
+You can read an [in-depth lesson](http://learnpythonthehardway.org/book/ex39.html), but codecademy has everything you need.
+
+### Homework
+
+Finish codecademy lesson on dictionaries, sections 10-14.
 
 <hr>
 ## 04/27
@@ -21,7 +45,8 @@ More on lists.
 
 ```
 [1,2,3,4,2] -> 4
-[-5,7,0,3] -> 7```
+[-5,7,0,3] -> 7
+```
 
 - Write a function to add all the elements of a list.
 
@@ -30,16 +55,10 @@ More on lists.
 [-5,7,0,3] -> 5
 ```
 
-- Write a function to sort a list.
-
-```
-[1,2,3,4,2] -> [1,2,2,3,4]
-[-5,7,0,3] -> [-5,0,3,7]
-```
 
 ### Homework
 
-Finish codecademy lesson on lists.
+Finish codecademy lesson on lists, sections 1-9.
 
 <hr>
 ## 04/25
