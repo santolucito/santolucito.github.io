@@ -10,11 +10,11 @@ Submit all homework before class on the LMS.
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
 <hr>
-## 05/02
+## 05/04
 
 ### In class
 
-We will talk about two ways to sort a list. We will write this code in class.
+A new way to sort a list with selection sort
 
 ```
 [1,2,3,4,2] -> [1,2,2,3,4]
@@ -33,6 +33,33 @@ You can read an [in-depth lesson](http://learnpythonthehardway.org/book/ex39.htm
 ### Homework
 
 Finish codecademy lesson on dictionaries, sections 10-14.
+
+<hr>
+## 05/04
+
+### In class
+
+*Errors* are important! be sure to read them!
+
+We learned how to sort a list (Bubble sort)!
+Here is a [nice video](visualgo.net/sorting)
+
+### Homework
+
+Finish writing the sorting algorithm.
+
+```
+[1,2,3,4,2] -> [1,2,2,3,4]
+[-5,7,0,3] -> [-5,0,3,7]
+
+def sort_a_list(x):
+  for i in range (?,?):
+    for j in range (?,?):
+      if ( x[?] > x[?]):
+        #chage the items
+        ???
+  return x
+```
 
 <hr>
 ## 04/27
