@@ -35,7 +35,7 @@ You can read an [in-depth lesson](http://learnpythonthehardway.org/book/ex39.htm
 Finish codecademy lesson on dictionaries, sections 10-14.
 
 <hr>
-## 05/04
+## 05/02
 
 ### In class
 

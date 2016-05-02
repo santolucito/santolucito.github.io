@@ -13,8 +13,8 @@ title: CS102
 
 Make a program to grade a class. We will need two files...
 
-- [Student.java](ggu/cs102/Student.java) - the student object should have two fields, a name and list of grades.
-- [Classroom.java](ggu/cs102/Classroom.java) - the main method will create a list of students and assign grades to each student. Then compute the final grades for each student.
+- [Student.java](/ggu/cs102/Student.java) - the student object should have two fields, a name and list of grades.
+- [Classroom.java](/ggu/cs102/Classroom.java) - the main method will create a list of students and assign grades to each student. Then compute the final grades for each student.
 
 The student object has a list of grades, but we need be careful how we edit them.
 For this, we introduce the ```private``` keyword and object functions.
@@ -29,7 +29,7 @@ We learned a few vocabulary words for functions:
 
 ### Homework
 
-Work on the [Midterm](ggu/cs102/midterm)
+Work on the [Midterm](/ggu/cs102/midterm) - due May 8, 11:59pm
 
 
 <hr>
@@ -75,7 +75,7 @@ class ArrayDemo {
 [-5,7,0,3] -> 5
 ```
 
-### [Midterm Project](ggu/cs102/midterm) - due May 7, 11:59pm
+### [Midterm Project](/ggu/cs102/midterm) - due May 8, 11:59pm
 
 
 <hr>
