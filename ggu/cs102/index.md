@@ -13,8 +13,14 @@ title: CS102
 
 Make a program to grade a class. We will need two files...
 
-- Student.java - the student object should have two fields, a name and list of grades.
-- Grader.java - the main method will create a list of students and assign grades to each student. Then compute the final grades for each student.
+- [Student.java](ggu/cs102/Student.java) - the student object should have two fields, a name and list of grades.
+- [Classroom.java](ggu/cs102/Classroom.java) - the main method will create a list of students and assign grades to each student. Then compute the final grades for each student.
+
+A few vocabulary words for functions
+
+- method header
+- parameters
+- return type
 
 The student object has a list of grades, but we need be careful how we edit them.
 For this, we introduce the ```private``` keyword and object functions.
