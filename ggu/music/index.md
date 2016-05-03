@@ -127,7 +127,7 @@ WAVES
 ## 4/12
 
 We learned about RAM vs disk and how to play samples quickly in Max.
-See a record of this class [here](/ggu/music/samples/4_12).
+See a record of this class [here](/ggu/music/4_12).
 
 <hr>
 ## 4/05
