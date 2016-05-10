@@ -14,7 +14,7 @@ All recordings you make should be added to the group.
 <hr>
 ## 5/10
 
-Review of the midterm. you can [download the solution](/ggu/music/midtermSolution.maxpat), or just view the program below.
+Review of the midterm. You can [download the solution](/ggu/music/samples/midtermSolution.maxpat), or just view the program below.
 
 ![solution](imgs/midterm_soln.PNG)
 
@@ -23,6 +23,8 @@ We will form groups and work on a similar project. This time, you will need the 
 - ```meter```
 - ```TogEdge```
 - ```>```
+
+Whenever the meter goes about a certain value, play a sample.
 
 #### Mapping a song
 
