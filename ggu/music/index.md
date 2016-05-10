@@ -24,8 +24,18 @@ We will form groups and work on a similar project. This time, you will need the 
 - ```TogEdge```
 - ```>```
 
-# Homework
-Next, we will begin a group project. We will form teams to compose a piece of music using max, audacity, and other programs. For homework this week, in your groups, write down a sketch of the song you want to make. We will practice this in class.
+#### Mapping a song
+
+In order to start making real music, we need to plan how the music should sound. Let's practice in class with this song.
+<p>
+MOIA?
+<audio controls>
+  <source src="/ggu/music/samples/MAMAMOO.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio></p>
+
+#### Homework
+Next, we will begin a group project. We will form teams to compose a piece of music using max, audacity, and other programs. For homework this week, in your groups, write down a sketch of the song you want to make.
 
 <hr>
 ## 5/03
@@ -169,4 +179,4 @@ No class today, we will make up class later in the semester.
 <hr>
 ## 3/8
 
-We [learned how to use Audacity](ggu/music/intro_to_aud) and listened to examples of *sampling*.
+We [learned how to use Audacity](/ggu/music/intro_to_aud) and listened to examples of *sampling*.
