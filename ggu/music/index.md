@@ -11,6 +11,12 @@ All recordings you make should be added to the group.
 
 <iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/groups/253205&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
 
+<hr>
+## 5/10
+
+Review of the midterm. you can [download the solution](/ggu/music/midtermSolution.maxpat), or just view the program below.
+
+![solution](/ggu/img/midterm_soln.PNG)
 
 <hr>
 ## 5/03

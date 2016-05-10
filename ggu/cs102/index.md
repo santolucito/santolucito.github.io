@@ -7,6 +7,13 @@ title: CS102
 
 
 <hr>
+## 5/04
+
+### In class
+
+More on objects
+
+<hr>
 ## 5/02
 
 ### In class
