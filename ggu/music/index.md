@@ -16,7 +16,16 @@ All recordings you make should be added to the group.
 
 Review of the midterm. you can [download the solution](/ggu/music/midtermSolution.maxpat), or just view the program below.
 
-![solution](/ggu/img/midterm_soln.PNG)
+![solution](imgs/midterm_soln.PNG)
+
+We will form groups and work on a similar project. This time, you will need the following objects:
+
+- ```meter```
+- ```TogEdge```
+- ```>```
+
+# Homework
+Next, we will begin a group project. We will form teams to compose a piece of music using max, audacity, and other programs. For homework this week, in your groups, write down a sketch of the song you want to make. We will practice this in class.
 
 <hr>
 ## 5/03
@@ -133,7 +142,7 @@ WAVES
 ## 4/12
 
 We learned about RAM vs disk and how to play samples quickly in Max.
-See a record of this class [here](/ggu/music/4_12).
+See a record of this class [here](/ggu/music/samples/4_12).
 
 <hr>
 ## 4/05
