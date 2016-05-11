@@ -36,8 +36,13 @@ MOIA?
 Your browser does not support the audio element.
 </audio></p>
 
+![moia](imgs/MOIA-map.png)
+
 #### Homework
-Next, we will begin a group project. We will form teams to compose a piece of music using max, audacity, and other programs. For homework this week, in your groups, write down a sketch of the song you want to make.
+Next, we will begin a group project. We will form teams to compose a piece of music using max, audacity, and other programs. For homework this week, in your groups, write down a sketch of the song you want to make. Turn this assignment in during class, on paper. We will not use the LMS for this assignment.
+
+If you were not in class, and do not have a group, complete this assignment on your own.
+You will be assigned a group next week.
 
 <hr>
 ## 5/03

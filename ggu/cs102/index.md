@@ -7,6 +7,40 @@ title: CS102
 
 
 <hr>
+## 5/11
+
+### In class
+
+Investor and stock program. ```static``` vs ```non-static``` functions.
+
+what is the difference between the two ```buy``` functions below.
+
+```java
+//in Investor.java
+Stock apple = new Stock("APPL",127.98);
+double p1 = apple.buy(5);
+double p2 = Stock.buy(apple,5);
+```
+```java
+//in Stock.java
+public double buy(int n){...}
+public static double buy(Stock s, int n){...}
+```
+
+### Homework
+
+Read the 'static 변수' and 'static method' sections. You do not need to read about the singleton pattern. [https://wikidocs.net/228](https://wikidocs.net/228)
+
+If you do not understand the above reading, also read this [http://rockdrumy.tistory.com/214](http://rockdrumy.tistory.com/214) for more examples.
+
+<hr>
+## 5/09
+
+### In class
+
+Investor and stock program. Multiple instances of an object.
+
+<hr>
 ## 5/04
 
 ### In class

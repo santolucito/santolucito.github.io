@@ -10,6 +10,42 @@ Submit all homework before class on the LMS.
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
 <hr>
+## 05/11
+
+You can use the try/except blocks if you like, but they are not generally necessary.
+
+```python
+def foo(lst,i):
+  if (i >= len(lst)):
+    return lst[(len(lst)-1)]
+  return lst[i]
+
+def foo2(lst,i):
+  try:
+    lst[i]
+  except:
+    return lst[(len(lst)-1)]
+```
+
+### Homework
+Finish all of the 8 assigned codecademy lessons by Monday. You lose 20 points for each lesson that is not complete.
+
+<hr>
+## 05/09
+
+Review selection sort.
+
+#### Dictionaries
+
+Like lists, but more fun! Now we can reference items by name, rather than index.
+You can read an [in-depth lesson](http://learnpythonthehardway.org/book/ex39.html), but codecademy has everything you need.
+
+### Homework
+
+Finish codecademy lesson on dictionaries, sections 10-14.
+
+
+<hr>
 ## 05/04
 
 ### In class
