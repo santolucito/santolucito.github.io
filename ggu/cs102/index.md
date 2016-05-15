@@ -5,6 +5,14 @@ title: CS102
 
 # CS102 - Object Oriented Programming
 
+<hr>
+## 5/16
+
+### In class
+
+Review of midterm
+
+[See the grades](/ggu/cs102/midterm_reults)
 
 <hr>
 ## 5/11
