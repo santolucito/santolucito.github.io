@@ -12,7 +12,30 @@ title: CS102
 
 Review of midterm
 
-[See the grades](/ggu/cs102/midterm_reults)
+[See the grades](/ggu/cs102/midterm_results)
+
+### Homework
+
+Make a zoo program
+
+The user can add animals to the zoo by providing a name and sound.
+The new animals will be added to an array of animal in the zoo.
+You will need to write a function that will print the sound of all the animals.
+
+```
+//In Main.java
+public static void all_sounds(Animal[] zoo){
+  // output...
+  // The lion goes roar
+  // The cat goes meow
+
+}
+
+//In Animal.java
+
+public Animal(String name, String sound)
+
+```
 
 <hr>
 ## 5/11
