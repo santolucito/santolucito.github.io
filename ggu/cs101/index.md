@@ -10,6 +10,46 @@ Submit all homework before class on the LMS.
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
 <hr>
+## 05/16
+
+### In class
+
+The .items() function is very helpful
+
+```
+my_dict = {'a': 1, 'g':2}
+for number, letter in my_dict.items():
+   print (number,letter)
+# a 1
+# b 2
+```
+
+Let's use this to break a code.
+
+![ceaser](http://1.bp.blogspot.com/-1L0BHN4Qr0s/UieG2he-AOI/AAAAAAAAAGg/Hop2r1Lg0yo/s1600/caesar.png)
+
+We will decode this message without the secret key.
+
+```
+Mjqqt rd sfrj nx Rfwp fsi N qnpj yjfhmnsl ajwd rzhm fy ymnx zsnajwxnyd. N fr xt mfuud yt xjj mtb lwjfy dtz mfaj itsj ymnx xjrjxyjw
+```
+
+### Homework
+
+Analyze the frequency of words in a Korean Buddhist text. Find a Korean text online (The Lotus Sutra is a good example), and report which words appear most frequently. What conclusion can you draw about these words. You will need to use the function split().
+
+```
+["A","string","with,"words"] == "A string with words".split()
+```
+
+Use this code to get started.
+```
+source = "The text to analyze goes here."
+wordcount={}
+???
+```
+
+<hr>
 ## 05/11
 
 You can use the try/except blocks if you like, but they are not generally necessary.
