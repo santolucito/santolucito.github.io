@@ -24,13 +24,20 @@ You will need to write a function that will print the sound of all the animals.
 
 ```
 //In Main.java
+public static void main(String[] args){
+  //make animals and add them to an array
+  all_sounds(my_zoo);
+}
+
 public static void all_sounds(Animal[] zoo){
   // output...
   // The lion goes roar
   // The cat goes meow
 
 }
+'''
 
+'''
 //In Animal.java
 
 public Animal(String name, String sound)
