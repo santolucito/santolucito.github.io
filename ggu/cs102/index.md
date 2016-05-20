@@ -24,6 +24,13 @@ You will need to write a function that will print the sound of all the animals.
 
 Upload your code to Github, and submit a link on the lms. The link should look as follows: github.com/username/repository_name
 
+To use github, follow this video.
+
+<iframe width="420" height="315" src="https://www.youtube.com/embed/bcFIhtRPWH4" frameborder="0" allowfullscreen></iframe>
+
+You can use this code as a template.
+
+
 ```
 //In Main.java
 public static void main(String[] args){
