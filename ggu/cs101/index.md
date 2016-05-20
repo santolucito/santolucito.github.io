@@ -18,7 +18,7 @@ The .items() function is very helpful
 
 ```
 my_dict = {'a': 1, 'g':2}
-for number, letter in my_dict.items():
+for (number, letter) in my_dict.items():
    print (number,letter)
 # a 1
 # b 2
@@ -34,6 +34,21 @@ We will decode this message without the secret key.
 Mjqqt rd sfrj nx Rfwp fsi N qnpj yjfhmnsl ajwd rzhm fy ymnx zsnajwxnyd. N fr xt mfuud yt xjj mtb lwjfy dtz mfaj itsj ymnx xjrjxyjw
 ```
 
+We need to count the frequency of each letter. The most frequent letter is mapped to an 'e', the most frequent letter in the English language. Remember to use triple quotes for long strings.
+
+```
+ciphertext = """Mjqqt rd sfrj nx Rfwp fsi N qnpj yjfhmnsl ajwd rzhm fy ymnx zsnajwxnyd. N fr xt mfuud yt xjj mtb lwjfy dtz mfaj itsj ymnx xjrjxyjw"""
+
+lettercount={}  
+for letter in ciphertext:
+    if letter not in lettercount:
+        lettercount[letter] = 1
+    else:
+        lettercount[letter] += 1
+for k,v in lettercount.items():
+    print (k, v)
+```
+
 ### Homework
 
 Analyze the frequency of words in a Korean Buddhist text. Find a Korean text online (The Lotus Sutra is a good example), and report which words appear most frequently. What conclusion can you draw about these words. You will need to use the function split().
@@ -42,12 +57,7 @@ Analyze the frequency of words in a Korean Buddhist text. Find a Korean text onl
 ["A","string","with,"words"] == "A string with words".split()
 ```
 
-Use this code to get started.
-
-```
-source = "The text to analyze goes here."
-wordcount={}
-???
+Use the code above for letter counting to get started.
 ```
 
 <hr>
