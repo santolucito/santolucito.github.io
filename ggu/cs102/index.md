@@ -19,7 +19,7 @@ Review of midterm
 Make a zoo program
 
 The user can add animals to the zoo by providing a name and sound.
-The new animals will be added to an array of animal in the zoo.
+The new animals will be added to an array of animals in the zoo.
 You will need to write a function that will print the sound of all the animals.
 
 Upload your code to Github, and submit a link on the lms. The link should look as follows: github.com/username/repository_name

@@ -5,15 +5,21 @@ title: CS102
 
 # 201312003
 
-### NA
+### 97
 
-no submission
++ Nice use of objects. Both a player and card object.
++ Can bet multiple times.
+
+- Code could be more organized with extra methods
 
 # 201532027
 
-### NA
+### 94
 
-no submission
++ Can bet multiple times
++ has error checking
+
+- no objects
 
 # 201661008
 
@@ -42,9 +48,18 @@ no submission
 
 # 201681002
 
-### NA
+### 85
 
-no submission
++ good use of indentation
++ organized code
+
+- no extras
+- 'Scanner RePlay = new Scanner(System.in);' variables should start with lower case letters
+- do not use one letter for variable names
+- avoid using break and continue statements when possible
+- this code is the same as 201681018, this was an individual assignment
+
+'while(0<1)' is the same as 'while (true)'
 
 # 201681003
 
