@@ -9,7 +9,42 @@ title: Music
 
 All recordings you make should be added to the group.
 
-<iframe width="100%" height="300" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/groups/253205&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+<iframe width="50%" height="300" scrolling="yes" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/groups/253205&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe>
+
+<hr>
+## 5/19
+
+We listened to everyone's submissions and picked a winner for the prize bag.
+The winner was...
+
+<iframe width="50%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/264885980&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=false"></iframe>
+
+We reviewed how to use audacity to create samples that can be used in LMMS.
+
+#### Homework - due 5/24 @ 10am
+
+Make a remix of a Buddhist chant.
+Use the "Buddhist Chant Demo" as an example.
+Your song should be at least 30 seconds.
+
+
+<iframe width="50%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/264881675&amp;auto_play=false&amp;hide_related=true&amp;show_comments=true&amp;show_user=false&amp;show_reposts=false&amp;visual=false"></iframe>
+
+<hr>
+## 5/17
+
+Starting with LMMMS. Download the program at [LMMS.io](https://lmms.io/).
+
+We made our first beat and used the map from the previous class to compose a new song.
+
+We will schedule our makeup classes on Thursday nights at 10pm.
+
+#### Homework - due 5/19 @ 10pm
+
+Finish the song we started in class.
+Use the map from last week to guide your composition.
+Upload your submission to the soundlcoud group before class on Thursday.
+
 
 <hr>
 ## 5/10
