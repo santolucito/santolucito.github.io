@@ -21,6 +21,8 @@ The winner was...
 
 We reviewed how to use audacity to create samples that can be used in LMMS.
 
+<iframe width="420" height="315" src="https://www.youtube.com/embed/kONijDwgNDg" frameborder="0" allowfullscreen></iframe>
+
 #### Homework - due 5/24 @ 10am
 
 Make a remix of a Buddhist chant.
