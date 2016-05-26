@@ -12,6 +12,78 @@ All recordings you make should be added to the group.
 <iframe width="50%" height="300" scrolling="yes" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/groups/253205&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe>
 
 <hr>
+## 5/26
+
+#### In class
+
+How to add FX in LMMMS.
+How to use automation to control LMMS.
+
+## Final assignment
+
+For the final project you will compose your own song in groups.
+The song must be at least 3:30 long (3 minutes, 30 seconds).
+The song must include at least one element of a Buddhist chant.
+
+- Direct sample from a chant
+- Lyrics from a chant
+- Moktak and rhythm from a chant
+
+Then song must include a recording of everyone's voice in someway.
+It may be as a group or as a solo.
+Use audacity to make this recording.
+
+You must use one Max module.
+You may use any module you like - either one from the set of examples, one you find online, or one you write yourself.
+
+The final assignment is broken into 4 parts.
+
+#### Part 1 - Due in class 5/30
+
+Create a map of your song (as we did in the homework from 5/17) with at least 6 distinct parts.
+Upload a first draft of the song to the soundcloud group.
+The first draft should have basic beats and simple voice recordings.
+This does not need to be high quality - it is just a sketch so we can get an idea of what your final song will sound like.
+
+
+#### Part 3 - Due in class 6/6
+
+Upload second draft to soundcloud with high-quality voice recordings.
+Use audacity to create recordings without noise.
+Take a band picture to use as the album artwork.
+
+#### Part 3 - Due at the showcase 6/8
+
+Final draft song presentation on the first floor of the library.
+
+
+#### Part 3 - Due in class (10am) 6/14
+
+You will each turn in, individually, a document containing the following.
+Explain what your group did for the song - why did you choose the samples, beats and voices?
+Which Max patch did you use and where is that sound in the final recording.
+How does this contribute and expand on the tradition of Buddhist music?
+
+360 evaluation of group.
+What did you contribute to the group and what did the other group members contribute.
+Give your team members grades based on their performance.
+This will be only a factor in the final grade.
+
+
+
+
+
+
+<hr>
+
+## 5/23
+
+Using Max to create sounds for LMMMS.
+
+Recording your own voice.
+
+
+<hr>
 ## 5/19
 
 We listened to everyone's submissions and picked a winner for the prize bag.
