@@ -29,7 +29,7 @@ The song must include at least one element of a Buddhist chant.
 - Lyrics from a chant
 - Moktak and rhythm from a chant
 
-Then song must include a recording of everyone's voice in someway.
+The song must include a recording of everyone's voice in someway.
 It may be as a group or as a solo.
 Use audacity to make this recording.
 
@@ -38,7 +38,7 @@ You may use any module you like - either one from the set of examples, one you f
 
 The final assignment is broken into 4 parts.
 
-#### Part 1 - Due in class 5/30
+#### Part 1 - Due in class 5/31
 
 Create a map of your song (as we did in the homework from 5/17) with at least 6 distinct parts.
 Upload a first draft of the song to the soundcloud group.
@@ -46,18 +46,19 @@ The first draft should have basic beats and simple voice recordings.
 This does not need to be high quality - it is just a sketch so we can get an idea of what your final song will sound like.
 
 
-#### Part 3 - Due in class 6/6
+#### Part 2 - Due in class 6/7
 
 Upload second draft to soundcloud with high-quality voice recordings.
 Use audacity to create recordings without noise.
 Take a band picture to use as the album artwork.
 
-#### Part 3 - Due at the showcase 6/8
+#### Part 3 - Due at the showcase @ 8pm 6/8
 
 Final draft song presentation on the first floor of the library.
+A panel of judges will vote for the best song and award a prize to the winner.
 
 
-#### Part 3 - Due in class (10am) 6/14
+#### Part 4 - Due in class (10am) 6/14
 
 You will each turn in, individually, a document containing the following.
 Explain what your group did for the song - why did you choose the samples, beats and voices?
