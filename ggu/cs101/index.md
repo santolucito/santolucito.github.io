@@ -9,6 +9,41 @@ Submit all homework before class on the LMS.
 
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
+
+<hr>
+## 5/25
+
+How can we calculate the xth prime number?
+
+It is important to be able to use functions to break complex problems into smaller parts.
+
+
+#### homework
+
+Write a function to find the x-th prime number.
+You will need a helper method as well to determine if a number is prime (return a boolean).
+
+'''
+def find_prime(x):
+???
+
+def is_prime(x):
+???
+
+'''
+
+<hr>
+## 5/23
+
+I'm sick :( Make up class at the end of the semester.
+
+
+<hr>
+## 5/18
+
+Festival - great job on all your performances and activities.
+
+
 <hr>
 ## 05/16
 
