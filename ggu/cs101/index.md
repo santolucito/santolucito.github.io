@@ -9,6 +9,7 @@ Submit all homework before class on the LMS.
 
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
+[http://imgur.com/gallery/qr9gq](http://imgur.com/gallery/qr9gq)
 
 <hr>
 ## 5/25

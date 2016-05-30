@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+chan press;</declaration><template><name x="5" y="5">Controller</name><declaration>// Place local declarations here.
+
+clock x;
+</declaration><location id="id0" x="64" y="-160"><name x="72" y="-192">Bright</name></location><location id="id1" x="-56" y="-160"><name x="-66" y="-190">Light</name></location><location id="id2" x="-176" y="-160"><name x="-208" y="-192">Off</name></location><init ref="id2"/><transition><source ref="id1"/><target ref="id2"/><label kind="guard" x="-152" y="-96">x&gt;3</label><label kind="synchronisation" x="-136" y="-120">press?</label><label kind="assignment" x="-120" y="-96">x:=0</label><nail x="-56" y="-96"/><nail x="-176" y="-96"/></transition><transition><source ref="id0"/><target ref="id2"/><label kind="synchronisation" x="-136" y="-184">press?</label><label kind="assignment" x="-88" y="-232">x:=0</label><nail x="64" y="-216"/><nail x="-176" y="-216"/></transition><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="-16" y="-160">x&lt;=3</label><label kind="synchronisation" x="-16" y="-184">press?</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="synchronisation" x="-136" y="-232">press?</label></transition></template><template><name>User</name><declaration>clock y;</declaration><location id="id3" x="8" y="-16"><name x="-2" y="-46">Busy</name></location><location id="id4" x="-136" y="-8"><name x="-146" y="-38">Rest</name></location><init ref="id4"/><transition><source ref="id3"/><target ref="id4"/><nail x="8" y="72"/><nail x="-136" y="72"/></transition><transition><source ref="id4"/><target ref="id3"/><label kind="synchronisation" x="-96" y="-128">press!</label><nail x="-136" y="-104"/><nail x="8" y="-104"/></transition></template><system>// Place template instantiations here.
+P1 = Controller();
+P2 = User();
+
+
+// List one or more processes to be composed into a system.
+system P1, P2;</system></nta>
