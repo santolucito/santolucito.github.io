@@ -9,7 +9,20 @@ title: Music
 
 All recordings you make should be added to the group.
 
-<iframe width="50%" height="300" scrolling="yes" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/groups/253205&amp;color=0066cc&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=true&amp;show_reposts=false"></iframe>
+
+<hr>
+## 5/31
+
+A set of helpful videos for learning LMMS.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLfhmN_gT2qqni0ARc1AC5A-1SiRk20RRf" frameborder="0" allowfullscreen></iframe>
+
+There are two repositories for LMMS projects you can use as inspiration. The first website does not seem to be very stable.
+
+[https://lmms.io/lsp/](https://lmms.io/lsp/)
+
+[http://lmms.sourceforge.net/lsp/index2.php](http://lmms.sourceforge.net/lsp/index2.php)
+
 
 <hr>
 ## 5/26
@@ -18,6 +31,7 @@ All recordings you make should be added to the group.
 
 How to add FX in LMMMS.
 How to use automation to control LMMS.
+See the LMMS tutorial videos (#7) playlist for a demonstration.
 
 ## Final assignment
 
@@ -87,23 +101,10 @@ Recording your own voice.
 <hr>
 ## 5/19
 
-We listened to everyone's submissions and picked a winner for the prize bag.
-The winner was...
-
-<iframe width="50%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/264885980&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=false"></iframe>
-
 We reviewed how to use audacity to create samples that can be used in LMMS.
+We started on the Buddhist chant remix project.
+See a record of this class [here](/ggu/music/5_19).
 
-<iframe width="420" height="315" src="https://www.youtube.com/embed/kONijDwgNDg" frameborder="0" allowfullscreen></iframe>
-
-#### Homework - due 5/24 @ 10am
-
-Make a remix of a Buddhist chant.
-Use the "Buddhist Chant Demo" as an example.
-Your song should be at least 30 seconds.
-
-
-<iframe width="50%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/264881675&amp;auto_play=false&amp;hide_related=true&amp;show_comments=true&amp;show_user=false&amp;show_reposts=false&amp;visual=false"></iframe>
 
 <hr>
 ## 5/17
@@ -158,35 +159,8 @@ You will be assigned a group next week.
 ## 5/03
 
 Midterm today!
+See a record of this class [here](/ggu/music/5_03).
 
-Download [this template](/ggu/music/midterm.maxpat) to get started.
-So far in class we have covered the fundamental mechanics of the Max programming language.
-This exam will test your ability to use the documentation to learn more on your own.
-This exam is open book, use any resources at your disposal, except your neighbors.
-Do NOT chat, text, or otherwise communicate with anyone in the class.
-
-You will use two new objects in the exam.
-
-- mousestate
-- TogEdge
-
-The exam is broken into three parts. Do not move on until you have completed each section.
-
-*Part I - 50 pts*
-Make a program that will play different samples as you scroll your mouse around the screen.
-Define four areas, as shown in the image below.
-![pic](imgs/exam_example.png)
-
-
-*Part II - 40 pts*
-When you click the mouse button, play another sample.
-
-*Part III - 10 pts*
-Use a selection of samples that work well together musically and perform your own piece. Post a recording on the soundcloud group. Put a link to the recording inside your program using the ```comment``` object.
-
-**To Submit**
-
-Submit your max program as an attachment on the lms and submit before noon.
 
 <hr>
 ## 4/26
@@ -217,59 +191,15 @@ Start with [this program](/ggu/music/samples/simpleMSP.maxpat). You need to add 
 
 <hr>
 ## 4/19
-
-### Max programming
-
-*Practice for the exam.* Work on a patch using the ```key``` object.
-Link 5 samples to five keys on the keyboard.
-For example, if I press 'a', Max should play the 'isthatyou.aiff' sound.
-Use a loop and then play your samples on the keyboard to create a 45 second recording.
-Post the recording to soundlcoud and make the image a screenshot of your max patch.
-On the real exam, you will also upload the .maxpat file on the LMS.
-
-After everyone is finished, we will review the ```key``` object together as a class to see how it works.
-
-### Homework
-Practice learning new objects and making a patch with it.
-Here are some good ones to practice with:
-
-- ```slider```
-- ```mousestate```
-
-All the object we have already learned may also be on the exam.
-
-GENERAL
-
-- ```umenu```
-- ```prepend```
-- ```preset```
-- ```toggle```
-- ```metro```
-- ```counter```
-- ```select```
-
-MIDI
-
-- ```makenote```
-- ```noteout```
-- ```pgmout```
-
-WAVES
-
-- ```cycle~```
-- ```*~```
-- ```+~```
-- ```buffer~```
-- ```groove~```
-- ```buffer~```
-- ```play~```
+We reviewed what we have learned so far.
+See a record of this class [here](/ggu/music/4_19).
 
 
 <hr>
 ## 4/12
 
 We learned about RAM vs disk and how to play samples quickly in Max.
-See a record of this class [here](/ggu/music/samples/4_12).
+See a record of this class [here](/ggu/music/4_12).
 
 <hr>
 ## 4/05
