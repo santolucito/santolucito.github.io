@@ -9,7 +9,32 @@ Submit all homework before class on the LMS.
 
 Practice problems available [here](http://codingbat.com/python). Do as many as you can!
 
-[http://imgur.com/gallery/qr9gq](http://imgur.com/gallery/qr9gq)
+If you want to get better at programming - [http://imgur.com/gallery/qr9gq](http://imgur.com/gallery/qr9gq)
+
+
+<hr>
+## 6/1
+
+What we have covered in this class:
+
+- Variables vs Values
+- Types (Booleans, Integers, Doubles, Strings, Arrays)
+- If Statements
+- Loops  (transforming between ```for``` and ```while```, nested loops)
+- Functions (when to use a function, return vs print, recursion)
+- Input and output (on the command line)
+- Arrays and Dictionaries (sorting a list, collecting/analyzing data)
+- Good coding style (programming is like writing an essay)
+
+Last things to review
+
+- nested loops
+- recursion once more
+
+Introducing
+
+- read a file
+
 
 <hr>
 ## 5/25
@@ -24,14 +49,14 @@ It is important to be able to use functions to break complex problems into small
 Write a function to find the x-th prime number.
 You will need a helper method as well to determine if a number is prime (return a boolean).
 
-'''
+```
 def find_prime(x):
 ???
 
 def is_prime(x):
 ???
 
-'''
+```
 
 <hr>
 ## 5/23

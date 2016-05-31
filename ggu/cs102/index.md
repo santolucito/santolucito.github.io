@@ -5,6 +5,16 @@ title: CS102
 
 # CS102 - Object Oriented Programming
 
+
+
+<hr>
+## 6/1
+
+#### Introducing Inheritance
+
+See the [official description](https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html) from Java on inheritance.
+This will allow use to use the ```extends``` keyword.
+
 <hr>
 ## 5/25
 
