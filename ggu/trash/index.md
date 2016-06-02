@@ -15,3 +15,6 @@ We will be using uppaal to create a model. [Download here](http://www.uppaal.org
 
 The light switch [demo file](/ggu/trash/light.xml).
 There is also a [file for the verification formulas](/ggu/trash/light.q).
+
+
+Read the [documentation/instructions](http://www.uppaal.com/index.php?sida=217&rubrik=101) for UPPAAL
