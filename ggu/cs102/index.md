@@ -5,6 +5,39 @@ title: CS102
 
 # CS102 - Object Oriented Programming
 
+<hr>
+## 6/8
+
+A special lecture from Rahul Dhodapkar.
+
+
+## Final Project - due 6/20 @ 11:59 pm
+
+To submit this project, create a github repository and properly upload your files.
+
+Your job to is to create a text-based adventure game.
+Your game will be the journey of a company man's transformation to a Buddhist Monk.
+The player starts with a certain amount of money, and must earn Zen points by doing good deeds.
+The goal is to become a master monk before you run out of money.
+
+To see how the game should work, download [this file](/ggu/cs102/Game.jar).
+Open a powershell window from the folder containing that file, and run the file with ```java -jar Game.jar```.
+
+The commands are ordered by difficulty.
+"Meditate" is easiest, while "Purchase Temple" is the most difficult.
+If you do try to buy temples, start with only "Small Temple" then add "Big Temples".
+Notice that all temples have names, but the Big Temple and Small Temple each do something different (hint: use extends here).
+
+Your grade is broken down as follows:
+
+- 5% - Proper use of Github
+- 15% - Coding style (good variable names, indentation, use of functions for organization)
+- 25% - Use of basic objects
+- 10% - Meditate
+- 10% - Help Someone
+- 10% - Work at Company
+- 10% - Purchase Temple
+- 10% - Use of advanced topics in objects (extends, super)
 
 
 <hr>
