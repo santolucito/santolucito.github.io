@@ -37,8 +37,9 @@ Your grade is broken down as follows:
 - 10% - Help Someone
 - 10% - Work at Company
 - 10% - Purchase Temple
-- 10% - Use of advanced topics in objects (extends, super)
+- 10% - Use of advanced topics in objects (extends, super, \@Overrides)
 
+Since this is a large project, you may want to download a more advanced editor. One option is [Netbeans](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
 <hr>
 ## 6/1
