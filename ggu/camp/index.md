@@ -16,10 +16,7 @@ Weeks 1 and 4 are in Korea, and weeks 2 and 3 are in the United States
 
 A tentative schedule for the time in the US can be found below.
 
-![1a](/ggu/camp/Program-Agenda1.png)
-![a1](/ggu/camp/Program-Agenda2.png)
-![a1](/ggu/camp/Program-Agenda3.png)
-
+<embed src="/ggu/camp/Program_Agenda.pdf" width="80%" height="375" type='application/pdf'>
 
 # Cost
 
