@@ -17,7 +17,7 @@ To submit this project, create a github repository and properly upload your file
 
 Your job to is to create a text-based adventure game.
 Your game will be the journey of a company man's transformation to a Buddhist Monk.
-The player starts with a certain amount of money, and must earn Zen points by doing good deeds.
+The player starts with a certain amount of money, and must earn 100 Zen points by doing good deeds.
 The goal is to become a master monk before you run out of money.
 
 To see how the game should work, download [this file](/ggu/cs102/Game.jar).
@@ -38,6 +38,7 @@ Your grade is broken down as follows:
 - 10% - Work at Company
 - 10% - Purchase Temple
 - 10% - Use of advanced topics in objects (extends, super, \@Overrides)
+- 5% - Do something extra
 
 Since this is a large project, you may want to download a more advanced editor. One option is [Netbeans](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 
