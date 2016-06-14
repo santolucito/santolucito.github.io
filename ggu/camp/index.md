@@ -4,6 +4,7 @@ title: Music
 ---
 
 # 2016 Global Immersion Program
+
 ### The Promise of a Liberal Arts Education
 
 # Program
@@ -11,11 +12,11 @@ title: Music
 The program will run from August 1-August 25.
 Weeks 1 and 4 are in Korea, and weeks 2 and 3 are in the United States
 
-<iframe src="https://docs.google.com/spreadsheets/d/12xu6TBx9y1EmA_U1FP6A4sa1F8LBt9lz9u1KtFe_4oI/pubhtml?gid=632688805&amp;single=true&amp;widget=true&amp;headers=false" width="70%" height="600px"></iframe>
+<iframe src="https://docs.google.com/spreadsheets/d/12xu6TBx9y1EmA_U1FP6A4sa1F8LBt9lz9u1KtFe_4oI/pubhtml?gid=632688805&amp;single=true&amp;widget=true&amp;headers=false" width="80%" height="650px"></iframe>
 
 A tentative schedule for the time in the US can be found below.
 
-<embed src="/ggu/camp/Program_Agenda.pdf" width="500" height="375" type='application/pdf'>
+<embed src="/ggu/camp/Program_Agenda.pdf" width="80%" height="375" type='application/pdf'>
 
 # Cost
 
@@ -45,4 +46,4 @@ In order to apply, submit a link to a youtube video below.
 The video must be no more than 3 min long and in English.
 In the video, tell us an interesting story about your life.
 
-<iframe src="https://docs.google.com/forms/d/1zD4V3Oqg3GiwIhW9FFP0wbpVZpAqxHY_LUdWoJ5gHvM/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+<iframe src="https://docs.google.com/forms/d/1zD4V3Oqg3GiwIhW9FFP0wbpVZpAqxHY_LUdWoJ5gHvM/viewform?embedded=true" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
