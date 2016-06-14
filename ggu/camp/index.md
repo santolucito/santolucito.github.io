@@ -23,9 +23,9 @@ A tentative schedule for the time in the US can be found below.
 Geumgang University has offered to contribute $2000 USD for each student.
 The cost of the program for each student is as follows:
 
-| Tuition | $2700 |
-| Plane Ticket | ~$1000 |
-| Food | ~$400 |
+| Tuition (Housing, Domestic Transportation)| $2700 |
+| Plane Ticket | [$1000 - $2000] |
+| Food | [$400 - $600] |
 | GGU Stipend | -$2000 |
 | **Total** |  **$2100** |
 
@@ -34,7 +34,10 @@ The cost of the program for each student is as follows:
 
 You must be currently enrolled as a GGU degree student.
 
-You do NOT need a visa.
+You will need a B visa.
+You can obtain this simply by filling out a form online.
+This visa is free.
+More instructions will follow upon acceptance to the program.
 
 You must have valid health insurance that will cover your time in the states.
 You may need to buy travelers insurance for this.
@@ -45,5 +48,6 @@ You may need to buy travelers insurance for this.
 In order to apply, submit a link to a youtube video below.
 The video must be no more than 3 min long and in English.
 In the video, tell us an interesting story about your life.
+The application must be submitted by June 24, 23:59.
 
 <iframe src="https://docs.google.com/forms/d/1zD4V3Oqg3GiwIhW9FFP0wbpVZpAqxHY_LUdWoJ5gHvM/viewform?embedded=true" width="700" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
