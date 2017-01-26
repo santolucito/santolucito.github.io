@@ -1,0 +1,11 @@
+1) download the cav17.zip and extract the .ova file
+
+2) username : cavae
+   password : cavae
+   
+3) Open a terminal and run...
+
+cd configErrorDetect/code2
+cabal run
+
+4) To change the program parameters edit src/Settings.hs (descriptions of field in file), then re-run 'cabal run'
