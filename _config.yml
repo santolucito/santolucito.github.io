@@ -10,3 +10,5 @@ rdiscount:
 safe: false
 include: [".well-known"]
 highlighter: rouge
+gems:
+  - jekyll-redirect-from
