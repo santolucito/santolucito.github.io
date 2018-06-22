@@ -1,0 +1,49 @@
+# LIVE
+
+A fancy UI is a must
+
+Ravi Chung has a CAREER grant that is very similar to Ruzica, and a paper on live programming synthesis in PLDI and UIST.
+
+Hieracrcy of liveness from some japanese guy - gives a way to quantify how 'live' your environment is
+
+# Day 1
+
+Remixing studies with program synthesis.
+Constraint based programming as the ultimate remixing tool?
+
+A literate community is not an illiterate community that can read
+
+# Ravi Chung
+
+Programming Language vs Direct Manipulation
+programming good for prototyping, but direct manipulation good for prototyping
+
+start with programming language and make it more 'directly manipulatable'
+
+lambda calculus + direct manipulation (can i make a actual semantics for this?)
+See PLDI 2016, fair bit of formalism there. Should look into that
+
+sketch-n-sketch online tool
+
+Argun Guha - configuration files and program repair
+
+# Thursday
+
+At lunch
+
+Talked to Korean guy from CMU about energy harvesting computing - opportunity for synthesis?
+
+Servless Trilemma (IBM)
+
+openwhisk, ibm-functions/composer on github
+pure functions as a service
+a way to compose functions
+a real world, cloud deployed version of pure parallelism from haskell
+black box, double billing, substitution (stuck with a tradeoff that you must violate one of these)
+like CAP theoreom from databases?
+
+Iota Calculus
+
+A 'lambda calculus' for internet of things
+
+
