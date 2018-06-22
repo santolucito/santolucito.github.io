@@ -1,0 +1,2905 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://assets-cdn.github.com">
+  <link rel="dns-prefetch" href="https://avatars0.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars1.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars2.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://avatars3.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://github-cloud.s3.amazonaws.com">
+  <link rel="dns-prefetch" href="https://user-images.githubusercontent.com/">
+
+
+
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-77c3b874f32e71b14cded5a120f42f5c7288fa52e0a37f2d5919fbd8bcfca63c.css" media="all" rel="stylesheet" />
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-6518de102c0fb5eefed8021d369596311a18c644778f5d8d1fa7238c4b3870ba.css" media="all" rel="stylesheet" />
+  
+  
+  <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/site-71b74cbb2894f6d4629c1a7afffb4692f35cc4213935f1c82967c254daaa14d1.css" media="all" rel="stylesheet" />
+  
+
+  <meta name="viewport" content="width=device-width">
+  
+  <title>[AIRFLOW-536] Schedule all pending DAG runs in a single scheduler loop by PushingUser · Pull Request #1906 · OwnerUser/RepoName · GitHub</title>
+  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+  <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+  <meta property="fb:app_id" content="1401488693436528">
+
+    
+    <meta content="https://avatars1.githubusercontent.com/u/907344?v=4&amp;s=400" property="og:image" /><meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="[AIRFLOW-536] Schedule all pending DAG runs in a single scheduler loop by PushingUser · Pull Request #1906 · OwnerUser/RepoName" property="og:title" /><meta content="https://github.com/OwnerUser/RepoName/pull/1906" property="og:url" /><meta content="Dear Airflow Maintainers,
+Please accept this PR that addresses the following issues:
+
+https://issues.OwnerUser.org/jira/browse/AIRFLOW-536
+
+This issue was reported by @aoen.
+Currently only a single DA..." property="og:description" />
+
+  <link rel="assets" href="https://assets-cdn.github.com/">
+  
+  <meta name="pjax-timeout" content="1000">
+  
+  <meta name="request-id" content="5B23:3503:2F16640:5674E67:599B8179" data-pjax-transient>
+  
+
+  <meta name="selected-link" value="repo_pulls" data-pjax-transient>
+
+  <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+<meta name="google-site-verification" content="ZzhVyEFwb7w3e0-uOTltm8Jsck2F5StVihD0exw2fsA">
+    <meta name="google-analytics" content="UA-3769691-2">
+
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="https://collector.githubapp.com/github-external/browser_event" name="octolytics-event-url" /><meta content="5B23:3503:2F16640:5674E67:599B8179" name="octolytics-dimension-request_id" /><meta content="iad" name="octolytics-dimension-region_edge" /><meta content="iad" name="octolytics-dimension-region_render" />
+<meta content="/&lt;user-name&gt;/&lt;repo-name&gt;/pull_requests/show/files" data-pjax-transient="true" name="analytics-location" />
+
+
+
+
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+
+
+  
+
+      <meta name="hostname" content="github.com">
+  <meta name="user-login" content="">
+
+      <meta name="expected-hostname" content="github.com">
+    <meta name="js-proxy-site-detection-payload" content="MmZiY2FkNmI4OWZkYTEwZGY2MjllODRkMjgzZTJjODE1NGQ0MDY4NWVjMmM2YTg2NmE2NjBlMzVjMDRmMmZmY3x7InJlbW90ZV9hZGRyZXNzIjoiMTMwLjEzMi4xNzMuMTY5IiwicmVxdWVzdF9pZCI6IjVCMjM6MzUwMzoyRjE2NjQwOjU2NzRFNjc6NTk5QjgxNzkiLCJ0aW1lc3RhbXAiOjE1MDMzNjM0NTAsImhvc3QiOiJnaXRodWIuY29tIn0=">
+
+
+  <meta name="html-safe-nonce" content="9bbd8a09385c8cd30436abe0886ce70a2b264608">
+
+  <meta http-equiv="x-pjax-version" content="5a55031578d46649c9b01bdc7ae7a913">
+  
+
+      <link data-pjax-transient rel="alternate" type="text/x-diff" href="/OwnerUser/RepoName/pull/1906.diff">
+  <link data-pjax-transient rel="alternate" type="text/x-patch" href="/OwnerUser/RepoName/pull/1906.patch">
+
+  <meta name="diff-view" content="unified" data-pjax-transient>
+  <link href="https://github.com/OwnerUser/RepoName/commits/improve_dagrun_scheduler.atom" rel="alternate" title="Recent Commits to RepoName:improve_dagrun_scheduler" type="application/atom+xml">
+
+  <meta name="description" content="RepoName - Apache Airflow (Incubating)">
+  <meta name="go-import" content="github.com/OwnerUser/RepoName git https://github.com/OwnerUser/RepoName.git">
+
+  <meta content="47359" name="octolytics-dimension-user_id" /><meta content="OwnerUser" name="octolytics-dimension-user_login" /><meta content="33884891" name="octolytics-dimension-repository_id" /><meta content="OwnerUser/RepoName" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="33884891" name="octolytics-dimension-repository_network_root_id" /><meta content="OwnerUser/RepoName" name="octolytics-dimension-repository_network_root_nwo" /><meta content="false" name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" />
+
+
+
+
+  <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+
+  <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+
+  <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#000000">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+<meta name="theme-color" content="#1e2327">
+
+
+
+  </head>
+
+  <body class="logged-out env-production">
+    
+
+  <div class="position-relative js-header-wrapper ">
+    <a href="#start-of-content" tabindex="1" class="px-2 py-4 show-on-focus js-skip-to-content">Skip to content</a>
+    <div id="js-pjax-loader-bar" class="pjax-loader-bar"><div class="progress"></div></div>
+
+    
+    
+    
+
+
+
+        <div class="header header-logged-out position-relative f4 py-3" role="banner">
+  <div class="container-lg px-3 clearfix">
+    <div class="d-flex flex-justify-between">
+      <div class="d-flex">
+        <a class="header-logo-invertocat my-0" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+          <svg aria-hidden="true" class="octicon octicon-mark-github" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+
+        <div class="header-sitemenu clearfix">
+            <nav>
+              <ul class="d-flex list-style-none">
+                  <li class="ml-2">
+                    <a href="/features" class="js-selected-navigation-item header-navlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:features" data-selected-links="/features /features">
+                      Features
+</a>                  </li>
+                  <li class="ml-4">
+                    <a href="/business" class="js-selected-navigation-item header-navlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:business" data-selected-links="/business /business/security /business/customers /business">
+                      Business
+</a>                  </li>
+
+                  <li class="ml-4">
+                    <a href="/explore" class="js-selected-navigation-item header-navlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:explore" data-selected-links="/explore /trending /trending/developers /integrations /integrations/feature/code /integrations/feature/collaborate /integrations/feature/ship /showcases /explore">
+                      Explore
+</a>                  </li>
+
+                  <li class="ml-4">
+                        <a href="/marketplace" class="js-selected-navigation-item header-navlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:marketplace" data-selected-links=" /marketplace">
+                          Marketplace
+</a>                  </li>
+                  <li class="ml-4">
+                    <a href="/pricing" class="js-selected-navigation-item header-navlink px-0 py-2 m-0" data-ga-click="Header, click, Nav menu - item:pricing" data-selected-links="/pricing /pricing/developer /pricing/team /pricing/business-hosted /pricing/business-enterprise /pricing">
+                      Pricing
+</a>                  </li>
+              </ul>
+            </nav>
+        </div>
+      </div>
+
+      <div class="d-flex">
+          <div class="mt-1 mr-3">
+            <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
+  <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/OwnerUser/RepoName/search" class="js-site-search-form" data-scoped-search-url="/OwnerUser/RepoName/search" data-unscoped-search-url="/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <label class="form-control header-search-wrapper js-chromeless-input-container">
+        <a href="/OwnerUser/RepoName/pull/1906/files" class="header-search-scope no-underline">This repository</a>
+      <input type="text"
+        class="form-control header-search-input js-site-search-focus js-site-search-field is-clearable"
+        data-hotkey="s"
+        name="q"
+        value=""
+        placeholder="Search"
+        aria-label="Search this repository"
+        data-unscoped-placeholder="Search GitHub"
+        data-scoped-placeholder="Search"
+        autocapitalize="off">
+        <input type="hidden" class="js-site-search-type-field" name="type" >
+    </label>
+</form></div>
+
+          </div>
+
+        <span class="d-inline-block">
+            <div class="header-navlink px-0 py-2 m-0">
+              <a class="text-bold text-white no-underline" href="/login?return_to=%2FOwnerUser%2FRepoName%2Fpull%2F1906%2Ffiles" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+                <span class="text-gray">or</span>
+                <a class="text-bold text-white no-underline" href="/join?source=header-repo" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+            </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+  <div id="start-of-content" class="show-on-focus"></div>
+
+    <div id="js-flash-container">
+</div>
+
+
+
+  <div role="main">
+        <div itemscope itemtype="http://schema.org/SoftwareSourceCode">
+    <div id="js-repo-pjax-container" data-pjax-container>
+      
+
+
+
+
+  
+
+
+
+    <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav">
+      <div class="container repohead-details-container">
+
+        <ul class="pagehead-actions">
+  <li>
+      <a href="/login?return_to=%2FOwnerUser%2FRepoName"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-eye" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"/></svg>
+    Watch
+  </a>
+  <a class="social-count" href="/OwnerUser/RepoName/watchers"
+     aria-label="443 users are watching this repository">
+    443
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2FOwnerUser%2FRepoName"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <svg aria-hidden="true" class="octicon octicon-star" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74z"/></svg>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/OwnerUser/RepoName/stargazers"
+      aria-label="5876 users starred this repository">
+      5,876
+    </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2FOwnerUser%2FRepoName"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <svg aria-hidden="true" class="octicon octicon-repo-forked" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+        Fork
+      </a>
+
+    <a href="/OwnerUser/RepoName/network" class="social-count"
+       aria-label="1671 users forked this repository">
+      1,671
+    </a>
+  </li>
+</ul>
+
+        <h1 class="public ">
+  <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"/></svg>
+  <span class="author" itemprop="author"><a href="/OwnerUser" class="url fn" rel="author">OwnerUser</a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong itemprop="name"><a href="/OwnerUser/RepoName" data-pjax="#js-repo-pjax-container">RepoName</a></strong>
+
+</h1>
+
+      </div>
+      <div class="container">
+        
+<nav class="reponav js-repo-nav js-sidenav-container-pjax"
+     itemscope
+     itemtype="http://schema.org/BreadcrumbList"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container">
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/OwnerUser/RepoName" class="js-selected-navigation-item reponav-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /OwnerUser/RepoName" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-code" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M9.5 3L8 4.5 11.5 8 8 11.5 9.5 13 14 8 9.5 3zm-5 0L0 8l4.5 5L6 11.5 2.5 8 6 4.5 4.5 3z"/></svg>
+      <span itemprop="name">Code</span>
+      <meta itemprop="position" content="1">
+</a>  </span>
+
+
+  <span itemscope itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+    <a href="/OwnerUser/RepoName/pulls" class="js-selected-navigation-item selected reponav-item" data-hotkey="g p" data-selected-links="repo_pulls /OwnerUser/RepoName/pulls" itemprop="url">
+      <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+      <span itemprop="name">Pull requests</span>
+      <span class="Counter">179</span>
+      <meta itemprop="position" content="3">
+</a>  </span>
+
+    <a href="/OwnerUser/RepoName/projects" class="js-selected-navigation-item reponav-item" data-selected-links="repo_projects new_repo_project repo_project /OwnerUser/RepoName/projects">
+      <svg aria-hidden="true" class="octicon octicon-project" height="16" version="1.1" viewBox="0 0 15 16" width="15"><path fill-rule="evenodd" d="M10 12h3V2h-3v10zm-4-2h3V2H6v8zm-4 4h3V2H2v12zm-1 1h13V1H1v14zM14 0H1a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/></svg>
+      Projects
+      <span class="Counter" >0</span>
+</a>
+
+
+    <div class="reponav-dropdown js-menu-container">
+      <button type="button" class="btn-link reponav-item reponav-dropdown js-menu-target " data-no-toggle aria-expanded="false" aria-haspopup="true">
+        Insights
+        <svg aria-hidden="true" class="octicon octicon-triangle-down v-align-middle text-gray" height="11" version="1.1" viewBox="0 0 12 16" width="8"><path fill-rule="evenodd" d="M0 5l6 6 6-6z"/></svg>
+      </button>
+      <div class="dropdown-menu-content js-menu-content">
+        <div class="dropdown-menu dropdown-menu-sw">
+          <a class="dropdown-item" href="/OwnerUser/RepoName/pulse" data-skip-pjax>
+            <svg aria-hidden="true" class="octicon octicon-pulse" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 8L8.8 5.4 6.6 8.5 5.5 1.6 2.38 8H0v2h3.6l.9-1.8.9 5.4L9 8.5l1.6 1.5H14V8z"/></svg>
+            Pulse
+          </a>
+          <a class="dropdown-item" href="/OwnerUser/RepoName/graphs" data-skip-pjax>
+            <svg aria-hidden="true" class="octicon octicon-graph" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"/></svg>
+            Graphs
+          </a>
+        </div>
+      </div>
+    </div>
+</nav>
+
+      </div>
+    </div>
+
+<div class="container new-discussion-timeline experiment-repo-nav">
+  <div class="repository-content">
+
+    
+  <div class="issues-listing js-review-state-classes " data-pjax>
+    <div id="files_bucket" class="files-bucket files-next-bucket clearfix pull-request-tab-content is-visible">
+      
+
+
+        
+  <div
+    id="partial-discussion-header"
+    class="gh-header js-details-container Details js-socket-channel js-updatable-content pull request"
+    data-channel="pull_request:95714840"
+    data-url="/OwnerUser/RepoName/pull/1906/show_partial?partial=pull_requests%2Ftitle">
+
+  <div class="gh-header-show gh-header-no-access">
+      <div class="gh-header-actions">
+
+          <button type="button" data-facebox="#new_issue_modal" class="btn btn-sm btn-primary float-right" data-hotkey="c" aria-haspopup="true">New issue</button>
+          <div id="new_issue_modal" class="d-none">
+  <div class="mt-3 mb-2 text-center">
+    <svg aria-hidden="true" class="octicon octicon-comment-discussion text-blue" height="60" version="1.1" viewBox="0 0 16 16" width="60"><path fill-rule="evenodd" d="M15 1H6c-.55 0-1 .45-1 1v2H1c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h1v3l3-3h4c.55 0 1-.45 1-1V9h1l3 3V9h1c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zM9 11H4.5L3 12.5V11H1V5h4v3c0 .55.45 1 1 1h3v2zm6-3h-2v1.5L11.5 8H6V2h9v6z"/></svg>
+  </div>
+
+  <div class="px-4">
+    <p class="text-center mb-4">
+      <strong>Have a question about this project?</strong> Sign up for a free GitHub account to open an issue and contact its maintainers and the community.
+    </p>
+
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form accept-charset="UTF-8" action="/join?return_to=%2FOwnerUser%2FRepoName%2Fissues%2Fnew" autocomplete="off" class="js-signup-form" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="e6sUxhkKshAa9EhSsGefQ01JRX8MgjirJV2wqi7mreuAQ8lAe0Y/EhArF2ErZ546wwBXGswdZCKmzgHkqeTPkA==" /></div>      <dl class="form-group"><dt class="input-label"><label autocapitalize="off" autofocus="autofocus" data-autocheck-authenticity-token="Yy4lmTqOhgAP+/Oaq68aKPgQbFCpyzj138aTOD1ix/xK8QXeP4vj4h4hP0yqSXh7+5cLBWfHFmPr08oD9XWKkQ==" data-autocheck-url="/signup_check/username" data-facebox-id="user-login-issues" for="user_login_issues" name="user[login]">Pick a username</label></dt><dd><input autocapitalize="off" autofocus="autofocus" class="form-control" data-autocheck-authenticity-token="Yy4lmTqOhgAP+/Oaq68aKPgQbFCpyzj138aTOD1ix/xK8QXeP4vj4h4hP0yqSXh7+5cLBWfHFmPr08oD9XWKkQ==" data-autocheck-url="/signup_check/username" data-facebox-id="user-login-issues" id="user_login_issues" name="user[login]" size="30" type="text" /></dd></dl>
+
+      <dl class="form-group"><dt class="input-label"><label autocapitalize="off" data-autocheck-authenticity-token="YnO7qsEneX1m0mMNqajYLdIsJqcx01cbHCluZ8XD7HF/Td2WBYsIrGbH4PBihvdQg6Cs0Ymw4gY67u+zbpr6yA==" data-autocheck-url="/signup_check/email" data-facebox-id="user-email-issues" for="user_email_issues" name="user[email]">Email Address</label></dt><dd><input autocapitalize="off" class="form-control" data-autocheck-authenticity-token="YnO7qsEneX1m0mMNqajYLdIsJqcx01cbHCluZ8XD7HF/Td2WBYsIrGbH4PBihvdQg6Cs0Ymw4gY67u+zbpr6yA==" data-autocheck-url="/signup_check/email" data-facebox-id="user-email-issues" id="user_email_issues" name="user[email]" size="30" type="text" /></dd></dl>
+
+      <dl class="form-group"><dt class="input-label"><label data-autocheck-authenticity-token="kEaM0rV8rE9lr3U97zHypLbTzx0GNE8/Wutcqj9FwZHMcDvcHvGfZYjc1gsgNfpG6uYeqOrk6cjbsC3+RUAUYA==" data-autocheck-url="/signup_check/password" data-facebox-id="user-password-issues" for="user_password_issues" name="user[password]">Password</label></dt><dd><input class="form-control" data-autocheck-authenticity-token="kEaM0rV8rE9lr3U97zHypLbTzx0GNE8/Wutcqj9FwZHMcDvcHvGfZYjc1gsgNfpG6uYeqOrk6cjbsC3+RUAUYA==" data-autocheck-url="/signup_check/password" data-facebox-id="user-password-issues" id="user_password_issues" name="user[password]" size="30" type="password" /></dd></dl>
+
+      <input type="hidden" name="source" class="js-signup-source" value="modal-issues">
+      <input class="form-control" name="timestamp" type="hidden" value="1503363450080" />
+<input class="form-control" name="timestamp_secret" type="hidden" value="ec01744880f827f8f5cfeac2015cb9833ea47c2832a730d77ba49c11913a9964" />
+
+
+      <button class="btn btn-primary mt-2 btn-block" type="submit" data-ga-click="(Logged out) New issue modal, clicked Sign up, text:sign-up">Sign up for GitHub</button>
+</form>
+    <p class="mt-4 text-gray text-center">Already on GitHub? <a href="/login?return_to=%2FOwnerUser%2FRepoName%2Fissues%2Fnew" data-ga-click="(Logged out) New issue modal, clicked Sign in, text:sign-in">Sign in</a> to your account</p>
+  </div>
+</div>
+
+      </div>
+
+    <h1 class="gh-header-title">
+      <span class="js-issue-title">
+        [AIRFLOW-536] Schedule all pending DAG runs in a single scheduler loop
+      </span>
+      <span class="gh-header-number">#1906</span>
+    </h1>
+  </div>
+
+
+  <div class="TableObject gh-header-meta">
+    <div class="TableObject-item">
+        <div class="State State--green">
+          <svg aria-hidden="true" class="octicon octicon-git-pull-request" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
+          Open
+        </div>
+    </div>
+    <div class="TableObject-item TableObject-item--primary">
+          <a href="/PushingUser" class="author pull-header-username css-truncate css-truncate-target expandable">
+    PushingUser
+  </a>
+   wants to merge 1 commit into
+
+
+
+  <span class="commit-ref css-truncate user-select-contain expandable base-ref" title="OwnerUser/RepoName:master"><span class="css-truncate-target user">OwnerUser</span>:<span class="css-truncate-target">master</span></span>
+
+  <div class="commit-ref-dropdown">
+    <div class="select-menu js-menu-container js-select-menu commitish-suggester js-load-contents" data-contents-url="/OwnerUser/RepoName/pull/1906/show_partial?partial=pull_requests%2Fdescription_branches_dropdown">
+      <button class="btn btn-sm select-menu-button js-menu-target branch" type="button" aria-label="Choose a base branch" aria-haspopup="true" aria-expanded="false">
+        <i>base:</i>
+        <span class="js-select-button css-truncate css-truncate-target" title="base: master">master</span>
+      </button>
+      <div class="select-menu-modal-holder js-menu-content js-navigation-container">
+        <div class="select-menu-modal">
+          <div class="js-select-menu-deferred-content"></div>
+          <div class="select-menu-loading-overlay anim-pulse">
+            <svg aria-hidden="true" class="octicon octicon-octoface" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M14.7 5.34c.13-.32.55-1.59-.13-3.31 0 0-1.05-.33-3.44 1.3-1-.28-2.07-.32-3.13-.32s-2.13.04-3.13.32c-2.39-1.64-3.44-1.3-3.44-1.3-.68 1.72-.26 2.99-.13 3.31C.49 6.21 0 7.33 0 8.69 0 13.84 3.33 15 7.98 15S16 13.84 16 8.69c0-1.36-.49-2.48-1.3-3.35zM8 14.02c-3.3 0-5.98-.15-5.98-3.35 0-.76.38-1.48 1.02-2.07 1.07-.98 2.9-.46 4.96-.46 2.07 0 3.88-.52 4.96.46.65.59 1.02 1.3 1.02 2.07 0 3.19-2.68 3.35-5.98 3.35zM5.49 9.01c-.66 0-1.2.8-1.2 1.78s.54 1.79 1.2 1.79c.66 0 1.2-.8 1.2-1.79s-.54-1.78-1.2-1.78zm5.02 0c-.66 0-1.2.79-1.2 1.78s.54 1.79 1.2 1.79c.66 0 1.2-.8 1.2-1.79s-.53-1.78-1.2-1.78z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+from
+
+<span class="commit-ref css-truncate user-select-contain expandable head-ref" title="PushingUser/RepoName:improve_dagrun_scheduler"><span class="css-truncate-target user">PushingUser</span>:<span class="css-truncate-target">improve_dagrun_scheduler</span></span>
+
+
+
+    </div>
+  </div>
+</div>
+
+        
+<div class="tabnav tabnav-pr">
+
+  <nav class="tabnav-tabs">
+      <link rel="pjax-prefetch" href="/OwnerUser/RepoName/pull/1906">
+    <a href="/OwnerUser/RepoName/pull/1906" class="tabnav-tab  js-pjax-history-navigate">
+      <svg aria-hidden="true" class="octicon octicon-comment-discussion" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M15 1H6c-.55 0-1 .45-1 1v2H1c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1h1v3l3-3h4c.55 0 1-.45 1-1V9h1l3 3V9h1c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zM9 11H4.5L3 12.5V11H1V5h4v3c0 .55.45 1 1 1h3v2zm6-3h-2v1.5L11.5 8H6V2h9v6z"/></svg>
+      Conversation
+
+      <span id="conversation_tab_counter" class="Counter">
+        14
+      </span>
+    </a>
+
+    <a href="/OwnerUser/RepoName/pull/1906/commits" class="tabnav-tab  js-pjax-history-navigate">
+      <svg aria-hidden="true" class="octicon octicon-git-commit" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M10.86 7c-.45-1.72-2-3-3.86-3-1.86 0-3.41 1.28-3.86 3H0v2h3.14c.45 1.72 2 3 3.86 3 1.86 0 3.41-1.28 3.86-3H14V7h-3.14zM7 10.2c-1.22 0-2.2-.98-2.2-2.2 0-1.22.98-2.2 2.2-2.2 1.22 0 2.2.98 2.2 2.2 0 1.22-.98 2.2-2.2 2.2z"/></svg>
+      Commits
+
+      <span id="commits_tab_counter" class="Counter">
+        1
+      </span>
+    </a>
+
+    <a href="/OwnerUser/RepoName/pull/1906/files" class="tabnav-tab selected js-pjax-history-navigate">
+      <svg aria-hidden="true" class="octicon octicon-diff" height="16" version="1.1" viewBox="0 0 13 16" width="13"><path fill-rule="evenodd" d="M6 7h2v1H6v2H5V8H3V7h2V5h1v2zm-3 6h5v-1H3v1zM7.5 2L11 5.5V15c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h6.5zM10 6L7 3H1v12h9V6zM8.5 0H3v1h5l4 4v8h1V4.5L8.5 0z"/></svg>
+      Files changed
+
+        <span id="files_tab_counter" class="Counter">
+            5
+        </span>
+    </a>
+  </nav>
+</div>
+
+
+        <div class="pr-toolbar js-sticky js-sticky-offset-scroll">
+          <div class="diffbar details-collapse js-details-container Details">
+            
+
+<div class="diffbar-item">
+  <div class="diffbar-range-menu select-menu js-menu-container js-select-menu "
+    data-range-url="/OwnerUser/RepoName/pull/1906/files/$range">
+    <div class="js-select-button">
+      <button type="button" class="btn-link muted-link select-menu-button js-menu-target" aria-expanded="false" aria-haspopup="true" data-hotkey="c">
+        Changes from
+          <strong>all commits</strong>
+      </button>
+    </div>
+
+    <div class="select-menu-modal-holder">
+      <div class="select-menu-modal js-menu-content">
+        <div class="select-menu-header">
+          <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+          <span class="select-menu-title">Commits</span>
+        </div>
+        <div class="select-menu-list js-navigation-container js-active-navigation-container" role="menu">
+          <a href="/OwnerUser/RepoName/pull/1906/files" class="select-menu-item js-navigation-item js-navigation-open" role="menuitem">
+            <div class="select-menu-item-text">
+              <div class="text-emphasized css-truncate css-truncate-target">
+                Show all changes
+              </div>
+              <span class="description">
+                1 commit
+              </span>
+            </div>
+          </a>
+
+
+          <div class="select-menu-divider">
+            Select commit
+          </div>
+
+          <div class="js-diffbar-commits-list">
+              <a href="/OwnerUser/RepoName/pull/1906/commits/4a033e5642de8743252221bee565cbfb07a5a336"
+                class="select-menu-item js-navigation-item js-navigation-open " role="menuitem"
+                data-commit="4a033e5" >
+                <div class="select-menu-item-text">
+                  <code class="float-right">4a033e5</code>
+                  <div class="text-emphasized css-truncate css-truncate-target">
+                    [AIRFLOW-536] Schedule all pending DAG runs in a single scheduler loop
+                  </div>
+                  <span class="description">
+                    PushingUser <relative-time datetime="2016-11-19T12:27:15Z">Nov 19, 2016</relative-time>
+                  </span>
+                </div>
+              </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+              
+<include-fragment src="/OwnerUser/RepoName/pull/1906/show_toc?base_sha=a2b0ea322694409a43f05275ded8acb47b809e98&amp;ds=true&amp;sha1=a2b0ea322694409a43f05275ded8acb47b809e98&amp;sha2=4a033e5642de8743252221bee565cbfb07a5a336"></include-fragment>
+
+<div class="diffbar-item toc-select select-menu js-menu-container js-select-menu js-load-contents" data-contents-url="/OwnerUser/RepoName/pull/1906/show_toc?base_sha=a2b0ea322694409a43f05275ded8acb47b809e98&amp;sha1=a2b0ea322694409a43f05275ded8acb47b809e98&amp;sha2=4a033e5642de8743252221bee565cbfb07a5a336">
+  <button type="button" class="btn-link muted-link select-menu-button js-menu-target" aria-expanded="false" aria-haspopup="true" data-hotkey="t" data-ga-click="Pull Requests, open table of contents, type:semantic">
+      <strong>Jump to…</strong>
+  </button>
+  <div class="select-menu-modal-holder">
+    <div class="select-menu-modal js-menu-content">
+        <div class="select-menu-header">
+          <svg aria-label="Close" class="octicon octicon-x js-menu-close" height="16" role="img" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+          <span class="select-menu-title">
+              Jump to file or symbol
+          </span>
+        </div>
+        <div class="js-select-menu-deferred-content">
+          <div class="select-menu-blankslate select-menu-error">
+            Failed to load files and symbols. <button type="button" class="btn-link js-toc-retry">Retry</button>
+          </div>
+        </div>
+        <div class="select-menu-loading-overlay anim-pulse">
+          <svg aria-hidden="true" class="octicon octicon-octoface" height="32" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M14.7 5.34c.13-.32.55-1.59-.13-3.31 0 0-1.05-.33-3.44 1.3-1-.28-2.07-.32-3.13-.32s-2.13.04-3.13.32c-2.39-1.64-3.44-1.3-3.44-1.3-.68 1.72-.26 2.99-.13 3.31C.49 6.21 0 7.33 0 8.69 0 13.84 3.33 15 7.98 15S16 13.84 16 8.69c0-1.36-.49-2.48-1.3-3.35zM8 14.02c-3.3 0-5.98-.15-5.98-3.35 0-.76.38-1.48 1.02-2.07 1.07-.98 2.9-.46 4.96-.46 2.07 0 3.88-.52 4.96.46.65.59 1.02 1.3 1.02 2.07 0 3.19-2.68 3.35-5.98 3.35zM5.49 9.01c-.66 0-1.2.8-1.2 1.78s.54 1.79 1.2 1.79c.66 0 1.2-.8 1.2-1.79s-.54-1.78-1.2-1.78zm5.02 0c-.66 0-1.2.79-1.2 1.78s.54 1.79 1.2 1.79c.66 0 1.2-.8 1.2-1.79s-.53-1.78-1.2-1.78z"/></svg>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+              <span class="diffbar-item diffstat">
+  <span class="text-green">
+    +51
+  </span>
+  <span class="text-red">
+    −9
+  </span>
+  <span class="tooltipped tooltipped-s" aria-label="60 lines changed">
+    <span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-neutral"></span>
+  </span>
+</span>
+
+
+            <div class="float-right pr-review-tools">
+              <div class="diffbar-item">
+  <div class="BtnGroup">
+      <button type="button" class="btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s bg-gray-light text-gray-light" aria-label="Viewing diff in unified mode" disabled>Unified</button>
+      <a class="btn btn-sm btn-outline BtnGroup-item tooltipped tooltipped-s" href="https://github.com/OwnerUser/RepoName/pull/1906/files?diff=split" aria-label="View diff in split mode">Split</a>
+  </div>
+</div>
+
+
+            </div>
+
+                  <div class="js-socket-channel js-updatable-content js-pull-refresh-on-pjax" data-channel="pull_request:95714840" data-url="/OwnerUser/RepoName/pull/1906/show_partial_comparison?base_commit_oid=a2b0ea322694409a43f05275ded8acb47b809e98&amp;end_commit_oid=4a033e5642de8743252221bee565cbfb07a5a336&amp;partial=pull_requests%2Fstale_comparison&amp;start_commit_oid=a2b0ea322694409a43f05275ded8acb47b809e98"></div>
+
+
+            <div class="modal-backdrop js-touch-events"></div>
+          </div>
+        </div>
+        <div class="pr-toolbar-shadow"></div>
+
+
+
+          <div id="files" class="diff-view ">
+
+  <div class="js-diff-progressive-container">
+    
+<a name="diff-a7f584b9502a6dd19987db41a8834ff9"></a>
+<div id="diff-0"
+     class="file js-file js-details-container Details
+             
+             
+             
+             
+             
+              show-inline-notes
+           ">
+  <div class="file-header" data-path="airflow/executors/base_executor.py" data-short-path="a7f584b" data-anchor="diff-a7f584b9502a6dd19987db41a8834ff9">
+    <div class="file-actions">
+
+        <span class="show-file-notes pt-1">
+          <label>
+            <input type="checkbox" checked="checked" class="js-toggle-file-notes">
+            Show comments
+          </label>
+        </span>
+
+          <a href="/PushingUser/RepoName/blob/4a033e5642de8743252221bee565cbfb07a5a336/airflow/executors/base_executor.py" class="btn btn-sm tooltipped tooltipped-nw" rel="nofollow" aria-label="View the whole file">View</a>
+
+
+            <button type="button" disabled class="btn-link btn-octicon tooltipped tooltipped-nw" aria-label="You must be signed in and have push access to the improve_dagrun_scheduler branch to make changes."><svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></button>
+      <button type="button" class="btn-octicon p-1 pr-2 js-details-target" aria-label="Toggle diff text" aria-expanded="true">
+        <svg aria-hidden="true" class="octicon octicon-chevron-down Details-content--shown" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"/></svg>
+        <svg aria-hidden="true" class="octicon octicon-chevron-up Details-content--hidden" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"/></svg>
+      </button>
+    </div>
+    <div class="file-info">
+        <span class="diffstat tooltipped tooltipped-e" aria-label="3 additions &amp; 2 deletions">5 <span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-deleted"></span><span class="block-diff-deleted"></span></span>
+
+      <a href="#diff-a7f584b9502a6dd19987db41a8834ff9" class="link-gray-dark"
+         title="airflow/executors/base_executor.py">airflow/executors/base_executor.py</a>
+
+      
+    </div>
+  </div>
+  <div class="js-file-content Details-content--shown">
+
+        <div class="data highlight blob-wrapper">
+          <table class="diff-table tab-size  " data-tab-size="8">
+            
+      <tr class="js-expandable-line" data-position="0">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-a7f584b9502a6dd19987db41a8834ff9"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/8b29b690dc3df7d9696c890a3b04f68a3aec3bef?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=10&amp;mode=100644&amp;next_line_num_left=104&amp;next_line_num_right=104&amp;path=airflow%2Fexecutors%2Fbase_executor.py&amp;prev_line_num_left=&amp;prev_line_num_right=&amp;right_hunk_size=11"
+            data-left-range="1-103" data-right-range="1-103">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -104,10 +104,11 @@ def heartbeat(self):</td>
+  </tr>
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L104" data-line-number="104"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R104" data-line-number="104"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c1">self</span>.logger.debug(<span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-c1">{}</span> in queue<span class="pl-pds">&quot;</span></span>.format(<span class="pl-c1">len</span>(<span class="pl-c1">self</span>.queued_tasks)))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L105" data-line-number="105"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R105" data-line-number="105"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c1">self</span>.logger.debug(<span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-c1">{}</span> open slots<span class="pl-pds">&quot;</span></span>.format(open_slots))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L106" data-line-number="106"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R106" data-line-number="106"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R107" data-line-number="107"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-c"><span class="pl-c">#</span> sort by priority (descending) and execution date (ascending)</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L107" data-line-number="107"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R108" data-line-number="108"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         sorted_queue <span class="pl-k">=</span> <span class="pl-c1">sorted</span>(</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L108" data-line-number="108"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R109" data-line-number="109"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             [(k, v) <span class="pl-k">for</span> k, v <span class="pl-k">in</span> <span class="pl-c1">self</span>.queued_tasks.items()],</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L109" data-line-number="109"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-            <span class="pl-v">key</span><span class="pl-k">=</span><span class="pl-k">lambda</span> <span class="pl-smi">x</span>: x[<span class="pl-c1">1</span>][<span class="pl-c1">1</span>],</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L110" data-line-number="110"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-            <span class="pl-v">reverse</span><span class="pl-k">=</span><span class="pl-c1 x x-first x-last">True</span>)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R110" data-line-number="110"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-v">key</span><span class="pl-k">=</span><span class="pl-k">lambda</span> <span class="pl-smi">x</span>: <span class="x x-first">(</span><span class="pl-k x x-last">-</span>x[<span class="pl-c1">1</span>][<span class="pl-c1">1</span>]<span class="x x-first">, x[</span><span class="pl-c1 x">0</span><span class="x">][</span><span class="pl-c1 x">2</span><span class="x x-last">])</span>,</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R111" data-line-number="111"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-v">reverse</span><span class="pl-k">=</span><span class="pl-c1 x x-first x-last">False</span>)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L111" data-line-number="111"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R112" data-line-number="112"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-k">for</span> i <span class="pl-k">in</span> <span class="pl-c1">range</span>(<span class="pl-c1">min</span>((open_slots, <span class="pl-c1">len</span>(<span class="pl-c1">self</span>.queued_tasks)))):</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L112" data-line-number="112"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R113" data-line-number="113"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             key, (command, _, queue, ti) <span class="pl-k">=</span> sorted_queue.pop(<span class="pl-c1">0</span>)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9L113" data-line-number="113"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a7f584b9502a6dd19987db41a8834ff9R114" data-line-number="114"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             <span class="pl-c"><span class="pl-c">#</span> <span class="pl-k">TODO</span>(jlowin) without a way to know what Job ran which tasks,</span></span>
+
+  </td>
+</tr>
+
+
+  <tr class="js-expandable-line">
+   <td class="blob-num blob-num-expandable" colspan="2">
+     <a href="#diff-a7f584b9502a6dd19987db41a8834ff9"
+          class="diff-expander js-expand" title="Expand" aria-label="Expand"
+          data-url="/OwnerUser/RepoName/blob_excerpt/8b29b690dc3df7d9696c890a3b04f68a3aec3bef?diff=unified&amp;in_wiki_context=&amp;mode=100644&amp;path=airflow%2Fexecutors%2Fbase_executor.py&amp;prev_line_num_left=113&amp;prev_line_num_right=114"
+          data-left-range="114-171"
+          data-right-range="115-171">
+       <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+     </a>
+   </td>
+   <td class="blob-code blob-code-expandable"></td>
+  </tr>
+
+          </table>
+        </div>
+
+  </div>
+</div>
+
+    
+<a name="diff-54a57ccc2c8e73d12c812798bf79ccb2"></a>
+<div id="diff-1"
+     class="file js-file js-details-container Details
+             
+             
+             
+             
+             
+              show-inline-notes
+           ">
+  <div class="file-header" data-path="airflow/jobs.py" data-short-path="54a57cc" data-anchor="diff-54a57ccc2c8e73d12c812798bf79ccb2">
+    <div class="file-actions">
+
+        <span class="show-file-notes pt-1">
+          <label>
+            <input type="checkbox" checked="checked" class="js-toggle-file-notes">
+            Show comments
+          </label>
+        </span>
+
+          <a href="/PushingUser/RepoName/blob/4a033e5642de8743252221bee565cbfb07a5a336/airflow/jobs.py" class="btn btn-sm tooltipped tooltipped-nw" rel="nofollow" aria-label="View the whole file">View</a>
+
+
+            <button type="button" disabled class="btn-link btn-octicon tooltipped tooltipped-nw" aria-label="You must be signed in and have push access to the improve_dagrun_scheduler branch to make changes."><svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></button>
+      <button type="button" class="btn-octicon p-1 pr-2 js-details-target" aria-label="Toggle diff text" aria-expanded="true">
+        <svg aria-hidden="true" class="octicon octicon-chevron-down Details-content--shown" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"/></svg>
+        <svg aria-hidden="true" class="octicon octicon-chevron-up Details-content--hidden" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"/></svg>
+      </button>
+    </div>
+    <div class="file-info">
+        <span class="diffstat tooltipped tooltipped-e" aria-label="7 additions &amp; 3 deletions">10 <span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-deleted"></span><span class="block-diff-neutral"></span></span>
+
+      <a href="#diff-54a57ccc2c8e73d12c812798bf79ccb2" class="link-gray-dark"
+         title="airflow/jobs.py">airflow/jobs.py</a>
+
+      
+    </div>
+  </div>
+  <div class="js-file-content Details-content--shown">
+
+        <div class="data highlight blob-wrapper">
+          <table class="diff-table tab-size  " data-tab-size="8">
+            
+      <tr class="js-expandable-line" data-position="0">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-54a57ccc2c8e73d12c812798bf79ccb2"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/e60377706b0ba0bd90294ee54ef4a7c0150d9fe6?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=9&amp;mode=100644&amp;next_line_num_left=1133&amp;next_line_num_right=1133&amp;path=airflow%2Fjobs.py&amp;prev_line_num_left=&amp;prev_line_num_right=&amp;right_hunk_size=13"
+            data-left-range="1-1132" data-right-range="1-1132">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -1133,9 +1133,13 @@ def _process_dags(self, dagbag, dags, tis_out):</td>
+  </tr>
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1133" data-line-number="1133"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1133" data-line-number="1133"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1134" data-line-number="1134"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1134" data-line-number="1134"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             <span class="pl-c1">self</span>.logger.info(<span class="pl-s"><span class="pl-pds">&quot;</span>Processing <span class="pl-c1">{}</span><span class="pl-pds">&quot;</span></span>.format(dag.dag_id))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1135" data-line-number="1135"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1135" data-line-number="1135"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1136" data-line-number="1136"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-            dag_run <span class="pl-k">=</span> <span class="pl-c1">self</span>.create_dag_run(dag)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1137" data-line-number="1137"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-            <span class="pl-k">if</span> dag_run:</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1138" data-line-number="1138"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-                <span class="pl-c1">self</span>.logger.info(<span class="pl-s"><span class="pl-pds">&quot;</span>Created <span class="pl-c1">{}</span><span class="pl-pds">&quot;</span></span>.format(dag_run))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1136" data-line-number="1136"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-c"><span class="pl-c">#</span> create all valid DAG runs in a single scheduler invocation</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1137" data-line-number="1137"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-k">while</span> <span class="pl-c1">True</span>:</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1138" data-line-number="1138"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                dag_run <span class="pl-k">=</span> <span class="pl-c1">self</span>.create_dag_run(dag)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1139" data-line-number="1139"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                <span class="pl-k">if</span> dag_run:</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1140" data-line-number="1140"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                    <span class="pl-c1">self</span>.logger.info(<span class="pl-s"><span class="pl-pds">&quot;</span>Created DAG run <span class="pl-c1">{}</span><span class="pl-pds">&quot;</span></span>.format(dag_run))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1141" data-line-number="1141"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                <span class="pl-k">else</span>:</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1142" data-line-number="1142"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                    <span class="pl-k">break</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1139" data-line-number="1139"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1143" data-line-number="1143"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             <span class="pl-c1">self</span>._process_task_instances(dag, tis_out)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1140" data-line-number="1140"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1144" data-line-number="1144"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             <span class="pl-c1">self</span>.manage_slas(dag)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2L1141" data-line-number="1141"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-54a57ccc2c8e73d12c812798bf79ccb2R1145" data-line-number="1145"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+  <tr class="js-expandable-line">
+   <td class="blob-num blob-num-expandable" colspan="2">
+     <a href="#diff-54a57ccc2c8e73d12c812798bf79ccb2"
+          class="diff-expander js-expand" title="Expand" aria-label="Expand"
+          data-url="/OwnerUser/RepoName/blob_excerpt/e60377706b0ba0bd90294ee54ef4a7c0150d9fe6?diff=unified&amp;in_wiki_context=&amp;mode=100644&amp;path=airflow%2Fjobs.py&amp;prev_line_num_left=1141&amp;prev_line_num_right=1145"
+          data-left-range="1142-2112"
+          data-right-range="1146-2112">
+       <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+     </a>
+   </td>
+   <td class="blob-code blob-code-expandable"></td>
+  </tr>
+
+          </table>
+        </div>
+
+  </div>
+</div>
+
+    
+<a name="diff-185fd29272f86a9026fa3fb7a7cb2915"></a>
+<div id="diff-2"
+     class="file js-file js-details-container Details
+             
+             
+             
+             
+             
+              show-inline-notes
+           ">
+  <div class="file-header" data-path="scripts/perf/scheduler_ops_metrics.py" data-short-path="185fd29" data-anchor="diff-185fd29272f86a9026fa3fb7a7cb2915">
+    <div class="file-actions">
+
+        <span class="show-file-notes pt-1">
+          <label>
+            <input type="checkbox" checked="checked" class="js-toggle-file-notes">
+            Show comments
+          </label>
+        </span>
+
+          <a href="/PushingUser/RepoName/blob/4a033e5642de8743252221bee565cbfb07a5a336/scripts/perf/scheduler_ops_metrics.py" class="btn btn-sm tooltipped tooltipped-nw" rel="nofollow" aria-label="View the whole file">View</a>
+
+
+            <button type="button" disabled class="btn-link btn-octicon tooltipped tooltipped-nw" aria-label="You must be signed in and have push access to the improve_dagrun_scheduler branch to make changes."><svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></button>
+      <button type="button" class="btn-octicon p-1 pr-2 js-details-target" aria-label="Toggle diff text" aria-expanded="true">
+        <svg aria-hidden="true" class="octicon octicon-chevron-down Details-content--shown" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"/></svg>
+        <svg aria-hidden="true" class="octicon octicon-chevron-up Details-content--hidden" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"/></svg>
+      </button>
+    </div>
+    <div class="file-info">
+        <span class="diffstat tooltipped tooltipped-e" aria-label="3 additions &amp; 2 deletions">5 <span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-deleted"></span><span class="block-diff-deleted"></span></span>
+
+      <a href="#diff-185fd29272f86a9026fa3fb7a7cb2915" class="link-gray-dark"
+         title="scripts/perf/scheduler_ops_metrics.py">scripts/perf/scheduler_ops_metrics.py</a>
+
+      
+    </div>
+  </div>
+  <div class="js-file-content Details-content--shown">
+
+        <div class="data highlight blob-wrapper">
+          <table class="diff-table tab-size  " data-tab-size="8">
+            
+      <tr class="js-expandable-line" data-position="0">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-185fd29272f86a9026fa3fb7a7cb2915"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/bab9ad81c58bf6c13605c10ee75ed6ef1c242051?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=7&amp;mode=100644&amp;next_line_num_left=24&amp;next_line_num_right=24&amp;path=scripts%2Fperf%2Fscheduler_ops_metrics.py&amp;prev_line_num_left=&amp;prev_line_num_right=&amp;right_hunk_size=7"
+            data-left-range="1-23" data-right-range="1-23">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -24,7 +24,7 @@</td>
+  </tr>
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L24" data-line-number="24"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R24" data-line-number="24"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L25" data-line-number="25"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R25" data-line-number="25"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-c1">SUBDIR</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&#39;</span>scripts/perf/dags<span class="pl-pds">&#39;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L26" data-line-number="26"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R26" data-line-number="26"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-c1">DAG_IDS</span> <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">&#39;</span>perf_dag_1<span class="pl-pds">&#39;</span></span>, <span class="pl-s"><span class="pl-pds">&#39;</span>perf_dag_2<span class="pl-pds">&#39;</span></span>]</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L27" data-line-number="27"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-<span class="pl-c1">MAX_RUNTIME_SECS</span> <span class="pl-k">=</span> <span class="pl-c1 x x-first x-last">6</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R27" data-line-number="27"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+<span class="pl-c1">MAX_RUNTIME_SECS</span> <span class="pl-k">=</span> <span class="pl-c1 x x-first x-last">600</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L28" data-line-number="28"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R28" data-line-number="28"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L29" data-line-number="29"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R29" data-line-number="29"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L30" data-line-number="30"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R30" data-line-number="30"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-k">class</span> <span class="pl-en">SchedulerMetricsJob</span>(<span class="pl-e">SchedulerJob</span>):</span>
+
+  </td>
+</tr>
+
+
+      <tr class="js-expandable-line" data-position="9">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-185fd29272f86a9026fa3fb7a7cb2915"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/bab9ad81c58bf6c13605c10ee75ed6ef1c242051?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=7&amp;mode=100644&amp;next_line_num_left=179&amp;next_line_num_right=179&amp;path=scripts%2Fperf%2Fscheduler_ops_metrics.py&amp;prev_line_num_left=30&amp;prev_line_num_right=30&amp;right_hunk_size=8"
+            data-left-range="31-178" data-right-range="31-178">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -179,7 +179,8 @@ def main():</td>
+  </tr>
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L179" data-line-number="179"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R179" data-line-number="179"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">     clear_dag_runs()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L180" data-line-number="180"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R180" data-line-number="180"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">     clear_dag_task_instances()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L181" data-line-number="181"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R181" data-line-number="181"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L182" data-line-number="182"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-    job <span class="pl-k">=</span> SchedulerMetricsJob(<span class="pl-v">dag_ids</span><span class="pl-k">=</span><span class="pl-c1">DAG_IDS</span>, <span class="pl-v">subdir</span><span class="pl-k">=</span><span class="pl-c1">SUBDIR</span>)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R182" data-line-number="182"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+    job <span class="pl-k">=</span> SchedulerMetricsJob(<span class="pl-v">dag_ids</span><span class="pl-k">=</span><span class="pl-c1">DAG_IDS</span>, <span class="pl-v">subdir</span><span class="pl-k">=</span><span class="pl-c1">SUBDIR</span>,</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R183" data-line-number="183"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-v">processor_poll_interval</span><span class="pl-k">=</span><span class="pl-c1">1.0</span>)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L183" data-line-number="183"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R184" data-line-number="184"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">     job.run()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L184" data-line-number="184"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R185" data-line-number="185"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915L185" data-line-number="185"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-185fd29272f86a9026fa3fb7a7cb2915R186" data-line-number="186"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+  <tr class="js-expandable-line">
+   <td class="blob-num blob-num-expandable" colspan="2">
+     <a href="#diff-185fd29272f86a9026fa3fb7a7cb2915"
+          class="diff-expander js-expand" title="Expand" aria-label="Expand"
+          data-url="/OwnerUser/RepoName/blob_excerpt/bab9ad81c58bf6c13605c10ee75ed6ef1c242051?diff=unified&amp;in_wiki_context=&amp;mode=100644&amp;path=scripts%2Fperf%2Fscheduler_ops_metrics.py&amp;prev_line_num_left=185&amp;prev_line_num_right=186"
+          data-left-range="186-188"
+          data-right-range="187-188">
+       <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+     </a>
+   </td>
+   <td class="blob-code blob-code-expandable"></td>
+  </tr>
+
+          </table>
+        </div>
+
+  </div>
+</div>
+
+    
+<a name="diff-b670bc5339ebcd11a3ec8bdbb24cdf37"></a>
+<div id="diff-3"
+     class="file js-file js-details-container Details
+             
+             
+             
+             
+             
+              show-inline-notes
+           ">
+  <div class="file-header" data-path="tests/jobs.py" data-short-path="b670bc5" data-anchor="diff-b670bc5339ebcd11a3ec8bdbb24cdf37">
+    <div class="file-actions">
+
+        <span class="show-file-notes pt-1">
+          <label>
+            <input type="checkbox" checked="checked" class="js-toggle-file-notes">
+            Show comments
+          </label>
+        </span>
+
+          <a href="/PushingUser/RepoName/blob/4a033e5642de8743252221bee565cbfb07a5a336/tests/jobs.py" class="btn btn-sm tooltipped tooltipped-nw" rel="nofollow" aria-label="View the whole file">View</a>
+
+
+            <button type="button" disabled class="btn-link btn-octicon tooltipped tooltipped-nw" aria-label="You must be signed in and have push access to the improve_dagrun_scheduler branch to make changes."><svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></button>
+      <button type="button" class="btn-octicon p-1 pr-2 js-details-target" aria-label="Toggle diff text" aria-expanded="true">
+        <svg aria-hidden="true" class="octicon octicon-chevron-down Details-content--shown" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"/></svg>
+        <svg aria-hidden="true" class="octicon octicon-chevron-up Details-content--hidden" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"/></svg>
+      </button>
+    </div>
+    <div class="file-info">
+        <span class="diffstat tooltipped tooltipped-e" aria-label="37 additions &amp; 1 deletion">38 <span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-added"></span><span class="block-diff-neutral"></span></span>
+
+      <a href="#diff-b670bc5339ebcd11a3ec8bdbb24cdf37" class="link-gray-dark"
+         title="tests/jobs.py">tests/jobs.py</a>
+
+      
+    </div>
+  </div>
+  <div class="js-file-content Details-content--shown">
+
+        <div class="data highlight blob-wrapper">
+          <table class="diff-table tab-size  " data-tab-size="8">
+            
+      <tr class="js-expandable-line" data-position="0">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-b670bc5339ebcd11a3ec8bdbb24cdf37"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/0c7d5ce9b8f43559ec08b002c8550543142fbe9c?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=6&amp;mode=100644&amp;next_line_num_left=37&amp;next_line_num_right=37&amp;path=tests%2Fjobs.py&amp;prev_line_num_left=&amp;prev_line_num_right=&amp;right_hunk_size=7"
+            data-left-range="1-36" data-right-range="1-36">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -37,6 +37,7 @@</td>
+  </tr>
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L37" data-line-number="37"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R37" data-line-number="37"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-k">from</span> airflow.utils.dag_processing <span class="pl-k">import</span> SimpleDagBag</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L38" data-line-number="38"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R38" data-line-number="38"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-k">from</span> mock <span class="pl-k">import</span> patch</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L39" data-line-number="39"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R39" data-line-number="39"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-k">from</span> tests.executor.test_executor <span class="pl-k">import</span> TestExecutor</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R40" data-line-number="40"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+<span class="pl-k">from</span> tests.test_utils.fake_datetime <span class="pl-k">import</span> FakeDatetime</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L40" data-line-number="40"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R41" data-line-number="41"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L41" data-line-number="41"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R42" data-line-number="42"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-k">from</span> airflow <span class="pl-k">import</span> configuration</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L42" data-line-number="42"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R43" data-line-number="43"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> configuration.load_test_config()</span>
+
+  </td>
+</tr>
+
+
+      <tr class="js-expandable-line" data-position="8">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-b670bc5339ebcd11a3ec8bdbb24cdf37"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/0c7d5ce9b8f43559ec08b002c8550543142fbe9c?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=6&amp;mode=100644&amp;next_line_num_left=851&amp;next_line_num_right=852&amp;path=tests%2Fjobs.py&amp;prev_line_num_left=42&amp;prev_line_num_right=43&amp;right_hunk_size=7"
+            data-left-range="43-850" data-right-range="44-851">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -851,6 +852,7 @@ def test_scheduler_auto_align(self):</td>
+  </tr>
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L851" data-line-number="851"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R852" data-line-number="852"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c1">self</span>.assertIsNotNone(dr)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L852" data-line-number="852"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R853" data-line-number="853"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c1">self</span>.assertEquals(dr.execution_date, datetime.datetime(<span class="pl-c1">2016</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">10</span>, <span class="pl-c1">10</span>))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L853" data-line-number="853"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R854" data-line-number="854"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R855" data-line-number="855"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+    <span class="pl-en">@mock.patch</span>(<span class="pl-s"><span class="pl-pds">&#39;</span>airflow.jobs.datetime<span class="pl-pds">&#39;</span></span>, FakeDatetime)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L854" data-line-number="854"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R856" data-line-number="856"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">     <span class="pl-k">def</span> <span class="pl-en">test_scheduler_reschedule</span>(<span class="pl-smi"><span class="pl-smi">self</span></span>):</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L855" data-line-number="855"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R857" data-line-number="857"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-s"><span class="pl-pds">&quot;&quot;&quot;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L856" data-line-number="856"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R858" data-line-number="858"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-s">        Checks if tasks that are not taken up by the executor</span></span>
+
+  </td>
+</tr>
+
+
+      <tr class="js-expandable-line" data-position="16">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-b670bc5339ebcd11a3ec8bdbb24cdf37"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/0c7d5ce9b8f43559ec08b002c8550543142fbe9c?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=10&amp;mode=100644&amp;next_line_num_left=894&amp;next_line_num_right=896&amp;path=tests%2Fjobs.py&amp;prev_line_num_left=856&amp;prev_line_num_right=858&amp;right_hunk_size=14"
+            data-left-range="857-893" data-right-range="859-895">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -894,10 +896,14 @@ def do_schedule(function, function2):</td>
+  </tr>
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L894" data-line-number="894"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R896" data-line-number="896"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             scheduler.heartrate <span class="pl-k">=</span> <span class="pl-c1">0</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L895" data-line-number="895"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R897" data-line-number="897"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">             scheduler.run()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L896" data-line-number="896"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R898" data-line-number="898"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R899" data-line-number="899"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        FakeDatetime.now <span class="pl-k">=</span> <span class="pl-c1">classmethod</span>(</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R900" data-line-number="900"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-k">lambda</span> <span class="pl-smi">cls</span>: <span class="pl-c1">DEFAULT_DATE</span><span class="pl-k">+</span>datetime.timedelta(<span class="pl-v">days</span><span class="pl-k">=</span><span class="pl-c1">1</span>))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L897" data-line-number="897"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R901" data-line-number="901"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         do_schedule()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L898" data-line-number="898"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R902" data-line-number="902"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c1">self</span>.assertEquals(<span class="pl-c1">1</span>, <span class="pl-c1">len</span>(executor.queued_tasks))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L899" data-line-number="899"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R903" data-line-number="903"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         executor.queued_tasks.clear()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L900" data-line-number="900"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R904" data-line-number="904"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R905" data-line-number="905"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        FakeDatetime.now <span class="pl-k">=</span> <span class="pl-c1">classmethod</span>(</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R906" data-line-number="906"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-k">lambda</span> <span class="pl-smi">cls</span>: <span class="pl-c1">DEFAULT_DATE</span><span class="pl-k">+</span>datetime.timedelta(<span class="pl-v">days</span><span class="pl-k">=</span><span class="pl-c1">2</span>))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L901" data-line-number="901"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R907" data-line-number="907"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         do_schedule()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L902" data-line-number="902"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R908" data-line-number="908"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c1">self</span>.assertEquals(<span class="pl-c1">2</span>, <span class="pl-c1">len</span>(executor.queued_tasks))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L903" data-line-number="903"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R909" data-line-number="909"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+      <tr class="js-expandable-line" data-position="31">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-b670bc5339ebcd11a3ec8bdbb24cdf37"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/0c7d5ce9b8f43559ec08b002c8550543142fbe9c?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=11&amp;mode=100644&amp;next_line_num_left=1027&amp;next_line_num_right=1033&amp;path=tests%2Fjobs.py&amp;prev_line_num_left=903&amp;prev_line_num_right=909&amp;right_hunk_size=15"
+            data-left-range="904-1026" data-right-range="910-1032">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -1027,11 +1033,15 @@ def test_scheduler_run_duration(self):</td>
+  </tr>
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1027" data-line-number="1027"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1033" data-line-number="1033"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">                      expected_run_duration)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1028" data-line-number="1028"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1034" data-line-number="1034"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-k">assert</span> run_duration <span class="pl-k">-</span> expected_run_duration <span class="pl-k">&lt;</span> <span class="pl-c1">5.0</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1029" data-line-number="1029"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1035" data-line-number="1035"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1036" data-line-number="1036"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+    <span class="pl-en">@mock.patch</span>(<span class="pl-s"><span class="pl-pds">&#39;</span>airflow.jobs.datetime<span class="pl-pds">&#39;</span></span>, FakeDatetime)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1030" data-line-number="1030"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1037" data-line-number="1037"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">     <span class="pl-k">def</span> <span class="pl-en">test_dag_with_system_exit</span>(<span class="pl-smi"><span class="pl-smi">self</span></span>):</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1031" data-line-number="1031"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1038" data-line-number="1038"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-s"><span class="pl-pds">&quot;&quot;&quot;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1032" data-line-number="1032"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-<span class="pl-s">        Test to check that a DAG with a system.exit() doesn&#39;t break the scheduler.</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1039" data-line-number="1039"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+<span class="pl-s">        Test to check that a DAG with a system.exit() doesn&#39;t break the</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1040" data-line-number="1040"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+<span class="pl-s">        scheduler.</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1033" data-line-number="1033"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1041" data-line-number="1041"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-s">        <span class="pl-pds">&quot;&quot;&quot;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1034" data-line-number="1034"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1042" data-line-number="1042"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1043" data-line-number="1043"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        FakeDatetime.now <span class="pl-k">=</span> <span class="pl-c1">classmethod</span>(</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1044" data-line-number="1044"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-k">lambda</span> <span class="pl-smi">cls</span>: datetime.datetime(<span class="pl-c1">2000</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1035" data-line-number="1035"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1045" data-line-number="1045"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         dag_id <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&#39;</span>exit_test_dag<span class="pl-pds">&#39;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1036" data-line-number="1036"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1046" data-line-number="1046"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         dag_ids <span class="pl-k">=</span> [dag_id]</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1037" data-line-number="1037"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1047" data-line-number="1047"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         dag_directory <span class="pl-k">=</span> os.path.join(models.<span class="pl-c1">DAGS_FOLDER</span>,</span>
+
+  </td>
+</tr>
+
+
+      <tr class="js-expandable-line" data-position="48">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-b670bc5339ebcd11a3ec8bdbb24cdf37"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/0c7d5ce9b8f43559ec08b002c8550543142fbe9c?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=3&amp;mode=100644&amp;next_line_num_left=1209&amp;next_line_num_right=1219&amp;path=tests%2Fjobs.py&amp;prev_line_num_left=1037&amp;prev_line_num_right=1047&amp;right_hunk_size=29"
+            data-left-range="1038-1208" data-right-range="1048-1218">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -1209,3 +1219,29 @@ def test_dag_catchup_option(self):</td>
+  </tr>
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1209" data-line-number="1209"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1219" data-line-number="1219"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1210" data-line-number="1210"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1220" data-line-number="1220"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c"><span class="pl-c">#</span> The DR should be scheduled BEFORE now</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37L1211" data-line-number="1211"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1221" data-line-number="1221"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">         <span class="pl-c1">self</span>.assertLess(dr.execution_date, datetime.datetime.now())</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1222" data-line-number="1222"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1223" data-line-number="1223"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+    <span class="pl-en">@mock.patch</span>(<span class="pl-s"><span class="pl-pds">&#39;</span>airflow.jobs.datetime<span class="pl-pds">&#39;</span></span>, FakeDatetime)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1224" data-line-number="1224"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+    <span class="pl-k">def</span> <span class="pl-en">test_schedule_multiple_dag_runs</span>(<span class="pl-smi"><span class="pl-smi">self</span></span>):</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1225" data-line-number="1225"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-s"><span class="pl-pds">&quot;&quot;&quot;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1226" data-line-number="1226"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+<span class="pl-s">        Test to check that multiple valid DAG runs are scheduled in a single</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1227" data-line-number="1227"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+<span class="pl-s">        scheduler loop.</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1228" data-line-number="1228"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+<span class="pl-s">        <span class="pl-pds">&quot;&quot;&quot;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1229" data-line-number="1229"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-c"><span class="pl-c">#</span> The start date for test_start_date_scheduling is 2100-1-1. If we mock</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1230" data-line-number="1230"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-c"><span class="pl-c">#</span> datetime.now() as 2100-1-8, DAG runs for 2100-1-1 to 2100-1-7 should</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1231" data-line-number="1231"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-c"><span class="pl-c">#</span> get scheduled in a single scheduler loop</span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1232" data-line-number="1232"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        FakeDatetime.now <span class="pl-k">=</span> <span class="pl-c1">classmethod</span>(</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1233" data-line-number="1233"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-k">lambda</span> <span class="pl-smi">cls</span>: datetime.datetime(<span class="pl-c1">2100</span>, <span class="pl-c1">1</span>, <span class="pl-c1">8</span>))</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1234" data-line-number="1234"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        dag_id <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&#39;</span>test_start_date_scheduling<span class="pl-pds">&#39;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1235" data-line-number="1235"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        dag_ids <span class="pl-k">=</span> [dag_id]</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1236" data-line-number="1236"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        dag_directory <span class="pl-k">=</span> os.path.join(models.<span class="pl-c1">DAGS_FOLDER</span>,</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1237" data-line-number="1237"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                                     <span class="pl-s"><span class="pl-pds">&quot;</span>..<span class="pl-pds">&quot;</span></span>,</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1238" data-line-number="1238"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                                     <span class="pl-s"><span class="pl-pds">&quot;</span>dags<span class="pl-pds">&quot;</span></span>)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1239" data-line-number="1239"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1240" data-line-number="1240"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        scheduler <span class="pl-k">=</span> SchedulerJob(<span class="pl-v">dag_ids</span><span class="pl-k">=</span>dag_ids,</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1241" data-line-number="1241"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                                 <span class="pl-v">subdir</span><span class="pl-k">=</span> dag_directory,</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1242" data-line-number="1242"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                                 <span class="pl-v">num_runs</span><span class="pl-k">=</span><span class="pl-c1">1</span>,</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1243" data-line-number="1243"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+                                 <span class="pl-k">**</span><span class="pl-c1">self</span>.default_scheduler_args)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1244" data-line-number="1244"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        scheduler.run()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1245" data-line-number="1245"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        session <span class="pl-k">=</span> settings.Session()</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1246" data-line-number="1246"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-c1">self</span>.assertEqual(</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-b670bc5339ebcd11a3ec8bdbb24cdf37R1247" data-line-number="1247"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+            <span class="pl-c1">len</span>(session.query(<span class="pl-c1">TI</span>).filter(<span class="pl-c1">TI</span>.dag_id <span class="pl-k">==</span> dag_id).all()), <span class="pl-c1">7</span>)</span>
+
+  </td>
+</tr>
+
+
+
+          </table>
+        </div>
+
+  </div>
+</div>
+
+    
+<a name="diff-a1ca6c92b2f9973c2b78f534e9b47d5b"></a>
+<div id="diff-4"
+     class="file js-file js-details-container Details
+             
+             
+             
+             
+             
+              show-inline-notes
+           ">
+  <div class="file-header" data-path="tests/test_utils/fake_datetime.py" data-short-path="a1ca6c9" data-anchor="diff-a1ca6c92b2f9973c2b78f534e9b47d5b">
+    <div class="file-actions">
+
+        <span class="show-file-notes pt-1">
+          <label>
+            <input type="checkbox" checked="checked" class="js-toggle-file-notes">
+            Show comments
+          </label>
+        </span>
+
+          <a href="/PushingUser/RepoName/blob/4a033e5642de8743252221bee565cbfb07a5a336/tests/test_utils/fake_datetime.py" class="btn btn-sm tooltipped tooltipped-nw" rel="nofollow" aria-label="View the whole file">View</a>
+
+
+            <button type="button" disabled class="btn-link btn-octicon tooltipped tooltipped-nw" aria-label="You must be signed in and have push access to the improve_dagrun_scheduler branch to make changes."><svg aria-hidden="true" class="octicon octicon-pencil" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg></button>
+      <button type="button" class="btn-octicon p-1 pr-2 js-details-target" aria-label="Toggle diff text" aria-expanded="true">
+        <svg aria-hidden="true" class="octicon octicon-chevron-down Details-content--shown" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"/></svg>
+        <svg aria-hidden="true" class="octicon octicon-chevron-up Details-content--hidden" height="16" version="1.1" viewBox="0 0 10 16" width="10"><path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5z"/></svg>
+      </button>
+    </div>
+    <div class="file-info">
+        <span class="diffstat tooltipped tooltipped-e" aria-label="1 addition &amp; 1 deletion">2 <span class="block-diff-added"></span><span class="block-diff-deleted"></span><span class="block-diff-neutral"></span><span class="block-diff-neutral"></span><span class="block-diff-neutral"></span></span>
+
+      <a href="#diff-a1ca6c92b2f9973c2b78f534e9b47d5b" class="link-gray-dark"
+         title="tests/test_utils/fake_datetime.py">tests/test_utils/fake_datetime.py</a>
+
+      
+    </div>
+  </div>
+  <div class="js-file-content Details-content--shown">
+
+        <div class="data highlight blob-wrapper">
+          <table class="diff-table tab-size  " data-tab-size="8">
+            
+      <tr class="js-expandable-line" data-position="0">
+    <td class="blob-num blob-num-expandable" colspan="2">
+      <a href="#diff-a1ca6c92b2f9973c2b78f534e9b47d5b"
+            class="diff-expander js-expand" title="Expand" aria-label="Expand"
+            data-url="/OwnerUser/RepoName/blob_excerpt/a2856f6f725b65c8791b968ffc6b60d18959ecfa?diff=unified&amp;in_wiki_context=&amp;left_hunk_size=4&amp;mode=100644&amp;next_line_num_left=21&amp;next_line_num_right=21&amp;path=tests%2Ftest_utils%2Ffake_datetime.py&amp;prev_line_num_left=&amp;prev_line_num_right=&amp;right_hunk_size=4"
+            data-left-range="1-20" data-right-range="1-20">
+        <svg aria-hidden="true" class="octicon octicon-unfold" height="16" version="1.1" viewBox="0 0 14 16" width="14"><path fill-rule="evenodd" d="M11.5 7.5L14 10c0 .55-.45 1-1 1H9v-1h3.5l-2-2h-7l-2 2H5v1H1c-.55 0-1-.45-1-1l2.5-2.5L0 5c0-.55.45-1 1-1h4v1H1.5l2 2h7l2-2H9V4h4c.55 0 1 .45 1 1l-2.5 2.5zM6 6h2V3h2L7 0 4 3h2v3zm2 3H6v3H4l3 3 3-3H8V9z"/></svg>
+      </a>
+    </td>
+    <td class="blob-code blob-code-inner blob-code-hunk">@@ -21,4 +21,4 @@ class FakeDatetime(datetime):</td>
+  </tr>
+
+    <tr>
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bL21" data-line-number="21"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bR21" data-line-number="21"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> <span class="pl-s">    <span class="pl-pds">&quot;&quot;&quot;</span></span></span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bL22" data-line-number="22"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bR22" data-line-number="22"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner"> </span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bL23" data-line-number="23"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bR23" data-line-number="23"
+        class="blob-num blob-num-context js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-context">
+
+    <span class="blob-code-inner">     <span class="pl-k">def</span> <span class="pl-c1">__new__</span>(<span class="pl-smi"><span class="pl-smi">cls</span></span>, <span class="pl-k">*</span><span class="pl-smi">args</span>, <span class="pl-k">**</span><span class="pl-smi">kwargs</span>):</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bL24" data-line-number="24"
+        class="blob-num blob-num-deletion js-linkable-line-number"></td>
+
+    <td class="blob-num blob-num-deletion empty-cell"></td>
+
+  <td class="blob-code blob-code-deletion">
+
+    <span class="blob-code-inner">-        <span class="pl-k">return</span> <span class="x x-first x-last">date</span>.<span class="pl-c1">__new__</span>(datetime, <span class="pl-k">*</span>args, <span class="pl-k">**</span>kwargs)</span>
+
+  </td>
+</tr>
+
+
+    <tr>
+    <td class="blob-num blob-num-addition empty-cell"></td>
+
+    <td id="diff-a1ca6c92b2f9973c2b78f534e9b47d5bR24" data-line-number="24"
+        class="blob-num blob-num-addition js-linkable-line-number"></td>
+
+  <td class="blob-code blob-code-addition">
+
+    <span class="blob-code-inner">+        <span class="pl-k">return</span> <span class="x x-first x-last">datetime</span>.<span class="pl-c1">__new__</span>(datetime, <span class="pl-k">*</span>args, <span class="pl-k">**</span>kwargs)</span>
+
+  </td>
+</tr>
+
+
+
+          </table>
+        </div>
+
+  </div>
+</div>
+
+  </div>
+
+</div>
+
+<button type="button" class="js-toggle-all-file-notes" data-hotkey="i" style="display:none">Toggle all file notes</button>
+
+<svg aria-hidden="true" width="340px" height="84px" viewBox="0 0 340 84" version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  class="diff-placeholder-svg position-absolute bottom-0">
+  <defs>
+    <clippath id="diff-placeholder">
+      <rect x="0" y="0" width="67.0175439" height="11.9298746" rx="2"></rect>
+      <rect x="18.9473684" y="47.7194983" width="100.701754" height="11.9298746" rx="2"></rect>
+      <rect x="0" y="71.930126" width="37.8947368" height="11.9298746" rx="2"></rect>
+      <rect x="127.017544" y="48.0703769" width="53.3333333" height="11.9298746" rx="2"></rect>
+      <rect x="187.719298" y="48.0703769" width="72.9824561" height="11.9298746" rx="2"></rect>
+      <rect x="76.8421053" y="0" width="140.350877" height="11.9298746" rx="2"></rect>
+      <rect x="17.8947368" y="23.8597491" width="140.350877" height="11.9298746" rx="2"></rect>
+      <rect x="166.315789" y="23.8597491" width="173.684211" height="11.9298746" rx="2"></rect>
+    </clippath>
+
+    <linearGradient id="animated-diff-gradient" x1="0" x2="0" y1="0" y2="1" spreadMethod="reflect">
+      <stop offset="0" stop-color="#eee"></stop>
+      <stop offset="0.2" stop-color="#eee"></stop>
+      <stop offset="0.5" stop-color="#ddd"></stop>
+      <stop offset="0.8" stop-color="#eee"></stop>
+      <stop offset="1" stop-color="#eee"></stop>
+      <animateTransform attributeName="y1" values="0%; 100%; 0" dur="1s" repeatCount="3"></animateTransform>
+      <animateTransform attributeName="y2" values="100%; 200%; 0" dur="1s" repeatCount="3"></animateTransform>
+    </linearGradient>
+  </defs>
+</svg>
+
+
+
+
+        <div class="clearfix"></div>
+    </div>
+  </div>
+
+  </div>
+  <div class="modal-backdrop js-touch-events"></div>
+</div>
+
+    </div>
+  </div>
+
+  </div>
+
+      
+<div class="footer container-lg px-3" role="contentinfo">
+  <div class="position-relative d-flex flex-justify-between py-6 mt-6 f6 text-gray border-top border-gray-light ">
+    <ul class="list-style-none d-flex flex-wrap ">
+      <li class="mr-3">&copy; 2017 <span title="0.75566s from unicorn-1022914604-bq5lk">GitHub</span>, Inc.</li>
+        <li class="mr-3"><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li class="mr-3"><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li class="mr-3"><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li class="mr-3"><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+
+    <a href="https://github.com" aria-label="Homepage" class="footer-octicon" title="GitHub">
+      <svg aria-hidden="true" class="octicon octicon-mark-github" height="24" version="1.1" viewBox="0 0 16 16" width="24"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+</a>
+    <ul class="list-style-none d-flex flex-wrap ">
+        <li class="mr-3"><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
+      <li class="mr-3"><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li class="mr-3"><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li class="mr-3"><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li class="mr-3"><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+
+    </ul>
+  </div>
+</div>
+
+
+
+  <div id="ajax-error-message" class="ajax-error-message flash flash-error">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
+    <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+    </button>
+    You can't perform that action at this time.
+  </div>
+
+
+    <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/compat-91f98c37fc84eac24836eec2567e9912742094369a04c4eba6e3cd1fa18902d9.js"></script>
+    <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/frameworks-b0c0c4f9e3de20515abd33c00aacd769908e225871fa703ae4f2abab0a6753c5.js"></script>
+    
+    <script async="async" crossorigin="anonymous" src="https://assets-cdn.github.com/assets/github-1975000bf7f91b599f89eb5eb67c9a1568773cb3f4cebf0b3f1b6c60b2ec708d.js"></script>
+    
+    
+    
+    
+  <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner d-none">
+    <svg aria-hidden="true" class="octicon octicon-alert" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8.865 1.52c-.18-.31-.51-.5-.87-.5s-.69.19-.87.5L.275 13.5c-.18.31-.18.69 0 1 .19.31.52.5.87.5h13.7c.36 0 .69-.19.86-.5.17-.31.18-.69.01-1L8.865 1.52zM8.995 13h-2v-2h2v2zm0-3h-2V6h2v4z"/></svg>
+    <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+  </div>
+  <div class="facebox" id="facebox" style="display:none;">
+  <div class="facebox-popup">
+    <div class="facebox-content" role="dialog" aria-labelledby="facebox-header" aria-describedby="facebox-description">
+    </div>
+    <button type="button" class="facebox-close js-facebox-close" aria-label="Close modal">
+      <svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"/></svg>
+    </button>
+  </div>
+</div>
+
+
+  </body>
+</html>
+
