@@ -1,0 +1,196 @@
+﻿Creative Embedded Systems, CPSC 334
+Instructors, Scott Petersen & Mark Santolucito
+Meeting Time: TBD
+Office Hours:
+Scott Petersen: by appointment. Office location is AKW 015
+Mark Santolucito: TBA. Office location is AKW 211
+
+
+Prerequisites: 
+________________
+
+
+
+
+After 223 or equivalent or by instructor permission.
+
+
+
+
+Course Description:
+________________
+
+
+
+
+Ubiquitous computing is creating new canvases and opportunities for creative ideas. This class explores the use of microprocessors, distributed sensor networks, IoT, and intermedia systems for the purposes of creative expression.
+
+
+The course is delivered in a mixed lecture and lab format that introduces the fundamental concepts and theory behind embedded systems as well as issues particular to their creative employment. The key objective of the course is for students to conceive of and implement creative uses of computation. To this end, skills to be obtained during the course are as follows:
+
+
+* Appreciate the current efforts and motivation to push the limitations of computation for creative expression, both in new application and new foundational research.
+* Weigh factors such as cost, power, processing, memory, I/O capabilities, and networking capabilities when choosing a set of embedded devices and sensors.
+* Contextualize unfamiliar hardware and languages through examples, documentation, and familiar design pattern.
+* Manage communication between multiple languages, devices, and protocols.
+
+
+Additionally, at the end of the course students will have:
+* A portfolio of their work in the form of writing, code, video, audio, and physical artifacts.
+
+
+
+
+Description of Structure and Workload:
+________________
+
+
+
+
+The course is divided into seven modules that build on each other over the course of the semester. At the end of each module students will demonstrate their knowledge of the topics presented via:
+* a written blog that contains log entries detailing their personal progress
+* aural/visual artifacts: output in the form of audio and video
+* video demonstrations of hardware systems
+* source code
+
+
+
+
+Module 1 - Generative Art: Weeks 1-3, 10% of final grade
+
+
+  
+
+
+
+In the first module we explore basic tools, techniques, and applications for generative art with embedded devices. We take DO to be audio and visuals, using small displays and the Raspberry Pi’s built-in audio capabilities. One practice captured by this system configuration is the practice of live coding. We will examine the work of live coders who work specifically with embedded hardware, such as Sam Aaron. Additionally, we will examine the great diversity of the field, especially evidenced by the South American live coding community with live coders such Alexandra Cardenas and Rodrigo Velasco.
+
+
+Module 2 - Interactive Devices: Weeks 4-5, 10% of final grade
+  
+
+In module 2, we expand our previous system by adding the ability to take input from the environment. This requires interfacing with a microcontroller device and building small circuits to interface with the physical world. The Hi inputs include adjustable pots, light sensors, distance sensors, microphones, and more. This system configuration falls into the broad scope of digital instrument design.
+
+
+Module 3 - Installation Art:  Weeks 6-7, 10% of final grade
+  
+
+In module 3, we break the physical link between the microcontroller and the server and explore wireless methods of data communication including wi-fi, BlueTooth, BlueTooth Low Energy, and more. Simultaneously, we encounter and incorporate technical and artistic motivations for autonomous creative systems that are potentially transparent to the viewer/listener. Those technologies include power considerations. The aesthetic considerations relate to the acousmatic - the heard but not seen.
+
+
+Module 4 - Kinetic Sculpture: Weeks 8-9, 10% of final grade
+  
+
+Module 4 introduces actuators (motors, LEDs) with HO to allow our system to take action in the physical world. We will look at examples of this work, such as the installation Kinetic Rain by the Art+Com group.  This system configuration is particularly well suited to commercial installation art, for example in the synchronized drone swarms as popularly displayed at the opening ceremony of the Beijing Olympics.
+
+
+Module 5 - Interactive Installation Art: Weeks, 10-12, 10% of final grade
+  
+
+
+
+In module 5 we combine all previous system configurations to build installations that can take user input Hi and actuate HO accordingly. This system configuration is utilized for purposes of augmented experience design. We will look at the work of the MIT Media Lab group Opera of the Future, which has utilized this configuration in much of their work.
+
+
+________________
+
+
+Module 6 - Distributed networks: Weeks 13-14, 10% of final grade
+  
+
+In the final guided module, we introduce distributed sensing and actuating networks for larger scale installations. This module does not introduce new modes of expression, but rather gives the artist the tools to scale up the previous configurations to match real world use cases.
+
+
+Module 7 - Final Project: Weeks 15-17, 25% of final grade
+
+
+The final module of the class is an open-ended exploration of system configurations we have explored in class. Students are required to use a minimum set of sensors, actuators, and digital outputs in their own designs. 
+
+
+Here week 17 is considered the end of exam period, the point at which all projects must be presented and turned-in.
+
+
+Total module assignments percentage, 85%.
+
+
+Participation
+
+
+The remaining 15% of the course grade will be determined by preparation (reading), attendance, and participation. See below under Participation and Attendance for more details.
+
+
+
+
+Assessments:
+________________
+
+
+
+
+Assessments are driven by the development of the students’ portfolios. Each module of the course (see above) requires a specific configuration of the common, creative system. Student work will be evaluated for utilization of ideas presented in class in the context of this system configuration. Additional assessments will take the form of incremental code review and check-ins to ensure every student is learning the necessary fundamental skills and staying on track. At the end of each module, students will also be required to comment on the submissions of their peers and provide constructive feedback.
+
+
+Principal Readings:
+________________
+
+
+
+
+Below is a limited (incomplete) bibliography of sources referenced throughout the course. In addition to these readings, students will find it necessary to consult technical documents for their specific applications. Those documents will take the form of man pages and reference documents for software (SuperCollider, Processing, Python, etc.) and hardware (Arduino, Raspberry Pi, passive components and sensors, etc.)
+
+
+Blum, Jeremy. Exploring Arduino: Tools and Techniques for Engineering Wizardry. Hoboken: John Wiley & Sons, 2013.
+
+
+Bullock, Jamie. "Designing Interfaces for Musical Algorithms." In The Oxford Handbook of Algorithmic Music: Oxford University Press, 2018-02-22. http://www.oxfordhandbooks.com/view/10.1093/oxfordhb/9780190226992.001.0001/oxfordhb-9780190226992-e-10. 
+
+
+Dow, Colin. Internet of Things Programming Projects. Birmingham, UK: Packt, 2018. 
+
+
+Kelly, Caleb. Sound. London: Whitechapel Gallery, 2011.
+
+
+Reas, Casey, and Ben Fry. Processing: a programming handbook for visual designers and artists. Cambridge, MA: MIT, 2007
+
+
+Upton, Eben, and Gareth Halfacree. Raspberry Pi User Guide, 4th ed. Hoboken: John Wiley & Sons, 2016.
+
+
+Ward, Brian. How Linux Works, 2nd ed. San Francisco, CA: No Starch Press. 2015.
+
+
+Wilson, Scott, Nick Collins, and David Cottle. The SuperCollider Book. Cambridge, MA: MIT, 2011.
+
+
+
+
+Late Work Policy:
+________________
+
+
+
+
+Late work will be accepted at the instructor's discretion up to the next class session or until the work is discussed in class.  All late work will be deducted 10 points (or 10% of the project).
+
+
+
+
+Participation and Attendance:
+________________
+
+
+
+
+Every class works best when each student in invested and engaged.  This is because students can learn as well from each other as from an instructor.  Peer advice, evaluation, and encouragement are keys to success in this and any other course.  Thus, students are expected to attend every class and to participate fully in the learning experience by contributing to discussion, providing feedback during presentations, and being fully prepared for each class by completing reading assignments and graded work on-time.  Consistent lateness, absences, or lack of class participation will negatively affect final grades.
+
+
+
+
+Course Guidelines:
+________________
+
+
+
+
+All students in the course must read the course guidelines in the Files/Readings/Guidelines folder on the course site. The guidelines are there so you can be sure that your in-class interactions as well as your academic work are in line with the course expectations. Included in the guidelines are expectations for presentations, submitted projects, and the course electronic devices policy.

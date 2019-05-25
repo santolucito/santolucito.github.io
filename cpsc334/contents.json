@@ -1,0 +1,101 @@
+{
+  "paths": [
+    {
+      "type": "file",
+      "value": "index.md"
+    },
+    {
+      "type": "dir",
+      "name": "ExternalResources",
+      "children": [
+        {
+          "type": "dir",
+          "name": "Code",
+          "children": [
+            {
+              "type": "file",
+              "value": "ExternalResources/Code/getESP32.sh"
+            }
+          ]
+        },
+        {
+          "type": "dir",
+          "name": "Documentation",
+          "children": [
+            {
+              "type": "file",
+              "value": "ExternalResources/Documentation/Esp32_DevKit_pinmap.png"
+            },
+            {
+              "type": "file",
+              "value": "ExternalResources/Documentation/esp32_datasheet_en.pdf"
+            }
+          ]
+        },
+        {
+          "type": "dir",
+          "name": "Readings",
+          "children": [
+            {
+              "type": "file",
+              "value": "ExternalResources/Readings/Live-Coding-Education.pdf"
+            }
+          ]
+        },
+        {
+          "type": "file",
+          "value": "ExternalResources/index.md"
+        }
+      ]
+    },
+    {
+      "type": "dir",
+      "name": "Modules",
+      "children": [
+        {
+          "type": "dir",
+          "name": "1_Generative_Art",
+          "children": [
+            {
+              "type": "file",
+              "value": "Modules/1_Generative_Art/hw1.md"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dir",
+      "name": "Syllabus",
+      "children": [
+        {
+          "type": "file",
+          "value": "Syllabus/Creative Embedded Systems Syllabus.txt"
+        }
+      ]
+    }
+  ],
+  "contents": [
+    {
+      "path": "index.md",
+      "url": "index.html",
+      "content": "# CPSC334\n\nThis folder holds the materials for CPSC334: Creative Embedded System, as it will be taught at Yale, Fall 2020.\n\nThe 'Syllabus' directory holds the syllabus\n\nThe 'Modules' directory holds all of our original textual and visual material that we develop for the class.\n\nThe 'External_Resources' directory holds external resources that are used during the class.\nThese will be at times references by Modules.\nExternal resources can include documentation, texts, links, audio, video, setup scripts, etc\n\n# Generating HTML\n\nThis folder can also be used to generate a website of the content using https://www.npmjs.com/package/markdown-folder-to-html\n",
+      "html": "<h1>CPSC334</h1>\n<p>This folder holds the materials for CPSC334: Creative Embedded System, as it will be taught at Yale, Fall 2020.</p>\n<p>The ‘Syllabus’ directory holds the syllabus</p>\n<p>The ‘Modules’ directory holds all of our original textual and visual material that we develop for the class.</p>\n<p>The ‘External_Resources’ directory holds external resources that are used during the class.\nThese will be at times references by Modules.\nExternal resources can include documentation, texts, links, audio, video, setup scripts, etc</p>\n<h1>Generating HTML</h1>\n<p>This folder can also be used to generate a website of the content using <a href=\"https://www.npmjs.com/package/markdown-folder-to-html\">https://www.npmjs.com/package/markdown-folder-to-html</a></p>\n",
+      "id": 0
+    },
+    {
+      "path": "ExternalResources/index.md",
+      "url": "ExternalResources/index.html",
+      "content": "# External Resources\n\nThis folder contains content to supplement modules\n",
+      "html": "<h1>External Resources</h1>\n<p>This folder contains content to supplement modules</p>\n",
+      "id": 1
+    },
+    {
+      "path": "Modules/1_Generative_Art/hw1.md",
+      "url": "Modules/1_Generative_Art/hw1.html",
+      "content": "# Week 1\n\nThe goal of this project is to familiarize yourself with the use of embedded systems for artistic purposes.\n\nThis project focuses on the following system configuration. \n\n              |------|\n    D_in ---> |  Pi  | ---> D_out\n              |------|  \n\n\nThis is the simplest system we will address this semester - a microcomputer with digital out.\nYou have two options for digital out - either visual or audio.\n\n\n# Live Coding \n\nIn our taxonomy of systems, we have the keyboard and D_in and audio or visuals as D_out.\n\n## Audio \n\nYour raspberry pi comes pre-installed with a program called Sonic Pi.\nWe will start exploring the practice of live coding with this tool.\n\n## Visuals\n\nLive coding for visuals is also an active space of exploration.\nFor visuals, we will use Hydra (?)\n\n# Installation Art\n\n\n## Audio\n\n## Interactivity\n\nSome, but not all, installation art will rely on input from the viewer.\nThe viewer may contribute to the art knowingly or unknowingly - actively or passively.\nWe will not draw a formal distinction between these two types of input as, from a technical perspective, we must solve similar issues.\n\n\n",
+      "html": "<h1>Week 1</h1>\n<p>The goal of this project is to familiarize yourself with the use of embedded systems for artistic purposes.</p>\n<p>This project focuses on the following system configuration.</p>\n<pre><code>          |------|\nD_in ---&gt; |  Pi  | ---&gt; D_out\n          |------|  \n</code></pre>\n<p>This is the simplest system we will address this semester - a microcomputer with digital out.\nYou have two options for digital out - either visual or audio.</p>\n<h1>Live Coding</h1>\n<p>In our taxonomy of systems, we have the keyboard and D_in and audio or visuals as D_out.</p>\n<h2>Audio</h2>\n<p>Your raspberry pi comes pre-installed with a program called Sonic Pi.\nWe will start exploring the practice of live coding with this tool.</p>\n<h2>Visuals</h2>\n<p>Live coding for visuals is also an active space of exploration.\nFor visuals, we will use Hydra (?)</p>\n<h1>Installation Art</h1>\n<h2>Audio</h2>\n<h2>Interactivity</h2>\n<p>Some, but not all, installation art will rely on input from the viewer.\nThe viewer may contribute to the art knowingly or unknowingly - actively or passively.\nWe will not draw a formal distinction between these two types of input as, from a technical perspective, we must solve similar issues.</p>\n",
+      "id": 2
+    }
+  ]
+}
