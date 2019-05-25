@@ -61,6 +61,30 @@
               "value": "Modules/1_Generative_Art/hw1.md"
             }
           ]
+        },
+        {
+          "type": "dir",
+          "name": "2_Interactive_Devices",
+          "children": [
+            {
+              "type": "file",
+              "value": "Modules/2_Interactive_Devices/HW2.md"
+            },
+            {
+              "type": "file",
+              "value": "Modules/2_Interactive_Devices/index.md"
+            }
+          ]
+        },
+        {
+          "type": "dir",
+          "name": "3_Installation_Art",
+          "children": [
+            {
+              "type": "file",
+              "value": "Modules/3_Installation_Art/HW3.md"
+            }
+          ]
         }
       ]
     },
@@ -96,6 +120,27 @@
       "content": "# Week 1\n\nThe goal of this project is to familiarize yourself with the use of embedded systems for artistic purposes.\n\nThis project focuses on the following system configuration. \n\n              |------|\n    D_in ---> |  Pi  | ---> D_out\n              |------|  \n\n\nThis is the simplest system we will address this semester - a microcomputer with digital out.\nYou have two options for digital out - either visual or audio.\n\n\n# Live Coding \n\nIn our taxonomy of systems, we have the keyboard and D_in and audio or visuals as D_out.\n\n## Audio \n\nYour raspberry pi comes pre-installed with a program called Sonic Pi.\nWe will start exploring the practice of live coding with this tool.\n\n## Visuals\n\nLive coding for visuals is also an active space of exploration.\nFor visuals, we will use Hydra (?)\n\n# Installation Art\n\n\n## Audio\n\n## Interactivity\n\nSome, but not all, installation art will rely on input from the viewer.\nThe viewer may contribute to the art knowingly or unknowingly - actively or passively.\nWe will not draw a formal distinction between these two types of input as, from a technical perspective, we must solve similar issues.\n\n\n",
       "html": "<h1>Week 1</h1>\n<p>The goal of this project is to familiarize yourself with the use of embedded systems for artistic purposes.</p>\n<p>This project focuses on the following system configuration.</p>\n<pre><code>          |------|\nD_in ---&gt; |  Pi  | ---&gt; D_out\n          |------|  \n</code></pre>\n<p>This is the simplest system we will address this semester - a microcomputer with digital out.\nYou have two options for digital out - either visual or audio.</p>\n<h1>Live Coding</h1>\n<p>In our taxonomy of systems, we have the keyboard and D_in and audio or visuals as D_out.</p>\n<h2>Audio</h2>\n<p>Your raspberry pi comes pre-installed with a program called Sonic Pi.\nWe will start exploring the practice of live coding with this tool.</p>\n<h2>Visuals</h2>\n<p>Live coding for visuals is also an active space of exploration.\nFor visuals, we will use Hydra (?)</p>\n<h1>Installation Art</h1>\n<h2>Audio</h2>\n<h2>Interactivity</h2>\n<p>Some, but not all, installation art will rely on input from the viewer.\nThe viewer may contribute to the art knowingly or unknowingly - actively or passively.\nWe will not draw a formal distinction between these two types of input as, from a technical perspective, we must solve similar issues.</p>\n",
       "id": 2
+    },
+    {
+      "path": "Modules/2_Interactive_Devices/HW2.md",
+      "url": "Modules/2_Interactive_Devices/HW2.html",
+      "content": "# ...\n",
+      "html": "<h1>…</h1>\n",
+      "id": 3
+    },
+    {
+      "path": "Modules/2_Interactive_Devices/index.md",
+      "url": "Modules/2_Interactive_Devices/index.html",
+      "content": "# ...\n",
+      "html": "<h1>…</h1>\n",
+      "id": 4
+    },
+    {
+      "path": "Modules/3_Installation_Art/HW3.md",
+      "url": "Modules/3_Installation_Art/HW3.html",
+      "content": "# ...\n",
+      "html": "<h1>…</h1>\n",
+      "id": 5
     }
   ]
 }
