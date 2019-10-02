@@ -21,7 +21,14 @@
       <script src="js/respond.min.js"></script>
     <![endif]-->
 
+				<script async src="https://www.googletagmanager.com/gtag/js?id=UA-34290445-1"></script>
+				<script>
+						window.dataLayer = window.dataLayer || [];
+						function gtag(){dataLayer.push(arguments);}
+						gtag('js', new Date());
 
+						gtag('config', 'UA-34290445-1');
+				</script>
   </head>
 
   <body>
@@ -33,6 +40,7 @@
 
         <p>I am a Computer Science PhD candidate working on Program Synthesis and Computer Music at Yale, where I am advised by Ruzica Piskac. I develop program synthesis and analysis techniques to provide programmers new ways to interface with code.</p>
         <p>I am on the job market this year.</p>
+
       </div>
     </div>
 
@@ -51,13 +59,13 @@
           <ul class="nav navbar-nav">
             <li><a href="/index.html">Home</a></li>
 
-            <li ><a href="/research.html">Research</a></li>
+            <li><a href="/research.html">Research</a></li>
 
             <li><a href="/teaching.html">Teaching</a></li>
 
-            <li class="active"><a href="/cv.html">CV</a></li>
-
-            <li><a href="/more.html">More</a></li>
+            <li><a href="/cv.html">CV</a></li>
+            
+            <li class="active"><a href="/more.html">More</a></li>
 
              </ul>
 
@@ -70,17 +78,23 @@
       <!-- Example row of columns -->
 
 
-    <div  id="research" class="container" style="height:500px">
-Last Updated 9/19/19
-          <object data="CV.pdf" type="application/pdf" width="100%" height="500px">
- 
-  <p><a href="CV.pdf">Download a .pdf of my CV</a></p>
-  
-</object>
-
-
-       </div>
-
+      <div class="row">
+          <h2 style="margin-left:50px">Grace Hopper College<span style="font-size:12pt">(March 28, 2017)</span></h2>
+        <div class="col-lg-12">
+          <h4 style="margin-left:40px"></h4>
+          <p>Yale has opened a new college named in honor of alum Grace Hopper (PhD '34). To celebrate the occasional, I made some posters highlighting (some of) the numerous accomplishments in her life. Feel free to use the posters however you like - though I cannot claim credit for the background images.</p>
+        </div>
+        <div class="col-4">
+          <img src="imgs/hopper1-1.png"> </img>
+        </div>
+        <div class="col-4">
+          <img src="imgs/hopper2-1.png"> </img>
+        </div>
+        <div class="col-4">
+          <img src="imgs/hopper3-1.png"> </img>
+        </div>
+        </div>
+   
       <hr>
 
       <footer>
