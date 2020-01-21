@@ -39,9 +39,18 @@ The exception is ```map swap``` which swap the front row and back row.
 - isRed: returns True if the card is red AND face up
 
 If a card is filtered out, all cards move to the left (your 0 index of the list) to fill this hole.
-For example, if ```filter isDown``` were to be applied to the bottom player of the initial board shown above, the result would be the following:
+For example, if ```filter isDown``` were to be applied to the first hand shown below, the result would be the next board shown.
+If the player chained together another function of ```map swap```, the third board would be the result.
+
+![original cards](/cardgame/imgs/origCards.jpg =250x)
+
+```filter isDown```
 
 ![filtered cards](/cardgame/imgs/filterCards.jpg =250x)
+
+```map swap```
+
+![swapped cards](/cardgame/imgs/swapCards.jpg =250x)
 
 ### Resolving the moves
 
