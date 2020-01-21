@@ -9,7 +9,7 @@ If you are interested in implementing this in Haskell let me know and we can wor
 Each player gets 8 cards, with 4 in each row, alternating between face up and face down.
 The board should be arranged as follows:
 
-![initial cards](/cardgame/imgs/initialCards.jpg =250x)
+<img src="/cardgame/imgs/initialCards.jpg" alt="initial cards" width="250"/>
 
 ## Stage 2 - Applying functions
 
@@ -42,15 +42,16 @@ If a card is filtered out, all cards move to the left (your 0 index of the list)
 For example, if ```filter isDown``` were to be applied to the first hand shown below, the result would be the next board shown.
 If the player chained together another function of ```map swap```, the third board would be the result.
 
-![original cards](/cardgame/imgs/origCards.jpg =250x)
+<img src="/cardgame/imgs/origCards.jpg" alt="original cards" width="250"/>
 
 ```filter isDown```
 
-![filtered cards](/cardgame/imgs/filterCards.jpg =250x)
+<img src="/cardgame/imgs/filterCards.jpg" alt="filtered cards" width="250"/>
 
 ```map swap```
 
-![swapped cards](/cardgame/imgs/swapCards.jpg =250x)
+<img src="/cardgame/imgs/swapCards.jpg" alt="swapped cards" width="250"/>
+
 
 ### Resolving the moves
 
