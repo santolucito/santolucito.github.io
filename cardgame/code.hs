@@ -2,33 +2,33 @@ module Main where
 
 import System.Exit
 import Data.Char
+import System.Random
 
 main = do
+  g <- newStdGen
   putStrLn "play a game?"
   ans <- getLine 
   if (toLower $head ans) /= 'y'
   then exitSuccess
   else return ()
-  putStrLn "ok, pick a number"
-  i <- readLn
-  let d = drawHand i
-  print d
+  let d = drawHand g
+  putStrLn $ displayHand d
 
 --use random to get a card
-drawCard :: Int -> Card
-drawCard i = Card {
+drawCard :: Face -> Int -> Card
+drawCard upOrDown i = Card {
     color = toEnum (i `mod` 2)
-  , face = toEnum (i `mod` 2)
+  , face = upOrDown
   , suit  = toEnum (i `mod` 4)
-  , value = toEnum (i `mod` 13) }
+  , value = (i `mod` 13) + 1 }
 
-drawHand :: Int -> Hand
-drawHand i = let
-  frontRow = map drawCard [i,i*2,i*3,i*4]
-  j = i*7+4
-  backRow = map drawCard [j,j*2,j*3,j*4]
+drawHand :: StdGen -> Hand
+drawHand g = let
+  front = zip [Up, Down, Up, Down] 
+  back = zip [Down, Up, Down, Up] 
+  getRow which = map (uncurry drawCard) $ which $ take 4 (randoms g)
  in
-  zip frontRow backRow
+  zip (getRow front) (getRow back)
 
 type Hand = [(Card, Card)]
 data Color = Red | Black 
@@ -51,7 +51,11 @@ instance Show Card where
     in
       "-----\n" ++
       "| "++v++" |\n" ++
-      "-----" 
+      "-----\n" 
+
+displayHand h = 
+  concatMap (show. fst) h ++ "\n" ++
+  concatMap (show. snd) h 
 
 instance Ord Card where
   compare c1 c2 = compare (value c1) (value c2)
@@ -73,5 +77,3 @@ flipOver card =
   then card { face = Up }
   else card { face = Down }
 
-swap :: (Card,Card)
-swap (x,y) = (y,x) --TODO probably this exists
