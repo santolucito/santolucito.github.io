@@ -1,3 +1,8 @@
+---
+layout: default
+title: COMS1002
+---
+ 
 # Computing in Context: Computing and the Arts
 
 Learning Objectives:
