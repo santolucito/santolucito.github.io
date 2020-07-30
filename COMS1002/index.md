@@ -2,7 +2,9 @@
 
 Learning Objectives:
 
-Know resources to further explore areas of interest
+- Know resources to further explore areas of interest
+- Understand key areas and issues in computational art
+- Have the confidence to work with code in an array of artistic domains
 
 ## Module 1: Visuals
 
