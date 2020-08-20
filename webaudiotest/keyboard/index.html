@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="main.js"></script>
+  </head>
+  <body style="background-color: gray;">
+
+    <span>Waveform: </span>
+    <select id="waveform">
+      <option value="sine" selected="selected">Sine</option>
+      <option value="square">Square</option>
+      <option value="sawtooth">Sawtooth</option>
+      <option value="triangle">Triangle</option>
+    </select>
+    <br>
+
+    <span>Gain: </span>
+    <input id="gain" type="range" min="0.0" max="1.0"
+      step="0.01" value="1.0">
+    <br>
+    <br>
+
+  </body>
+</html>
