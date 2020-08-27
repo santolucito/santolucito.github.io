@@ -69,8 +69,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             //for ...RampToValueAtTime(), "The change starts at the time specified for the previous event", 
             // so we need to trigger an "event" using setValue to set a start time for the ramp
             activeGains[key].gain.setValueAtTime(activeGains[key].gain.value, audioCtx.currentTime)
-            activeGains[key].gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime+0.06)
-            activeOscillators[key].stop(audioCtx.currentTime+0.06);
+            activeGains[key].gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime+0.16)
+            activeOscillators[key].stop(audioCtx.currentTime+0.16);
             delete activeOscillators[key];
             delete activeGains[key];
         }
@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         const numOscs = Object.keys(activeOscillators).length+1;
         console.log(numOscs)
         keyGain.gain.exponentialRampToValueAtTime(1/numOscs, audioCtx.currentTime+0.04)
+        keyGain.gain.exponentialRampToValueAtTime(1/(numOscs+4), audioCtx.currentTime+0.08)
 
         Object.keys(activeGains).forEach(o => {
             // "The change starts at the time specified for the previous event"
