@@ -11,6 +11,10 @@ Learning Objectives:
 - Understand key areas and issues in computational art
 - Have the confidence to work with code in an array of artistic domains
 
+## Pre-context labs
+
+[Lab 1: coding poetry and poeticizing code](/Lab1.md)
+
 ## Module 1: Visuals
 
 ### Lecture 1: 
