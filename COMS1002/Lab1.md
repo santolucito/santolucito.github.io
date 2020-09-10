@@ -41,7 +41,7 @@ Now we haven't covered much python yet, but let's make some simple use of variab
     print(belief)
     print(wonder)
 
-Here I overlaying my reading of the poem into the code. Let's see another version of this
+Here I overlaying my reading of the poem into the code. The poem remains unchanged, but the underlying representation has changed, adding a new layer complexity to the original text. Is this still the same poem? Is this the same artistic object? Can we consider code as part of the creative artifact? Let's see another version of this
 
     i_give = "It takes"
     print("I believe in myself slowly.")
