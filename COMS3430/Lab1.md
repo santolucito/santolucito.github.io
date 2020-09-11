@@ -1,3 +1,8 @@
+---
+layout: default
+title: Lab1
+---
+
 # Lab 1 - Build your own keyboard (12 pts)
 
 For this lab you will build your own keyboard on the web using WebAudio.
