@@ -28,7 +28,7 @@ Let’s code this up in python now. To start, we will try copy and pasting the t
 
 If you run this you get an error. What went wrong? Well, python doesn't allow us to enter multiple lines of text like this. Instead
 
-    print("I believe in myself slowly."
+    print("I believe in myself slowly.")
     print("It takes all of the doubt I’ve got.")
     print("It takes my wonder.")
 
