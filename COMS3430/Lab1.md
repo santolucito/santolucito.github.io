@@ -95,6 +95,7 @@ This will give you a really awful keyboard made with WebAudio.
 Once you have the basic keyboard working, you have a few extra challenges to pursue
 
 1) Allow the user to choose a waveform from between sine and sawtooth, at least. (1 pt)
+
 2) Implement ADSR envelopes for your notes you you don't get zero-ing clicks. You will need to add a gain node for this. It will be in between the osc and the audioCtx.
 
     const globalGain = audioCtx.createGain();
@@ -103,7 +104,8 @@ Once you have the basic keyboard working, you have a few extra challenges to pur
     //...
     osc.connect(gainNode).connect.(audioCtx.destination)
 
-In practice, it is the release part of ADSR that causes the most problems, so focus on that first, then tackle the rest of the envelope. The shape of the envelope can be hard-coded. You will want to explore the ```exponentialRampToValueAtTime()``` function (HINT: read the [https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/exponentialRampToValueAtTime](documentation) carefully. If you want a reference for a gorgeous front end keyboard that does not address this issue, see: [https://oscillator.js.org/](https://oscillator.js.org/) As an expectation calibration, this course will not teach or expect anything like this frontend, but will demand a higher standard of audio. (3 pts)
+In practice, it is the release part of ADSR that causes the most problems, so focus on that first, then tackle the rest of the envelope. The shape of the envelope can be hard-coded. You will want to explore the ```exponentialRampToValueAtTime()``` function (HINT: read the [documentation](https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/exponentialRampToValueAtTime) carefully. If you want a reference for a gorgeous front end keyboard that does not address this issue, see: [https://oscillator.js.org/](https://oscillator.js.org/) As an expectation calibration, this course will not teach or expect anything like this frontend, but will demand a higher standard of audio. (3 pts)
+
 3) Try playing two notes at once. It sounds awful right? Now we enable polyphonic mode - allowing the user to play two keys at once. To do this, we need to make sure you are not "clipping" (no amp levels >1). (HINT: you may need to control the gain of each oscillator independently). You do not need to support more than 2 voices, but it is likely a good solution will be easy generalize anyway. (3 pts)
 
 ## The extra step (1 pt)
