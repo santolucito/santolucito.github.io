@@ -9,7 +9,7 @@ title: COMS3430
 
 [Lab 1: Build your own keyboard](/Lab1.md)
 
-[In-class activity: Equal Loudness](/equalLoudness)
+[In-class activity: Equal Loudness](./equalLoudness)
 
 ## Module 2: Live Coding
 
