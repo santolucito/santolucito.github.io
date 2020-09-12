@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="refTone">Play Reference tone: 440Hz @ 0.7 gain</button>
+    <button id="newTone">Play Current Tone:</button> <input type="text" value="880" id="currentFreq">Hz</input> 
+    <button id="record">Record gain value and get new freq</button>
+    <input type="range" min="1" max="100" orient="vertical" id="gainLevel"/>
+    <h2>COMS3430 Equal Loudness Curve</h2>
+    <div id="my_dataviz"></div>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="graph.js"> </script>
+
+</body>
+</html>
