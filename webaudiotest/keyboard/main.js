@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     let waveform = 'sine'
 
-    const activeOscillators = {};
-    const activeGains = {};
+    var activeOscillators = {};
+    var activeGains = {};
 
     const keyboardFrequencyMap = {
         '90': 261.625565300598634,  //Z - C
