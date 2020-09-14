@@ -1,4 +1,4 @@
-var data = [{"gain":0.5, "freq":1440}]
+var data = [{"gain":0.7, "freq":440}]
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 40, left: 50},
