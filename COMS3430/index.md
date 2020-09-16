@@ -13,6 +13,11 @@ title: COMS3430
 
 [In-class activity: Equal Loudness](./equalLoudness)
 
+[Demo: Amplitude Modulation](./am)
+[Demo: Frequency Modulation](./fm)
+[Demo: Parallel Multi-Modulator Frequency Modulation](./parmmfm)
+[Demo: Serial Multi-Modulator Frequency Modulation](./sermmfm)
+
 ## Module 2: Live Coding
 
 ## Module 3: Automated Composition
