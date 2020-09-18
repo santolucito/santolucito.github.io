@@ -21,6 +21,8 @@ title: COMS3430
 
 [Demo: Serial Multi-Modulator Frequency Modulation](./sermmfm)
 
+[Lab 2: Make your keyboard into a synth](/Lab2.md)
+
 ## Module 2: Live Coding
 
 ## Module 3: Automated Composition

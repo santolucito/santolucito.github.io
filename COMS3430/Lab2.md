@@ -8,6 +8,9 @@ title: Lab2
 In our previous lab, you built your own keyboard, but the sounds were a bit lackluster - we were only using one oscillator at a time per key press.
 To make things more interesting, we will start playing with more complex sounds.
 
+This lab should be turned in on Canvas by Sunday at 8pm EST.
+
+
 ## the basics (8 pts)
 
 you will need to three implement types of audio synthesis
