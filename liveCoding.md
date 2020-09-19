@@ -5,6 +5,10 @@ title: Exploring Human-in-the-loop Program Synthesis with Live Coding
 
 # Exploring Human-in-the-loop Program Synthesis with Live Coding
 
+Mark Santolucito, Barnard College
+
+<hr>
+
 *Live Coding is a budding performative practice whereby artists write code that generates media (audio, visuals, etc.) live on stage.
 In live coding, the process of writing code is itself the final product, rather than a fixed implementation of a tool, as typically seen in software development.
 We propose that this unique performance style, with a heavy emphasis on the evolution of code, is an ideal space to explore program synthesis.
@@ -42,7 +46,10 @@ To explore the intersection of live coding and program synthesis, we built a liv
 
 ### Interaction model
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k5I2fkEr_qE?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="100%" src="https://www.youtube-nocookie.com/embed/k5I2fkEr_qE?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="
+    margin: 0 auto;
+    display: block;
+" allowfullscreen></iframe>
 
 ### Implementation
 
@@ -59,7 +66,8 @@ To transform this array into a PBE problem, we view the array as a function mapp
 
 As an example, the pattern below would generate the following PBE constraints.
 
-![A Tom1 pattern](./imgs/tom1.JPG "A Tom1 pattern")
+<img src="./imgs/tom1.JPG" alt="a Tom1 pattern" width="100%"/>
+
 
 ```
 (constraint (== f(0) 1))
@@ -91,7 +99,7 @@ b.rhythm1 = new Array(16).fill(0).map((val,i) => {  return 1 - (i % 2); });
 
 This is a good solution as it not only satisfies the given examples, it also reasonably generalizes across the rest of the beat, hypothesizing that the pattern the user would like to complete is as follows:
 
-![A generalized Tom1 pattern](./imgs/tom1-2.JPG "A generalized Tom1 pattern")
+<img src="./imgs/tom1-2.JPG" alt="a generalized Tom1 pattern" width="100%"/>
 
 
 However, this is of course not the pattern the user has provided yet. With our current ```.map``` code alone, the code and the GUI pattern are no longer in alignment. 
@@ -121,3 +129,5 @@ At times, this may even speed up synthesis when a previous pattern can be effect
 
 There are additionally many interaction design questions in the space of displaying proposed synthesis solutions.
 The work of [Lerner, CHI 2020](http://cseweb.ucsd.edu/~lerner/papers/projection-boxes-chi2020.pdf) proposes projection boxes as a way of demonstrating code behavior to users. This might be adopted for the synthesis context to good effect.
+
+<br><br>
