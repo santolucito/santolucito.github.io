@@ -17,7 +17,7 @@ We describe the tool and its implementation, and highlight key areas of future e
 
 ## What is live coding?
 
-Live Coding is a performative practice of coding still in its nascent stages of definition.
+[Live Coding](https://toplap.org/wiki/ManifestoDraft) is a performative practice of coding still in its nascent stages of definition.
 Live coding, by its nature, is an evolving practice that eludes a formal definition.
 Generally, a live coding performance consists of code that continually generates some media (often audio).
 The performer changes the code throughout the performance, thereby shaping the media that is being produced.
@@ -25,7 +25,7 @@ A key component to live coding allowing viewers to watch the evolution of the co
 
 During the evolution of code throughout a live coding performance, there is no single correct state of the code that the performer must achieve.
 The process of a writing code for a live coding performance is exploratory.
-As a result the implicit specification of the indetended code is constantly shifting.
+As a result, the implicit specification of the intended code is constantly shifting.
 This constantly changing specification make live coding an ideal testbed for program synthesis.
 
 Live coding is closely related in many ways to Live Programming.
@@ -33,8 +33,91 @@ In both cases, there is a focus on live re-evaluation of code.
 Live programming is largely framed as an style of IDE and a software development environment, whereas live coding specifically focuses on the performative practice of the evolution of code.
 One possible interpretation of these two terms is that live coding is a performance practice that takes place inside a live programming environment.
 
+There has been great progress in the space of Live Programming with the work of [Hempel et. al, UIST '19](https://arxiv.org/pdf/1907.10699.pdf) on the Sketch-n-Sketch tool that looks at output directed programming. In this work, the authors explore how direct manipulation of the intended output can be turned back into program transformations automatically.
+The authors of this work mention the possible integration of synthesis (as opposed to hand-coded transformations).
+
 ## Live Coding + Synthesis
 
 To explore the intersection of live coding and program synthesis, we built a live coding environment, called the "Shiny Happy WebAudio MIDI-fied Live Coding Drum Machine", or the SHWAMLCDM for short.
 
+### Interaction model
+
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/k5I2fkEr_qE?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Implementation
+
+As shown in the above video, our live coding environment uses a synthesis driven program-repair model to constantly updated the code to match the provided pattern.
+On the interface level, this is a programming-by-demonstration interaction - the user demonstrates the intended beat with the GUI, and the repair engine generates code to match the data in the GUI.
+The implementation of this transforms this problem into a programming-by-example (PBE) problem.
+As programming-by-example problem, we then use [CVC4](https://cvc4.github.io/), a SMT solver with [support for SyGuS](http://lara.epfl.ch/~reynolds/cav15a.pdf), to run SyGuS queries.
+We map the grammatical elements of SyGuS to generic Javascript code, and put this result inside Javascript templates before displaying the code to the user.
+
+More specifically, to obtain a PBE problem, we start by treating each beat (e.g. Tom1, Kick, Snare, etc) as a separate problem.
+Each beat itself is an array of length 16 with values representing the note to be played (0 for no beat, 1 for a quiet beat, 2 for a loud beat) at the time step corresponding to the index of the array.
+As is typical in step sequencers, time is quantized into 16 steps.
+To transform this array into a PBE problem, we view the array as a function mapping time to notes.
+
+As an example, the pattern below would generate the following PBE constraints.
+
+![A Tom1 pattern](./imgs/tom1.JPG "A Tom1 pattern")
+
+```
+(constraint (== f(0) 1))
+(constraint (== f(1) 0))
+(constraint (== f(2) 1))
+(constraint (== f(3) 0))
+(constraint (== f(4) 1))
+```
+
+Notice that we truncate the constraints at the position of the last non-zero beat. 
+We do this so that synthesis has some opportunity to generalize the given pattern.
+In the above example, CVC4 will output the following function in SyGuS format.
+
+```
+(define-fun f ((i Int)) Int (- 1 (mod i 2)))
+```
+
+Transformed from SyGuS into Javascript via a simple syntactic mapping, we then obtain the following term:
+
+```
+ 1 - (i % 2)
+ ```
+
+ To map this term over the array of beats, we use a code snippet template as follows:
+
+ ```
+b.rhythm1 = new Array(16).fill(0).map((val,i) => {  return 1 - (i % 2); });
+```
+
+This is a good solution as it not only satisfies the given examples, it also reasonably generalizes across the rest of the beat, hypothesizing that the pattern the user would like to complete is as follows:
+
+![A generalized Tom1 pattern](./imgs/tom1-2.JPG "A generalized Tom1 pattern")
+
+
+However, this is of course not the pattern the user has provided yet. With our current ```.map``` code alone, the code and the GUI pattern are no longer in alignment. 
+One of the key design goals of this system is that the code is always in a state that would generate the GUI data.
+To remedy this situation, we overwrite the second half of the array which is all zeros.
+This allows us to keep our general solution, while still ensuring the code does not overstep in its predictions.
+
+```
+b.rhythm1 = new Array(16).fill(0).map((val,i) => {  return 1 - (i % 2); });
+b.rhythm1.splice(5,11,...Array(11).fill(0));
+```
+
+If the user likes this proposed code, the user may comment out the second line so that the GUI pattern adopts the generalized code solution.
+
+## Future directions
+
+This prototype of a synthesis-enabled live coding environment demonstrates the potential for further exploration in this space.
+
+One main question is how we can more effectively leverage synthesis. 
+Currently, our synthesis is limited to LIA problems and only replaces subexpressions in ```.map``` statements.
+CVC4's SyGuS support is powerful enough to support much more complex synthesis, but the key challenge is how to integrate this into a real language.
+
+One possible direction is to connect the synthesis requests of each individual beat pattern together.
+At the moment, there is no way for, as an example, a result for the Kick pattern to be reused in the Snare pattern.
+Allowing for this would make the synthesis requests more complex, but potentially allow us to generate more compact code.
+At times, this may even speed up synthesis when a previous pattern can be effectively reused for a new pattern.
+
+There are additionally many interaction design questions in the space of displaying proposed synthesis solutions.
+The work of [Lerner, CHI 2020](http://cseweb.ucsd.edu/~lerner/papers/projection-boxes-chi2020.pdf) proposes projection boxes as a way of demonstrating code behavior to users. This might be adopted for the synthesis context to good effect.
