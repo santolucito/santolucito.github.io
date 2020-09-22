@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+<meta charset="utf‐8">
+<title> Hello web audio </title> </head>
+<body>
+<button id="start">Start/stop (white noise)</button><br>
+<button id="fm">FM source</button><br>
+<button id="lfos">LFO freq and Q</button><br>
+<input type="range" min=1 max=15000 oninput="updateFreq(this.value)" onchange="updateFreq(this.value)">freq</input><br>
+<input type="range" min=0 max=100 oninput="updateIndex(this.value)" onchange="updateIndex(this.value)">gain</input><br>
+<input type="range" min=1 max=1000 oninput="updateIndex(this.value)" onchange="updateQ(this.value)">Q</input><br>
+<select onchange="changeFilterType(this.value);">
+  <option value="lowpass">LowPass</option>
+  <option value="highpass">HighPass</option>
+  <option value="bandpass">BandPass</option>
+  <option value="lowshelf">LowShelf</option>
+  <option value="highshelf">HighShelf</option>
+  <option value="peaking">Peaking</option>
+  <option value="notch">Notch</option>
+  <option value="allpass">AllPass</option>
+</select>
+</body>
+<script src="test.js"> </script>
+</html>
