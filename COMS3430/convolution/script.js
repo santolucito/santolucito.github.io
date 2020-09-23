@@ -41,7 +41,7 @@ playButton.addEventListener('click', async function() {
   gateIR = await loadBuffer('../samples/reverse-gate.mp3');
   churchIR = await loadBuffer('../samples/big-church.mp3');
   reverb = audioCtx.createConvolver();
-  reverb.buffer = churchIR;
+  reverb.buffer = gateIR;
   
   dry = audioCtx.createGain();
   wet = audioCtx.createGain();

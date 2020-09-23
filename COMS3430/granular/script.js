@@ -40,7 +40,7 @@ playButton.addEventListener('click', async function() {
     for (let i = 0; i < 4; ++i) {
       playGrain(audioBuffer, startPos);
     }
-    requestAnimationFrame(generateGrains((startPos+.02)%audioBuffer.duration));
+    requestAnimationFrame(function() {generateGrains((startPos+.02)%audioBuffer.duration)});
   };
 
   generateGrains(0);
