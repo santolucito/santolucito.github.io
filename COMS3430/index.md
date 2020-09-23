@@ -13,6 +13,8 @@ title: COMS3430
 
 [In-class activity: Equal Loudness](./equalLoudness)
 
+Synthesis 
+
 [Demo: Amplitude Modulation](./am)
 
 [Demo: Frequency Modulation](./fm)
@@ -22,6 +24,22 @@ title: COMS3430
 [Demo: Serial Multi-Modulator Frequency Modulation](./sermmfm)
 
 [Lab 2: Make your keyboard into a synth](/Lab2.md)
+
+Filters
+
+[Demo: Biquad](./biquad)
+
+[Demo: Loading files](./loadfile)
+
+[Demo: Granular Synthesis](./granular)
+
+[Demo: Allpass](./allpass) (not really working...)
+
+[Demo: convolution](./convolution)
+
+[Demo: 3D panning](./3dpanning)
+
+
 
 ## Module 2: Live Coding
 
