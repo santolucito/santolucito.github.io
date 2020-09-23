@@ -33,7 +33,7 @@ Filters
 
 [Demo: Granular Synthesis](./granular)
 
-[Demo: Allpass](./allpass) (not really working...)
+[Demo: Allpass](./allpass) (hard to hear, but it is working)
 
 [Demo: convolution](./convolution)
 

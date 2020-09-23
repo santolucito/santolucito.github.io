@@ -36,7 +36,7 @@ playButton.addEventListener('click', async function() {
   biquadFilter = audioCtx.createBiquadFilter();
 
   biquadFilter.type = "allpass";
-  biquadFilter.frequency.setValueAtTime(7000, audioCtx.currentTime);
+  biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
   biquadFilter.gain.setValueAtTime(50, audioCtx.currentTime);
   biquadFilter.Q.setValueAtTime(2, audioCtx.currentTime);
 
@@ -46,7 +46,7 @@ playButton.addEventListener('click', async function() {
   wet.gain.value = 0.5
 
   source.connect(dry).connect(audioCtx.destination);
-  source.connect(biquadFilter).connect(wet).connect(audioCtx.destination);
+  source.connect(wet).connect(biquadFilter).connect(audioCtx.destination);
 
 });
 
