@@ -59,6 +59,7 @@ The main question facing you is, how do you adapt this to the BiquadNode in WebA
 
 Next you will create your own sound from scratch.
 Look to Farnell, *Designing Sound* Part IV: Practicals. 
+This book is available through the Columbia Library website.
 There are a number of descriptions of how to generate various sounds. 
 Pick one and try to implement it.
 Some are easier than others - choose the right level of challenge for you.
