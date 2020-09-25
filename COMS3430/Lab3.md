@@ -13,7 +13,7 @@ This lab should be turned in on Canvas by Monday at 8pm EST.
 
 ## Part I: Reading unfamiliar languages (4 pts)
 
-For the first part, you will work as a pair with a classmate to recreate a classic SuperCollider program in WebAudio.
+For the first part, you will work as a pair with a classmate (when you submit, make a note of who you were working with) to recreate a classic SuperCollider program in WebAudio.
 But wait you say, we never covered SuperCollider.
 Indeed! One of the joys of working in audio (and programming in general) is that you will often want to leverage material that does not exactly fit your context.
 In this lab we will slowly work up to more complex challenges, with fewer resources for you to rely upon.
@@ -57,7 +57,7 @@ The main question facing you is, how do you adapt this to the BiquadNode in WebA
 
 ## Part II: Reading high level descriptions (4 pts)
 
-Next you will create your own sound from scratch.
+Next you will create your own sound from scratch (this part is individual, but work together as much as you like).
 Look to Farnell, *Designing Sound* Part IV: Practicals. 
 This book is available through the Columbia Library website.
 There are a number of descriptions of how to generate various sounds. 
