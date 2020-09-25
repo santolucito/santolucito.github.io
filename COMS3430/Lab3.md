@@ -28,7 +28,7 @@ Is should sound like this:
   <source src="sounds/babbling.wav" type="audio/wav">
 </audio>
 
-This is a simplified version of the (original code)[https://supercollider.github.io/examples/supercollider-code-examples.html], so it sounds a bit more like bubbles at this point, but close enough.
+This is a simplified version of the [original code](https://supercollider.github.io/examples/supercollider-code-examples.html), so it sounds a bit more like bubbles at this point, but close enough.
 
 You will notice some items we have covered before (```RHPF``` and ```LPF```) and others we have not ```BrownNoise```.
 To help you a bit, to generate Brown Noise, you can use the code below:
@@ -52,7 +52,7 @@ To help you a bit, to generate Brown Noise, you can use the code below:
     whiteNoise.start(0);
 
 See if you can intuit the meaning of the arguments for ```LPF```.
-You can look at the (docs for RHPF)[https://doc.sccode.org/Classes/RHPF.html] to learn how this is being used.
+You can look at the [docs for RHPF](https://doc.sccode.org/Classes/RHPF.html) to learn how this is being used.
 The main question facing you is, how do you adapt this to the BiquadNode in WebAudio
 
 ## Part II: Reading high level descriptions (4 pts)
