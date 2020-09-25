@@ -20,7 +20,7 @@ In this lab we will slowly work up to more complex challenges, with fewer resour
 
 The sound you will create is a "babbling brook". The code provided here:
 
-    {RHPF.ar(LPF.ar(BrownNoise.ar, 400), LPF.ar(BrownNoise.ar, 14) * 400 + 500, 0.03, 0.1)}.play
+    {RHPF.ar(LPF.ar(BrownNoise.ar(), 400), LPF.ar(BrownNoise.ar(), 14) * 400 + 500, 0.03, 0.1)}.play
 
 Is should sound like this: 
 
@@ -39,17 +39,17 @@ To help you a bit, to generate Brown Noise, you can use the code below:
 
     var lastOut = 0;
     for (var i = 0; i < bufferSize; i++) {
-        var white = Math.random() * 2 - 1;
+        var brown = Math.random() * 2 - 1;
       
-        output[i] = (lastOut + (0.02 * white)) / 1.02;
+        output[i] = (lastOut + (0.02 * brown)) / 1.02;
         lastOut = output[i];
         output[i] *= 3.5;
     }
 
-    whiteNoise = audioCtx.createBufferSource();
-    whiteNoise.buffer = noiseBuffer;
-    whiteNoise.loop = true;
-    whiteNoise.start(0);
+    brownNoise = audioCtx.createBufferSource();
+    brownNoise.buffer = noiseBuffer;
+    brownNoise.loop = true;
+    brownNoise.start(0);
 
 See if you can intuit the meaning of the arguments for ```LPF```.
 You can look at the [docs for RHPF](https://doc.sccode.org/Classes/RHPF.html) to learn how this is being used.
