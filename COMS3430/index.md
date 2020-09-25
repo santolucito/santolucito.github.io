@@ -23,6 +23,8 @@ title: COMS3430
 
 [Lab 2: Make your keyboard into a synth](/Lab2.md)
 
+[Lab 3: Farnell Synthesis](/Lab3.md)
+
 ## Module 2: Live Coding
 
 ## Module 3: Automated Composition

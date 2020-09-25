@@ -13,7 +13,7 @@ This lab should be turned in on Canvas by Monday at 8pm EST.
 
 ## Part I: Reading unfamiliar languages (4 pts)
 
-For the first part, you will work as a pair to recreate a classic SuperCollider program in WebAudio.
+For the first part, you will work as a pair with a classmate to recreate a classic SuperCollider program in WebAudio.
 But wait you say, we never covered SuperCollider.
 Indeed! One of the joys of working in audio (and programming in general) is that you will often want to leverage material that does not exactly fit your context.
 In this lab we will slowly work up to more complex challenges, with fewer resources for you to rely upon.
