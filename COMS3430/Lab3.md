@@ -8,7 +8,7 @@ title: Lab3
 In our previous labs, you built your own keyboard and synthesizer.
 Now we leave that behind and move to a different type of synthesis, looking at procedural sounds and audio effects.
 
-This lab should be turned in on Canvas by Monday at 8pm EST.
+This lab should be turned in on Canvas by Tuesday Midnight (AoE).
 
 
 ## Part I: Reading unfamiliar languages (4 pts)
