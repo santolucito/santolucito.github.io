@@ -14,7 +14,7 @@ You may use any live coding language listed here:
 - Sonic Pi
 - Quaver
 - SuperCollider
-- Build-your-own (if you do Part B first, check with me first though)
+- Build-your-own (check with me first though)
 
 Other languages may be used, but check with me first.
 
