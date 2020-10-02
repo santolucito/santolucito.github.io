@@ -43,5 +43,8 @@ Filters
 
 ## Module 2: Live Coding
 
+[Lab 4: Live Coding](/Lab4.md)
+
+
 ## Module 3: Automated Composition
 
