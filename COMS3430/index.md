@@ -48,3 +48,6 @@ Filters
 
 ## Module 3: Automated Composition
 
+[Demo: Notes](./notes)
+
+[Demo: randomWalk](./randomWalk)
