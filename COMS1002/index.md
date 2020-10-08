@@ -17,6 +17,8 @@ Learning Objectives:
 
 [Lab 3: Generative Art v0.1](/Lab3.md)
 
+[Lab 5: Computationally Collaborative Creativity ](/Lab5.md)
+
 ## Module 1: Visuals
 
 ### Lecture 1: 
