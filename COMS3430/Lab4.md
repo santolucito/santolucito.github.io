@@ -10,11 +10,11 @@ This lab should be turned in on Canvas by Tuesday Midnight (AoE).
 Make a video recording of yourself live coding.
 You may use any live coding language listed here:
 
-- Tidal
-- Sonic Pi
-- Quaver
-- SuperCollider
-- Build-your-own (if you do Part B first, check with me first though)
+- Tidal (best for pattern based music)
+- Sonic Pi (also good for pattern based music, easier syntax, but less expressive, harded to make complex rhytms. has good support for ```live_audio```)
+- Quaver (basic of basic)
+- SuperCollider (good for focus on DSP - see [http://marksantolucito.com/cpsc432.zip](http://marksantolucito.com/cpsc432.zip). very non-standard language model)
+- Build-your-own (check with me first though)
 
 Other languages may be used, but check with me first.
 
