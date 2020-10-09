@@ -39,6 +39,8 @@ Now we implement automated composition from scratch. Choose from below:
 
 All of these options can run as a static process that generates a sequence of notes, then plays them back. you do not need anything to continuously play back. Of course, you are welcome to go above and beyond if you like (it is not a huge step, and makes the tool more fun).
 
+You may use utility libraries are necessary. For example, you may use a matrix multiplication library, but not a markov chain library.
+
 ### Markov Chain Learning
 
 You must be able to learn an n-th order markov chain from input data. You may use the TWINKLE_TWINKLE input data from the magenta example, or, if you prefer, use the [```blobToNoteSequence```](https://magenta.github.io/magenta-js/music/modules/_core_midi_io_.html#blobtonotesequence) function to read in MIDI files.

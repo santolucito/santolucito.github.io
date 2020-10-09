@@ -8,7 +8,6 @@ function midiToFreq(m) {
     return Math.pow(2, (m - 69) / 12) * 440;
 }
 
-
 function playNote(note) {
     gainNode.gain.setTargetAtTime(1, note.startTime, 0.001)
     osc.frequency.setTargetAtTime(midiToFreq(note.pitch), note.startTime, 0.001)
