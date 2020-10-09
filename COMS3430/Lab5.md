@@ -5,7 +5,7 @@ title: Lab5
 
 # Lab 5 - Automated Composition (12 pts)
 
-This lab should be turned in on Canvas by Tuesday Midnight (AoE).
+This lab should be turned in on Canvas by Monday Midnight (AoE).
 
 For this lab you will implement two automated composition techniques and reflect on the experience
 First, you will use the ```magenta.js``` library to implement neural network-driven composition.
