@@ -45,13 +45,13 @@ You must be able to learn an n-th order markov chain from input data. You may us
 
 ### Cellular Automata
 
-This approach is purely generative, no input data needed. You must implement a 3D cellular automata, then map the output to notes, which you play back. There is a large creative space in how the mapping actually works - find something that motivates you. Similarly, you do not need to stick to any particular rules for the automata generation - remember that cellular automata are more general than the Game of Life.
+This approach is purely generative, no input data needed. You must implement a 2D cellular automata, then map the output to notes, which you play back. There is a large creative space in how the mapping actually works - find something that motivates you. Similarly, you do not need to stick to any particular rules for the automata generation - remember that cellular automata are more general than the Game of Life.
 
 ### Pitch Set Theory
 
 Use pitch set theory to automate a composition. You will need to implement functions for transpose, inverse, and retrograde of a pitch class sequence. Then, implement a function that takes an initial pitch class set, and randomly applies the aforementioned operations to generate a composition.
 
-you do not need to implement a normalization procedure. You can assume the input pitch set classes are already in normal form.
+You do not need to implement a normalization procedure. You can assume the input pitch set classes are already in normal form.
 
 Check the course slides for more information on pitch set theory resources.
 
