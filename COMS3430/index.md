@@ -51,3 +51,7 @@ Filters
 [Demo: Notes](./notes)
 
 [Demo: randomWalk](./randomWalk)
+
+[Demo: Magenta](./Magenta)
+
+[Lab 5: Automated Composition](./Lab5)
