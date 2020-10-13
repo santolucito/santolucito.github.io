@@ -16,7 +16,7 @@ If you spent 10 hours on the homeworks on average, expect to spend 25 hours on t
 
 If you are working as a group of 3, ~75 total effort-hours should be committed to this project.
 
-This final project is 30 points - which is 30\% of your grade.
+This final project is 30 points - which is 30% of your grade.
 No late work can be accepted for this final project.
 
 ## Implementation (18 pts)
