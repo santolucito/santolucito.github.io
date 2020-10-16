@@ -58,4 +58,4 @@ Filters
 
 ## Final Project
 
-[Final Project](./final)
+[Final Project](./Final)

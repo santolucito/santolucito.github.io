@@ -5,7 +5,7 @@ title: Lab4
 
 # Lab 4 - Live Coding (12 pts)
 
-This lab should be turned in on Canvas by Tuesday Midnight (AoE).
+This lab should be turned in on Canvas by Monday Midnight (AoE).
 
 Make a video recording of yourself live coding.
 You may use any live coding language listed here:
