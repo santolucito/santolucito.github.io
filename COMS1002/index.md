@@ -5,12 +5,18 @@ title: COMS1002
  
 # Computing in Context: Computing and the Arts
 
-Learning Objectives:
+Key Learning Objectives:
+
+- Write code to generate and manipulate multimedia
+- Discuss issues of authorship in AI generated/assisted art
+- Understand the various roles in computational art - who is the audience, who is the artist, who is the programmer?
+- Contextualize computational art in its place. How is computational art presented, and how does that presentation changes its meaning?
+
+Other learning objectives:
 
 - Know resources to further explore areas of interest
 - Understand key areas and issues in computational art
 - Have the confidence to work with code in an array of artistic domains
-- Discuss issues of authorship in AI generated/assisted art
 
 ## Pre-context labs
 
