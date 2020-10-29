@@ -9,6 +9,7 @@ During the creation process, some of the key questions we ask are:
 
 
 ## Project 1: Processing
+<a name="project1"></a>
 
 - Due Nov 9
 
@@ -51,6 +52,7 @@ We will tackle the generation of both static images and animations.
 One key point is to ensure that we understand performance bottlenecks and other basic issues in graphics systems, and how our code can impact the quality of our renderings.
 
 ## Lab 1: Processing
+<a name="lab1"></a>
 
 Oct 30
 
