@@ -65,7 +65,7 @@ For the first part of this lab our goal is to  start with the "Yellowtail" examp
 The text size should take up the full display window, and the text should "bounce" up and down on the screen.
 You will want to "remix" code from ```Demos > Graphics > Yellowtail``` and ```Basics > Typography > FiveWaysOfWritingText```.
 
-One you have the code working, next we will document our work.
+Once you have the code working, next we will document our work.
 Documenting your work is one of the most important, and most neglected, aspects of computational art.
 This is a different type of documentation than commenting your code.
 We will create a video recording of that processing script being run - our goal is to document the artistic artifact.
@@ -75,8 +75,7 @@ Try to screencast just the display window, rather than your whole screen.
 
 ### To turn in:
 
-Post your video recording publicly, and save the link.
-To submit this lab, post a link to the video as well as your code.
+Post your video recording publicly, and save the link. Add that link as a comment in your code. To submit this lab, submit a .zip of your code.
 
 <hr>
 
