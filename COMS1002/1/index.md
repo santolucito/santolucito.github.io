@@ -14,8 +14,8 @@ During the creation process, some of the key questions we ask are:
 
 - Due Nov 9
 
-You goal is to create a new work of art with Processing in Python mode.
-This is an open-ended assignment - which may be uncomfortable space for you if this is new to you.
+Your goal is to create a new work of art with Processing in Python mode.
+This is an open-ended assignment - which may be an uncomfortable space for you if this is new to you.
 The guiding principle should be to create something that you are proud to call your own creation.
 
 As a more concrete guide, here are some guideposts you should hit:
@@ -38,7 +38,7 @@ A link to a video recording of your processing sketch, as well as your program c
 Rubric
 
 - 50 points - Technical Sophistication. Does your project utilize your programming skills in an effective way? Have you gone significantly beyond any example code you have used? Is this "your" work?
-- 30 points - Documentation. Have you captured you work in a digestible way? Does the documentation highlight both the artistic aspect of your work, as well as the technical sophistication? Your work should be equally well appreciated by both a technical and non-technical audience. Note that capturing the technical side is often the more difficult.
+- 30 points - Documentation. Have you captured your work in a digestible way? Does the documentation highlight both the artistic aspect of your work, as well as the technical sophistication? Your work should be equally well appreciated by both a technical and non-technical audience. Note that capturing the technical side is often the more difficult.
 - 20 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, submit a work that you are proud to call your own. Pursue something that is artistically motivating you, and communicate that through your documentation.
 
 <hr>
