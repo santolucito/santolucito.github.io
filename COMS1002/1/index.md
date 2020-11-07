@@ -42,6 +42,9 @@ Rubric
 - 30 points - Documentation. Have you captured your work in a digestible way? Does the documentation highlight both the artistic aspect of your work, as well as the technical sophistication? Your work should be equally well appreciated by both a technical and non-technical audience. Note that capturing the technical side is often the more difficult.
 - 20 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, submit a work that you are proud to call your own. Pursue something that is artistically motivating you, and communicate that through your documentation.
 
+
+An example of an A+ project is here [https://www.youtube.com/watch?v=OCe36rvdrFI](https://www.youtube.com/watch?v=OCe36rvdrFI)
+
 <hr>
 
 ## Lecture 1: 
