@@ -13,7 +13,7 @@ In a more practical sense, this is particularly good training for coding intervi
 - Due Nov 23
 
 Your goal is to experience first-hand the practice of live coding.
-you will be using Sonic Pi. 
+You will be using Sonic Pi. 
 
 During your performance, you must:
 
@@ -62,6 +62,7 @@ Installing finding your way around Sonic Pi.
 
 The goal of this lab is for you to install Sonic Pi, learn the basic interface, and make a short recording. 
 
+Complete sections 2.1, 2.2, 2.3, 3.1, 3.2, and 4 in the Sonic Pi tutorial.
 
 ### To turn in:
 
