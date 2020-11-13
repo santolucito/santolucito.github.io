@@ -66,7 +66,7 @@ Complete sections 2.1, 2.2, 2.3, 3.1, 3.2, and 4 in the Sonic Pi tutorial.
 
 ### To turn in:
 
-Record a video of your coding in Sonic Pi. It doesnt have to be fancy - a loop that plays a single note is enough. Post your video recording publicly, and save the link. For the lab, simply submit the link!
+Record a video of your coding in Sonic Pi. It doesn't have to be fancy - a loop that plays a single note is enough. This is to confirm that you have the tool installed, understand the basic usage, and can record your audio and code at the same time. Post your video recording publicly, and save the link. For the lab, simply submit the link!
 
 <hr>
 
