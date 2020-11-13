@@ -29,6 +29,8 @@ Some language features you should use include:
 - samples
 - synths
 
+The recording should last roughly 10 minutes. Note that in order to achieve this length, you will need to improvise a bit with your code in real-time. Do not try to plan out all 10 minutes exactly ahead of time.
+
 ### What to hand in?
 
 - A link to the public posted video recording of your live code performance in Sonic Pi. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up highlighting interesting moments in the performance or lines of code you thought were creative.
