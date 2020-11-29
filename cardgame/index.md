@@ -3,6 +3,7 @@
 This is the complete set of instructions for the functional programming card game.
 If you find something that is ambiguously defined, please send me an email!
 If you are interested in implementing this in Haskell let me know and we can work together!
+I have a sketch of the code already.
 
 ## Stage 1 - Dealing the cards
 
