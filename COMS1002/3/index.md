@@ -3,10 +3,12 @@
 Using the [micro:bit from BBC](https://microbit.org/), we will explore the basics of bringing computation to the physical world.
 The micro:bit can be programmed with Python. 
 We give an overview of the basic components of the micro:bit, and how to control them with code.
-You will create a digital artifact that interfaces with non-technical users.
+You will create a digital artifact that interfaces with the physical world.
 Here we pay particular attention to the importance of documentation.
 
 <a name="project3"></a>
+
+## Project 3: Physical+Digital Art
 
 - Due Dec 14
 
@@ -32,23 +34,16 @@ Rubric
 You will score full points by overlaying a screen capture of your processing sketch with a video of the microbit manipulation. If you take a video with your phone of your computer screen and the microbit manipulation you can score at most 28 points on this section.
 - 20 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, submit a work that you are proud to call your own. Pursue something that is artistically motivating you, and communicate that through your documentation.
 
-
-
-### Project 3: micro:bit Art
-
-- Due Dec 14
-
-
-
 <hr>
 
 ### Lecture 5: 
 Dec 3
 
-We give a basic overview of physical computing, the maker movement, etc.
+We give a basic overview of IoT, physical computing, the maker movement, etc.
 How much background do you really need to build your own hardware device?
 What are the various ways you can approach this?
 What is the motivation for embedded systems, when should we just use a mobile phone?
+How do we connect devices together?
 
 ### Lab 6: MicroBit setup
 
