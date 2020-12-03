@@ -49,6 +49,23 @@ How do we connect devices together?
 
 Dec 4
 
+The goal of this lab is to setup our microbit and ensure all the hardware is functioning properly.
+
+Download the code for the [microbit here](template/microbitSend.py).
+Load this code in the online microbit editor.
+
+Download the code for [Processing here](template/microbitRead.py).
+Load this code into Processing.
+
+With the micro:bit plugged in, run the Processing script. 
+You may need to experiment with the portIndex to find the right value.
+
+Be careful - not all microusb cables can carry data - some are only power.
+If your computer does not recognize a device plugged in, you may need a different microusb cable.
+
+Make a short video that includes both the visualization and the microbit, and submit this for the lab.
+See the note above in project 3 about the video.
+
 <hr>
 
 
