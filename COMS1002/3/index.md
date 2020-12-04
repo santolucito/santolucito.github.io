@@ -56,15 +56,29 @@ Load this code in the online microbit editor.
 
 Download the code for [Processing here](template/microbitRead.pyde).
 Load this code into Processing.
+If you cannot open the file directly, open the file in a text editor and copy and paste the contents into a new processing sketch.
 
-With the micro:bit plugged in, run the Processing script. 
+First, flash the code to the microbit.
+The microbit code will be sending serial messages to you computer.
+If you do not first flash the microbit, the processing code will not have any messages to read.
+You will know the code has flashed correctly when you see a flashing ```X``` on the microbit LED board.
+
+With the micro:bit plugged in and running, run the Processing script.
 You may need to experiment with the portIndex to find the right value.
+On Windows computer, the correct portIndex will coorespond to something like ```COM6```.
+On a Mac it will correspond to something like ```/dev/cu.usbmodem14402```.
+The number of ports available will depend on your particular devices and the USB and bluetooth devices you have connected to.
+
+When you have selected the correct port, the processing terminal window will display the message ```face up``` over and over (or ```face down``` depending on the orientation of your microbit).
+Tilt your microbit to the side to generate the ```left``` message and watch the sphere in processing move.
 
 Be careful - not all microusb cables can carry data - some are only power.
 If your computer does not recognize a device plugged in, you may need a different microusb cable.
 
+Note: you need a USB port to connect the USB cable. If you have a Mac with only USB C ports, you will need an adapter or a different cable.
+
 Make a short video that includes both the visualization and the microbit, and submit this for the lab.
-See the note above in project 3 about the video.
+
 
 <hr>
 
