@@ -6,6 +6,10 @@ We give an overview of the basic components of the micro:bit, and how to control
 You will create a digital artifact that interfaces with the physical world.
 Here we pay particular attention to the importance of documentation.
 
+[Reference material for the microbit](https://microbit-micropython.readthedocs.io/en/v1.0.1/microbit_micropython_api.html)
+
+[Online editor for microbit](https://python.microbit.org/v/2)
+
 <a name="project3"></a>
 
 ## Project 3: Physical+Digital Art
