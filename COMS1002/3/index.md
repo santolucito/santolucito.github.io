@@ -54,7 +54,7 @@ The goal of this lab is to setup our microbit and ensure all the hardware is fun
 Download the code for the [microbit here](template/microbitSend.py).
 Load this code in the online microbit editor.
 
-Download the code for [Processing here](template/microbitRead.py).
+Download the code for [Processing here](template/microbitRead.pyde).
 Load this code into Processing.
 
 With the micro:bit plugged in, run the Processing script. 
