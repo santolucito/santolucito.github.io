@@ -20,6 +20,14 @@ This is again an open-ended assignment.
 You should utilize at least two different sensors on the micro:bit (e.g. accelerometer and buttons) to send serial information.
 Your Processing sketch should make use of these sensor values in a way that is central to the piece you are creating.
 
+You may reuse your code from Project 1 as a starting point.
+You may even use a peer's code (with their permission) as a starting point.
+**However**, note that you will only be graded on the delta between the starting point and the new submission.
+That is, the bar for overall quality is significantly higher if you are reusing code.
+If you are reusing code, you must **clearly** indicate as such in **both** the code itself (as a comment) and your artist's statement on the video you post.
+Mention in that comment explicitly what improvements have been made since the prior submission.
+Failure to do so will be considered academic dishonesty.
+
 ### What to hand in?
 
 - Your program code for BOTH the micro:bit and processing in a .zip folder.
@@ -34,6 +42,8 @@ Rubric
 You will score full points by overlaying a screen capture of your processing sketch with a video of the microbit manipulation. If you take a video with your phone of your computer screen and the microbit manipulation you can score at most 28 points on this section.
 - 20 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, submit a work that you are proud to call your own. Pursue something that is artistically motivating you, and communicate that through your documentation.
 
+**NOTE** Because this is the last assignment of the semester, NO late submissions will be accepted (we need to get grades in very shortly after the assignment deadline). Failure to turn this assignment in on time will result in a zero grade.
+
 <hr>
 
 ### Lecture 5: 
@@ -44,6 +54,9 @@ How much background do you really need to build your own hardware device?
 What are the various ways you can approach this?
 What is the motivation for embedded systems, when should we just use a mobile phone?
 How do we connect devices together?
+
+
+<a name="lab3"></a>
 
 ### Lab 6: MicroBit setup
 
@@ -65,7 +78,7 @@ You will know the code has flashed correctly when you see a flashing ```X``` on 
 
 With the micro:bit plugged in and running, run the Processing script.
 You may need to experiment with the portIndex to find the right value.
-On Windows computer, the correct portIndex will coorespond to something like ```COM6```.
+On Windows computer, the correct portIndex will correspond to something like ```COM6```.
 On a Mac it will correspond to something like ```/dev/cu.usbmodem14402```.
 The number of ports available will depend on your particular devices and the USB and bluetooth devices you have connected to.
 
