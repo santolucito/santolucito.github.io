@@ -51,6 +51,8 @@ An example of an A+ project is here [https://www.youtube.com/watch?v=OCe36rvdrFI
 
 Oct 29
 
+[Download slides for Lecture 1](../slides/lect1.pdf)
+
 In this lecture we get into the technical aspects of generative visuals.
 We will cover the graphics system used by processing and explore the ways in which we communicate visual instructions to a computer.
 We will tackle the generation of both static images and animations.
@@ -86,6 +88,8 @@ Post your video recording publicly, and save the link. Add that link as a commen
 ### Lecture 2:
 
 Nov 5
+
+[Download slides for Lecture 2](../slides/lect2.pdf)
 
 Creativity and Code. Context in digital art. 
 How can code itself be a visual artistic object? Can we treat code as literature?

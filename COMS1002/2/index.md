@@ -60,6 +60,8 @@ What new challenges arise in programming audio as opposed to non-time domain pro
 
 Nov 13
 
+[Download slides for Lecture 3](../slides/lect3.pdf)
+
 Installing finding your way around Sonic Pi.
 
 The goal of this lab is for you to install Sonic Pi, learn the basic interface, and make a short recording. 
@@ -75,6 +77,8 @@ Record a video of your coding in Sonic Pi. It doesn't have to be fancy - a loop 
 ### Lecture 4: Live coding Ethos
 
 Nov 19
+
+[Download slides for Lecture 4](../slides/lect4.pdf)
 
 We start be examining the design of languages around creativity - how does the structure of a programming language encourage exploration and creativity?
 We then look at the practice of live coding and algoraves.

@@ -55,6 +55,8 @@ An example of an A+ project is here: [microbit code](exampleProject/microbitSend
 ### Lecture 5: 
 Dec 3
 
+[Download slides for Lecture 5](../slides/lect5.pdf)
+
 We give a basic overview of IoT, physical computing, the maker movement, etc.
 How much background do you really need to build your own hardware device?
 What are the various ways you can approach this?
@@ -105,6 +107,8 @@ Make a short video that includes both the visualization and the microbit, and su
 ### Lecture 6: 
 
 Dec 10
+
+[Download slides for Lecture 6](../slides/lect6.pdf)
 
 What is Digital Art in Place, and Place in Digital Art?
 We explore issues of presentation of digital artifacts and how this can interface with strangers.
