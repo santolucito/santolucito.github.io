@@ -48,7 +48,9 @@ You will score full points by overlaying a screen capture of your processing ske
 
 **NOTE** Because this is the last assignment of the semester, NO late submissions will be accepted (we need to get grades in very shortly after the assignment deadline). Failure to turn this assignment in on time will result in a zero grade.
 
-An example of an A+ project is here: [microbit code](exampleProject/microbitSendComplete.py), [Processing code](exampleProject/microbitReadComplete.pyde)
+An example of an A+ project is here: [microbit code](exampleProject/microbitSendComplete.py), [Processing code](exampleProject/microbitReadComplete.pyde). The video for this project is below:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U6Bjup3E8cU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <hr>
 
