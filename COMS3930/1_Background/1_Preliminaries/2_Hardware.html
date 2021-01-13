@@ -1,0 +1,648 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <style>
+    /*! ADAPTED
+    Typeplate : Starter Kit
+    URL ........... http://typeplate.com
+    Version ....... 3.0.2
+    Github ........ https://github.com/typeplate/starter-kit
+    Authors ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
+    License ....... Creative Commmons Attribution 3.0
+    License URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
+    */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-rendering: optimizeLegibility;
+      line-height: 1;
+      margin-top: 0;
+      color: #222;
+    }
+
+    blockquote+figcaption cite {
+      display: block;
+      font-size: inherit;
+      text-align: right;
+    }
+
+    body {
+      word-wrap: break-word;
+    }
+
+    pre code {
+      word-wrap: normal;
+    }
+
+    body {
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+      color: #444;
+    }
+
+    h1 {
+      font-size: 2em;
+      /* 2*16 = 32 */
+    }
+
+    h2 {
+      font-size: 1.5em;
+      /* 1.5*16 = 24 */
+    }
+
+    h3 {
+      font-size: 1.17em;
+      /* 1.17*16 = 18.72 */
+    }
+
+    h4 {
+      font-size: 1em;
+      /* 1*16 = 16 */
+    }
+
+    h5 {
+      font-size: 0.83em;
+      /* 0.83*16 = 13.28 */
+    }
+
+    h6 {
+      font-size: 0.75em;
+      /* 0.75*16 = 12 */
+    }
+
+    h1 {
+      margin: 2.42424rem 0 1.454544rem;
+    }
+
+    h2 {
+      margin: 2.0202rem 0 1.21212rem;
+    }
+
+    h3 {
+      margin: 1.61616rem 0 1rem;
+    }
+
+    h4 {
+      margin: 1.21212rem 0 1;
+    }
+
+    h5 {
+      margin: 0.80808rem 0;
+    }
+
+    h6 {
+      margin: 0.70707rem 0;
+    }
+
+    p {
+      margin: auto auto 1.5rem;
+    }
+
+    small {
+      font-size: 65%;
+    }
+
+    input,
+    abbr,
+    acronym,
+    blockquote,
+    code,
+    kbd,
+    q,
+    samp,
+    var {
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+
+    pre {
+      white-space: pre;
+    }
+
+    pre code {
+      white-space: -moz-pre-wrap;
+      white-space: pre-wrap;
+    }
+
+    code {
+      white-space: pre;
+      font-family: SF Mono, Consolas, Dejavu Sans Mono, Menlo, monospace;
+    }
+
+    abbr {
+      -webkit-font-variant: small-caps;
+      -moz-font-variant: small-caps;
+      -ms-font-variant: small-caps;
+      font-variant: small-caps;
+      font-weight: 600;
+      text-transform: lowercase;
+      color: gray;
+    }
+
+    abbr[title]:hover {
+      cursor: help;
+    }
+
+    /* FROM http://purecss.io/layouts/side-menu/  adapted to remove pure classes*/
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #444;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background-color: #f5f5f5;
+      color: #444;
+      border-radius: 2px;
+      text-shadow: 0px 1px 0px white;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    pre code {
+      border: none;
+      box-shadow: none;
+    }
+
+    pre {
+      padding: 0.5em;
+    }
+
+    code {
+      display: inline-block;
+      padding: 0 0.5em;
+      line-height: 1.4;
+      font-size: 0.9em;
+    }
+
+    table {
+      border-spacing: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.3em 0.7em;
+    }
+
+    table th {
+      background-color: #f4f4f4;
+      border-bottom: 2px solid #444;
+    }
+
+    table td {
+      border: 1px solid #f5f5f5;
+    }
+
+    /* Add transition to containers so they can push in and out. */
+
+    #layout,
+    #menu,
+    .menu-link {
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out;
+      -o-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out;
+    }
+
+    /* This is the parent `<div>` that contains the menu and the content area. */
+
+    #layout {
+      position: relative;
+      padding-left: 0;
+    }
+
+    #layout.active #menu {
+      left: 250px;
+      width: 250px;
+    }
+
+    #layout.active .menu-link {
+      left: 250px;
+    }
+
+    /* The content `<div>` is where all your content goes. */
+
+    .content {
+      margin: 50px auto;
+      padding: 0 2em;
+      max-width: 80ex;
+      line-height: 1.6em;
+    }
+
+    /*
+    The `#menu` `<div>` is the parent `<div>` that contains the menu that
+    appears on the left side of the page.
+    */
+
+    #menu {
+      margin-left: -250px;
+      /* "#menu" width */
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+      /* so the menu or its navicon stays above all content */
+      background: #f4f4f4;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 0.9em;
+    }
+
+    a,
+    a * {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    a:visited {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    /* All anchors inside the menu should be styled like this. */
+
+    #menu a {
+      display: block;
+      padding: 0.5em 0.5em;
+    }
+
+    #menu a:first-letter {
+      text-transform: capitalize;
+    }
+
+    #menu ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 1em 0.5em;
+    }
+
+    #menu ul ul {
+      margin-top: 0.5em;
+      margin-left: 0.5em;
+      border-left: 4px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Change color of the anchor links on hover/focus. */
+
+    #menu li a:hover,
+    #menu li a:focus {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* This styles the selected menu item `<li>`. */
+
+    #menu li a.active {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* This styles a link within a selected menu item `<li>`. */
+
+    #menu li a.active {
+      color: #222;
+    }
+
+    /* This styles the menu heading. */
+
+    #menu li.heading {
+      font-size: 0.9em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    #menu li.heading>* {
+      padding: 0.5em;
+      display: block;
+    }
+
+    #menu li.heading a {
+      color: #0c68af;
+    }
+
+    /* -- Dynamic Button For Responsive Menu -------------------------------------*/
+
+    /*
+    `.menu-link` represents the responsive menu toggle that shows/hides on
+    small screens.
+    */
+
+    .menu-link {
+      position: fixed;
+      display: block;
+      /* show this only on small screens */
+      top: 0;
+      left: 0;
+      /* "#menu width" */
+      background: #f4f4f4;
+      font-size: 10px;
+      /* change this value to increase/decrease button size */
+      z-index: 10;
+      width: 2em;
+      height: auto;
+      padding: 1.6em 1.2em;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .menu-link:hover {
+      background: /* #f4f4f4 * 0.8 */
+      #eee;
+    }
+
+    .menu-link span {
+      position: relative;
+      display: block;
+    }
+
+    .menu-link span,
+    .menu-link span:before,
+    .menu-link span:after {
+      background-color: #555;
+      width: 100%;
+      height: 0.2em;
+      border-radius: 1em;
+    }
+
+    .menu-link span:before,
+    .menu-link span:after {
+      position: absolute;
+      margin-top: -0.6em;
+      content: " ";
+    }
+
+    .menu-link span:after {
+      margin-top: 0.6em;
+    }
+
+    /* Hides the menu at `48em`, but modify this based on your app's needs. */
+
+    @media (min-width: 48em) {
+
+      .header,
+      .content {
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+
+      #layout {
+        padding-left: 250px;
+        /* left col width "#menu" */
+        left: 0;
+      }
+      #menu {
+        left: 250px;
+      }
+
+      .menu-link {
+        position: fixed;
+        left: 250px;
+        display: none;
+      }
+
+      #layout.active .menu-link {
+        left: 250px;
+      }
+    }
+
+    @media (max-width: 48em) {
+      /* Only apply this when the window is small. Otherwise, the following case results in extra padding on the left:
+       * Make the window small.
+       * Tap the menu to trigger the active state.
+       * Make the window large again.
+       */
+      #layout.active {
+        position: relative;
+        left: 250px;
+      }
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+      <!-- Hamburger icon -->
+      <span></span>
+    </a>
+    <nav id="menu">
+      <ul>
+<li><a class="" href="../../index.html">index</a></li>
+<li class="heading"><a class="" href="../../0_Introduction/index.html">0 Introduction</a></li>
+<ul>
+
+</ul>
+<li class="heading"><span>1 Background</span></li>
+<ul>
+<li class="heading"><a class="" href="index.html">1 Preliminaries</a></li>
+<ul>
+<li><a class="" href="1_Development_Tools.html">1 Development Tools</a></li>
+<li><a class="active" href="2_Hardware.html">2 Hardware</a></li>
+<li><a class="" href="3_Communication.html">3 Communication</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../2_Creativity/index.html">2 Creativity</a></li>
+<ul>
+<li><a class="" href="../2_Creativity/1_Whence_creativity.html">1 Whence creativity</a></li>
+<li><a class="" href="../2_Creativity/2_Presenting_your_work.html">2 Presenting your work</a></li>
+
+</ul>
+</ul>
+<li class="heading"><a class="" href="../../2_Modules/index.html">2 Modules</a></li>
+<ul>
+<li class="heading"><a class="" href="../../2_Modules/1_Generative_Art/index.html">1 Generative Art</a></li>
+<ul>
+
+</ul>
+
+</ul>
+<li class="heading"><a class="" href="../../Appendix/index.html">Appendix</a></li>
+<ul>
+<li><a class="" href="../../Appendix/How_Low_Can_you_Go.html">How Low Can you Go</a></li>
+<li><a class="" href="../../Appendix/Run_on_boot.html">Run on boot</a></li>
+<li><a class="" href="../../Appendix/System_Management.html">System Management</a></li>
+<li><a class="" href="../../Appendix/Version_Control.html">Version Control</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../../ExternalResources/index.html">ExternalResources</a></li>
+<ul>
+<li class="heading"><span>Code</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Code/getESP32.sh">getESP32.sh</a></li>
+</ul>
+<li class="heading"><span>Documentation</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Documentation/Esp32_DevKit_pinmap.png">Esp32 DevKit pinmap.png</a></li>
+<li><a class="" href="../../ExternalResources/Documentation/esp32_datasheet_en.pdf">esp32 datasheet en.pdf</a></li>
+</ul>
+<li class="heading"><span>Media</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Media/ceid_cafe.jpg">ceid cafe.jpg</a></li>
+<li><a class="" href="../../ExternalResources/Media/columbia_video.jpg">columbia video.jpg</a></li>
+</ul>
+<li class="heading"><span>Readings</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Readings/Beginners_Guide_v1.pdf">Beginners Guide v1.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/Live-Coding-Education.pdf">Live Coding Education.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/MagPi68.pdf">MagPi68.pdf</a></li>
+</ul>
+
+</ul>
+</ul>
+    </nav>
+    <article id="main" class="content">
+      <h1>Hardware</h1>
+<p>We will cover different types of hardware in this course:</p>
+<ol>
+<li>Microprocessors</li>
+<li>Microcontrollers</li>
+<li>Circuits</li>
+</ol>
+<h2>Microprocessors</h2>
+<p>A microprocessor is a small device that can run a full OS and interface with multiple peripheral devices…
+The main benefit to this is that you are working with, essentially, a full computer on a very small device.
+The main challenges with using a microprocessor are power consumption, and speed (both runtime and boot time).</p>
+<p>One of the original motivation behind microprocessors at the early stages of their more widespread adoption was to deliver more affordable access to computing power.
+However, With the precipitous drop in price of smartphones this is less of a concern.
+That being said, while a smartphone can deliver the computational power for many projects, their hardware interface is severely limited.</p>
+<h3>Raspberry Pi</h3>
+<p>The Raspberry Pi (occasionally, RaspPi) is the canonical microprocessor that in large part facilitated the wide reach of the <em>maker movement</em>.
+The Raspberry Pi is essentially a very small laptop without any peripherals (e.g. screen, keyboard, mouse), but with many open hardware ports.
+This allows the device to easily connect to many unique or custom devices to act as sensors or actuators.</p>
+<p>The Raspberry Pi also includes a set of GPIO (general-purpose input/output) pins, which allow you to connect to some hardware crcuits, such as buttons (inputs0 and LEDs (outputs).
+These GPIO pins are strictly digital, which can be limiting for certain applications.
+We will see more on this as we explore the role of microcontrollers in embedded systems.</p>
+<p>The operating system, and all data, lives on an SD card in Raspberry Pi.
+When working with multiple projects that need differently configured systems, this can be leveraged to keep a separate SD card for each project.</p>
+<p>For more detailed information on your Raspberry Pi, see the documentation available in the official (Raspeberry Pi Beginner’s Guide)[].</p>
+<p>In addition to making the Raspberry Pi devices, the Raspberry Pi Foundation, the group also produces two useful text resources.
+A magazine, MagPi, on the latest developments in the Raspberry Pi community.
+Additionally, the Foundation annually produces the <em>Official Project Books</em>, which document a number of interesting projects that have used a Raspberry Pi.</p>
+<h3>Smartphones (Honorable mention)</h3>
+<p>Although limited in their ability to interface with peripheral devices, a smartphone is still able to communicate with networked devices.
+A phone can be used as interface (e.g. light sensors, cameras, gyroscope, microphone) or as a portable computing device.
+In the case of the use of the phone as a portable computing device, computation may happen locally, or the phone can simply be used as a conduit for server-side computation.
+The difficulty with a phone as local computing device is the code is general specialized to the platform.
+We may see this change with the introduction of Purism’s Librem 5 Linux phone.</p>
+<h2>Microcontrollers</h2>
+<p>Microcontrollers have no OS installed (generally), which means any code you want to run on a microcontroller must be written with the specific device in mind.
+When designing a embedded system, you will need to consider if you application is more appropriate for a microprocessor (with GPIO pins, like the Raspberry Pi), or a microcontroller, or some combination of both.
+Some factors to consider are power draw (significantly higher for microprocessors), processing speed (significantly higher for microprocessors), and circuitry availability (generally, microcontrollers will expose more interfaces than microprocessors).</p>
+<p>In terms of circuitry, two of the most important pieces you will find available on most microcontrollers are an ADC (Analog to Digital Converter) and a DAC (Digital to Analog Converter).
+You will often encounter these devices in the audio domain (where we need to converter digital music signals into audio we can here - or to capture audio waves in the air into a digital signal we can record), but also in any other <em>continuous</em> domain.
+Some examples of this include light sensors and (some) motor actuators.</p>
+<h3>Arduino</h3>
+<p>Arduino is the most widely recognized type of microcontroller.
+The Arduino, like the Raspberry Pi, was at the forefront of the maker movement.
+The Arduino Genuino, the classic Arduino model, includes both analog and digital input pins.
+One of the major benefits introduced by the Arduino is the Arduino programming language and the Arduino IDE.
+Previously, the toolchain to flash code onto a microcontroller was fairly involved.
+The Arduino IDE simplified this process.</p>
+<p>There are two main drawbacks to the Arduino IDE - performance and space.
+The libraries for the Arduino are not too large, but program space can be fairly limited on microcontrollers.
+Accordingly, loading these libraries at boot-time also introduces a delay.
+Depending on your application, you may find these drawbacks to be unacceptable.
+In the creative embedded systems domain, this will rarely be the case.</p>
+<p>It is slightly more likely that you will find the performance of the program itself to be too slow.
+This will most often happen in the domain of interface design, where realtime interaction is key.
+Depending on the application, the human psychology can find delays of &gt; 20 ms to be unnatural.
+Generally, the Arduino code will not be the bottleneck for this delay.
+For creative embedded systems, it is generally good practice to initially prototype with the Arduino IDE, and only switch to a lower level language if needed.
+More discussion on this topic is contained in the <a href="../../Appendix/How_Low_Can_you_Go.html">appendix</a>.</p>
+<p>Since its introduction, there have been a number of similar microcontrollers that mimic the Arduino and can also interface with the Arduino IDE.</p>
+<h3>ESP32/ESP8266</h3>
+<p>This class of microcontrollers are essentially Arduino’s with WiFi shields baked in (and so much more).
+These devices can also be programmed from within the Arduino IDE.
+They are likely the most popular microcontroller for creative embedded projects at the moment.</p>
+<p>This course will focus on development with ESP32s.</p>
+<h3>MSP430 (Honorable mention)</h3>
+<p>The MSP430 is an energy harvesting device that is able to run off of the energy from ambient radio waves or any other harvestable power source.
+This is particularly of interest in the domain of creative embedded systems as it lets us permanently untether from power.
+While an intriguing concept, for most creative applications, a battery is enough to untether from power.</p>
+<p>While the MSP430 has an fork of Arduino IDE that can be used to program the MSP430, the overhead is generally too high for the performance sensitive device.</p>
+<h3>FPGA (Honorable mention)</h3>
+<p>Field programmable gate arrays (FPGAs) are an exciting way to merge the speed of circuits with the ease of development of software.
+Although we will not cover FPGAs in depth, it is good to be aware of the sorts of problems that can be addressed with this tool.
+Short of designing a hardware circuit by hand from components (transistors, etc) and getting it printed onto a PCB (printed circuit board), FPGAs are the fastest tool you can get.
+This can be useful for applications where realtime interaction (especially reaction) is important.
+One example would be a computer vision module that moves a trash can to catch a ball of paper no matter where you throw it in the room.</p>
+<h2>Circuits</h2>
+<p>At times, we will need to build custom interfaces to the physical world.
+This will require us to work with copper wire, resistors, sensors, and the like.
+Working with circuits affords a huge amount of expressive freedom in terms of form factor and function, but prototyping can be a bit slow.
+There are a number of online tools for circuit simulation that will allow you to build a simulated circuit with software, and verify that you are getting the behavior you expect.
+An alternative development approach, and more in the spirit of the exploratory ethos of the creative embedded systems community, is to move fast and break things.
+For the majority of components available in your average maker space, the total cost a circuit is not more than a few cents.
+These days, it is okay if you burn a few LEDs while learning how resistors work.
+Just be sure to know when you are dealing with more expensive components, such as motor actuators or more exotic sensors.</p>
+<h3>PCB (Honorable mention)</h3>
+<p>A Printed Circuit Board (PBC) is just a more stable version of a breadboard.
+Printing a PCB is a nice way to add polish to your system, but is more of a late-stage prototyping step.
+PCBs are first designed in software, then
+Some maker spaces will have PCB mills allowing you to more quickly prototype with PCB.</p>
+
+    </article>
+  </div>
+  <script>
+    // Load contents.json if you need it
+  </script>
+  <script>
+    // FROM http://purecss.io/js/ui.js
+    (function (window, document) {
+
+      var layout = document.getElementById('layout'),
+        menu = document.getElementById('menu'),
+        menuLink = document.getElementById('menuLink');
+
+      function toggleClass(element, className) {
+        var classes = element.className.split(/\s+/),
+          length = classes.length,
+          i = 0;
+
+        for (; i < length; i++) {
+          if (classes[i] === className) {
+            classes.splice(i, 1);
+            break;
+          }
+        }
+        // The className is not found
+        if (length === classes.length) {
+          classes.push(className);
+        }
+
+        element.className = classes.join(' ');
+      }
+
+      menuLink.onclick = function (e) {
+        var active = 'active';
+
+        e.preventDefault();
+        toggleClass(layout, active);
+        toggleClass(menu, active);
+        toggleClass(menuLink, active);
+      };
+
+    }(this, this.document));
+  </script>
+</body>
+
+</html>
