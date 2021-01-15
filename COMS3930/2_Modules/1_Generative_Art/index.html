@@ -611,6 +611,68 @@ In a multichannel video display, there are multiple displays available to the ar
 In the simplest case, the displays have the same virtual layout as their physical counterpart.
 However, in an increasing number of cases, the connection between the virtual layout and the physical layout is disjoint.
 This presents a challenge/opportunity for the artist to work within the dissonance of the virtual and physical worlds.</p>
+<hr>
+<h2>Assignment</h2>
+<h3>Generative Kiosk Art (20 pts)</h3>
+<p>In this lab you will you use your:</p>
+<ul>
+<li>Raspberry Pi</li>
+<li>external monitor</li>
+<li>Freenove 8 RGB LED module</li>
+</ul>
+<p>The goal is to create a generative kiosk art installation in your home that faces outward.
+You will place your monitor and LED module in a window, and create a visualization that fits this context.
+Use this opportunity to reflect on the connection between your living space, the outside world, and how we have experienced this divide in the past year.</p>
+<p>NOTE: proceed with caution, but don’t be scared!
+You are displaying art (possibly for the first time) to the public.
+Consider: who will see this, what will they see, when will they see it?
+You may choose to put up your installation for only a short time (long enough for you to document your installation).</p>
+<p>From a software perspective, you will write a</p>
+<ul>
+<li>python script to control the LED module that utilizes data from a web API of your choice</li>
+<li>a processing script to control the external monitor</li>
+<li>edit the file to start both of these scripts on boot</li>
+</ul>
+<h4>Task #1</h4>
+<p>In Task #1, you will write a generative visualization in Processing. You need to get this code onto your Pi, and set up the Pi so that your processing script runs on boot, in full screen mode.</p>
+<p>We will lay the foundations for task on Friday lab, 1/15.</p>
+<h4>Task #2</h4>
+<p>Get the 8 RGB LED module connected to the Raspberry Pi.
+Use python to control the LEDs.
+The LED module you have follows the same configuration as a Neopixel module.
+You should mostly follow the sample code is here. <a href="https://learn.adafruit.com/neopixels-on-raspberry-pi/overview">https://learn.adafruit.com/neopixels-on-raspberry-pi/overview</a>.</p>
+<p>We will start this task on Friday lab, 1/22.</p>
+<hr>
+<p>This is the first open-ended, creatively driven project of the class.
+There are two main goals.
+The first goal is to introduce you to the challenge of working with an underspecified problem - modelling the typical real world constraints given to installation artists of: “make something for this space”.
+The second goal is to get you comfortable with showing you art to the world in a low stakes way.</p>
+<p>Deliverables:</p>
+<ul>
+<li>(10 pts total - see below for breakdown) A link to your git repository with a program that runs on a Raspberry Pi to generate a visual for your display. The program must meet the following criteria:</li>
+<li>(3 pts) Be generative as defined in the course text (now you have to at least skim the reading)</li>
+<li>(2 pts) Start on boot of the Raspberry Pi, and display fullscreen (for processing).</li>
+<li>(2 pts) Call a web API.</li>
+<li>(2 pts) LEDs must turn on and respond to your code.</li>
+<li>(1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.</li>
+</ul>
+<h4>Standard Documentation Deliverables:</h4>
+<p>In addition to the project specific deliverables lists above, you must also meet the following “standard documentation deliverables”. Throughout this course, we will ask you to document your work in order to slowly build a portfolio of your projects. Going forward, these types of standard documentation deliverables can be assumed to be required for all assignments unless specified otherwise.</p>
+<p>(5 pts) <em>A blog post</em></p>
+<p>Using the blog site (more info to come), make a blog post describing your art.
+The post should give an overview of your artistic vision.
+In particular for this assignment, you should address how you have specialized your generative art to the space.
+What creative decisions did you work lead you to, and which decisions did you take?
+How were your decisions motivated by your larger creative vision for this project.
+In the same vein, also address any technical issues you encountered in your work.
+Particularly focus on issues that other artists may encounter when developing with your hardware setup.</p>
+<p>(3 pts) <em>A README</em></p>
+<p>On your github repo add a readme that contains a short description and key information on reproducibility/installation/usage.
+This key information should be sufficient for a knowledge third party, outside the class, to replicate your design.
+This readme can/should be a subset of the material used in your CoursePress blog post.</p>
+<p>(2 pts) <em>A video of your art</em></p>
+<p>Include in the README a link to your video. The video can be a simple video shot on your phone - the only goal is to have a record of your art in action. You can host the video wherever you like as long as the hosting platform supports in-browser playback (e.g. YouTube, Vimeo). You may also choose to embed a gif in your README in place of a video link.</p>
+<p>If you cannot access a public space from which you window is visible, please message me directly.</p>
 
     </article>
   </div>
