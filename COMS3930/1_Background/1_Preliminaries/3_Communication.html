@@ -473,6 +473,10 @@
 <ul>
 
 </ul>
+<li class="heading"><a class="" href="../../2_Modules/2_Interactive_Devices/index.html">2 Interactive Devices</a></li>
+<ul>
+
+</ul>
 
 </ul>
 <li class="heading"><a class="" href="../../Appendix/index.html">Appendix</a></li>
@@ -543,16 +547,17 @@ These connections will then allow us to communicate between devices on the softw
 Analog input allows for the reading or writing of continuous values, whereas digital is discrete (zeros and ones).
 This is the simplest protocol you can use with embedded systems.
 The Arduino will allow you to read and write to these pins as you like via software.</p>
-<h3>Serial bus</h3>
+<h3>Serial bus/SPI</h3>
 <p>Serial bus is the next easiest protocol to handle - all the above wired software protocols can run atop this connection.
 For our purposes, we mostly will be able to abstract the serial bus protocol as the thing that happens when you plug in a USB.
 That being said, there are times, particularly when interfacing with the Arduino IDE that we need to know a bit about how Serial Bus and serial ports work.</p>
 <h3>Bluetooth/BLE</h3>
 <p>Bluetooth, and more commonly, Bluetooth Low Energy (BLE) are standard protocols for communicating over Bluetooth devices.</p>
-<h3>i2C</h3>
-<p>The i<sup>2</sup>C protocol handles sending data over a two-wire interface.
-This is some low level stuff right here.
-We should not need to know anything about this for this class other than it exists.
+<h3>i2C, UART, 1-wire, Morse code</h3>
+<p>There are a number of low level protocols for sending information over a small number of wires
+As an example, the i<sup>2</sup>C protocol handles sending data over a two-wire interface.
+We should not need to know anything about this for this class other than it exists and we might want to use it.
+The implementation of these protocols is well support by many libraries.
 More details can be found <a href="https://learn.sparkfun.com/tutorials/i2c/all">online</a>.</p>
 
     </article>

@@ -453,27 +453,27 @@
 </ul>
 <li class="heading"><span>1 Background</span></li>
 <ul>
-<li class="heading"><a class="" href="index.html">1 Preliminaries</a></li>
+<li class="heading"><a class="" href="../../1_Background/1_Preliminaries/index.html">1 Preliminaries</a></li>
 <ul>
-<li><a class="" href="1_Development_Tools.html">1 Development Tools</a></li>
-<li><a class="active" href="2_Hardware.html">2 Hardware</a></li>
-<li><a class="" href="3_Communication.html">3 Communication</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/1_Development_Tools.html">1 Development Tools</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/2_Hardware.html">2 Hardware</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/3_Communication.html">3 Communication</a></li>
 
 </ul>
-<li class="heading"><a class="" href="../2_Creativity/index.html">2 Creativity</a></li>
+<li class="heading"><a class="" href="../../1_Background/2_Creativity/index.html">2 Creativity</a></li>
 <ul>
-<li><a class="" href="../2_Creativity/1_Whence_creativity.html">1 Whence creativity</a></li>
-<li><a class="" href="../2_Creativity/2_Presenting_your_work.html">2 Presenting your work</a></li>
+<li><a class="" href="../../1_Background/2_Creativity/1_Whence_creativity.html">1 Whence creativity</a></li>
+<li><a class="" href="../../1_Background/2_Creativity/2_Presenting_your_work.html">2 Presenting your work</a></li>
 
 </ul>
 </ul>
-<li class="heading"><a class="" href="../../2_Modules/index.html">2 Modules</a></li>
+<li class="heading"><a class="" href="../index.html">2 Modules</a></li>
 <ul>
-<li class="heading"><a class="" href="../../2_Modules/1_Generative_Art/index.html">1 Generative Art</a></li>
+<li class="heading"><a class="" href="../1_Generative_Art/index.html">1 Generative Art</a></li>
 <ul>
 
 </ul>
-<li class="heading"><a class="" href="../../2_Modules/2_Interactive_Devices/index.html">2 Interactive Devices</a></li>
+<li class="heading"><a class="active" href="index.html">2 Interactive Devices</a></li>
 <ul>
 
 </ul>
@@ -514,99 +514,96 @@
 </ul>
     </nav>
     <article id="main" class="content">
-      <h1>Hardware</h1>
-<p>We will cover different types of hardware in this course:</p>
-<ol>
-<li>Microprocessors</li>
-<li>Microcontrollers</li>
-<li>Circuits</li>
-</ol>
-<h2>Microprocessors</h2>
-<p>A microprocessor is a small device that can run a full OS and interface with multiple peripheral devices…
-The main benefit to this is that you are working with, essentially, a full computer on a very small device.
-The main challenges with using a microprocessor are power consumption, and speed (both runtime and boot time).</p>
-<p>One of the original motivation behind microprocessors at the early stages of their more widespread adoption was to deliver more affordable access to computing power.
-However, With the precipitous drop in price of smartphones this is less of a concern.
-That being said, while a smartphone can deliver the computational power for many projects, their hardware interface is severely limited.</p>
-<h3>Raspberry Pi</h3>
-<p>The Raspberry Pi (occasionally, RaspPi) is the canonical microprocessor that in large part facilitated the wide reach of the <em>maker movement</em>.
-The Raspberry Pi is essentially a very small laptop without any peripherals (e.g. screen, keyboard, mouse), but with many open hardware ports.
-This allows the device to easily connect to many unique or custom devices to act as sensors or actuators.</p>
-<p>The Raspberry Pi also includes a set of GPIO (general-purpose input/output) pins, which allow you to connect to some hardware crcuits, such as buttons (inputs0 and LEDs (outputs).
-These GPIO pins are strictly digital, which can be limiting for certain applications.
-We will see more on this as we explore the role of microcontrollers in embedded systems.</p>
-<p>The operating system, and all data, lives on an SD card in Raspberry Pi.
-When working with multiple projects that need differently configured systems, this can be leveraged to keep a separate SD card for each project.</p>
-<p>For more detailed information on your Raspberry Pi, see the documentation available in the official (Raspeberry Pi Beginner’s Guide)[].</p>
-<p>In addition to making the Raspberry Pi devices, the Raspberry Pi Foundation, the group also produces two useful text resources.
-A magazine, MagPi, on the latest developments in the Raspberry Pi community.
-Additionally, the Foundation annually produces the <em>Official Project Books</em>, which document a number of interesting projects that have used a Raspberry Pi.</p>
-<h3>Smartphones (Honorable mention)</h3>
-<p>Although limited in their ability to interface with peripheral devices, a smartphone is still able to communicate with networked devices.
-A phone can be used as interface (e.g. light sensors, cameras, gyroscope, microphone) or as a portable computing device.
-In the case of the use of the phone as a portable computing device, computation may happen locally, or the phone can simply be used as a conduit for server-side computation.
-The difficulty with a phone as local computing device is the code is general specialized to the platform.
-We may see this change with the introduction of Purism’s Librem 5 Linux phone.</p>
-<h2>Microcontrollers</h2>
-<p>Microcontrollers have no OS installed (generally), which means any code you want to run on a microcontroller must be written with the specific device in mind.
-When designing a embedded system, you will need to consider if you application is more appropriate for a microprocessor (with GPIO pins, like the Raspberry Pi), or a microcontroller, or some combination of both.
-Some factors to consider are power draw (significantly higher for microprocessors), processing speed (significantly higher for microprocessors), and circuitry availability (generally, microcontrollers will expose more interfaces than microprocessors).</p>
-<p>In terms of circuitry, two of the most important pieces you will find available on most microcontrollers are an ADC (Analog to Digital Converter) and a DAC (Digital to Analog Converter).
-You will often encounter these devices in the audio domain (where we need to converter digital music signals into audio we can here - or to capture audio waves in the air into a digital signal we can record), but also in any other <em>continuous</em> domain.
-Some examples of this include light sensors and (some) motor actuators.</p>
-<h3>Arduino</h3>
-<p>Arduino is the most widely recognized type of microcontroller.
-The Arduino, like the Raspberry Pi, was at the forefront of the maker movement.
-The Arduino Genuino, the classic Arduino model, includes both analog and digital input pins.
-One of the major benefits introduced by the Arduino is the Arduino programming language and the Arduino IDE.
-Previously, the toolchain to flash code onto a microcontroller was fairly involved.
-The Arduino IDE simplified this process.</p>
-<p>There are two main drawbacks to the Arduino IDE - performance and space.
-The libraries for the Arduino are not too large, but program space can be fairly limited on microcontrollers.
-Accordingly, loading these libraries at boot-time also introduces a delay.
-Depending on your application, you may find these drawbacks to be unacceptable.
-In the creative embedded systems domain, this will rarely be the case.</p>
-<p>It is slightly more likely that you will find the performance of the program itself to be too slow.
-This will most often happen in the domain of interface design, where realtime interaction is key.
-Depending on the application, the human psychology can find delays of &gt; 20 ms to be unnatural.
-Generally, the Arduino code will not be the bottleneck for this delay.
-For creative embedded systems, it is generally good practice to initially prototype with the Arduino IDE, and only switch to a lower level language if needed.
-More discussion on this topic is contained in the <a href="../../Appendix/How_Low_Can_you_Go.html">appendix</a>.</p>
-<p>Since its introduction, there have been a number of similar microcontrollers that mimic the Arduino and can also interface with the Arduino IDE.</p>
-<h3>ESP32/ESP8266</h3>
-<p>This class of microcontrollers are essentially Arduino’s with WiFi shields baked in (and so much more).
-These devices can also be programmed from within the Arduino IDE.
-They are likely the most popular microcontroller for creative embedded projects at the moment.</p>
-<p>This course will focus on development with ESP32s.</p>
-<h3>MSP430 (Honorable mention)</h3>
-<p>The MSP430 is an energy harvesting device that is able to run off of the energy from ambient radio waves or any other harvestable power source.
-This is particularly of interest in the domain of creative embedded systems as it lets us permanently untether from power.
-While an intriguing concept, for most creative applications, a battery is enough to untether from power.</p>
-<p>While the MSP430 has an fork of Arduino IDE that can be used to program the MSP430, the overhead is generally too high for the performance sensitive device.</p>
-<h3>FPGA (Honorable mention)</h3>
-<p>Field programmable gate arrays (FPGAs) are an exciting way to merge the speed of circuits with the ease of development of software.
-Although we will not cover FPGAs in depth, it is good to be aware of the sorts of problems that can be addressed with this tool.
-Short of designing a hardware circuit by hand from components (transistors, etc) and getting it printed onto a PCB (printed circuit board), FPGAs are the fastest tool you can get.
-This can be useful for applications where realtime interaction (especially reaction) is important.
-One example would be a computer vision module that moves a trash can to catch a ball of paper no matter where you throw it in the room.</p>
-<h2>Circuits</h2>
-<p>At times, we will need to build custom interfaces to the physical world.
-This will require us to work with copper wire, resistors, sensors, and the like.
-Working with circuits affords a huge amount of expressive freedom in terms of form factor and function, but prototyping can be a bit slow.
-There are a number of online tools for circuit simulation that will allow you to build a simulated circuit with software, and verify that you are getting the behavior you expect.
-An alternative development approach, and more in the spirit of the exploratory ethos of the creative embedded systems community, is to move fast and break things.
-For the majority of components available in your average maker space, the total cost a circuit is not more than a few cents.
-These days, it is okay if you burn a few LEDs while learning how resistors work.
-Just be sure to know when you are dealing with more expensive components, such as motor actuators or more exotic sensors.</p>
-<h3>PCB (Honorable mention)</h3>
-<p>A Printed Circuit Board (PBC) is just a more stable version of a breadboard.
-Printing a PCB is a nice way to add polish to your system, but is more of a late-stage prototyping step.
-PCBs are first designed in software, then physically printed - usually by sending the design to a PCB manufacturer.
-Some maker spaces will have PCB mills allowing you to more quickly prototype with PCB.</p>
-<p>One difficulty to watch out for is the difference between “through hole” and SMT (surface mount technology components).
-To start, you will want to stick with “through hole” components as they are easier to purchase and easier to use.</p>
-<p>You may be tempted to design a PCB with the raw processor that is used on your dev board.
-While this can shrink the form factor, you should be sure that the smaller form factor is necessary, use the processor instead of the dev board introduced a high engineering overhead.</p>
+      <h1>Interactive Devices</h1>
+<h2>System Configuration</h2>
+<pre><code>          |------|
+          |  mp  | ---&gt; D_out
+          |------|  
+             ^
+             |
+             |
+             | 
+             v
+          |------|
+A_in ---&gt; |  mc  |
+          |------|  
+</code></pre>
+<p>In this module, we extend our previous configuration with analog input.
+We use the term analog input to capture the class of circuit designs that allow us to pull data from the real (analog) world into the digital world.
+Accordingly, we now include A<sub>in</sub> (analog input) in our system configuration specification.</p>
+<h3>Digital vs Analog Input</h3>
+<p>In addition to analog input, we now also include digital input in our systems.
+In fact, the distinction between digital and analog input is somewhat arbitrary.
+Digital input is voltage reduced to either high (1) or low (0) value on your computation device.
+In practice, a high digital signal value is an analog signal value with a value near the top of the voltage range, while a low digital is a voltage signal near the bottom of the range.
+Similarly, analog input is voltage reduced to the space of the number of bits your computation device support on its digital pins.</p>
+<p>From a hardware perspective, the Raspberry Pi includes a set of GPIO pins that allow you to interface with circuits.
+Without an ADC (analog to digital converter, for input) or DAC (digital to analog converter, for output), you cannot use the Raspberry Pi for analog signals - all signals are digital (0 or 1).
+This is not to say that you cannot use analog input devices, just that they will be reduced to digital inputs.
+At times this will be the most appropriate approach for certain hardware constraints.</p>
+<p>For higher fidelity readings, you will need a ADC pin.
+This will convert analog voltages to a range of digital values.
+Every ADC has a different bit resolution - for example, the ESP32 has ADCs with a bit resolution of 12 bits - allowing for readings from 0 to 4095.</p>
+<p>Digital input pins can also be used to read complex values beyond 0 and 1, but then require the use of a communication protocol.
+The digital GPIO pin will still only receive 0s and 1s, but the sequence and timing of these bits can encode more complex information.
+More information on communication protocols is <a href="../../1_Preliminaries/3_Communication.html">available in this text</a>, as well as online.</p>
+<hr>
+<h2>Application Domains</h2>
+<hr>
+<h3>Digital Instruments</h3>
+<p>Interactive devices can be used to assist artists in performance.
+As before, our system will produce some output, but now we have a physical input that is visible to the viewer.
+This is a key component of digital instrument design, and interactive devices more generally.
+The ability of the viewer to appreciate the input mechanism allows the viewer to construct a model of virtuosity of the performer.
+In the same why the physical challenge of playing a violin communicates expertise, by seeing how the artist interacts with the interactive device, a viewer can appreciate the expertise the artist needed to develop in order to create the performance.</p>
+<p>This issue of physically visible input also brings us to the problematic distinction between artist and device designer/developer.
+Should we distinguish between these two roles?
+And if so, who’s responsibility/right is it to make this distinction?
+By designing a creative embedded system, is the device designer now, by virtue of working in an artistic realm, an artist?
+In the case of a team of an artist and device designer, is it possible to assign absolute roles, and is there any value to such an assignment
+Is the concept of an identity as an artist or embedded system engineer inherently exclusionary (the purpose is to give value to membership of an group) or inclusionary (the purpose is to build a community around those who self-identify)?</p>
+<p>This discussion is complicated by the concept of the observer.
+An observer typically has limited time with the device, and approaches the device without prior instruction on its use.
+This can lead no interaction behavior that pushes boundaries on the intended functionality - potentially leading to novel uses, and/or system failures.
+A device designed for the causal observer will implement a different design strategy than a device designed for the expert user.</p>
+<p>We can make a clear distinction between casual observers and expert users of a device, especially in the design phase.
+A device designed for an expert user may have more functionality that is less accessible, with the understanding that it is the expert performer’s responsibility to gain mastery of the functionality.
+It may also be the responsibility of the expert, like the casual observer, to push the boundaries of the device’s interaction modes.</p>
+<p>The video above shows an example of an expert device - the Mimo glove, as performed by Imogen Heap.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6btFObRRD9k?start=944" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h4>Multiplayer instruments</h4>
+<p>Digital instruments can also be designed for use with multiple performers.
+In the video below, the Data Duo synth demonstrates how the physical design of the instrument lends itself to multiplayer input.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qgyAASXtZj8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2>Enclosure Design</h2>
+<p>Building the hardware components is only half the task in an embedded systes - you must also consider how your device will be packaged.
+An enclosure for a device can make the difference between a “fragile experiment” and a “functional product”.
+An enclosure defines the physical form factor of the device.
+In designing a physical form factor for a device, the artist implicitly suggests an interface and mode of interaction to users.</p>
+<p>The idea of an implicit mode of interaction has been explored in the computer graphics community.
+In the image below from Lau et al. <em>Tactile Mesh Saliency</em> in SIGGRAPH 2016, machine learning is used to predict how users will interact with a device.
+Follow up work from Brahmbhatt et al. <em>ContactDB: Analyzing and Predicting Grasp Contact via Thermal Imaging</em> in CVPR 2019 continued to explore this idea as well.
+This prediction can then be shown to the artists during the device design stage to more quickly iterate designs.</p>
+<p>When time allows, iterating designs with user feedback in the design loop produces devices with more usable interfaces.
+In so called <em>pilot studies</em> of your device, it is important to observe - not guide.
+This will allow you to see the natural interaction modalities user tend to explore on their own.
+To explore further, Ask non-leading questions to users.
+For example, ask “what did you expect this button to do?” rather than “did you expect this button to do X?”
+Ask “what do you want the device could do?” rather than “would you want the device to do X?”</p>
+<p>A device may have multiple enclosures, either connected via wires or (in Module 4) wirelessly.
+Additionally, when we explore networked systems in Module 6, a system may comprise multiple devices.
+In this case, complementary form factors may help increase usability.</p>
+<p>In designing an enclosure, it is also important to take into account where the enclosure will be open.
+Depending on the hardware being used and intensity of the computation, it may be necessary to leave openings for ventilation.
+When a system is completely sealed, heat transfer may be a problem - potentially overheating your components under periods of prolonged use.
+Some openings may also be left for wired connections, for example power or 3.5mm audio cables.</p>
+<h3>Documenting enclosures</h3>
+<p>In the presentation of a device, an enclosure is one of the most immediately obvious features to the viewers.
+As the vast majority of your audience is likely to only observe your device through the documentation you produce, it is worth investing more time in cleaning up documentation as much as possible.
+In documenting the enclosure, basic best practices for photography should be observed.
+As an example, photographing or video recordings should be (as appropriate) against solid color backgrounds to better call attention to the device itself.
+More information on best practices that apply well to this domain can be found in <em>Picturing Science and Engineering</em> by Felice C. Frankel.</p>
+<hr>
 
     </article>
   </div>
