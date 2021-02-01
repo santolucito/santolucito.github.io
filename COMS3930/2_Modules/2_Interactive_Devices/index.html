@@ -602,8 +602,34 @@ Some openings may also be left for wired connections, for example power or 3.5mm
 As the vast majority of your audience is likely to only observe your device through the documentation you produce, it is worth investing more time in cleaning up documentation as much as possible.
 In documenting the enclosure, basic best practices for photography should be observed.
 As an example, photographing or video recordings should be (as appropriate) against solid color backgrounds to better call attention to the device itself.
+When documenting the device in action, extra wires should be hidden as much as possible.
 More information on best practices that apply well to this domain can be found in <em>Picturing Science and Engineering</em> by Felice C. Frankel.</p>
 <hr>
+<h2>Assignment</h2>
+<p>Due Feb 15</p>
+<p>The second assignment is to place yourself in the position of an interactive instrument device designer. You are asked to build a “performable” device. Performable is broadly interpreted here and may include devices such as digital instruments, or game consoles.</p>
+<p>You are placed under the following design constraints:</p>
+<ul>
+<li>You are allocated three types of sensors: a momentary button (x2), a SPST switch (x1), and an analog joystick (x1). You must utilize exactly these four components.</li>
+<li>Must demonstrate three different “modes” of operation. A mode of operation is defined as: a state of the system that alters the effect an input action has on the output. For example, in one mode of operation, a button press will trigger a sound, and in a second mode of operation, the same button press will trigger a visual effect. While in the context of generative art, the continuously evolving system state might induce new modes of operations, for this task the modes of operation must be directly user controller. You can think of modes of operations as a state machine, where each state is a different mode.</li>
+<li>The device must have an enclosure or enclosures.</li>
+<li>Has some digital output.</li>
+<li>Your device must operate on the Raspberry Pi using the GPIO pins.</li>
+<li>You must use the ESP32 and the Raspberry Pi.</li>
+<li>You may use as many LEDs as you like. Additionally, you may use audio digital out (from the Pi) or visual (monitor, mini-screen, projector etc) digital out.</li>
+</ul>
+<p>Two primary technical challenges you must overcome are 1) aggregating the sensor readings from both the Pi and the ESP32  2) manage switching between three states with only one binary switch</p>
+<h3>Deliverables:</h3>
+<p>Submit a link to your blog post on the course blog. That post should contain:</p>
+<p>(10 pts total - see below for breakdown) A link to your git repository with a program that runs on a Raspberry Pi as well as the program running on the ESP32. Your system must meet the following criteria:</p>
+<ul>
+<li>(3 pts) Uses exactly the sensors listed above and demonstrates three modes of operation.</li>
+<li>(2 pts) Utilize the joystick as analog input.</li>
+<li>(2 pts) Have an enclosure.</li>
+<li>(2 pts) Is a performable device.</li>
+<li>(1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.</li>
+</ul>
+<p>(10 pts) As always, the standard deliverables. The post should detail the creative vision of the device you have created. You should detail the technical challenges that you faced during the implementation of the device. Include a video of your device in action. Specifically, you must make a recording of you peers performing on your device, for whatever “perform” means for your device. The video should be recording following the best practice procedure for documentation covered in class (link to come).</p>
 
     </article>
   </div>
