@@ -528,9 +528,9 @@
           |  mp  |
           |------|  
              ^
-             |
-             |
-             |
+             .
+             .
+             .
              v
           |------|
           |  mc  | ---&gt; A_out
@@ -538,7 +538,8 @@
 </code></pre>
 <p>Module 4 introduces actuators (motors, LEDs) with A<sub>out</sub> to allow our system to take action in the physical world.
 Similar to Module 1 on <a href="../1_Generative_Art/index.html">Generative Art</a>, this system configuration takes no inputs.
-Here we focus on generative systems that produce analog outputs, rather than digital outputs.</p>
+Here we focus on generative systems that produce analog outputs, rather than digital outputs.
+We can still optionally include a connection a microprocessor for digital output.</p>
 <h1>Interactive Kinetic Art</h1>
 <h3>System Configuration</h3>
 <pre><code>          |------|
@@ -553,7 +554,7 @@ Here we focus on generative systems that produce analog outputs, rather than dig
 A_in ---&gt; |  mc  | ---&gt; A_out
           |------|  
 </code></pre>
-<p>In module 5 we combine all previous system configurations to build installations that can take user input Hi and actuate HO accordingly. This system configuration is utilized for purposes of augmented experience design.
+<p>In module 5 we combine all previous system configurations to build installations that can take user input A<sub>in</sub> and actuate A<sub>out</sub> accordingly. This system configuration is utilized for purposes of augmented experience design.
 In this chapter, we combine modules 4 and 5.</p>
 <h2>Basic Philosophy of Kinetic Art</h2>
 <p>Kinetic art in the context of creative embedded systems bridges the gap between the “cyber” and the “physical”.
