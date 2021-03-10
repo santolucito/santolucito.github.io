@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#efefef">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <title>Spiral</title>
+  <style>
+    body {
+      background-color: #efefef;
+      text-align:left;
+      margin: 0;
+      margin-top: 4px;
+      margin-left: 4px;
+      overflow: hidden;
+    }
+    #board {
+      touch-action: none;
+      border: 0.5px solid rgba(0,0,0,0.1);
+      box-shadow: 1px 1px 1px 0.5px rgba(0,0,0,0.1);
+      cursor: crosshair;
+    }
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div style="position: relative;">
+    <h1 style="position: absolute; left: 20%; top: 2%;">Trace the Spiral, then click done to download CSV</h1>
+    <canvas touch-action="none" id="board" width="640" height="640" style="width:320px; height:320px;">
+      Spiral Analysis will not work with this browser.
+    </canvas>
+    <button class="button overlay" id="doneButton" style="position: absolute; left: 50%; bottom: 5%; transform: translate(-50%, -50%);">Done</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
+  <script src="js/vendors/pep.js"></script>
+  <script src="js/libs/Board.js"></script>
+  <script src="js/libs/Pointer.js"></script>
+  <script src="js/libs/Pen.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA_ID_GOES_HERE', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+</body>
+</html>
