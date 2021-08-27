@@ -39,7 +39,7 @@ Guest Lecturer: TBA
 # Oct 7
 
 Location : FIT
-Topic:  Digital Embroidery 
+Topic: Digital Embroidery 
 Guest Lecturer: Maria Hwang and Patrice George
 
 # Oct 14
@@ -51,6 +51,10 @@ Guest Lecturer: Mark Santolucito
 # Oct 21
 
 # Oct 28
+
+Location : Barnard
+Topic: Architecture
+Guest Lecturer: Saima Akhtar
 
 # Nov 4
 
