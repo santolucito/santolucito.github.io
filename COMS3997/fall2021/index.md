@@ -14,7 +14,7 @@ hands-on experience with the technologies used in various arts fields, such as c
 digital embroidery, and architectural preservation. The fundamentals of CS will be covered on an
 as-needed basis to allow students to fully appreciate the tools they will use.
 
-This is a *joint institution* course
+This is a **_joint institution_** course.
 We will meet both on campus at Barnard College and on campus at Fashion Institute of Technology.
 Students will need to travel to the respective campuses to attend lectures.
 Below is a list of class locations throughout the semester
