@@ -47,14 +47,14 @@ Please find the [syllabus here](./syllabus.pdf).
 
 # Sept 30
 
-- Location : Barnard
-- Topic: Computer Music 
-
-# Oct 7
-
 - Location : FIT
 - Topic: Digital Embroidery 
 - Guest Lecturer: Patrice George
+
+# Oct 7
+
+- Location : Barnard
+- Topic: TBA
 
 # Oct 14
 
@@ -63,8 +63,9 @@ Please find the [syllabus here](./syllabus.pdf).
 
 # Oct 21
 
-- Location : FIT/NFT Gallery
-- Topic: NFTs
+- Location : Barnard
+- Topic: Computer Music 
+- Guest Lecturer: Seth Cluett
 
 # Oct 28
 
@@ -74,18 +75,19 @@ Please find the [syllabus here](./syllabus.pdf).
 
 # Nov 4
 
-- Location : Barnard
-- Topic: Computer Music 
-- Guest Lecturer: Seth Cluett
+- Location : FIT/NFT Gallery
+- Topic: NFTs
 
 # Nov 11
 
 - Location: Barnard
-- Topic: Final Project time
+- Topic: TBA 
 
 # Nov 18
 
-- TBA
+- Location : FIT
+- Topic:  Scanning Electron Microscope
+- Guest Lecturer: Deborah Berhanu
 
 # Nov 25 (No Class, Thanksgiving)
 
@@ -97,4 +99,7 @@ Please find the [syllabus here](./syllabus.pdf).
 
 - TBA
 
+# Dec 16
 
+- Location: FIT
+- Topic: Installation
