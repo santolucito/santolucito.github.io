@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Lab1
+title: Lab2
 ---
 
-# Lab 1
+# Lab 2
 
 ## coding poetry and poeticizing code
 

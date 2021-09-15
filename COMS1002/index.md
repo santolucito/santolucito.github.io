@@ -20,7 +20,7 @@ Other learning objectives:
 
 ## Pre-context labs
 
-[Lab 1/2: coding poetry and poeticizing code](/Lab1.md)
+[Lab 2: coding poetry and poeticizing code](/Lab2.md)
 
 [Lab 3: Generative Art v0.1](/Lab3.md)
 
