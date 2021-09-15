@@ -9,7 +9,7 @@ title: Lab2
 
 In this lab, we will get a bit of practice running python code. We won’t be doing any computation here - we will just explore the python environment and get a feel for how python programs might look.
 
-To this end, we will be coding poetry and poeticizing code. That is, we will use code to write poetry, and we will make our code poetic. This will be a lab-by-example. I will give a demonstration of the process, and you follow your own creative inspirations in reproducing this process.
+To this end, we will be coding poetry and poeticizing code. That is, we will use code to write poetry, and we will make our code poetic. This will be a lab-by-example. I will give a demonstration of the process, and you will then follow your own creative inspirations in reproducing this process.
 
 To start, let’s pick a poem. I will go with “Lyric 12” from Primus St. John (this poem featured in the Poetry in Motion series on the MTA in 2019). Here is the poem:
 
