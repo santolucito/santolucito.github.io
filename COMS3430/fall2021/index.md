@@ -22,6 +22,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 <!--- [In-class activity: Sensation caused by two pure tones](./beatingDemo) --->
 
+[Homework 1](./Lab1)
 
 - Filters
 
