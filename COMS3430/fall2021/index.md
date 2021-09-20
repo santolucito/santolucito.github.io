@@ -20,6 +20,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Basic with slider](./basic_slider)
 
+[Delay](./delay)
+
 [In-class activity: Sensation caused by two pure tones](./beatingDemo)
 
 [In-class activity: Fletcher-Muson](./equalLoudness)
