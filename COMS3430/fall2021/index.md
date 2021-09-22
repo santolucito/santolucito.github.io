@@ -22,11 +22,14 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Delay](./delay)
 
+[Homework 1](./Lab1)
+
 [In-class activity: Sensation caused by two pure tones](./beatingDemo)
 
 [In-class activity: Fletcher-Muson](./equalLoudness)
 
-[Homework 1](./Lab1)
+[Analyzer](./analyzer)
+
 
 - Filters
 
