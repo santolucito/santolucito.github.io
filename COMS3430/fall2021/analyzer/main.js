@@ -7,9 +7,11 @@ const playButton = document.querySelector('button');
 function initAudio() {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)
     osc = audioCtx.createOscillator();
+    myGain = audioCtx.createGain();
+    myGain.gain.value = 0.1;
     globalAnalyser = audioCtx.createAnalyser();
-    osc.connect(globalAnalyser);
-    osc.connect(audioCtx.destination);
+    myGain.connect(globalAnalyser);
+    osc.connect(myGain).connect(audioCtx.destination);
     osc.start();
     draw();
 }
