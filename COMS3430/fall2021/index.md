@@ -33,6 +33,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Additive Synthesis](./addititive)
 
+[Demo: LFO + Additive](./lfoAdditive)
+
 [Demo: Amplitude Modulation](./am)
 
 [Demo: Frequency Modulation](./fm)
