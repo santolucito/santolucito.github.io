@@ -53,13 +53,13 @@ Please find the [syllabus here](./syllabus.pdf).
 
 # Oct 7
 
-- Location : Barnard
-- Topic: TBA
+- Location : Barnard (probably)
+- Topic: Introduction to Final Projects
 
 # Oct 14
 
-- Location : FIT
-- Topic: Introduction to Final Projects
+- Location : Barnard
+- Topic: Robotics, Wearables, and Dance
 
 # Oct 21
 
@@ -75,13 +75,13 @@ Please find the [syllabus here](./syllabus.pdf).
 
 # Nov 4
 
-- Location : FIT/NFT Gallery
+- Location : FIT
 - Topic: NFTs
 
 # Nov 11
 
 - Location: Barnard
-- Topic: TBA 
+- Topic: Robotics, Wearables, and Dance (pt 2)
 
 # Nov 18
 
