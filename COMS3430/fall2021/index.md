@@ -20,11 +20,16 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Basic with slider](./basic_slider)
 
+[Delay](./delay)
+
+[Homework 1](./Lab1)
+
 [In-class activity: Sensation caused by two pure tones](./beatingDemo)
 
 [In-class activity: Fletcher-Muson](./equalLoudness)
 
-[Homework 1](./Lab1)
+[Analyzer](./analyzer)
+
 
 [Demo: Additive Synthesis](./addititive)
 
