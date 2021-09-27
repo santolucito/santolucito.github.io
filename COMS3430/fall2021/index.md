@@ -16,15 +16,29 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - Synthesis 
 
-[Basic](./basic)
+[Demo: Basic](./basic)
 
-[Basic with slider](./basic_slider)
+[Demo: Basic with slider](./basic_slider)
 
 [In-class activity: Sensation caused by two pure tones](./beatingDemo)
 
 [In-class activity: Fletcher-Muson](./equalLoudness)
 
 [Homework 1](./Lab1)
+
+[Demo: Additive Synthesis](./addititive)
+
+[Demo: Amplitude Modulation](./am)
+
+[Demo: Frequency Modulation](./fm)
+
+[Demo: Parallel Multi-Modulator Frequency Modulation](./parmmfm)
+
+[Demo: Serial Multi-Modulator Frequency Modulation](./sermmfm)
+
+[Demo: LFO + Frequency Modulation](./lfofm)
+
+[Homework 2](./Lab2)
 
 - Filters
 
