@@ -33,7 +33,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Additive Synthesis](./addititive)
 
-[Demo: LFO + Additive](./lfoAdditive)
+[Demo: LFO + Additive](./lfoAddititve)
 
 [Demo: Amplitude Modulation](./am)
 
@@ -46,6 +46,8 @@ you can find the [syllabus here](./syllabus.pdf)
 [Demo: LFO + Frequency Modulation](./lfofm)
 
 [Homework 2](./Lab2)
+
+[Demo: biquad](./biquad)
 
 - Filters
 
