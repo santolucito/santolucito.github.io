@@ -2,6 +2,12 @@
 var audioCtx;
 var biquadFilter;
 var whiteNoise;
+var analyser;
+var canvasCtx = document.getElementById("visualizer").getContext("2d");
+var dataArray;
+var WIDTH = 800;
+var HEIGHT = 300;
+var bufferLength;
 
 function initLFOQ() {
     var lfo1 = audioCtx.createOscillator();
@@ -43,6 +49,17 @@ function initBiquad() {
 
     whiteNoise.connect(biquadFilter).connect(audioCtx.destination);
 
+
+    analyser = audioCtx.createAnalyser();
+    biquadFilter.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 256;
+    bufferLength = analyser.frequencyBinCount;
+    console.log(bufferLength);
+    dataArray = new Uint8Array(bufferLength);
+
+    canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+    draw();
 
 }
 
@@ -94,3 +111,26 @@ lfof.addEventListener('click', function () {
         initLFOF();
     }
 })
+
+
+function draw() {
+    drawVisual = requestAnimationFrame(draw);
+
+    analyser.getByteFrequencyData(dataArray);
+
+    canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+    canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    var barWidth = (WIDTH / bufferLength) * 2.5;
+    var barHeight;
+    var x = 0;
+
+    for (var i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i] * 2;
+
+        canvasCtx.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)';
+        canvasCtx.fillRect(x, HEIGHT - barHeight / 2, barWidth, barHeight);
+
+        x += barWidth + 1;
+    }
+};

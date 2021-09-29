@@ -14,6 +14,7 @@
   <input type="range" min=-40 max=40 value=0 oninput="updateIndex(this.value)">gain</input> (used only for lowshelf,
   highshelf, and peaking)<br>
   <input type="range" min=1 max=1000 oninput="updateQ(this.value)">Q</input><br>
+  <canvas id="visualizer" width="800" height="300"></canvas><br>
   <select onchange="changeFilterType(this.value);">
     <option value="lowpass">LowPass</option>
     <option value="highpass">HighPass</option>
