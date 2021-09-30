@@ -24,6 +24,8 @@ Other learning objectives:
 
 [Lab 3: Generative Art v0.1](/Lab3.md)
 
+[Lab 4: Geometry](/Lab4.md)
+
 [Lab 5: Computationally Collaborative Creativity ](/Lab5.md)
 
 ## [Module 1: Visuals](./1)
