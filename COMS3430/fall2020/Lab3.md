@@ -28,7 +28,7 @@ Is should sound like this:
   <source src="sounds/babbling.wav" type="audio/wav">
 </audio>
 
-This is a simplified version of the [original code](https://supercollider.github.io/examples/supercollider-code-examples.html), so it sounds a bit more like bubbles at this point, but close enough.
+This is a simplified version of the [original code](https://github.com/supercollider/supercollider/blob/3287b55edfc670caefda0a0056f48b1319075b3c/examples/demonstrations/babbling%20brook.scd), so it sounds a bit more like bubbles at this point, but close enough.
 
 You will notice some items we have covered before (```RHPF``` and ```LPF```) and others we have not ```BrownNoise```.
 To help you a bit, to generate Brown Noise, you can use the code below:
