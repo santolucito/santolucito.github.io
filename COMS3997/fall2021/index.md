@@ -101,5 +101,5 @@ Please find the [syllabus here](./syllabus.pdf).
 
 # Dec 16
 
-- Location: FIT
+- Location: Barnard
 - Topic: Installation
