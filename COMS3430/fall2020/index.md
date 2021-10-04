@@ -29,7 +29,7 @@ Filters
 
 [Demo: Biquad](./biquad)
 
-[Demo: Loading files](./loadfile)
+[Demo: Loading files](./loadFile)
 
 [Demo: Granular Synthesis](./granular)
 

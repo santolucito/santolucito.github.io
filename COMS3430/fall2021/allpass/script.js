@@ -14,6 +14,8 @@ async function loadBuffer(bufferURL) {
 
 function updateFreq(val) {
   biquadFilter.frequency.value = val;
+  console.log(biquadFilter.frequency.value)
+
 };
 
 function updateMix(val) {
@@ -27,14 +29,14 @@ playButton.addEventListener('click', async function() {
 
   audioCtx = new AudioContext()
 
-  var audioBuffer = await loadBuffer('../samples/disco.wav');
+  var audioBuffer = await loadBuffer('../../fall2020/samples/disco.wav');
   const source = audioCtx.createBufferSource();
+  source.loop = true;
   source.buffer = audioBuffer;
   source.start();
 
   
   biquadFilter = audioCtx.createBiquadFilter();
-
   biquadFilter.type = "allpass";
   biquadFilter.frequency.setValueAtTime(1000, audioCtx.currentTime);
   biquadFilter.Q.setValueAtTime(2, audioCtx.currentTime);

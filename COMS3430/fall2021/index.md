@@ -47,7 +47,19 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Homework 2](./Lab2)
 
-[Demo: biquad](./biquad)
+[Demo: Biquad](./biquad)
+
+[Demo: Loading files](./loadFile)
+
+[Demo: Granular Synthesis](./granular)
+
+[Demo: Allpass](./allpass) 
+
+[Demo: convolution](./convolution)
+
+[Demo: 3D panning](./3dpanning)
+
+[Lab 3: Farnell Synthesis](/Lab3.md)
 
 - Filters
 
