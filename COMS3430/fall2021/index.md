@@ -47,6 +47,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Homework 2](./Lab2)
 
+- Filters
+
 [Demo: Biquad](./biquad)
 
 [Demo: Loading files](./loadFile)
@@ -59,9 +61,10 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: 3D panning](./3dpanning)
 
+[Demo: MIDI](./midi)
+
 [Lab 3: Farnell Synthesis](/Lab3.md)
 
-- Filters
 
 ## Module 2: Live Coding (3 weeks) 
 
