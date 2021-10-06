@@ -12,14 +12,14 @@ async function loadBuffer(bufferURL) {
 
 const playButton = document.querySelector('button');
 
-playButton.addEventListener('click', async function() {
+playButton.addEventListener('click', async function () {
 
   audioCtx = new AudioContext()
 
   const panner = new PannerNode(audioCtx);
   panner.panningModel = 'HRTF';
   panner.positionY.value = 0.01; // being at y = 0 can be tricky
-  
+
   // Creates a circular motion for HRTF panning
   let x = 0;
   let z = 0;
@@ -32,7 +32,7 @@ playButton.addEventListener('click', async function() {
     requestAnimationFrame(moveInCircle);
   };
 
-  var audioBuffer = await loadBuffer('../samples/barnard.mp3');
+  var audioBuffer = await loadBuffer('../../fall2020/samples/barnard.mp3');
   const source = audioCtx.createBufferSource();
   source.connect(panner).connect(audioCtx.destination);
   source.buffer = audioBuffer;
