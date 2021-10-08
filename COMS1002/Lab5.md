@@ -47,7 +47,7 @@ When you run the code, you will get something as below:
 
     Antomd molent pona worr d js pslently ie ponh sclash Stlenumn moin
 
-The code has done it's part, now it is your turn. Use this as a starting point to create your own haiku. As an example, I first break the text above into three lines.
+The code has done it's part, now it is your turn. The next steps do not need to happen in code - just follow your own creative impulses to turn this string into a haiku. Use this as a starting point to create your own haiku. As an example, I first break the text above into three lines.
 
     Antomd molent pona worr 
     d js pslently ie ponh sclash 
@@ -65,4 +65,18 @@ Then one more pass to turn it into a haiku about social unrest and communism.
     The tones of plenty do clash
     St. Lenin will mourn
 
-Now try the process yourself and reflect. Was your code a creative actor in this piece? Can you as the author claim credit alone? What role has Matsuo Basho played in this haiku? What role have the developers of Python played in this haiku? If our code was a bit smarter, would your answer change? Where do we draw the line of authorship? 
+
+## Task 1
+
+Your first task is to add a third haiku to the mix.
+You will need to randomly select characters from between the three haikus with roughly equal probablity (hint: use > 0.33 and add a new if condition).
+Select a third haiku on your own that you want to add to the mix.
+
+
+## Task 2
+
+With your new code that mixes together three haikus, try the above process yourself.
+In a block comment, add your haiku.
+In addition to the haiku. add a short reflection on this process. Was your code a creative actor in this piece? Can you as the author claim credit alone? What role has Matsuo Basho played in this haiku? What role have the developers of Python played in this haiku? If our code was a bit smarter, would your answer change? Where do we draw the line of authorship? 
+
+When you are done, submit a single .py file with your peotry and reflections in a block comment.

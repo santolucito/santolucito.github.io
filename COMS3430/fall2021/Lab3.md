@@ -22,7 +22,7 @@ The sound you will create is a "babbling brook". The code provided here:
 Is should sound like this: 
 
 <audio controls>
-  <source src="sounds/babbling.wav" type="audio/wav">
+  <source src="../../fall2020/sounds/babbling.wav" type="audio/wav">
 </audio>
 
 This is a simplified version of the [original code](https://github.com/supercollider/supercollider/blob/3287b55edfc670caefda0a0056f48b1319075b3c/examples/demonstrations/babbling%20brook.scd), so it sounds a bit more like bubbles at this point, but close enough.
