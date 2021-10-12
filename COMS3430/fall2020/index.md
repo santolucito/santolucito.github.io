@@ -54,7 +54,7 @@ Filters
 
 [Demo: Magenta](../demoFiles/magenta)
 
-[Lab 5: Automated Composition](./Lab5)
+[Lab 5: Automated Composition](./Lab5.md)
 
 ## Final Project
 
