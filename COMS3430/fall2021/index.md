@@ -45,7 +45,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: LFO + Frequency Modulation](../demoFiles/lfofm)
 
-[Homework 2](../Lab2.md)
+[Homework 2](./Lab2.md)
 
 - Filters
 
