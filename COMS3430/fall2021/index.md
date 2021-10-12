@@ -20,9 +20,9 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Basic with slider](../demoFiles/basic_slider)
 
-[Delay](../demoFiles/delay)
+[Delay](./delay)
 
-[Homework 1](../demoFiles/Lab1)
+[Homework 1](./Lab1)
 
 [In-class activity: Sensation caused by two pure tones](../demoFiles/beatingDemo)
 
