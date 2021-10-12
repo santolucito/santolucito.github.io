@@ -18,50 +18,50 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Basic](../demoFiles/basic)
 
-[Demo: Basic with slider](./basic_slider)
+[Demo: Basic with slider](../demoFiles/basic_slider)
 
-[Delay](./delay)
+[Delay](../demoFiles/delay)
 
-[Homework 1](./Lab1)
+[Homework 1](../demoFiles/Lab1)
 
-[In-class activity: Sensation caused by two pure tones](./beatingDemo)
+[In-class activity: Sensation caused by two pure tones](../demoFiles/beatingDemo)
 
-[In-class activity: Fletcher-Muson](./equalLoudness)
+[In-class activity: Fletcher-Muson](../demoFiles/equalLoudness)
 
-[Analyzer](./analyzer)
+[Analyzer](../demoFiles/analyzer)
 
 
-[Demo: Additive Synthesis](./addititive)
+[Demo: Additive Synthesis](../demoFiles/addititive)
 
-[Demo: LFO + Additive](./lfoAddititve)
+[Demo: LFO + Additive](../demoFiles/lfoAddititve)
 
-[Demo: Amplitude Modulation](./am)
+[Demo: Amplitude Modulation](../demoFiles/am)
 
-[Demo: Frequency Modulation](./fm)
+[Demo: Frequency Modulation](../demoFiles/fm)
 
-[Demo: Parallel Multi-Modulator Frequency Modulation](./parmmfm)
+[Demo: Parallel Multi-Modulator Frequency Modulation](../demoFiles/parmmfm)
 
-[Demo: Serial Multi-Modulator Frequency Modulation](./sermmfm)
+[Demo: Serial Multi-Modulator Frequency Modulation](../demoFiles/sermmfm)
 
-[Demo: LFO + Frequency Modulation](./lfofm)
+[Demo: LFO + Frequency Modulation](../demoFiles/lfofm)
 
-[Homework 2](./Lab2)
+[Homework 2](../Lab2)
 
 - Filters
 
-[Demo: Biquad](./biquad)
+[Demo: Biquad](../demoFiles/biquad)
 
-[Demo: Loading files](./loadFile)
+[Demo: Loading files](../demoFiles/loadFile)
 
-[Demo: Granular Synthesis](./granular)
+[Demo: Granular Synthesis](../demoFiles/granular)
 
-[Demo: Allpass](./allpass) 
+[Demo: Allpass](../demoFiles/allpass) 
 
-[Demo: convolution](./convolution)
+[Demo: convolution](../demoFiles/convolution)
 
-[Demo: 3D panning](./3dpanning)
+[Demo: 3D panning](../demoFiles/3dpanning)
 
-[Demo: MIDI](./midi)
+[Demo: MIDI](../demoFiles/midi)
 
 [Lab 3: Farnell Synthesis](/Lab3.md)
 
