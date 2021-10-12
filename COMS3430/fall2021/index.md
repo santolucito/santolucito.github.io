@@ -16,7 +16,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - Synthesis 
 
-[Demo: Basic](./basic)
+[Demo: Basic](COMS3430/demoFiles/basic)
 
 [Demo: Basic with slider](./basic_slider)
 
