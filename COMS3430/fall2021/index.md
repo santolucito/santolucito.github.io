@@ -20,7 +20,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Basic with slider](../demoFiles/basic_slider)
 
-[Delay](./delay)
+[Delay](../demoFiles/delay)
 
 [Homework 1](./Lab1)
 
