@@ -22,7 +22,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Delay](../demoFiles/delay)
 
-[Homework 1](./Lab1)
+[Homework 1](./Lab1.md)
 
 [In-class activity: Sensation caused by two pure tones](../demoFiles/beatingDemo)
 
@@ -45,7 +45,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: LFO + Frequency Modulation](../demoFiles/lfofm)
 
-[Homework 2](../Lab2)
+[Homework 2](../Lab2.md)
 
 - Filters
 
