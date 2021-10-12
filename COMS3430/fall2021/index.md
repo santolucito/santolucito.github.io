@@ -63,7 +63,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: MIDI](../demoFiles/midi)
 
-[Lab 3: Farnell Synthesis](/Lab3.md)
+[Lab 3: Farnell Synthesis](./Lab3.md)
 
 
 ## Module 2: Live Coding (3 weeks) 
