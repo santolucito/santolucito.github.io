@@ -96,11 +96,11 @@ Once you have the basic keyboard working, you have a few extra challenges to pur
 
 2) Implement ADSR envelopes for your notes so you don't get zero-ing clicks. You will need to add a gain node for this. It will be in between the osc and the audioCtx.
 
-    const globalGain = audioCtx.createGain();
+    const globalGain = audioCtx.createGain(); //this will control the volume of all notes
     globalGain.gain.setValueAtTime(0.8, audioCtx.currentTime)
     globalGain.connect(audioCtx.destination);
     //...
-    osc.connect(gainNode).connect.(audioCtx.destination)
+    osc.connect(gainNode).connect.(globalGain) //you will need a new gain node for each node to control the adsr of that note
 
 In practice, it is the release part of ADSR that causes the most problems, so focus on that first, then tackle the rest of the envelope. The shape of the envelope can be hard-coded. You will want to explore the ```exponentialRampToValueAtTime()``` function (HINT: read the [documentation](https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/exponentialRampToValueAtTime) carefully, as well as the ```setTargetAtTime``` function. If you want a reference for a gorgeous front end keyboard that does not address this issue, see: [https://oscillator.js.org/](https://oscillator.js.org/). As an expectation calibration, this course will not teach or expect anything like this frontend, but will demand a higher standard of audio quality. (3 pts)
 
