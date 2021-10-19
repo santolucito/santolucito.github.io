@@ -54,12 +54,13 @@ Please find the [syllabus here](./syllabus.pdf).
 # Oct 7
 
 - Location : Barnard (probably)
-- Topic: Introduction to Final Projects
+- Topic: Movement lab visit and Introduction to Final Projects
 
 # Oct 14
 
 - Location : Barnard
 - Topic: Robotics, Wearables, and Dance
+- Guest Lecturer: Amy LaViers
 
 # Oct 21
 
@@ -70,13 +71,13 @@ Please find the [syllabus here](./syllabus.pdf).
 # Oct 28
 
 - Location : Barnard
-- Topic: Architecture
+- Topic: Digital Heritage and 3D scanning
 - Guest Lecturer: Saima Akhtar
 
 # Nov 4
 
 - Location : FIT
-- Topic: NFTs
+- Topic: 3D Printing and NFTs
 
 # Nov 11
 
@@ -93,11 +94,11 @@ Please find the [syllabus here](./syllabus.pdf).
 
 # Dec 2 
 
-- TBA
+- Project work time
 
 # Dec 9
 
-- TBA
+- Project work time
 
 # Dec 16
 
