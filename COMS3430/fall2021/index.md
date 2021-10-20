@@ -70,6 +70,10 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - build your own live coding language
 
+[Demo: Live Coding (Basic)](./liveCodeBasic)
+
+[Demo: Live Coding (Pitch)](./liveCodePitch)
+
 ## Module 3: Automated Composition (3 weeks)
  
 ## Module 4: Audio Plugin Development (3 weeks)
