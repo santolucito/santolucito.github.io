@@ -74,7 +74,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Live Coding (Pitch)](./liveCodePitch)
 
-[Lab 4: Farnell Synthesis](/Lab4.md)
+[Lab 4: Live Coding](/Lab4.md)
 
 ## Module 3: Automated Composition (3 weeks)
  
