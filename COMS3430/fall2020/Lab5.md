@@ -18,7 +18,7 @@ As a reminder, these are:
 
 ## Part I (2 pts)
 
-For this, you will start with the code at [Demo: Magenta](./magenta). Walk through this code to understand what is happening (it is gratuitously commented). You can check the reference material cited below for more information.
+For this, you will start with the code at [Demo: Magenta](../demoFiles/magenta). Walk through this code to understand what is happening (it is gratuitously commented). You can check the reference material cited below for more information.
 
 You task is to hook this up to your synth from Lab2 (or a classmate's synth if you are not happy with your Lab2 synth).
 
