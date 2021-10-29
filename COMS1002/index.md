@@ -18,6 +18,8 @@ Other learning objectives:
 - Understand key areas and issues in computational art
 - Have the confidence to work with code in an array of artistic domains
 
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GrLF8MgWiSs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Pre-context labs
 
 [Lab 2: coding poetry and poeticizing code](/Lab2.md)

@@ -66,6 +66,8 @@ Oct 30
 
 Installing [Processing](https://processing.org/download/). Once you have installed Processing, proceed to install Python mode. To do this, click the top right button that says Java, and then click "Add Mode".
 
+Note that you should stick to Processing version 3.5.4 for now (as opposed to the 4.0 beta). Also, if you are on a newer Mac, you may need to add ```frameRate(30)``` to your ```setup()``` function in case some example sketches are not working for you. See the video below for more details.
+
 In this lab we have two goals: 1) getting our hands dirty with Processing, and 2) establishing the foundations for documenting work.
 For the first part of this lab our goal is to  start with the "Yellowtail" example and modify it to additionally display text of your choice.
 The text size should take up the full display window, and the text should "bounce" up and down on the screen.
@@ -78,6 +80,10 @@ We will create a video recording of that processing script being run - our goal 
 This style of documentation is complementary to technical documentation (e.g. commenting your code).
 There is a built-in tool to record images frame-by-frame in Processing, but it might be easier to just record a screencast using your favorite tool.
 Try to screencast just the display window, rather than your whole screen.
+
+Here is a short video with a walk-through of the key points of the lab.
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/2poj7Djjt8M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### To turn in:
 

@@ -65,6 +65,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Lab 3: Farnell Synthesis](/Lab3.md)
 
+[Video: how to make a square wave from a sine wave](https://www.youtube.com/watch?v=E55TbBVWI1g)
 
 ## Module 2: Live Coding (3 weeks) 
 
