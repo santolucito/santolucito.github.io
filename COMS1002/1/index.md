@@ -12,7 +12,7 @@ During the creation process, some of the key questions we ask are:
 
 ## Project 1: Processing
 
-- Due Nov 9
+- Due Monday Nov 8, 11:59pm
 
 Your goal is to create a new work of art with Processing in Python mode.
 This is an open-ended assignment - which may be an uncomfortable space for you if this is new to you.
