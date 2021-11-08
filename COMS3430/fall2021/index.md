@@ -78,6 +78,8 @@ you can find the [syllabus here](./syllabus.pdf)
 [Lab 4: Live Coding](/Lab4.md)
 
 ## Module 3: Automated Composition (3 weeks)
+
+[Lab 5: Automated Compisition](/Lab5.md)
  
 ## Module 4: Audio Plugin Development (3 weeks)
 
