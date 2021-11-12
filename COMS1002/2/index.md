@@ -10,7 +10,7 @@ In a more practical sense, this is particularly good training for coding intervi
 
 ### Project 2: Live coding with Sonic Pi
 
-- Due Nov 23
+- Due Monday Nov 22, 11:59pm
 
 Your goal is to experience first-hand the practice of live coding.
 You will be using Sonic Pi. 
@@ -21,19 +21,19 @@ During your performance, you must:
 - Improvise, though you can plan most of the piece ahead of time. Even with most of the code pre written in a separate window, you should be experiment with new values for random seeds, loops, pitch values, etc during the "performance"
 - Generally, adhere to the Live Code Manifesto
 
-Some language features you should use include:
+Some language features you *must** use include:
 
-- setting a random seed
-- sync'ing loops
-- loops, for example ```3.times do...```
-- samples
-- synths
+- setting a random seed (5 points)
+- sync'ing live loops (5 points)
+- loops inside a live loop, for example ```3.times do...``` (5 points)
+- play samples (5 points)
+- use a synths (5 points)
 
 The recording should last roughly 10 minutes. Note that in order to achieve this length, you will need to improvise a bit with your code in real-time. Do not try to plan out all 10 minutes exactly ahead of time.
 
 ### What to hand in?
 
-- A link to the public posted video recording of your live code performance in Sonic Pi. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up highlighting interesting moments in the performance or lines of code you thought were creative.
+- A link to the public posted video recording of your live code performance in Sonic Pi. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up highlighting interesting moments in the performance or lines of code you thought were creative. Submit this link as a .txt file.
 
 ### How am I graded?
 
@@ -49,7 +49,7 @@ Does the documentation highlight both the artistic aspect of your work, as well 
 
 ### Lecture 3: Technicals of Audio 
 
-Nov 12
+Nov 11
 
 What is digital audio? How is sound represented in a computer?
 What new challenges arise in programming audio as opposed to non-time domain programming?
@@ -58,7 +58,7 @@ What new challenges arise in programming audio as opposed to non-time domain pro
 
 ### Lab 2: Sonic Pi
 
-Nov 13
+Nov 12
 
 [Download slides for Lecture 3](../slides/lect3.pdf)
 
@@ -66,17 +66,22 @@ Installing finding your way around Sonic Pi.
 
 The goal of this lab is for you to install Sonic Pi, learn the basic interface, and make a short recording. 
 
-Complete sections 2.1, 2.2, 2.3, 3.1, 3.2, and 4 in the Sonic Pi tutorial.
+Complete sections 1.1, 2, 2.1, 2.2, 2.3, 2.4, 3, 3.1, 3.2, 4, 5.2, and 9.2 in the Sonic Pi tutorial.
 
 ### To turn in:
 
-Record a video of your coding in Sonic Pi. It doesn't have to be fancy - a loop that plays a single note is enough. This is to confirm that you have the tool installed, understand the basic usage, and can record your audio and code at the same time. Post your video recording publicly, and save the link. For the lab, simply submit the link!
+Once you have completed the above tutorial sections you will have a good foundation to start live coding yourself. Record a video of you live coding in Sonic Pi. It doesn't have to be fancy or long (less than 30 seconds is fine) - though a loop that plays a single note is enough. This is to confirm that you have the tool installed, understand the basic usage, and can record your audio and code at the same time. Post your video recording publicly, and save the link. For the lab, simply submit the link in a .txt file!
+
+
+### A note on recording
+
+Please be sure you are recording the sound *directly* from your computer, and not record the output of your laptop speakers. If you are using zoom, you will want to share computer audio. Be sure to also go to "More" > "Select sound sharing mode" > "Stereo (high-fidelity)". Be sure to mute your microphone. Follow analogous instructions for other screen recorders (e.g. quicktime). Once you have made your recording, be sure to listen to it once to make sure the audio has recorded properly and has not picked up your roommates' conversations. 
 
 <hr>
 
 ### Lecture 4: Live coding Ethos
 
-Nov 19
+Nov 18
 
 [Download slides for Lecture 4](../slides/lect4.pdf)
 
