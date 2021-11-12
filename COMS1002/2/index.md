@@ -62,7 +62,7 @@ Nov 12
 
 [Download slides for Lecture 3](../slides/lect3.pdf)
 
-Installing finding your way around Sonic Pi.
+Installing and finding your way around Sonic Pi.
 
 The goal of this lab is for you to install Sonic Pi, learn the basic interface, and make a short recording. 
 
