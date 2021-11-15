@@ -85,6 +85,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Magenta](./magenta)
 
+[Demo: Phone Control](./phonecontrol)
+
 [Lab 5: Automated Composition](/Lab5.md)
  
 ## Module 4: Audio Plugin Development (3 weeks)
