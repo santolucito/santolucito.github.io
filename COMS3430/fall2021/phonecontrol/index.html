@@ -21,9 +21,8 @@
   <p>Put these files on some other machine. Then send a stream of messages to the server. 
     For example, use the <a href="https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu">HyperIMU app</a>.
     Any app that streams sensor value to a user selected IP and port is fine.</p>
-  <p>Since the server listens to your phone on one port, and sends events out another port, 
-    we cannot use this code with a globally accesible web server (ie running on port 80, or on port 443 for SSL).
-    Instead, you can run the server wherever you like, but the client needs to be flexible and not demand a particular port (e.g. being hosted a https site</p>
+  <p> In order to run this online, you need the SSE to run on the appropriate port (80 for http, 443 for https).
+      If you are running this js client code locally it doesnt matter though.</p>
   <p><a href="./server.py">server.py</a></p>
   <p><a href="./cors_helper.py">cors_helper.py</a></p>
 
