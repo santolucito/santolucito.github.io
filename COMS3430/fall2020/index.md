@@ -52,7 +52,7 @@ Filters
 
 [Demo: randomWalk](./randomWalk)
 
-[Demo: Magenta](./Magenta)
+[Demo: Magenta](./magenta)
 
 [Lab 5: Automated Composition](./Lab5)
 

@@ -79,7 +79,13 @@ you can find the [syllabus here](./syllabus.pdf)
 
 ## Module 3: Automated Composition (3 weeks)
 
-[Lab 5: Automated Compisition](/Lab5.md)
+[Demo: Notes](./notes)
+
+[Demo: randomWalk](./randomWalk)
+
+[Demo: Magenta](./magenta)
+
+[Lab 5: Automated Composition](/Lab5.md)
  
 ## Module 4: Audio Plugin Development (3 weeks)
 
