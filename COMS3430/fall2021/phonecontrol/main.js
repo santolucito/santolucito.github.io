@@ -1,4 +1,4 @@
-const evtSource = new EventSource("http://161.35.14.211:8889", { } );
+const evtSource = new EventSource("https://tslsynthesissynthesizer.com:8889", { } );
 
 evtSource.onmessage = function(event) {
   console.log("message: " + event.data)
