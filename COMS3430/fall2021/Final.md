@@ -5,7 +5,7 @@ title: Final Project
 
 # Final Project (30 pts)
 
-The final project should be turned in on Courseworks by the last day of finals.
+The final project should be turned in on Courseworks on Friday, Dec 17, midnight AoE.
 
 This project may be completed as a group of up to 3.
 When working as a group, you must use a git repository to track each group members' commits and include a link to the repo in your submission.
