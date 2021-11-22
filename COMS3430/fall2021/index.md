@@ -95,3 +95,4 @@ you can find the [syllabus here](./syllabus.pdf)
 
 ## Final Project
 
+[Final Project](./Final)
