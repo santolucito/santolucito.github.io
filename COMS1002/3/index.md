@@ -102,7 +102,7 @@ Note: you need a USB port to connect the USB cable. If you have a Mac with only 
 
 Once you have everything working from the example code. You need to add two new features. First, add the ability for the sphere to move up and down when the messages ```up``` and ```down``` are recieved. Second, we brush up our processing skills - make the sphere change colors over times (as a reminder, you will want to use ```millis()``` and you might want to also use ```sin()```).
 
-Once you have added the two new features, make a short video that includes both the visualization and your physical manipuation of the microbit, and submit this for the lab.
+Once you have added the two new features, make a short video that includes both the visualization and your physical manipuation of the microbit. Add a link to the video to the top of your processing code as a comment, and submit a zip file of your processing code and the microbit code for the lab submission.
 
 
 <hr>
