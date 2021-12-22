@@ -14,7 +14,7 @@ Here we pay particular attention to the importance of documentation.
 
 ## Project 3: Physical+Digital Art
 
-- Due Dec 14
+- Due Dec 15
 
 Your goal is to create an interactive visualization that users can interact with using the microbit as a controller.
 You will be interfacing your microbit with Processing in Python mode.
@@ -55,7 +55,7 @@ An example of an A+ project is here: [microbit code](exampleProject/microbitSend
 <hr>
 
 ### Lecture 5: 
-Dec 3
+Dec 4
 
 [Download slides for Lecture 5](../slides/lect5.pdf)
 
@@ -70,7 +70,7 @@ How do we connect devices together?
 
 ### Lab 6: MicroBit setup
 
-Dec 4
+Dec 5
 
 The goal of this lab is to setup our microbit and ensure all the hardware is functioning properly.
 
@@ -100,7 +100,9 @@ If your computer does not recognize a device plugged in, you may need a differen
 
 Note: you need a USB port to connect the USB cable. If you have a Mac with only USB C ports, you will need an adapter or a different cable.
 
-Make a short video that includes both the visualization and the microbit, and submit this for the lab.
+Once you have everything working from the example code. You need to add two new features. First, add the ability for the sphere to move up and down when the messages ```up``` and ```down``` are recieved. Second, we brush up our processing skills - make the sphere change colors over times (as a reminder, you will want to use ```millis()``` and you might want to also use ```sin()```).
+
+Once you have added the two new features, make a short video that includes both the visualization and your physical manipuation of the microbit. Add a link to the video to the top of your processing code as a comment, and submit a zip file of your processing code and the microbit code for the lab submission.
 
 
 <hr>
@@ -108,7 +110,7 @@ Make a short video that includes both the visualization and the microbit, and su
 
 ### Lecture 6: 
 
-Dec 10
+Dec 11
 
 [Download slides for Lecture 6](../slides/lect6.pdf)
 

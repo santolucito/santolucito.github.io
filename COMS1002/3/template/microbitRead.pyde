@@ -26,9 +26,9 @@ def draw():
         microbitInput = myPort.readString().strip()
         print(microbitInput)
         
-    if(microbitInput == "left"):
+    if "left" in microbitInput:
         offset += 1
-    elif(microbitInput == "right"):
+    elif "right" in microbitInput:
         offset -= 1
         
     translate(offset, 200, 0)
