@@ -34,7 +34,7 @@ function initBiquad() {
         noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate),
         output = noiseBuffer.getChannelData(0);
     for (var i = 0; i < bufferSize; i++) {
-        output[i] = Math.random() * 2 - 1;
+        output[i] = (Math.random() * 2 - 1) * 0.5;
     }
     whiteNoise = audioCtx.createBufferSource();
     whiteNoise.buffer = noiseBuffer;
