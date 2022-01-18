@@ -1,0 +1,740 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <style>
+    /*! ADAPTED
+    Typeplate : Starter Kit
+    URL ........... http://typeplate.com
+    Version ....... 3.0.2
+    Github ........ https://github.com/typeplate/starter-kit
+    Authors ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
+    License ....... Creative Commmons Attribution 3.0
+    License URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
+    */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-rendering: optimizeLegibility;
+      line-height: 1;
+      margin-top: 0;
+      color: #222;
+    }
+
+    blockquote+figcaption cite {
+      display: block;
+      font-size: inherit;
+      text-align: right;
+    }
+
+    body {
+      word-wrap: break-word;
+    }
+
+    pre code {
+      word-wrap: normal;
+    }
+
+    body {
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+      color: #444;
+    }
+
+    h1 {
+      font-size: 2em;
+      /* 2*16 = 32 */
+    }
+
+    h2 {
+      font-size: 1.5em;
+      /* 1.5*16 = 24 */
+    }
+
+    h3 {
+      font-size: 1.17em;
+      /* 1.17*16 = 18.72 */
+    }
+
+    h4 {
+      font-size: 1em;
+      /* 1*16 = 16 */
+    }
+
+    h5 {
+      font-size: 0.83em;
+      /* 0.83*16 = 13.28 */
+    }
+
+    h6 {
+      font-size: 0.75em;
+      /* 0.75*16 = 12 */
+    }
+
+    h1 {
+      margin: 2.42424rem 0 1.454544rem;
+    }
+
+    h2 {
+      margin: 2.0202rem 0 1.21212rem;
+    }
+
+    h3 {
+      margin: 1.61616rem 0 1rem;
+    }
+
+    h4 {
+      margin: 1.21212rem 0 1;
+    }
+
+    h5 {
+      margin: 0.80808rem 0;
+    }
+
+    h6 {
+      margin: 0.70707rem 0;
+    }
+
+    p {
+      margin: auto auto 1.5rem;
+    }
+
+    small {
+      font-size: 65%;
+    }
+
+    input,
+    abbr,
+    acronym,
+    blockquote,
+    code,
+    kbd,
+    q,
+    samp,
+    var {
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+
+    pre {
+      white-space: pre;
+    }
+
+    pre code {
+      white-space: -moz-pre-wrap;
+      white-space: pre-wrap;
+    }
+
+    code {
+      white-space: pre;
+      font-family: SF Mono, Consolas, Dejavu Sans Mono, Menlo, monospace;
+    }
+
+    abbr {
+      -webkit-font-variant: small-caps;
+      -moz-font-variant: small-caps;
+      -ms-font-variant: small-caps;
+      font-variant: small-caps;
+      font-weight: 600;
+      text-transform: lowercase;
+      color: gray;
+    }
+
+    abbr[title]:hover {
+      cursor: help;
+    }
+
+    /* FROM http://purecss.io/layouts/side-menu/  adapted to remove pure classes*/
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #444;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background-color: #f5f5f5;
+      color: #444;
+      border-radius: 2px;
+      text-shadow: 0px 1px 0px white;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    pre code {
+      border: none;
+      box-shadow: none;
+    }
+
+    pre {
+      padding: 0.5em;
+    }
+
+    code {
+      display: inline-block;
+      padding: 0 0.5em;
+      line-height: 1.4;
+      font-size: 0.9em;
+    }
+
+    table {
+      border-spacing: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.3em 0.7em;
+    }
+
+    table th {
+      background-color: #f4f4f4;
+      border-bottom: 2px solid #444;
+    }
+
+    table td {
+      border: 1px solid #f5f5f5;
+    }
+
+    /* Add transition to containers so they can push in and out. */
+
+    #layout,
+    #menu,
+    .menu-link {
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out;
+      -o-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out;
+    }
+
+    /* This is the parent `<div>` that contains the menu and the content area. */
+
+    #layout {
+      position: relative;
+      padding-left: 0;
+    }
+
+    #layout.active #menu {
+      left: 250px;
+      width: 250px;
+    }
+
+    #layout.active .menu-link {
+      left: 250px;
+    }
+
+    /* The content `<div>` is where all your content goes. */
+
+    .content {
+      margin: 50px auto;
+      padding: 0 2em;
+      max-width: 80ex;
+      line-height: 1.6em;
+    }
+
+    /*
+    The `#menu` `<div>` is the parent `<div>` that contains the menu that
+    appears on the left side of the page.
+    */
+
+    #menu {
+      margin-left: -250px;
+      /* "#menu" width */
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+      /* so the menu or its navicon stays above all content */
+      background: #f4f4f4;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 0.9em;
+    }
+
+    a,
+    a * {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    a:visited {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    /* All anchors inside the menu should be styled like this. */
+
+    #menu a {
+      display: block;
+      padding: 0.5em 0.5em;
+    }
+
+    #menu a:first-letter {
+      text-transform: capitalize;
+    }
+
+    #menu ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 1em 0.5em;
+    }
+
+    #menu ul ul {
+      margin-top: 0.5em;
+      margin-left: 0.5em;
+      border-left: 4px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Change color of the anchor links on hover/focus. */
+
+    #menu li a:hover,
+    #menu li a:focus {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* This styles the selected menu item `<li>`. */
+
+    #menu li a.active {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* This styles a link within a selected menu item `<li>`. */
+
+    #menu li a.active {
+      color: #222;
+    }
+
+    /* This styles the menu heading. */
+
+    #menu li.heading {
+      font-size: 0.9em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    #menu li.heading>* {
+      padding: 0.5em;
+      display: block;
+    }
+
+    #menu li.heading a {
+      color: #0c68af;
+    }
+
+    /* -- Dynamic Button For Responsive Menu -------------------------------------*/
+
+    /*
+    `.menu-link` represents the responsive menu toggle that shows/hides on
+    small screens.
+    */
+
+    .menu-link {
+      position: fixed;
+      display: block;
+      /* show this only on small screens */
+      top: 0;
+      left: 0;
+      /* "#menu width" */
+      background: #f4f4f4;
+      font-size: 10px;
+      /* change this value to increase/decrease button size */
+      z-index: 10;
+      width: 2em;
+      height: auto;
+      padding: 1.6em 1.2em;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .menu-link:hover {
+      background: /* #f4f4f4 * 0.8 */
+      #eee;
+    }
+
+    .menu-link span {
+      position: relative;
+      display: block;
+    }
+
+    .menu-link span,
+    .menu-link span:before,
+    .menu-link span:after {
+      background-color: #555;
+      width: 100%;
+      height: 0.2em;
+      border-radius: 1em;
+    }
+
+    .menu-link span:before,
+    .menu-link span:after {
+      position: absolute;
+      margin-top: -0.6em;
+      content: " ";
+    }
+
+    .menu-link span:after {
+      margin-top: 0.6em;
+    }
+
+    /* Hides the menu at `48em`, but modify this based on your app's needs. */
+
+    @media (min-width: 48em) {
+
+      .header,
+      .content {
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+
+      #layout {
+        padding-left: 250px;
+        /* left col width "#menu" */
+        left: 0;
+      }
+      #menu {
+        left: 250px;
+      }
+
+      .menu-link {
+        position: fixed;
+        left: 250px;
+        display: none;
+      }
+
+      #layout.active .menu-link {
+        left: 250px;
+      }
+    }
+
+    @media (max-width: 48em) {
+      /* Only apply this when the window is small. Otherwise, the following case results in extra padding on the left:
+       * Make the window small.
+       * Tap the menu to trigger the active state.
+       * Make the window large again.
+       */
+      #layout.active {
+        position: relative;
+        left: 250px;
+      }
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+      <!-- Hamburger icon -->
+      <span></span>
+    </a>
+    <nav id="menu">
+      <ul>
+<li><a class="" href="../../index.html">index</a></li>
+<li class="heading"><a class="" href="../../0_Introduction/index.html">0 Introduction</a></li>
+<ul>
+
+</ul>
+<li class="heading"><span>1 Background</span></li>
+<ul>
+<li class="heading"><a class="" href="../../1_Background/1_Preliminaries/index.html">1 Preliminaries</a></li>
+<ul>
+<li><a class="" href="../../1_Background/1_Preliminaries/1_Development_Tools.html">1 Development Tools</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/2_Hardware.html">2 Hardware</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/3_Communication.html">3 Communication</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../../1_Background/2_Creativity/index.html">2 Creativity</a></li>
+<ul>
+<li><a class="" href="../../1_Background/2_Creativity/1_Whence_creativity.html">1 Whence creativity</a></li>
+<li><a class="" href="../../1_Background/2_Creativity/2_Presenting_your_work.html">2 Presenting your work</a></li>
+
+</ul>
+</ul>
+<li class="heading"><a class="" href="../index.html">2 Modules</a></li>
+<ul>
+<li class="heading"><a class="active" href="index.html">1 Generative Art</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../2_Interactive_Devices/index.html">2 Interactive Devices</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../3_Installation_Art/index.html">3 Installation Art</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../4_Kinetic_Scuplture/index.html">4 Kinetic Scuplture</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../7_Final_Project/index.html">7 Final Project</a></li>
+<ul>
+
+</ul>
+
+</ul>
+<li class="heading"><a class="" href="../../Appendix/index.html">Appendix</a></li>
+<ul>
+<li><a class="" href="../../Appendix/How_Low_Can_you_Go.html">How Low Can you Go</a></li>
+<li><a class="" href="../../Appendix/Run_on_boot.html">Run on boot</a></li>
+<li><a class="" href="../../Appendix/System_Management.html">System Management</a></li>
+<li><a class="" href="../../Appendix/Version_Control.html">Version Control</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../../ExternalResources/index.html">ExternalResources</a></li>
+<ul>
+<li class="heading"><span>Code</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Code/getESP32.sh">getESP32.sh</a></li>
+</ul>
+<li class="heading"><span>Documentation</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Documentation/Esp32_DevKit_pinmap.png">Esp32 DevKit pinmap.png</a></li>
+<li><a class="" href="../../ExternalResources/Documentation/esp32_datasheet_en.pdf">esp32 datasheet en.pdf</a></li>
+</ul>
+<li class="heading"><span>Media</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Media/ceid_cafe.jpg">ceid cafe.jpg</a></li>
+<li><a class="" href="../../ExternalResources/Media/columbia_video.jpg">columbia video.jpg</a></li>
+</ul>
+<li class="heading"><span>Readings</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Readings/Beginners_Guide_v1.pdf">Beginners Guide v1.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/Live-Coding-Education.pdf">Live Coding Education.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/MagPi68.pdf">MagPi68.pdf</a></li>
+</ul>
+
+</ul>
+</ul>
+    </nav>
+    <article id="main" class="content">
+      <h1>Generative Art</h1>
+<h2>System Configuration</h2>
+<pre><code>          |------|
+          |  mp  | ---&gt; D_out
+          |------|  
+</code></pre>
+<p>This is the simplest class of systems we will address - a microprocessor with digital out.
+We address two options for digital out - either visual or audio.
+This captures well the domain of generative art - the practice of using automation to create content.
+Generative works are those created with the assistance of a program that significantly, sometimes entirely, informs the composition and realization of the work.</p>
+<p>Generative art can be static (complete) or dynamic (iterative).
+In dynamic generative art the generative <em>process</em> is treated as content, rather than static content produced by the process.
+Some examples of static content includes using an algorithm to generative designs for scarfs, that are then custom knitted.
+While this falls into the category of generative art, the content is the art, whereas the process is not, in this case, presented to the audience.</p>
+<p>In contrast, in dynamic generative art the process of generation is visible to the audience.
+We provide some examples below of this style of generative art.
+We note that we are particularly interested in generative processes that fit into a semi-automated definition - by some process, random or otherwise, the output of the system at any given time should not be predictable based solely on the initial state.
+The generative process evolves in a way that cannot be captured by fixed media.</p>
+<h3>Generative Art vs Visualizations</h3>
+<p>Can a data visualization be considered generative art?
+Can all data visualizations be considered generative art?
+Understanding these classifications can help us to make more directed creative choices in our art.
+While data visualizations and generative art are certainly not mutually exclusive, there is a difference in ethos between the two.
+Whereas data visualizations are conceptually driven by the data ingest, generative art is conceptually driven by the creative choices of the artists.
+In generative art, the process is designed to be self-consuming, generally using its own internal state to evolve.
+Data ingest may play a role in how the artist chooses to evolve the state of the system, but it does not (generally) dominate.</p>
+<hr>
+<h2>Application Domains</h2>
+<hr>
+<h3>Live Coding</h3>
+<p>In our taxonomy of systems, we allow audio or visuals as D<sub>out</sub>.
+One creative practice that falls into this category is <em>live coding</em>.
+Live Coding is an artistic practice where the act of programming becomes a critical part of the end product.
+Rather than creating a static program that is deployed to users after it is complete, live coding shifts this perspective.
+It is the process of creating the software that is shown now users.
+Nick Collins, a pioneer of live coding, captures this sentiment well in giving a description of live coding:</p>
+<blockquote>
+<p>“Art of re-programming; changing your mind about a process once established” <br> <div align="right"><em>-Nick Collins</em></div></p>
+</blockquote>
+<p>The practice of live coding can be more formalism on a stage, where the music produced is more beat oriented.
+In this example, Sam Aaron, the developer of Sonic Pi, demonstrates his live coding practice.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0dgZf3Com44?start=1162" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>For live coding, we do require some input from the artist (in the form of a keyboard and mouse), however the act of providing input is not “visible” to the viewer.
+To say the input is not visible to the viewer is not to say it is not an integral part of the performance.
+Indeed, one of the oft repeated mantras of live coding is “show your code”.
+Allowing the viewer to watch the source of the live coded content evolve is a defining feature of the practice of live coding.
+However, what is shown to the viewer is the code on the screen - not (generally) the physical process of inputting the code.
+From the perspective of an embedded system, we are not making the input modality a part of the system.
+We will revisit the issue of physically visible input in Module 2, <a href="../2_Interactive_Devices/index.html">Interactive Devices</a>.</p>
+<h4>Audio Live Coding</h4>
+<p>Your Raspberry Pi (with Raspbian OS) comes pre-installed with a program called Sonic Pi, a language for live coding audio.
+You can start exploring the practice of live coding with this tool.
+A tutorial is available within the Sonic Pi IDE.
+Live coding does not strictly follow the system configuration described above, as we also use an input to the system from the performer.</p>
+<p>In order to use Sonic Pi for generative art in the system configuration we present in this chapter, we need to start a Sonic Pi program when the device boots.
+Details on this procedure are provided in <a href="../../Appendix/Run_on_boot.html">Appendix</a>.
+Starting a generative art program during the boot sequence of the embedded device is a standard way to package your project into a self-contained and easy to use installation.</p>
+<p>Another language for live coding audio is <a href="https://tidalcycles.org/">Tidal</a>, which is an embedded DSL in Haskell.
+As opposed to Sonic Pi, which is beat oriented, Tidal is pattern oriented, which tends to lead artists down a different creative path.
+It is also possible to live code in <a href="https://toplap.org/howto_co34pt_livecode-resources-about-how-i-live-code-in-supercollider/">SuperCollider</a>, which tends to be more signal oriented.</p>
+<p>These live coding languages can also be used to create generative audio processes that do not require input from the artist.
+For example, you might have a Sonic Pi program pre-written that algorithmically generates music.
+You could <a href="../../Appendix/Run_on_boot.html">start that script on boot</a>, so the audio begins playing as soon as the Pi is powered on.</p>
+<h4>Visual Live Coding</h4>
+<p>Live coding for visuals is also an active space of exploration.
+In this section, we will focus on D<sub>out</sub> as only visuals.
+In the space of live coding as an artistic practice, visualists are often separate performers from the audio live coders.
+Consequentially, many performances of live coding with visuals will be duets, where the two performers collaborate on stage.</p>
+<p>In order to quickly test out some live coding for visuals, the programming language <a href="https://hydra-editor.glitch.me">Hydra</a> is available online.</p>
+<p>The practice of live coding can also be more informal, as in this example, which is set in a less formalized environment.
+This set is presented by Alex McLean on audio and Dan Hett on visuals.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fIuqDKzYBzc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>Similar to audio, you could use a tool like Hydra to generate visuals, and <a href="../../Appendix/Run_on_boot.html">start that script on boot</a>, so the visuals immediately start when the Pi is powered on.</p>
+<hr>
+<h2>Kiosk Installation Art</h2>
+<p>We use the term <em>kiosk installation art</em> to capture standalone generative art installations that do not take input from the viewer.
+This type of installation is captured well by the Generative Art system configuration described above.
+Such installations are often found as stations in museums, but are also often found in public spaces.</p>
+<p>The space in which kiosk installation art is to be displayed should be an important design consideration.
+If a museum, you might expect a longer term engagement with each audience members.
+In contrast, in a public space, more audience members are likely to engage with your art for shorter periods of time, perhaps as they walk by the display.
+In the below example of the LED display in the Becton Ground Cafe at Yale University, the majority of users will engage with the work while passing by the building, some will engage as they are eating or working in the cafe, and small minority will enter the cafe specifically to view your work.
+It is again a creative choice to decide which subset of the audience you are primarily designing for, or if in fact there is a dichotomy between these groups at all.</p>
+<p>As a note, some installation art will rely on input from the viewer.
+The viewer may contribute to the art knowingly (actively) or unknowingly (passively).
+We will not draw a formal distinction between these two types of input as, from a technical perspective, we must solve similar issues.
+We revisit issues of interactivity in future modules.</p>
+<h3>Multichannel displays</h3>
+<p><img src="../../ExternalResources/Media/ceid_cafe.jpg" alt="ceid cafe video display"></p>
+<blockquote>
+<p>An example of a video installation exhibit at Yale’s Becton Ground Cafe.</p>
+</blockquote>
+<p><img src="../../ExternalResources/Media/columbia_video.jpg" alt="columbia video display"></p>
+<blockquote>
+<p>Columbia University’s Morningside Heights Campus at the Greene Science Center also features a video wall.</p>
+</blockquote>
+<p>One type of kiosk installation art is multichannel displays.
+In a multichannel video display, there are multiple displays available to the artist.
+In the simplest case, the displays have the same virtual layout as their physical counterpart.
+However, in an increasing number of cases, the connection between the virtual layout and the physical layout is disjoint.
+This presents a challenge/opportunity for the artist to work within the dissonance of the virtual and physical worlds.</p>
+<hr>
+<h2>Assignment</h2>
+<p>Due Jan 29th, 11:59pm</p>
+<h3>Generative Kiosk Art (20 pts)</h3>
+<p>In this lab you will use your:</p>
+<ul>
+<li>Raspberry Pi</li>
+<li>external monitor</li>
+<li>Freenove 8 RGB LED module</li>
+</ul>
+<p>The goal is to create a generative kiosk art installation in your home that faces outward.
+You will place your monitor and LED module in a window, and create a visualization that fits this context.
+Use this opportunity to reflect on the connection between your living space, the outside world, and how we have experienced this divide in the past year.</p>
+<p>NOTE: proceed with caution, but don’t be scared!
+You are displaying art (possibly for the first time) to the public.
+Consider: who will see this, what will they see, when will they see it?
+You may choose to put up your installation for only a short time (long enough for you to document your installation).</p>
+<p>From a software perspective, you will write a</p>
+<ul>
+<li>python script to control the LED module that utilizes data from a web API of your choice</li>
+<li>a processing script to control the external monitor</li>
+<li>edit the file to start both of these scripts on boot</li>
+</ul>
+<h4>Task #1</h4>
+<p>In Task #1, you will write a generative visualization in Processing. You need to get this code onto your Pi, and set up the Pi so that your processing script runs on boot, in full screen mode.</p>
+<p>We will lay the foundations for task on Friday lab, 1/15.</p>
+<h4>Task #2</h4>
+<p>Get the 8 RGB LED module connected to the Raspberry Pi.
+Use python to control the LEDs.
+The LED module you have follows the same configuration as a Neopixel module.
+You should mostly follow the sample code is here. <a href="https://learn.adafruit.com/neopixels-on-raspberry-pi/overview">https://learn.adafruit.com/neopixels-on-raspberry-pi/overview</a>.</p>
+<p>We will start this task on Friday lab, 1/22.</p>
+<hr>
+<p>This is the first open-ended, creatively driven project of the class.
+There are two main goals.
+The first goal is to introduce you to the challenge of working with an underspecified problem - modelling the typical real world constraints given to installation artists of: “make something for this space”.
+The second goal is to get you comfortable with showing you art to the world in a low stakes way.</p>
+<p>Submit a link to your blog post on the course blog. That post should contain:</p>
+<p>(10 pts total - see below for breakdown) A link to your git repository with a program that runs on a Raspberry Pi to generate a visual for your display. The program must meet the following criteria:</p>
+<ul>
+<li>(3 pts) Be generative as defined in the course text (now you have to at least skim the reading)</li>
+<li>(2 pts) Start on boot of the Raspberry Pi, and display fullscreen (for processing).</li>
+<li>(2 pts) Call a web API.</li>
+<li>(2 pts) LEDs must turn on and respond to your code.</li>
+<li>(1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.</li>
+</ul>
+<h4>Standard Documentation Deliverables:</h4>
+<p>(10 pts total - see below for breakdown)</p>
+<p>In addition to the project specific deliverables lists above, you must also meet the following “standard documentation deliverables”. Throughout this course, we will ask you to document your work in order to slowly build a portfolio of your projects. Going forward, these types of standard documentation deliverables can be assumed to be required for all assignments unless specified otherwise.</p>
+<p>(5 pts) <em>A blog post</em></p>
+<p>Using the blog site (more info to come), make a blog post describing your art.
+The post should give an overview of your artistic vision.
+In particular for this assignment, you should address how you have specialized your generative art to the space.
+What creative decisions did you work lead you to, and which decisions did you take?
+How were your decisions motivated by your larger creative vision for this project.
+In the same vein, also address any technical issues you encountered in your work.
+Particularly focus on issues that other artists may encounter when developing with your hardware setup.</p>
+<p>(3 pts) <em>A README</em></p>
+<p>On your github repo add a readme that contains a short description and key information on reproducibility/installation/usage.
+This key information should be sufficient for a knowledge third party, outside the class, to replicate your design.
+This readme can/should be a subset of the material used in your CoursePress blog post.</p>
+<p>(2 pts) <em>A video of your art</em></p>
+<p>Include in the README a link to your video. The video can be a simple video shot on your phone - the only goal is to have a record of your art in action. You can host the video wherever you like as long as the hosting platform supports in-browser playback (e.g. YouTube, Vimeo). You may also choose to embed a gif in your README in place of a video link.</p>
+<p>If you cannot access a public space from which your window is visible, please message me directly.</p>
+
+    </article>
+  </div>
+  <script>
+    // Load contents.json if you need it
+  </script>
+  <script>
+    // FROM http://purecss.io/js/ui.js
+    (function (window, document) {
+
+      var layout = document.getElementById('layout'),
+        menu = document.getElementById('menu'),
+        menuLink = document.getElementById('menuLink');
+
+      function toggleClass(element, className) {
+        var classes = element.className.split(/\s+/),
+          length = classes.length,
+          i = 0;
+
+        for (; i < length; i++) {
+          if (classes[i] === className) {
+            classes.splice(i, 1);
+            break;
+          }
+        }
+        // The className is not found
+        if (length === classes.length) {
+          classes.push(className);
+        }
+
+        element.className = classes.join(' ');
+      }
+
+      menuLink.onclick = function (e) {
+        var active = 'active';
+
+        e.preventDefault();
+        toggleClass(layout, active);
+        toggleClass(menu, active);
+        toggleClass(menuLink, active);
+      };
+
+    }(this, this.document));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,644 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <style>
+    /*! ADAPTED
+    Typeplate : Starter Kit
+    URL ........... http://typeplate.com
+    Version ....... 3.0.2
+    Github ........ https://github.com/typeplate/starter-kit
+    Authors ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
+    License ....... Creative Commmons Attribution 3.0
+    License URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
+    */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-rendering: optimizeLegibility;
+      line-height: 1;
+      margin-top: 0;
+      color: #222;
+    }
+
+    blockquote+figcaption cite {
+      display: block;
+      font-size: inherit;
+      text-align: right;
+    }
+
+    body {
+      word-wrap: break-word;
+    }
+
+    pre code {
+      word-wrap: normal;
+    }
+
+    body {
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+      color: #444;
+    }
+
+    h1 {
+      font-size: 2em;
+      /* 2*16 = 32 */
+    }
+
+    h2 {
+      font-size: 1.5em;
+      /* 1.5*16 = 24 */
+    }
+
+    h3 {
+      font-size: 1.17em;
+      /* 1.17*16 = 18.72 */
+    }
+
+    h4 {
+      font-size: 1em;
+      /* 1*16 = 16 */
+    }
+
+    h5 {
+      font-size: 0.83em;
+      /* 0.83*16 = 13.28 */
+    }
+
+    h6 {
+      font-size: 0.75em;
+      /* 0.75*16 = 12 */
+    }
+
+    h1 {
+      margin: 2.42424rem 0 1.454544rem;
+    }
+
+    h2 {
+      margin: 2.0202rem 0 1.21212rem;
+    }
+
+    h3 {
+      margin: 1.61616rem 0 1rem;
+    }
+
+    h4 {
+      margin: 1.21212rem 0 1;
+    }
+
+    h5 {
+      margin: 0.80808rem 0;
+    }
+
+    h6 {
+      margin: 0.70707rem 0;
+    }
+
+    p {
+      margin: auto auto 1.5rem;
+    }
+
+    small {
+      font-size: 65%;
+    }
+
+    input,
+    abbr,
+    acronym,
+    blockquote,
+    code,
+    kbd,
+    q,
+    samp,
+    var {
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+
+    pre {
+      white-space: pre;
+    }
+
+    pre code {
+      white-space: -moz-pre-wrap;
+      white-space: pre-wrap;
+    }
+
+    code {
+      white-space: pre;
+      font-family: SF Mono, Consolas, Dejavu Sans Mono, Menlo, monospace;
+    }
+
+    abbr {
+      -webkit-font-variant: small-caps;
+      -moz-font-variant: small-caps;
+      -ms-font-variant: small-caps;
+      font-variant: small-caps;
+      font-weight: 600;
+      text-transform: lowercase;
+      color: gray;
+    }
+
+    abbr[title]:hover {
+      cursor: help;
+    }
+
+    /* FROM http://purecss.io/layouts/side-menu/  adapted to remove pure classes*/
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #444;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background-color: #f5f5f5;
+      color: #444;
+      border-radius: 2px;
+      text-shadow: 0px 1px 0px white;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    pre code {
+      border: none;
+      box-shadow: none;
+    }
+
+    pre {
+      padding: 0.5em;
+    }
+
+    code {
+      display: inline-block;
+      padding: 0 0.5em;
+      line-height: 1.4;
+      font-size: 0.9em;
+    }
+
+    table {
+      border-spacing: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.3em 0.7em;
+    }
+
+    table th {
+      background-color: #f4f4f4;
+      border-bottom: 2px solid #444;
+    }
+
+    table td {
+      border: 1px solid #f5f5f5;
+    }
+
+    /* Add transition to containers so they can push in and out. */
+
+    #layout,
+    #menu,
+    .menu-link {
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out;
+      -o-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out;
+    }
+
+    /* This is the parent `<div>` that contains the menu and the content area. */
+
+    #layout {
+      position: relative;
+      padding-left: 0;
+    }
+
+    #layout.active #menu {
+      left: 250px;
+      width: 250px;
+    }
+
+    #layout.active .menu-link {
+      left: 250px;
+    }
+
+    /* The content `<div>` is where all your content goes. */
+
+    .content {
+      margin: 50px auto;
+      padding: 0 2em;
+      max-width: 80ex;
+      line-height: 1.6em;
+    }
+
+    /*
+    The `#menu` `<div>` is the parent `<div>` that contains the menu that
+    appears on the left side of the page.
+    */
+
+    #menu {
+      margin-left: -250px;
+      /* "#menu" width */
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+      /* so the menu or its navicon stays above all content */
+      background: #f4f4f4;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 0.9em;
+    }
+
+    a,
+    a * {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    a:visited {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    /* All anchors inside the menu should be styled like this. */
+
+    #menu a {
+      display: block;
+      padding: 0.5em 0.5em;
+    }
+
+    #menu a:first-letter {
+      text-transform: capitalize;
+    }
+
+    #menu ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 1em 0.5em;
+    }
+
+    #menu ul ul {
+      margin-top: 0.5em;
+      margin-left: 0.5em;
+      border-left: 4px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Change color of the anchor links on hover/focus. */
+
+    #menu li a:hover,
+    #menu li a:focus {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* This styles the selected menu item `<li>`. */
+
+    #menu li a.active {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* This styles a link within a selected menu item `<li>`. */
+
+    #menu li a.active {
+      color: #222;
+    }
+
+    /* This styles the menu heading. */
+
+    #menu li.heading {
+      font-size: 0.9em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    #menu li.heading>* {
+      padding: 0.5em;
+      display: block;
+    }
+
+    #menu li.heading a {
+      color: #0c68af;
+    }
+
+    /* -- Dynamic Button For Responsive Menu -------------------------------------*/
+
+    /*
+    `.menu-link` represents the responsive menu toggle that shows/hides on
+    small screens.
+    */
+
+    .menu-link {
+      position: fixed;
+      display: block;
+      /* show this only on small screens */
+      top: 0;
+      left: 0;
+      /* "#menu width" */
+      background: #f4f4f4;
+      font-size: 10px;
+      /* change this value to increase/decrease button size */
+      z-index: 10;
+      width: 2em;
+      height: auto;
+      padding: 1.6em 1.2em;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .menu-link:hover {
+      background: /* #f4f4f4 * 0.8 */
+      #eee;
+    }
+
+    .menu-link span {
+      position: relative;
+      display: block;
+    }
+
+    .menu-link span,
+    .menu-link span:before,
+    .menu-link span:after {
+      background-color: #555;
+      width: 100%;
+      height: 0.2em;
+      border-radius: 1em;
+    }
+
+    .menu-link span:before,
+    .menu-link span:after {
+      position: absolute;
+      margin-top: -0.6em;
+      content: " ";
+    }
+
+    .menu-link span:after {
+      margin-top: 0.6em;
+    }
+
+    /* Hides the menu at `48em`, but modify this based on your app's needs. */
+
+    @media (min-width: 48em) {
+
+      .header,
+      .content {
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+
+      #layout {
+        padding-left: 250px;
+        /* left col width "#menu" */
+        left: 0;
+      }
+      #menu {
+        left: 250px;
+      }
+
+      .menu-link {
+        position: fixed;
+        left: 250px;
+        display: none;
+      }
+
+      #layout.active .menu-link {
+        left: 250px;
+      }
+    }
+
+    @media (max-width: 48em) {
+      /* Only apply this when the window is small. Otherwise, the following case results in extra padding on the left:
+       * Make the window small.
+       * Tap the menu to trigger the active state.
+       * Make the window large again.
+       */
+      #layout.active {
+        position: relative;
+        left: 250px;
+      }
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+      <!-- Hamburger icon -->
+      <span></span>
+    </a>
+    <nav id="menu">
+      <ul>
+<li><a class="" href="../../index.html">index</a></li>
+<li class="heading"><a class="" href="../../0_Introduction/index.html">0 Introduction</a></li>
+<ul>
+
+</ul>
+<li class="heading"><span>1 Background</span></li>
+<ul>
+<li class="heading"><a class="" href="../../1_Background/1_Preliminaries/index.html">1 Preliminaries</a></li>
+<ul>
+<li><a class="" href="../../1_Background/1_Preliminaries/1_Development_Tools.html">1 Development Tools</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/2_Hardware.html">2 Hardware</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/3_Communication.html">3 Communication</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../../1_Background/2_Creativity/index.html">2 Creativity</a></li>
+<ul>
+<li><a class="" href="../../1_Background/2_Creativity/1_Whence_creativity.html">1 Whence creativity</a></li>
+<li><a class="" href="../../1_Background/2_Creativity/2_Presenting_your_work.html">2 Presenting your work</a></li>
+
+</ul>
+</ul>
+<li class="heading"><a class="" href="../index.html">2 Modules</a></li>
+<ul>
+<li class="heading"><a class="" href="../1_Generative_Art/index.html">1 Generative Art</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../2_Interactive_Devices/index.html">2 Interactive Devices</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../3_Installation_Art/index.html">3 Installation Art</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="active" href="index.html">4 Kinetic Scuplture</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../7_Final_Project/index.html">7 Final Project</a></li>
+<ul>
+
+</ul>
+
+</ul>
+<li class="heading"><a class="" href="../../Appendix/index.html">Appendix</a></li>
+<ul>
+<li><a class="" href="../../Appendix/How_Low_Can_you_Go.html">How Low Can you Go</a></li>
+<li><a class="" href="../../Appendix/Run_on_boot.html">Run on boot</a></li>
+<li><a class="" href="../../Appendix/System_Management.html">System Management</a></li>
+<li><a class="" href="../../Appendix/Version_Control.html">Version Control</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../../ExternalResources/index.html">ExternalResources</a></li>
+<ul>
+<li class="heading"><span>Code</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Code/getESP32.sh">getESP32.sh</a></li>
+</ul>
+<li class="heading"><span>Documentation</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Documentation/Esp32_DevKit_pinmap.png">Esp32 DevKit pinmap.png</a></li>
+<li><a class="" href="../../ExternalResources/Documentation/esp32_datasheet_en.pdf">esp32 datasheet en.pdf</a></li>
+</ul>
+<li class="heading"><span>Media</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Media/ceid_cafe.jpg">ceid cafe.jpg</a></li>
+<li><a class="" href="../../ExternalResources/Media/columbia_video.jpg">columbia video.jpg</a></li>
+</ul>
+<li class="heading"><span>Readings</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Readings/Beginners_Guide_v1.pdf">Beginners Guide v1.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/Live-Coding-Education.pdf">Live Coding Education.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/MagPi68.pdf">MagPi68.pdf</a></li>
+</ul>
+
+</ul>
+</ul>
+    </nav>
+    <article id="main" class="content">
+      <h1>Kinetic Sculpture</h1>
+<h3>System Configuration (Module 4)</h3>
+<pre><code>          |------|
+          |  mp  |
+          |------|  
+             ^
+             .
+             .
+             .
+             v
+          |------|
+          |  mc  | ---&gt; A_out
+          |------|  
+</code></pre>
+<p>Module 4 introduces actuators (motors, LEDs) with A<sub>out</sub> to allow our system to take action in the physical world.
+Similar to Module 1 on <a href="../1_Generative_Art/index.html">Generative Art</a>, this system configuration takes no inputs.
+Here we focus on generative systems that produce analog outputs, rather than digital outputs.
+We can still optionally include a connection a microprocessor for digital output.</p>
+<h1>Interactive Kinetic Art</h1>
+<h3>System Configuration</h3>
+<pre><code>          |------|
+          |  mp  | ---&gt; D_out
+          |------|  
+             ^
+             .
+             .
+             . 
+             v
+          |------|
+A_in ---&gt; |  mc  | ---&gt; A_out
+          |------|  
+</code></pre>
+<p>In module 5 we combine all previous system configurations to build installations that can take user input A<sub>in</sub> and actuate A<sub>out</sub> accordingly. This system configuration is utilized for purposes of augmented experience design.
+In this chapter, we combine modules 4 and 5.</p>
+<h2>Basic Philosophy of Kinetic Art</h2>
+<p>Kinetic art in the context of creative embedded systems bridges the gap between the “cyber” and the “physical”.
+This appeals to our more visceral human instincts to examine motion.
+With such systems, we can visualize bits being flipped or augment motion with computation to create complex patterns that would de difficult to implement in a purely physical system.</p>
+<p>To first explore the basics of kinetic sculpture, view the video below which illustrates some core ideas behind the practice - outside the realm of embedded systems.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nxdcj2tLQGE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<hr>
+<h1>Examples</h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1_lBHkdEYJk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2>Module 4: Actuators</h2>
+<p>Due March 26th - no late work please!</p>
+<p>This assignment requires you actuate the physical world - you may choose one of two configurations for this project - either 1) kinetic sculpture or 2) Interactive kinetic art. The difference amounts to whether or not you choose to integrate input from the user into your work. You are provided in your kit with the following hardware.</p>
+<ul>
+<li>28BYJ-48 Step Motor</li>
+<li>SG90 Tower Pro MicroServo</li>
+<li>DC Brush motor</li>
+</ul>
+<p>You may create a team of up to three group members. Your group may not have overlapping members from the previous assignments. When working in a group, your hardware resources are pooled. Your device must adhere to the following specification.
+You must use a minimum of (2*number of group members) motors and may use as many motors as you have available to your group.
+The device must have an enclosure or enclosures.</p>
+<p>Your device must utilize an API (to be provided) that will allow you to start the device in motion.
+More details to come on the API usage in class.
+The device must be safe to operate in intervals of at least 30 seconds multiple times in a row.</p>
+<p>If you are interested, you are invited to display your work in Milstein on the 5th floor for the time period of March 27-28.</p>
+<h5>Deliverables</h5>
+<p>40 pts</p>
+<ul>
+<li>(10 pts) A link to your git repository with a program that runs on the ESP32 or the Raspberry Pi to control your device. The program must meet the following criteria:</li>
+<li>(10 pts) Utilizes your actuators</li>
+<li>(8 pts) Successfully combine earlier system configurations through use/reuse of sensors, config code, and physical design principles.</li>
+<li>(2 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.</li>
+<li>(10 pts) Quality and thoroughness of documentation and standard deliverables.</li>
+</ul>
+<p>A video of your device in action.</p>
+<p>As always, the standard deliverables. If working in a group, you may all submit the same code repository and a single blog post. The post should detail, in your own words, the creative vision of the device you have created. You should detail the technical challenges you specifically (as opposed to other group members) faced during the implementation of the device.</p>
+
+    </article>
+  </div>
+  <script>
+    // Load contents.json if you need it
+  </script>
+  <script>
+    // FROM http://purecss.io/js/ui.js
+    (function (window, document) {
+
+      var layout = document.getElementById('layout'),
+        menu = document.getElementById('menu'),
+        menuLink = document.getElementById('menuLink');
+
+      function toggleClass(element, className) {
+        var classes = element.className.split(/\s+/),
+          length = classes.length,
+          i = 0;
+
+        for (; i < length; i++) {
+          if (classes[i] === className) {
+            classes.splice(i, 1);
+            break;
+          }
+        }
+        // The className is not found
+        if (length === classes.length) {
+          classes.push(className);
+        }
+
+        element.className = classes.join(' ');
+      }
+
+      menuLink.onclick = function (e) {
+        var active = 'active';
+
+        e.preventDefault();
+        toggleClass(layout, active);
+        toggleClass(menu, active);
+        toggleClass(menuLink, active);
+      };
+
+    }(this, this.document));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,658 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <style>
+    /*! ADAPTED
+    Typeplate : Starter Kit
+    URL ........... http://typeplate.com
+    Version ....... 3.0.2
+    Github ........ https://github.com/typeplate/starter-kit
+    Authors ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
+    License ....... Creative Commmons Attribution 3.0
+    License URL ... https://github.com/typeplate/starter-kit/blob/master/license.txt
+    */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-rendering: optimizeLegibility;
+      line-height: 1;
+      margin-top: 0;
+      color: #222;
+    }
+
+    blockquote+figcaption cite {
+      display: block;
+      font-size: inherit;
+      text-align: right;
+    }
+
+    body {
+      word-wrap: break-word;
+    }
+
+    pre code {
+      word-wrap: normal;
+    }
+
+    body {
+      -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+      color: #444;
+    }
+
+    h1 {
+      font-size: 2em;
+      /* 2*16 = 32 */
+    }
+
+    h2 {
+      font-size: 1.5em;
+      /* 1.5*16 = 24 */
+    }
+
+    h3 {
+      font-size: 1.17em;
+      /* 1.17*16 = 18.72 */
+    }
+
+    h4 {
+      font-size: 1em;
+      /* 1*16 = 16 */
+    }
+
+    h5 {
+      font-size: 0.83em;
+      /* 0.83*16 = 13.28 */
+    }
+
+    h6 {
+      font-size: 0.75em;
+      /* 0.75*16 = 12 */
+    }
+
+    h1 {
+      margin: 2.42424rem 0 1.454544rem;
+    }
+
+    h2 {
+      margin: 2.0202rem 0 1.21212rem;
+    }
+
+    h3 {
+      margin: 1.61616rem 0 1rem;
+    }
+
+    h4 {
+      margin: 1.21212rem 0 1;
+    }
+
+    h5 {
+      margin: 0.80808rem 0;
+    }
+
+    h6 {
+      margin: 0.70707rem 0;
+    }
+
+    p {
+      margin: auto auto 1.5rem;
+    }
+
+    small {
+      font-size: 65%;
+    }
+
+    input,
+    abbr,
+    acronym,
+    blockquote,
+    code,
+    kbd,
+    q,
+    samp,
+    var {
+      -webkit-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+
+    pre {
+      white-space: pre;
+    }
+
+    pre code {
+      white-space: -moz-pre-wrap;
+      white-space: pre-wrap;
+    }
+
+    code {
+      white-space: pre;
+      font-family: SF Mono, Consolas, Dejavu Sans Mono, Menlo, monospace;
+    }
+
+    abbr {
+      -webkit-font-variant: small-caps;
+      -moz-font-variant: small-caps;
+      -ms-font-variant: small-caps;
+      font-variant: small-caps;
+      font-weight: 600;
+      text-transform: lowercase;
+      color: gray;
+    }
+
+    abbr[title]:hover {
+      cursor: help;
+    }
+
+    /* FROM http://purecss.io/layouts/side-menu/  adapted to remove pure classes*/
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      color: #444;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: auto;
+    }
+
+    code,
+    pre {
+      background-color: #f5f5f5;
+      color: #444;
+      border-radius: 2px;
+      text-shadow: 0px 1px 0px white;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    }
+
+    pre code {
+      border: none;
+      box-shadow: none;
+    }
+
+    pre {
+      padding: 0.5em;
+    }
+
+    code {
+      display: inline-block;
+      padding: 0 0.5em;
+      line-height: 1.4;
+      font-size: 0.9em;
+    }
+
+    table {
+      border-spacing: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    table th,
+    table td {
+      padding: 0.3em 0.7em;
+    }
+
+    table th {
+      background-color: #f4f4f4;
+      border-bottom: 2px solid #444;
+    }
+
+    table td {
+      border: 1px solid #f5f5f5;
+    }
+
+    /* Add transition to containers so they can push in and out. */
+
+    #layout,
+    #menu,
+    .menu-link {
+      -webkit-transition: all 0.2s ease-out;
+      -moz-transition: all 0.2s ease-out;
+      -ms-transition: all 0.2s ease-out;
+      -o-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out;
+    }
+
+    /* This is the parent `<div>` that contains the menu and the content area. */
+
+    #layout {
+      position: relative;
+      padding-left: 0;
+    }
+
+    #layout.active #menu {
+      left: 250px;
+      width: 250px;
+    }
+
+    #layout.active .menu-link {
+      left: 250px;
+    }
+
+    /* The content `<div>` is where all your content goes. */
+
+    .content {
+      margin: 50px auto;
+      padding: 0 2em;
+      max-width: 80ex;
+      line-height: 1.6em;
+    }
+
+    /*
+    The `#menu` `<div>` is the parent `<div>` that contains the menu that
+    appears on the left side of the page.
+    */
+
+    #menu {
+      margin-left: -250px;
+      /* "#menu" width */
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+      /* so the menu or its navicon stays above all content */
+      background: #f4f4f4;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 0.9em;
+    }
+
+    a,
+    a * {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    a:visited {
+      text-decoration: none;
+      color: #2483cc;
+    }
+
+    /* All anchors inside the menu should be styled like this. */
+
+    #menu a {
+      display: block;
+      padding: 0.5em 0.5em;
+    }
+
+    #menu a:first-letter {
+      text-transform: capitalize;
+    }
+
+    #menu ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 1em 0.5em;
+    }
+
+    #menu ul ul {
+      margin-top: 0.5em;
+      margin-left: 0.5em;
+      border-left: 4px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Change color of the anchor links on hover/focus. */
+
+    #menu li a:hover,
+    #menu li a:focus {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    /* This styles the selected menu item `<li>`. */
+
+    #menu li a.active {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* This styles a link within a selected menu item `<li>`. */
+
+    #menu li a.active {
+      color: #222;
+    }
+
+    /* This styles the menu heading. */
+
+    #menu li.heading {
+      font-size: 0.9em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    #menu li.heading>* {
+      padding: 0.5em;
+      display: block;
+    }
+
+    #menu li.heading a {
+      color: #0c68af;
+    }
+
+    /* -- Dynamic Button For Responsive Menu -------------------------------------*/
+
+    /*
+    `.menu-link` represents the responsive menu toggle that shows/hides on
+    small screens.
+    */
+
+    .menu-link {
+      position: fixed;
+      display: block;
+      /* show this only on small screens */
+      top: 0;
+      left: 0;
+      /* "#menu width" */
+      background: #f4f4f4;
+      font-size: 10px;
+      /* change this value to increase/decrease button size */
+      z-index: 10;
+      width: 2em;
+      height: auto;
+      padding: 1.6em 1.2em;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .menu-link:hover {
+      background: /* #f4f4f4 * 0.8 */
+      #eee;
+    }
+
+    .menu-link span {
+      position: relative;
+      display: block;
+    }
+
+    .menu-link span,
+    .menu-link span:before,
+    .menu-link span:after {
+      background-color: #555;
+      width: 100%;
+      height: 0.2em;
+      border-radius: 1em;
+    }
+
+    .menu-link span:before,
+    .menu-link span:after {
+      position: absolute;
+      margin-top: -0.6em;
+      content: " ";
+    }
+
+    .menu-link span:after {
+      margin-top: 0.6em;
+    }
+
+    /* Hides the menu at `48em`, but modify this based on your app's needs. */
+
+    @media (min-width: 48em) {
+
+      .header,
+      .content {
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+
+      #layout {
+        padding-left: 250px;
+        /* left col width "#menu" */
+        left: 0;
+      }
+      #menu {
+        left: 250px;
+      }
+
+      .menu-link {
+        position: fixed;
+        left: 250px;
+        display: none;
+      }
+
+      #layout.active .menu-link {
+        left: 250px;
+      }
+    }
+
+    @media (max-width: 48em) {
+      /* Only apply this when the window is small. Otherwise, the following case results in extra padding on the left:
+       * Make the window small.
+       * Tap the menu to trigger the active state.
+       * Make the window large again.
+       */
+      #layout.active {
+        position: relative;
+        left: 250px;
+      }
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+      <!-- Hamburger icon -->
+      <span></span>
+    </a>
+    <nav id="menu">
+      <ul>
+<li><a class="" href="../../index.html">index</a></li>
+<li class="heading"><a class="" href="../../0_Introduction/index.html">0 Introduction</a></li>
+<ul>
+
+</ul>
+<li class="heading"><span>1 Background</span></li>
+<ul>
+<li class="heading"><a class="" href="../../1_Background/1_Preliminaries/index.html">1 Preliminaries</a></li>
+<ul>
+<li><a class="" href="../../1_Background/1_Preliminaries/1_Development_Tools.html">1 Development Tools</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/2_Hardware.html">2 Hardware</a></li>
+<li><a class="" href="../../1_Background/1_Preliminaries/3_Communication.html">3 Communication</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../../1_Background/2_Creativity/index.html">2 Creativity</a></li>
+<ul>
+<li><a class="" href="../../1_Background/2_Creativity/1_Whence_creativity.html">1 Whence creativity</a></li>
+<li><a class="" href="../../1_Background/2_Creativity/2_Presenting_your_work.html">2 Presenting your work</a></li>
+
+</ul>
+</ul>
+<li class="heading"><a class="" href="../index.html">2 Modules</a></li>
+<ul>
+<li class="heading"><a class="" href="../1_Generative_Art/index.html">1 Generative Art</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../2_Interactive_Devices/index.html">2 Interactive Devices</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="active" href="index.html">3 Installation Art</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../4_Kinetic_Scuplture/index.html">4 Kinetic Scuplture</a></li>
+<ul>
+
+</ul>
+<li class="heading"><a class="" href="../7_Final_Project/index.html">7 Final Project</a></li>
+<ul>
+
+</ul>
+
+</ul>
+<li class="heading"><a class="" href="../../Appendix/index.html">Appendix</a></li>
+<ul>
+<li><a class="" href="../../Appendix/How_Low_Can_you_Go.html">How Low Can you Go</a></li>
+<li><a class="" href="../../Appendix/Run_on_boot.html">Run on boot</a></li>
+<li><a class="" href="../../Appendix/System_Management.html">System Management</a></li>
+<li><a class="" href="../../Appendix/Version_Control.html">Version Control</a></li>
+
+</ul>
+<li class="heading"><a class="" href="../../ExternalResources/index.html">ExternalResources</a></li>
+<ul>
+<li class="heading"><span>Code</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Code/getESP32.sh">getESP32.sh</a></li>
+</ul>
+<li class="heading"><span>Documentation</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Documentation/Esp32_DevKit_pinmap.png">Esp32 DevKit pinmap.png</a></li>
+<li><a class="" href="../../ExternalResources/Documentation/esp32_datasheet_en.pdf">esp32 datasheet en.pdf</a></li>
+</ul>
+<li class="heading"><span>Media</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Media/ceid_cafe.jpg">ceid cafe.jpg</a></li>
+<li><a class="" href="../../ExternalResources/Media/columbia_video.jpg">columbia video.jpg</a></li>
+</ul>
+<li class="heading"><span>Readings</span></li>
+<ul>
+<li><a class="" href="../../ExternalResources/Readings/Beginners_Guide_v1.pdf">Beginners Guide v1.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/Live-Coding-Education.pdf">Live Coding Education.pdf</a></li>
+<li><a class="" href="../../ExternalResources/Readings/MagPi68.pdf">MagPi68.pdf</a></li>
+</ul>
+
+</ul>
+</ul>
+    </nav>
+    <article id="main" class="content">
+      <h1>Installation Art</h1>
+<h3>System Configuration</h3>
+<pre><code>          |------|
+          |  mp  | ---&gt; D_out
+          |------|  
+             ^
+             .
+             .
+             . 
+             v
+          |------|
+A_in ---&gt; |  mc  |
+          |------|  
+</code></pre>
+<p>In this module, we break the physical link between the microcontroller and the server and explore wireless methods of data communication including wi-fi, BlueTooth, BlueTooth Low Energy. Simultaneously, we encounter and incorporate technical and artistic motivations for autonomous creative systems that are potentially transparent to the viewer/listener. Those technologies include power considerations. The aesthetic considerations relate to the acousmatic - the heard but not seen.</p>
+<h2>Weighing options</h2>
+<p>At first glance, WiFi and Bluetooth accomplish roughly the same goal - to have a wireless link that can send data.
+Upon closer inspection, the technical differences between these technologies has important consequences for the creative design of a system.
+In asking “how do we move away from tethered interaction?” we implicitly ask, “what is the benefit of going wireless?” and “what are artistically motivated reasons for communicating wirelessly?”
+In looking at WiFi, Bluetooth and BLE, we need to consider constraints such as power, possible network topologies, device support, and bandwidth.</p>
+<p>In terms of power, we generally see a tradeoff where more power allows for greater range, or greater bandwidth.
+In the case of WiFi, the most expensive communication method of the three, we achieve greater range.
+When comparing Bluetooth and Bluetooth Low Energy, we see a larger difference in general between the data transfer rate than the range.
+In all cases, devices may run at different power levels, so giving an absolute range is not possible for each technology.
+Both bandwidth and range will also depend on environmental interference, such as other networks, or physical obstacles in the room that do not let a signal pass through.
+As an example, European houses (often made of thick stone walls) have more trouble propagating a WiFi signal than within the smaller wooden/drywall walls of American style houses.</p>
+<p>Power will also influence form factor.
+By going wireless, your device may be untethered, but then must supply its own power.
+To do this will most often require a battery (usually LiPo - see appendix for more).
+Some key considerations for choosing a battery will be cost and size (both physical form and total milliAmp hours (mAh)).
+Before choosing a battery size, think about the use case of your device - how long does it need to run for, can the battery be switched out during a performance, how long is such a performance, how intense is the computation for this application?
+You should be able to find rough estimates on the power consumption cost of your hardware in various modes of operation (eg. computation vs WiFi broadcast).</p>
+<p>Again thinking of the actual use case of the device, consider what network topologies are most conducive to your artistic vision.
+While we address more complex topologies in Module 6 on Distributed Systems, even with two devices, there are considerations to make.
+For example, when using WiFi, most devices can only connect to one network at a time.
+If your device requires users to connect (for example, with their phone) to your local WiFi network, that will force users off of any other WiFi network.
+Even within WiFi, the ESP32 can work as both an Access Point (also called a hotspot), but also as a Station (a device connecting to an existing network).
+When possible, using the ESP32 as an Access Point is more reliable, as you do not need to rely on any configuration of an existing network.</p>
+<p>Device support is also an issue.
+For example, if interfacing with mobile phones, Bluetooth only has native support.
+That is, to communicate with phones over Bluetooth, you will need to write native apps.
+In contrast, a WiFi network can allow users to open their browser and access interfaces you build and host on your device.
+In the case of the ESP32, this might include a website that displays a button allowing users to turn an LED on and off (see appendix for activity).</p>
+<p>When sending messages over a network, you must also consider the protocol and message format.
+For most embedded systems UDP (faster, easier to set up, but may drop some packets) is the best solutions, as sensor values are continuously streamed from a device.
+As always, context will dictate whether, TCP or UDP is the right choice.
+You may consider packaging messages as OSC, when the language support is available.</p>
+<hr>
+<h2>Module 3 Project: Cutting the cord</h2>
+<p>Due Monday March 1</p>
+<hr>
+<h3>Aesthetic Challenges:</h3>
+<p>The project for this module challenges you artistically in two ways.</p>
+<p>First, you must contemplate and ultimately resolve the effect that removing the traditional or expected 1:1, action/reaction/, cause/consequence or process/product pairs that typical installation art has on the viewer or listener. We will refer to this as the “unseen effect”. To begin to address this you will have to define the high/low latency components of your system, both technically and conceptually.</p>
+<p>Second, to reinforce and possibly assist you in answering the above question, you will be required to both conceive of and design your system combinatorially. That is, you must continue to develop new, creative pathways while incorporating your previous experiences through the reuse of components and algorithms possibly in new, transformed ways.</p>
+<h3>Technical Challenges:</h3>
+<p>Technically, your project must be designed to take advantage of the new system configuration, specifically 1) wireless communications and 2) battery-powered potential. Previous sensors are in play, as are any other sensors available in your kit.</p>
+<p>You also have a battery (3.7V 650 mAh - provided to those on campus) to allow for a true “wireless” experience.</p>
+<p>Design Prompts:</p>
+<p>If your project is mobile, who will move it and how? How can your (or your classmates) Module 2 project inform your design decisions this time around?</p>
+<p>Your system components may be visible or masked, a plexiglass homage to form as function or a black box – impenetrable and imperceivable.</p>
+<p>If your project is immobile, but untethered, might its physical form hint at this reality?</p>
+<p>Component Quick Info:</p>
+<p>Piezoelectric sensors detect vibration – that means that, provided the sensor is mounted tightly to an object, touching the object will result in voltage from the sensor. Useful to detect touch and motion (if the motion results in vibration, such as rolling on wheels across gravel…)</p>
+<p>Ambient light sensors (photoresistors) are good (sensitive) and dirt cheap. Useful for detecting… light. But if light is stationary and system is mobile, can be used to detect motion/orientation of the system itself.</p>
+<h3>Code Deliverables</h3>
+<p>(10 pts) A link to your git repository with a program that runs on the ESP32 (possibly also the Raspberry Pi) that wirelessly communicates sensor data to a client computer for visualization or sonification. If you do not submit code you will not be awarded any points for the code deliverables section. The program must meet the following criteria:</p>
+<ul>
+<li>(5 pts) require wirelessness (convincingly) by addressing, in physical design and realization, the issue of “unseen effect.”</li>
+<li>(4 pts) Successfully combine earlier system configurations through use/reuse of sensors, config code, and physical design principles.</li>
+<li>(1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.</li>
+</ul>
+<h3>Standard Documentation Deliverables:</h3>
+<p>10 points</p>
+<p>In addition to the project specific deliverables lists above, you must also meet the following “standard documentation deliverables”. Throughout this course, we will ask you to document your work in order to slowly build a portfolio of your projects. Going forward, these types of standard documentation deliverables can be assumed to be required for all assignments unless specified otherwise.</p>
+<p>A blog post</p>
+<p>Using the CoursePress site available through Canvas, make a blog post describing your art. The post should give an overview of your artistic vision. In particular for this assignment, you should address how you have specialized your generative art to the space. What creative decisions did you work lead you to, and which decisions did you take? How were your decisions motivated by your large creative vision for this project. In the same vein, also address any technical issues you encountered in your work. Particularly focus on issues that other artists may encounter when developing a generative art display for this space.</p>
+<p>A README</p>
+<p>On your github repo add a readme that contains a short description and key information on reproducibility/installation/usage.
+This key information should be sufficient for a knowledge third party, outside the class, to replicate your design.
+This readme can/should be a subset of the material used in your CoursePress blog post</p>
+<p>A video of your art</p>
+<p>Include in the README a link to your video. The video can be a simple video shot on your phone - the only goal is to have a record of your art in action. You can host the video wherever you like as long as the hosting platform supports in-browser playback (e.g. YouTube, Vimeo).</p>
+
+    </article>
+  </div>
+  <script>
+    // Load contents.json if you need it
+  </script>
+  <script>
+    // FROM http://purecss.io/js/ui.js
+    (function (window, document) {
+
+      var layout = document.getElementById('layout'),
+        menu = document.getElementById('menu'),
+        menuLink = document.getElementById('menuLink');
+
+      function toggleClass(element, className) {
+        var classes = element.className.split(/\s+/),
+          length = classes.length,
+          i = 0;
+
+        for (; i < length; i++) {
+          if (classes[i] === className) {
+            classes.splice(i, 1);
+            break;
+          }
+        }
+        // The className is not found
+        if (length === classes.length) {
+          classes.push(className);
+        }
+
+        element.className = classes.join(' ');
+      }
+
+      menuLink.onclick = function (e) {
+        var active = 'active';
+
+        e.preventDefault();
+        toggleClass(layout, active);
+        toggleClass(menu, active);
+        toggleClass(menuLink, active);
+      };
+
+    }(this, this.document));
+  </script>
+</body>
+
+</html>
