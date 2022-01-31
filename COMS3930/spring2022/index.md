@@ -13,3 +13,6 @@ As such, we will follow a different schedule, including in some cases covering d
 
 You can find the [syllabus here](./syllabus.pdf)
 
+# Module 1
+
+[Generative Art](./mod1.md)
