@@ -26,3 +26,7 @@ Variable resistor
 ## Module 1
 
 [Generative Art](./mod1.md)
+
+## Module 2
+
+[Interactive Devices](./mod2.md)
