@@ -27,6 +27,20 @@ Variable resistor
 
 [Generative Art](./mod1.md)
 
+[ESP32 TTGO T-Display demo](https://youtu.be/adLUgmCJKnM) (probably should re-record this one - until then, be sure to watch the whole video. there is a bit of non-linear storytelling here)
+
+[Soldering batteries](https://youtu.be/QM1rR0MHfmM)
+
+[Installation](https://youtu.be/AR0eMbk_z5M)
+
 ## Module 2
 
 [Interactive Devices](./mod2.md)
+
+[Soldering header](https://youtu.be/rqZaLtoW9_Y)
+
+[Serial: Arduino->Python](https://gist.github.com/santolucito/44410ed78def1b68b9994b74227f59ee)
+
+[WebSerial Visual](./serialVisual.html)
+
+[WebSerial Audio](./serialAudio.html)
