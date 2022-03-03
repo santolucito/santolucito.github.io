@@ -21,7 +21,7 @@ You will also write a media generation program on your laptop to handle this dat
 
 (2 pts)
 
-Due Midnight Sun 3/20 (you should be able to complete this in class on Thursday though)
+Deadline listed on courseworks
 
 Test out capacitive touch. Record a short video of this in action.
 
@@ -31,7 +31,7 @@ Test out capacitive touch. Record a short video of this in action.
 
 (18 points)
 
-Code and Documentation due Midnight Tue 3/1
+Deadline listed on courseworks
 
 Submit a link to your blog post on the course blog. That post should contain:
 
