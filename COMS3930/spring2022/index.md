@@ -44,3 +44,8 @@ Variable resistor
 [WebSerial Visual](./serialVisual.html)
 
 [WebSerial Audio](./serialAudio.html)
+
+## Module 3
+
+[Kinetic Sculptures](./mod3.md)
+
