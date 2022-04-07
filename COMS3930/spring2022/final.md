@@ -4,7 +4,7 @@
 
 The final project is a chance for you to synthesize the topics we have covered so far in class (and the topics we will soon cover). This project may be a group project of groups of up to three. If this is a group project, at least two ESP32s must be used and communicate directly with each other using wifi, bluetooth, or ESP-NOW.
 
-### Final Project Proposal (5 points)
+### [Final Project Proposal](#proposal) (5 points)
 
  A short plaintext description of your idea submitted to CourseWorks. Include in your proposal:
 
@@ -12,7 +12,7 @@ The final project is a chance for you to synthesize the topics we have covered s
 - a plan for the major checkpoints (with dates) you need to hit in order to accomplish that idea (a list including at least 4 checkpoints)
 - the new piece of hardware or software you will include (1 paragraph - why this piece and what resources will you utilize to learn how this work)
 
-### Final Project In-progress Presentation (15 points)
+### [Final Project In-progress Presentation](#presentation) (15 points)
 
 On the last day of class, we will have presentations of the progress you have made so far.
 Presentations should be 3 min per group member.
@@ -26,7 +26,7 @@ You will be evaluated on the following points:
 - Have you made concrete progress in a way that suggests to the instructor that you will have a complete submission by the deadline (2 points)
 - Have you provided feedback to your peers. At the time of presentation, each of you must post your slides to the discord #showcases channel and starting a thread. Students should provide feedback to your peers within that thread for project on which you have constructive comments. (3 points)
 
-### Final Project Documentation (30 points)
+### [Final Project Documentation](#documentation) (30 points)
 
 As always, the standard deliverables. If working in a group, you may all submit the same code repository, but each need to submit your own blog post. The post should detail, in your own words, the creative vision of the device you have created. You should detail the technical challenges you specifically (as opposed to other group members) faced during the implementation of the device.
 
