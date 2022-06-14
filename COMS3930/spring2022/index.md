@@ -47,6 +47,8 @@ You can find the [syllabus here](./syllabus.pdf)
 
 [WebSerial Visual](./serialVisual.html)
 
+[WebSerial Visual (Three.js)](./serialThree.html)
+
 [WebSerial Audio](./serialAudio.html)
 
 ## Module 3
