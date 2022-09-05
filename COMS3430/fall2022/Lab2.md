@@ -31,7 +31,7 @@ Use a LFO to add complexity to some part of your synth.
 
 ### Interaction (2 pts)
 With your synthesis modes created, you need a way to interface with the hardcoded parameters of synthesis. 
-Build a front-end (textbox or range input is fine) that allows users to control some (or all, but no less than 2) parameters of the three modes of synthesis.
+Build a front-end (textbox or range input is fine) that allows users to control some (what some means I leave to you - earn 2 points by submitting work that exceeds expectations, earn 1 point by doing less than that) parameters of the three modes of synthesis.
 These parameters could be the mix between synthesis methods, the number of partials to add in additive synthesis, the value of the modulation frequency, the ADSR envelope, etc.
 
 ## the extra step (1pt)
