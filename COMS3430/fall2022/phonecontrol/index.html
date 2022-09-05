@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf‐8">
+  <title> Sensor input</title>
+
+
+</head>
+
+<body>
+  <h1>Control the sound with your phone</h1>
+	<p>Frequency Modulation Synthesis</p>
+	<button>Play</button>
+	<p>Control modulator frequency</p>
+	<input type="range" min=1 max=1000 oninput="updateFreq(this.value)"></input>
+	<p>Control index of modulation</p>
+	<input type="range" min=1 max=1000 oninput="updateIndex(this.value)"></input>
+
+  <h2>Server Files</h2>
+  <p>Put these files on some other machine. Then send a stream of messages to the server. 
+    For example, use the <a href="https://play.google.com/store/apps/details?id=com.ianovir.hyper_imu">HyperIMU app</a>.
+    Any app that streams sensor value to a user selected IP and port is fine.</p>
+  <p> In order to run this online, you need the SSE to run on the appropriate port (80 for http, 443 for https).
+      If you are running this js client code locally it doesnt matter though.</p>
+  <p><a href="./server.py">server.py</a></p>
+  <p><a href="./cors_helper.py">cors_helper.py</a></p>
+
+</body>
+<script src="main.js"> </script>
+
+</html>

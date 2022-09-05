@@ -3,12 +3,12 @@ layout: default
 title: COMS3430
 ---
  
-# Computational Sound (Fall 2021)
+# Computational Sound (Fall 2022)
 
 
 Modules will be added as we go through the course.
-You may find the [material from last year](../fall2020) helpful as a guide.
-Note that last year's iteration of the course was a 6-week intensive, so we will follow a different schedule, including in some cases covering different topics and assignments.
+You may find the [material from last year](../fall2021) helpful as a guide.
+Note that the course changes year to year, including in some cases covering different topics and assignments.
 
 you can find the [syllabus here](./syllabus.pdf)
 
@@ -79,16 +79,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 ## Module 3: Automated Composition (3 weeks)
 
-[Demo: Notes](./notes)
+- make the computer write music for you
 
-[Demo: randomWalk](./randomWalk)
-
-[Demo: Magenta](./magenta)
-
-[Demo: Phone Control](./phonecontrol)
-
-[Lab 5: Automated Composition](/Lab5.md)
- 
 ## Module 4: Audio Plugin Development (3 weeks)
 
 - Multichannel processing and spatialization
