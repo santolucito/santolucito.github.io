@@ -63,27 +63,25 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: MIDI](./midi)
 
-[Lab 3: Farnell Synthesis](/Lab3.md)
-
-[Video: how to make a square wave from a sine wave](https://www.youtube.com/watch?v=E55TbBVWI1g)
+Homework 3
 
 ## Module 2: Live Coding (3 weeks) 
 
 - build your own live coding language
 
-[Demo: Live Coding (Basic)](./liveCodeBasic)
-
-[Demo: Live Coding (Pitch)](./liveCodePitch)
-
-[Lab 4: Live Coding](/Lab4.md)
+Homework 4
 
 ## Module 3: Automated Composition (3 weeks)
 
 - make the computer write music for you
 
+Homework 5
+
 ## Module 4: Audio Plugin Development (3 weeks)
 
 - Multichannel processing and spatialization
+
+Homework 6
 
 ## Final Project
 
