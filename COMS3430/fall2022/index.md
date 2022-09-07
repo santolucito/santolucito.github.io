@@ -20,6 +20,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Basic with slider](./basic_slider)
 
+[Demo: Listener with slider](./listener_slider)
+
 [Delay](./delay)
 
 [Homework 1](./Lab1)

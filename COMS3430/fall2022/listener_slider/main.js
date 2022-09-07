@@ -12,8 +12,7 @@ function initAudio() {
 
 var slider = document.getElementById("pitch");
 
-slider.addEventListener("change", function (val) {
-    console.log(val)
+slider.addEventListener("input", function () {
     //osc.frequency.value = slider.value; this works, but the next line is better
     osc.frequency.exponentialRampToValueAtTime(slider.value, audioCtx.currentTime + 0.1);
 }, false);
