@@ -14,7 +14,8 @@ var slider = document.getElementById("pitch");
 
 slider.addEventListener("change", function (val) {
     console.log(val)
-    osc.frequency.value = val.value;
+    osc.frequency.value = slider.value;
+    osc.frequency.value.exponentialRampToValueAtTime(slider.value, audioCtx.currentTime + 0.1);
 }, false);
 
 playButton.addEventListener('click', function () {
