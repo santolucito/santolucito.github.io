@@ -13,7 +13,8 @@ function initAudio() {
 var slider = document.getElementById("pitch");
 
 slider.addEventListener("change", function (val) {
-    osc.frequency.value = val;
+    console.log(val)
+    osc.frequency.value = val.value;
 }, false);
 
 playButton.addEventListener('click', function () {
