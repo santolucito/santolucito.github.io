@@ -30,8 +30,11 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [In-class activity: Fletcher-Muson](./equalLoudness)
 
-[Analyzer](./analyzer)
+[Waveform visualizer](./wave_logger)
 
+[Peak Logger](./peak_logger)
+
+[Amplitude visualizer](https://stackoverflow.com/a/44360729/1609406)
 
 [Demo: Additive Synthesis](./addititive)
 
@@ -51,7 +54,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - Filters
 
-[Demo: Biquad](./biquad)
+[Demo: Biquad (and FFT visualizer)](./biquad)
 
 [Demo: Loading files](./loadFile)
 
