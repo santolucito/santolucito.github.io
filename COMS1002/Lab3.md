@@ -51,7 +51,7 @@ Here is one example:
 
 You have received a commisson from a shoe making company, Valenciaga. They desperately need someone to generate the following pattern (nevermind the fact that they somehow already have this pattern) for their new limited edition sneakers (MSRP $5000 USD).
 
-![a $5000 pattern - clearly](./media/pattern1.PNG)
+![a $5000 pattern - clearly](./media/pattern.png)
 
 Write code to generate this pattern. This will be part 1 of your submission. Save this file as task1.py
 
