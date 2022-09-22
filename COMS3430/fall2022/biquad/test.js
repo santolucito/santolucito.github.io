@@ -21,7 +21,7 @@ function initLFOQ() {
 function initLFOF() {
     var lfo1 = audioCtx.createOscillator();
     modulationIndex = audioCtx.createGain();
-    modulationIndex.gain.value = 200;
+    modulationIndex.gain.value = 2000;
     lfo1.frequency.value = 0.1;
     lfo1.connect(modulationIndex).connect(biquadFilter.frequency);
     lfo1.start()
@@ -53,7 +53,7 @@ function initBiquad() {
     analyser = audioCtx.createAnalyser();
     biquadFilter.connect(analyser);
     analyser.connect(audioCtx.destination);
-    analyser.fftSize = 256;
+    analyser.fftSize = 2048;
     bufferLength = analyser.frequencyBinCount;
     console.log(bufferLength);
     dataArray = new Uint8Array(bufferLength);
