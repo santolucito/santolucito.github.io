@@ -54,7 +54,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - Filters
 
-[Demo: Biquad](./biquad)
+[Demo: Biquad (and FFT visualizer)](./biquad)
 
 [Demo: Loading files](./loadFile)
 
