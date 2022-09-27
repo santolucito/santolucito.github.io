@@ -66,6 +66,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: 3D panning](./3dpanning)
 
+[Demo: Gain worklet](./gain_worklet)
+
 [Demo: MIDI](./midi)
 
 Homework 3
