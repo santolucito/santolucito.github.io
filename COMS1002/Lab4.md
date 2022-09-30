@@ -1,3 +1,3 @@
 # Lab 4
 
-Nothing special this week for the Arts context. Do the standard lab this time around.
+https://github.com/SPWeissmann/COMS1002_F22/tree/main/Art_Labs/Lab4_Art
