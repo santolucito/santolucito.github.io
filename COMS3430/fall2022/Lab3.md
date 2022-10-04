@@ -50,7 +50,8 @@ To help you a bit, to generate Brown Noise, you can use the code below:
 
 See if you can intuit the meaning of the arguments for ```LPF```.
 You can look at the [docs for RHPF](https://doc.sccode.org/Classes/RHPF.html) to learn how this is being used.
-The main question facing you is: how do you adapt this code to the BiquadNode in WebAudio?
+Recall how we do addition and multiplication in WebAudio.
+The main question facing you is: how do you adapt this code to a series of BiquadNodes in WebAudio?
 
 ## Part II: Reading high level descriptions (4 pts)
 
@@ -77,7 +78,7 @@ Think creatively - if your sound does not match exactly what you envisioned, can
 
 Write a short blog describing the sound you were aiming to recreate, and walking through the key parts of your code.
 
-Include an image of the audio signal graph. This can be generated with the WebAudio visualizer Chrome extension, or drawn by hand. (1 pt)
+Include an image of the audio signal graph. This can be generated with the WebAudio visualizer Chrome extension (if it is working properly), or drawn by hand. (1 pt)
 
 Explain your process and experience.
 What were the types of synthesis you use, how do they fit together, and why did you made these choices? (2 pts)
@@ -87,4 +88,4 @@ What were the types of synthesis you use, how do they fit together, and why did 
 You get this point if you tackle a challenging sound.
 The alarm sound or the dialtone/phone buttons is probably not challenging (unless you creatively take it a significant step further).
 Do not feel like you *need* to get this point. 
-If tackling the alarm is a sufficent challenge for you personally at this point in the semester, I encourage you to forgo this aspect of the assignment.
+If tackling the alarm is a sufficient challenge for you personally at this point in the semester, I encourage you to forgo this aspect of the assignment.
