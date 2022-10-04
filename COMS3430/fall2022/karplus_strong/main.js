@@ -1,7 +1,7 @@
 //code adapted from : https://github.com/joshreiss/Working-with-the-Web-Audio-API/blob/c330a5065be7931a5832c1936a2b7524f67d58b0/19%20Wonders%20of%20audio%20worklets/KarplusStrong/KarplusStrongV2.js
 //changes: more readable code, added a lowpass filter
 
-var audioCtx = new AudioContext()
+var audioCtx = new AudioContext
 audioCtx.audioWorklet.addModule('modules.js').then(() => {
 
     let bufferSize = 10 * audioCtx.sampleRate,
@@ -47,6 +47,7 @@ audioCtx.audioWorklet.addModule('modules.js').then(() => {
     }
 
     let playNote = function () {
+        audioCtx.resume()
         let blockSize = 128;
         var newDelay = Number(document.getElementById("delaySlider").value) + 1000 * blockSize / audioCtx.sampleRate
         feedbackDelay.parameters.get('delayTime').value = newDelay
