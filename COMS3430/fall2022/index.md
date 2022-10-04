@@ -70,6 +70,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: MIDI](./midi)
 
+[Demo: Karplus Strong](./karplus_strong)
+
 [Homework 3](./Lab3.md)
 
 ## Module 2: Live Coding (3 weeks) 
