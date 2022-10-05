@@ -8,7 +8,9 @@ registerProcessor('feedbackDelay-processor', class extends AudioWorkletProcessor
     }
     constructor() {
         super()
-        this.delayBuffer = new Array(48000).fill(0)
+        //why buffer length? Our max delay is 20ms, and sample rate is 48k/sec, so 48k*0.02=960, 
+        //and the nearest power of two above that is 1024 (why power of two? - see O'Reilly's "Practical C, 3rd Edition", page 258, The Power of Powers of 2 )
+        this.delayBuffer = new Array(1024).fill(0)
         this.readPtr = 0, this.writePtr = 0
     }
     process(inputs, outputs, parameters) {
@@ -16,13 +18,20 @@ registerProcessor('feedbackDelay-processor', class extends AudioWorkletProcessor
             bufferSize = this.delayBuffer.length
         for (let i = 0; i < outputs[0][0].length; ++i) {
             outputs[0][0][i] = parameters.gain[0] * this.delayBuffer[this.readPtr] + inputs[0][0][i]
-            this.delayBuffer[this.writePtr] = outputs[0][0][i]
+
+            //a lazy lowpass filter
+            if (i > 0) {
+                this.delayBuffer[this.writePtr] = outputs[0][0][i] * 0.5 + outputs[0][0][i - 1] * 0.5
+            }
+            else {
+                this.delayBuffer[this.writePtr] = outputs[0][0][i]
+            }
 
             //this implements a circular buffer
             this.writePtr = (this.writePtr + 1) % bufferSize
             this.readPtr = this.writePtr - delaySamples
             if (this.readPtr < 0) {
-                this.readPtr = this.readPtr + bufferSize  
+                this.readPtr = this.readPtr + bufferSize
             }
         }
         return true

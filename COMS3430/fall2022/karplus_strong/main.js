@@ -43,12 +43,8 @@ let initAudio = function () {
                 parameterData: { delayTime: 5, gain: 0.9 }
             })
 
-        let lpf = audioCtx.createBiquadFilter()
-        lpf.type = "lowpass"
-        lpf.Q = 0.0001 // changing this doesnt seem to do anything, but in theory we do not want resonance for KPS
-
         whiteNoise.connect(noiseEnv).connect(output)
-        noiseEnv.connect(lpf).connect(feedbackDelay).connect(output)
+        noiseEnv.connect(feedbackDelay).connect(output)
 
         output.connect(audioCtx.destination)
 
