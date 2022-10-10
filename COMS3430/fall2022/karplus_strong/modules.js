@@ -1,5 +1,6 @@
 //the built-in delayNode operates on blocks (128 samples), so we can only get a minimum of 128 sample delay
 //thus, we need to implement our own custom delayNode
+//we also need to run the delayed signal through a lowpass before consuming it again, so we add a lowpass filter here
 registerProcessor('feedbackDelay-processor', class extends AudioWorkletProcessor {
     static get parameterDescriptors() {
         return [
