@@ -9,7 +9,7 @@ title: Lab4
 
 Complete the "build your own live coding language" activity from class.
 You start with the code here [https://www.marksantolucito.com/COMS3430/fall2021/liveCodePitch/](https://www.marksantolucito.com/COMS3430/fall2021/liveCodePitch/), and need to add one additional feature.
-Examples of new features are giving in the comments in the code for the example.
+Examples of new features are given in the comments in the code for the example.
 
 ## Part II (10 points)
 
@@ -17,7 +17,7 @@ Make a video recording of yourself live coding.
 You may use any live coding language listed here:
 
 - Tidal (best for pattern based music)
-- Sonic Pi (also good for pattern based music, easier syntax, but less expressive, harded to make complex rhytms. has good support for ```live_audio```)
+- Sonic Pi (also good for pattern based music, easier syntax, but less expressive, harder to make complex rhythms. has good support for ```live_audio```)
 - Quaver (basic of basic)
 - SuperCollider (good for focus on DSP - see [http://marksantolucito.com/cpsc432.zip](http://marksantolucito.com/cpsc432.zip). very non-standard language model)
 - Build-your-own 
@@ -58,3 +58,6 @@ You will submit a .zip file with at least 3 files
 1) index.html for Part I
 2) main.js for Part I (possibly, multiple js files if you find that helpful)
 3) a video.txt file with a link to your video hosting on your favorite video publishing platform. The video does not need to be public, but I need to be able to access it.
+
+
+You need to either upload a zip with all the files in it, or a link to an active website (not a github repo) with your live code language.

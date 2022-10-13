@@ -78,7 +78,11 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - build your own live coding language
 
-Homework 4
+[Demo: Live Coding (Basic)](./liveCodeBasic)
+
+[Demo: Live Coding (Pitch)](./liveCodePitch)
+
+[Homework 4: Live Coding](/Lab4.md)
 
 ## Module 3: Automated Composition (3 weeks)
 
