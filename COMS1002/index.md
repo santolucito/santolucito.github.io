@@ -42,9 +42,9 @@ In this module we use Sonic Pi to explore live coding and audio.
 
 <hr>
 
-## [Module 3: Physical Computing](./3)
+## [Module 3: Machine Learning](./3)
 
-In this module we use the BBC micro:bit to explore creative embedded systems and physical computing.
+In this module we use the text-to-image model called Stable Diffusion, and learn to fine-tune machine learning models.
 
 <hr>
 
@@ -53,7 +53,7 @@ In this module we use the BBC micro:bit to explore creative embedded systems and
 
 > Will any of this help me get a job?
 
-Probably. In module 1, we work with processing.py. While our focus is on generative art, this is has significant amount of overlap in the skill set used for data visualization (for example, the gorgeous graphics produced by the New York Times on a daily basis). In module 2, we tackle live coding - the performative practice of writing code in front of an audience. While the art aspect of live coding may not be widely "marketable", having the confidence to write code on the spot (especially in front of people you want to impress - audience or employer) is critical to any tech job. In module 3, we work with physical computing - an area less dominate in the tech industry at the moment, having a familiarity with this level of computing gives you a better context for what is going on in the world around you (also, IoT hype and all that). 
+Probably. In module 1, we work with processing.py. While our focus is on generative art, this is has significant amount of overlap in the skill set used for data visualization (for example, the gorgeous graphics produced by the New York Times on a daily basis). In module 2, we tackle live coding - the performative practice of writing code in front of an audience. While the art aspect of live coding may not be widely "marketable", having the confidence to write code on the spot (especially in front of people you want to impress - audience or employer) is critical to any tech job. In module 3, we work with machine learning - currently a hot topic in the job market. 
 
 More generally, hopefully through this class you will come to realize that any experience that you gain with computing (in any context) will be broadly applicable to many paths to gainful employment. Computing is a mindset and way of thinking more so than it is a skill set. 
 

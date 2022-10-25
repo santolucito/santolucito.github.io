@@ -8,9 +8,9 @@ In a more practical sense, this is particularly good training for coding intervi
 
 <a name="project2"></a>
 
-### Project 2: Live coding with Sonic Pi
+## Project 2: Live coding with Sonic Pi
 
-- Due Monday Nov 22, 11:59pm
+- Due Wed Nov 23, 11:59pm
 
 Your goal is to experience first-hand the practice of live coding.
 You will be using Sonic Pi. 
@@ -42,21 +42,22 @@ Rubric
 - 50 points - Technical Sophistication. Does your project utilize your programming skills in an effective way? Have you gone significantly beyond any example code you have used? Is this "your" work?
 - 30 points - Documentation. Did you record properly (sound recorded directly from sound card of computer). Have you shown your complete code during the performance? 
 Does the documentation highlight both the artistic aspect of your work, as well as the technical sophistication? Your work should be equally well appreciated by both a technical and non-technical audience. 
-- 20 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, you will need to put significant time into practicing live coding. Try to gain a level of fluency with Sonic Pi that allows you to explore new creative ideas during your performance.
+- 10 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, you will need to put significant time into practicing live coding. Try to gain a level of fluency with Sonic Pi that allows you to explore new creative ideas during your performance.
 
+Additionally, 10 points are given for showing up to the Live Code Jam Session on Nov 22 and performing something for your block of time. If you don't show up and perform you don't get these 10 points.
 
 <hr> 
 
-### Lecture 3: Technicals of Audio 
+## Lecture 2-1: Technicals of Audio 
 
-Nov 11
+Nov 10
 
 What is digital audio? How is sound represented in a computer?
 What new challenges arise in programming audio as opposed to non-time domain programming?
 
 <a name="lab2"></a>
 
-### Lab 2: Sonic Pi
+## Lab 2: Sonic Pi
 
 Nov 12
 
@@ -79,9 +80,10 @@ Please be sure you are recording the sound *directly* from your computer, and no
 
 <hr>
 
-### Lecture 4: Live coding Ethos
 
-Nov 18
+## Lecture 2-2: Live coding Ethos
+
+Nov 15
 
 [Download slides for Lecture 4](../slides/lect4.pdf)
 
@@ -90,8 +92,22 @@ We then look at the practice of live coding and algoraves.
 How can language design guide us to ensure code does not break on stage?
 We ask - if code is art, what is virtuosity in code?
 
+## Lecture 2-3: Live coding visuals
 
-### Lab 5: Project 2 help
+Nov 17
 
-Nov 20
+Live coding in Hydra - how to program in a language you have never seen.
 
+## Lab 5: Project 2 help
+
+Nov 18
+
+<hr>
+
+## Lecture 2-4: 
+
+Nov 22
+
+Live coding Jam Session in the movement lab!
+
+You will perform for ~5 minutes in front of your peers!
