@@ -51,6 +51,8 @@ An example of an A+ project is here [https://www.youtube.com/watch?v=OCe36rvdrFI
 
 Oct 25
 
+slides - https://docs.google.com/presentation/d/19_aM9lGcngPQDzwll8MkjKBmKnL1xN5bAzWfe9BHc7k/edit?usp=sharing
+
 In this lecture we get into the technical aspects of generative visuals.
 We will cover the graphics system used by Processing and explore the ways in which we communicate visual instructions to a computer.
 We will tackle the generation of both static images and animations.
@@ -60,6 +62,8 @@ One key point is to ensure that we understand performance bottlenecks and other 
 ## Lecture 1-2:
 
 Oct 27
+
+slides - https://docs.google.com/presentation/d/1ROUIlclygquDHawnaLrTM6Je9lzx2jOGME5vhFxgLUs/edit?usp=sharing
 
 Creativity and Code. Context in digital art. 
 How can code itself be a visual artistic object? Can we treat code as literature?
@@ -111,14 +115,17 @@ Post your video recording publicly, and save the link. Add that link as a commen
 
 Nov 1
 
-Intro to Blender and the bpy package
+slides - https://docs.google.com/presentation/d/1J_ty_J0rnksw_0tkljc2BcTo4hm0mtLjZv8hm7xXR9c/edit?usp=sharing
 
+Intro to Blender and the bpy package. We explore the basics of Blender from a coding perspective. This class focuses on the basics of the interface and how to write code. 
+
+Download Blender her: https://www.blender.org/
 
 ## Lecture 1-4:
 
-Using more advanced python skills in Blender
-
 Nov 3
+
+Using more advanced python skills in Blender
 
 ## Lab 1-2: Project 1 help
 
