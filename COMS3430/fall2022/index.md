@@ -88,6 +88,16 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - make the computer write music for you
 
+[Demo: Notes](./notes)
+
+[Demo: randomWalk](./randomWalk)
+
+[Demo: Magenta](./magenta)
+
+[Demo: Phone Control](./phonecontrol)
+
+[Lab 5: Automated Composition](/Lab5.md)
+
 Homework 5
 
 ## Module 4: Audio Plugin Development (3 weeks)

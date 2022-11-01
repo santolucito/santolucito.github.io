@@ -5,7 +5,7 @@ title: Lab5
 
 # Lab 5 - Automated Composition (12 pts)
 
-This lab should be turned in on by Nov 24.
+This lab should be turned in on by Nov 15.
 
 For this lab you will implement two automated composition techniques and reflect on the experience
 First, you will use the ```magenta.js``` library to implement neural network-driven composition.
@@ -39,7 +39,9 @@ Now we implement automated composition from scratch. Choose from below:
 
 All of these options can run as a static process that generates a sequence of notes, then plays them back. You do not need anything to continuously play back. Of course, you are welcome to go above and beyond if you like (it is not a huge step, and makes the tool more fun). The descriptions below are the bare minimum requirements you should meet.
 
-You may use utility libraries are necessary. For example, you may use a matrix multiplication library, but not a markov chain library.
+If you like, you can also tackle some other automated composition technique (including further exploring machine learning in python), but check with me first.
+
+You may use utility libraries that are reasonably necessary, but not libraries that do the whole job for you. For example, you may use a matrix multiplication library, but not a markov chain library.
 
 ### Markov Chain Learning
 
