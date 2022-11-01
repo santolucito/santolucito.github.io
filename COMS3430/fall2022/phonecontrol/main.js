@@ -1,10 +1,10 @@
-const evtSource = new EventSource("http://161.35.14.211:8889", { } );
+const evtSource = new EventSource("http://161.35.14.211:8889", {});
 
-evtSource.onmessage = function(event) {
-  console.log("message: " + event.data)
-  parsed_data = JSON.parse(event.data)
-  val = parsed_data["lsm6dso accelerometer"][1]
-  modulatorFreq.frequency.value = val;
+evtSource.onmessage = function (event) {
+    console.log("message: " + event.data)
+    parsed_data = JSON.parse(event.data)
+    val = parsed_data["lsm6dso accelerometer"][1]
+    modulatorFreq.frequency.value = val;
 }
 
 var audioCtx;
@@ -23,7 +23,7 @@ function initFM() {
 
     modulatorFreq.connect(modulationIndex);
     modulationIndex.connect(carrier.frequency)
-    
+
     carrier.connect(audioCtx.destination);
 
     carrier.start();
@@ -39,12 +39,12 @@ function updateIndex(val) {
 
 
 const playButton = document.querySelector('button');
-playButton.addEventListener('click', function() {
+playButton.addEventListener('click', function () {
 
-    if(!audioCtx) {
+    if (!audioCtx) {
         initFM();
         return;
-	}
+    }
 
     if (audioCtx.state === 'suspended') {
         audioCtx.resume();

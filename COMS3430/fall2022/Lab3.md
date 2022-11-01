@@ -78,7 +78,7 @@ Think creatively - if your sound does not match exactly what you envisioned, can
 
 Write a short blog describing the sound you were aiming to recreate, and walking through the key parts of your code.
 
-Include an image of the audio signal graph. This can be generated with the WebAudio visualizer Chrome extension (if it is working properly), or drawn by hand. (1 pt)
+Include an image of the audio signal flow graph. This can be generated with the WebAudio visualizer Chrome extension (if it is working properly), or drawn by hand. (1 pt)
 
 Explain your process and experience.
 What were the types of synthesis you use, how do they fit together, and why did you made these choices? (2 pts)
