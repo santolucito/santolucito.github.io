@@ -125,10 +125,11 @@ Download Blender her: https://www.blender.org/
 
 Nov 3
 
-Using more advanced python skills in Blender
+slides - https://docs.google.com/presentation/d/1suUSGNwcsFQTLQCpu57IYXZvDXVXAOrkbmiJ17Qjxwk/edit?usp=sharing
 
-## Lab 1-2: Project 1 help
+Review of Blender topics and discussion of code reuse
 
-Nov 4
+## Lab 1-2: 
 
-Help with the project.
+Nov 4 (no lab due to break)
+

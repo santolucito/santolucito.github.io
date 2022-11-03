@@ -26,7 +26,7 @@ async def main():
     server = await asyncio.start_server(handle_echo, "", 8888)
 
     addrs = ", ".join(str(sock.getsockname()) for sock in server.sockets)
-    print(f"Serving on {addrs}")
+    print("Serving on {addrs}")
 
     app = web.Application()
     app.router.add_route("GET", "/", index)
