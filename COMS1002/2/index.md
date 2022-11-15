@@ -48,7 +48,7 @@ Additionally, 10 points are given for showing up to the Live Code Jam Session on
 
 <hr> 
 
-## Lecture 2-1: Technicals of Audio 
+## Lecture 2-1: Technicals of Audio  
 
 Nov 10
 
@@ -61,7 +61,7 @@ What new challenges arise in programming audio as opposed to non-time domain pro
 
 Nov 12
 
-[Download slides for Lecture 3](../slides/lect3.pdf)
+[Slides for Lecture 2-1](https://docs.google.com/presentation/d/15GVnhcprkbth51CwEFJyHwlS0OdxUY8D2bP3TILpk9o/edit?usp=sharing)
 
 Installing and finding your way around Sonic Pi.
 
@@ -85,7 +85,7 @@ Please be sure you are recording the sound *directly* from your computer, and no
 
 Nov 15
 
-[Download slides for Lecture 4](../slides/lect4.pdf)
+[Slides for Lecture 2-2](https://docs.google.com/presentation/d/1VNr-c2h478Eacsf-vx0Z9TGsG00SZ9tQZkgDZWvb3qw/edit?usp=sharing)
 
 We start be examining the design of languages around creativity - how does the structure of a programming language encourage exploration and creativity?
 We then look at the practice of live coding and algoraves.
