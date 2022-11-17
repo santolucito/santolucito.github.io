@@ -103,8 +103,6 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - Multichannel processing and spatialization
 
-Homework 6
-
 ## Final Project
 
 [Final Project](./Final)
