@@ -37,7 +37,7 @@ https://docs.google.com/presentation/d/16KVanb8DUQrtvyibYqlryn-ZnpCHDidwuv-aK8Fj
 
 The goal of this lab is to ensure you are ready to start interfacing with stable diffusion.
 Your goal is to explore the impact of the ```inference_steps``` parameter.
-Start by setting a random seed, and then design a prompt of your choosing, and generate 10 images, each with an increasing number of ```inference_steps```.
+Start by setting a random seed, and then design a prompt of your choosing, and generate 10 images, each with an increasing number of ```inference_steps``` (a range of roughly 1-150 is reasonable).
 Write up a short description of what you observe.
 How does the image change with more inference steps?
 
