@@ -6,7 +6,7 @@ More details to come
 
 ## Project 3: Using Text-to-image
 
-- Due Wed Nov 23, 11:59pm
+- Due Fri Dec 16, 11:59pm
 
 Your goal is to experience first-hand using a text-to-image (Stable Diffusion) to generate a piece of media.
 
