@@ -12,7 +12,13 @@ Your goal is to experience first-hand using a text-to-image (Stable Diffusion) t
 
 You will need to:
 
-- find a text to use as source material (e.g. project gutenberg [https://www.gutenberg.org/])
+- find a text to use as source material (e.g. project gutenberg [https://www.gutenberg.org/]). Download the .txt file then upload it into your colab. You will then read in this file with code similar to this:
+
+```
+f = open("/content/pg2641.txt", "r")
+text = f.read()
+```
+
 - compute the most frequent noun phrases (use .noun_phrases [https://github.com/sloria/textblob] to get the noun phrases, then filter the list to select only the noun phrases that contain only alpha characters or spaces, the get the most frequent)
 - generate a set of 4 images from the 4 most common noun phrases using Stable Diffusion (you will need to design your own prompt) (note: you might not be able to generate all four at once, but will need to call 'pipe' on one prompt at a time otherwise colab's GPU will run out of memory).
 
