@@ -25,22 +25,22 @@ I obtained the following noun phrase frequencies: ('lucy', 449), ('cecil', 235),
 
 Then, I generated the following four images.
 
-![Lucy][lucy.png]
-![Cecil][cecil.png]
-![Miss Barlett][bartlett.png]
-![Freddy][freddy.png]
+![Lucy](lucy.png)
+![Cecil](cecil.png)
+![Miss Barlett](bartlett.png)
+![Freddy](freddy.png)
 
 <hr> 
 
 ## Lecture 3-1: Intro to Text-to-image
 
-[https://docs.google.com/presentation/d/16KVanb8DUQrtvyibYqlryn-ZnpCHDidwuv-aK8FjnhU/edit?usp=sharing]
+https://docs.google.com/presentation/d/16KVanb8DUQrtvyibYqlryn-ZnpCHDidwuv-aK8FjnhU/edit?usp=sharing
 
 <hr> 
 
 ## Lecture 3-2: Prompt Engineering
 
-[https://docs.google.com/presentation/d/1Tm-CL_Pynli3ZJmQeA3VwJ6TKikhSpRdfhetPLvTtpM/edit?usp=sharing]
+https://docs.google.com/presentation/d/1Tm-CL_Pynli3ZJmQeA3VwJ6TKikhSpRdfhetPLvTtpM/edit?usp=sharing
 
 <hr> 
 
