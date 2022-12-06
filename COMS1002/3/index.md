@@ -25,10 +25,10 @@ I obtained the following noun phrase frequencies: ('lucy', 449), ('cecil', 235),
 
 Then, I generated the following four images.
 
-![Lucy](lucy.png)
-![Cecil](cecil.png)
-![Miss Barlett](bartlett.png)
-![Freddy](freddy.png)
+![Lucy](pics/lucy.png)
+![Cecil](pics/cecil.png)
+![Miss Barlett](pics/bartlett.png)
+![Freddy](pics/freddy.png)
 
 <hr> 
 
