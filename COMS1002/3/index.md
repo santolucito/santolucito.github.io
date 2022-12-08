@@ -19,7 +19,7 @@ f = open("/content/pg2641.txt", "r")
 text = f.read()
 ```
 
-- compute the most frequent noun phrases (use .noun_phrases [https://github.com/sloria/textblob] to get the noun phrases, then filter the list to select only the noun phrases that contain only alpha characters or spaces, the get the most frequent)
+- compute the most frequent noun phrases (use .noun_phrases [https://github.com/sloria/textblob] to get the noun phrases, then filter the list to select only the noun phrases that contain only alpha characters or spaces, the get the most frequent). you might need to do further filtering, for example, based on the length of the words. Do as you see fit!
 - generate a set of 4 images from the 4 most common noun phrases using Stable Diffusion (you will need to design your own prompt - you must include a negative prompt and utilize weights) (note: you might not be able to generate all four at once, but will need to call 'pipe' on one prompt at a time otherwise colab's GPU will run out of memory).
 
 This will require you leverage your Python skills from the first half of the class, as well as a bit of prompt engineering.
@@ -29,12 +29,24 @@ Optional: fine-tune the model to produce images in a particular style
 As an example, I used the book A Room With A View, by E. M. Forster.
 I obtained the following noun phrase frequencies: ('lucy', 449), ('cecil', 235), ('miss bartlett', 198), ('freddy', 124).
 
-Then, I generated the following four images.
+Then, I generated the following four images. I used a promt for each image that included the most frequent work and the title of the book.
 
 ![Lucy](pics/lucy.png)
 ![Cecil](pics/cecil.png)
 ![Miss Barlett](pics/bartlett.png)
 ![Freddy](pics/freddy.png)
+
+### tips
+
+The students who were in class on Thursday got some good tips - try to reach out and talk to them if you are stuck!
+One issue that came up was with the ```pipe.enable_xformers_memory_efficient_attention()``` line which seems to have broken since last week.
+You can just comment this out and change ```num_images = 4``` to ```num_images = 1``` and it should fix the out of memory error for you.
+
+### To turn in
+Download any code you have written as .ipynb (in colab and/or jyupter).
+You will submit the code and the four images as seperate files.
+Most of you should expect to submit 5 (if you only used colab) or 6 (if you used colab and jyupter) files, including the 4 images.
+You don't need to include the .txt unless you want to.
 
 <hr> 
 
