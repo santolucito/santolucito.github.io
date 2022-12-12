@@ -2,6 +2,8 @@
 layout: default
 title: COMS3997
 ---
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kGJcH_femZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
  
 # New Directions in Computing: Arts and Computing in NYC (Fall 2021)
 
