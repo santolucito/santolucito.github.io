@@ -3,7 +3,7 @@ layout: default
 title: COMS3997
 ---
 
-# New Directions in Computing: Program Synthesis seminar (Spring 2021)
+# New Directions in Computing: Program Synthesis seminar (Spring 2023)
 
 [Course Site](./spring2023)
  
