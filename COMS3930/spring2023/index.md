@@ -24,6 +24,12 @@ You can find the [syllabus here](./syllabus.pdf)
 - Variable resistor
 
 
+## slides
+
+[lecture 1](https://docs.google.com/presentation/d/1E5Z55TWN8dyVO0oQpFIxsKS6UpPJ_kGK/edit?usp=sharing&ouid=117771447296538002013&rtpof=true&sd=true)
+
+[lecture 2](https://docs.google.com/presentation/d/1gS7KOvo3zVrMT67-I0imdUQEq8WHlseg/edit?usp=sharing&ouid=117771447296538002013&rtpof=true&sd=true)
+
 ## Module 1
 
 ### [Generative Art](./mod1.md)
