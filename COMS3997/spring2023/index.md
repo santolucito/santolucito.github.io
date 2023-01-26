@@ -35,10 +35,12 @@ https://www.cs.yale.edu/homes/piskac/papers/2010KuncakETALCompleteFunctionalSynt
 Week 7 (March 2) SyGuS
 
 Week 8 (March 9) Rosette and Synquid (Homework 3 due)
+https://homes.cs.washington.edu/~emina/doc/rosette.onward13.pdf
 
 Week X (March 16) no class, spring break
 
 Week 9 (March 23) SemGuS (Homework 4 due)
+https://arxiv.org/abs/2008.09836
 
 ## Module 3 - Reactive Synthesis (Temporal logic)
 
@@ -50,4 +52,5 @@ Week 12 (April 13) Beyond Booleans in Temporal Logic (Homework 5 due)
 
 Week 13 (April 20) Program synthesis + Machine learning (everything we haven’t covered)
 
+Week 14 (April 27) Final project in-progress presentations
 
