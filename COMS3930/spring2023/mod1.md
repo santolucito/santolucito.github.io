@@ -20,15 +20,14 @@ From a software perspective, you will write a single ESP32 program that visualiz
 
 Deadline listed on courseworks
 
-Start by running the example code shown in class on Tuesday 2/1.
+Start by running the example code shown in class.
 Record a video of your device running this example code, upload to a public video hosting platform, and submit the link on courseworks.
 
 ### Task #2
 
 (18 points)
 
-Deadline listed on courseworks
-Code due Thu 2/10 before class (in class installation)
+Deadline listed on courseworks (the Sunday after the installation)
 
 This is an open-ended, creatively driven project. There are two main goals. The first goal is to introduce you to the challenge of working with an underspecified problem and writing code that is creatively driven rather than driven by specifications. The second goal is to get you comfortable with showing you art to the world in a low stakes way.
 
@@ -40,7 +39,7 @@ Submit a link to your blog post on the course blog. That post should contain:
 
 A link to your git repository with a program that runs on the ESP32 TTGO T-Display to generate a visual for your display. The program must meet the following criteria:
 
-(5 pts) Be generative as discussed in class (i.e. cannot be (effectively) a .gif).
+(5 pts) Be generative as discussed in class (i.e. cannot be the moral equivalent of a .gif).
 (2 pts) Uses a context-appropriate text
 (1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.
 
