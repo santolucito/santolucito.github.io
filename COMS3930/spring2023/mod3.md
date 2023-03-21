@@ -7,28 +7,13 @@ This is a group project. You must work in a group of 4-5.
 In this lab you will use your:
 
 - ESP32 TTGO T-display
-- battery
 - self-made enclosure
 
 This assignment requires that you work with the ESPNOW communication protocol to build a multiplayer game.  
 
-You will be assigned a team of four to five (depending on the class size) group members. Please contact the instructor and/or preceptor ahead of time if you have requests for group formation in the negative (i.e. we will honor preferences for people you do *not* want to work with, but will not accomodate prefernces for who you do want to work with).
+You will be assigned a team of four to five (depending on the class size) group members. Please contact the instructor and/or preceptor ahead of time if you have requests for group formation in the negative (i.e. we will honor preferences for people you do *not* want to work with, but will not accommodate preferences for who you do want to work with).
 
-All devices in the group must have identical (moduluo manufacting errors) enclosures.
-
-Your device must utilize an API (https://github.com/mbennett12/kinetic-sculpture-webapi) that will allow you to start the device in motion. More details to come on the API usage in class. The device must be safe to operate in intervals of at least 30 seconds multiple times in a row.
-
-Instructions to come on installation, which will happen on Tuesday April 5. 
-
-Deliverables
-
-A link to your git repository with a program that runs on the ESP32 or the Raspberry Pi to control your device. The program must meet the following criteria:
-
-(6 pts) Utilizes your actuators
-
-(3 pts) Successfully combine earlier system configurations through use/reuse of sensors, config code, and physical design principles.
-
-(1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.
+Your assignment will be to build some meaningful addition to the code here: https://github.com/santolucito/ESP32aceTeam
 
 As always, the standard deliverables. If working in a group, you may all submit the same code repository, but each need to submit your own blog. The post should detail, in your own words, the creative vision of the device you have created. You should detail the technical challenges you specifically (as opposed to other group members) faced during the implementation of the device.
 
