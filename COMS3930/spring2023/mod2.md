@@ -5,31 +5,18 @@
 In this lab you will use your:
 
 - ESP32 TTGO T-display
-- battery
 - a button
 - a joystick
 - a potentiometer
 
 The goal is to create an interactive device with the provided hardware. 
-The devices will run off a battery and send data back to your laptop for visualization, sonfication, or whatever media generation process you prefer.
+The devices will run off wired power and send data back to your laptop for visualization, sonfication, or whatever media generation process you prefer.
 
 From a hardware perspective, you will need to connect the specified components to the ESP32 and create an enclosure for the device.
 From a software perspective, you will write an ESP32 program that collects sensor data and sends it over either a serial or wifi connection to a laptop.
 You will also write a media generation program on your laptop to handle this data and create something interesting with it.
 
-### Task #1
-
-(2 pts)
-
-Deadline listed on courseworks
-
-Test out capacitive touch. Record a short video of this in action.
-
-[https://gist.github.com/santolucito/44410ed78def1b68b9994b74227f59ee](https://gist.github.com/santolucito/44410ed78def1b68b9994b74227f59ee)
-
-### Task #2
-
-(18 points)
+We will use a breadboard to connect all these components.
 
 Deadline listed on courseworks
 
