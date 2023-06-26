@@ -1,5 +1,6 @@
 var audioCtx;
 var delay;
+var microphone;
 
 const playButton = document.querySelector('button');
 
@@ -8,7 +9,7 @@ playButton.addEventListener('click', async function () {
 const audioCtx = new AudioContext();
 if (navigator.mediaDevices) {
   navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
-    const microphone = audioCtx.createMediaStreamSource(stream);
+    microphone = audioCtx.createMediaStreamSource(stream);
     // `microphone` can now act like any other AudioNode
   }).catch((err) => {
     // browser unable to access microphone
