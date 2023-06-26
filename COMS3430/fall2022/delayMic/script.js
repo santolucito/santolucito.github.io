@@ -10,7 +10,12 @@ const audioCtx = new AudioContext();
 if (navigator.mediaDevices) {
   navigator.mediaDevices.getUserMedia({"audio": true}).then((stream) => {
     microphone = audioCtx.createMediaStreamSource(stream);
-    // `microphone` can now act like any other AudioNode
+    delay = audioCtx.createDelay(1);
+    delay.delayTime = 0;
+    source.connect(delay).connect(audioCtx.destination);
+    source.connect(audioCtx.destination);
+    source.buffer = audioBuffer;
+    source.start();
   }).catch((err) => {
     // browser unable to access microphone
     // (check to see if microphone is attached)
@@ -19,13 +24,6 @@ if (navigator.mediaDevices) {
   // browser unable to access media devices
   // (update your browser)
 }
-  delay = audioCtx.createDelay(1);
-  delay.delayTime = 0;
-  const source = microphone
-  source.connect(delay).connect(audioCtx.destination);
-  source.connect(audioCtx.destination);
-  source.buffer = audioBuffer;
-  source.start();
 
 });
 
