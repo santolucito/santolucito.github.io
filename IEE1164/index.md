@@ -13,6 +13,8 @@ Topic: semantics, Intro to Python, Strings, programs as files, functions
 
 [Day 1](https://docs.google.com/presentation/d/1mNCiFEoroLQCI30wEE1BGTUT5VunkkVuNgjU7BLSMJQ/edit?usp=sharing)
 
+[Day 2](https://docs.google.com/presentation/d/1e5J_Xjt7D90HfCx1BBl7qPghPzBs5wENvaB9w5n3w1A/edit?usp=sharing) + [In class lab](./InClass1.md)
+
 # Week 2 
 Topic: Conditionals, Iteration, functions vs methods
 
