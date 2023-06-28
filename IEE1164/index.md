@@ -15,6 +15,8 @@ Topic: semantics, Intro to Python, Strings, programs as files, functions
 
 [Day 2](https://docs.google.com/presentation/d/1e5J_Xjt7D90HfCx1BBl7qPghPzBs5wENvaB9w5n3w1A/edit?usp=sharing) + [In class lab](./InClass1.md)
 
+[Day 3](https://docs.google.com/presentation/d/1aAfNmrsGFnyu09-k3ZbKlX6SnZzIWaRY5d7FnpIIsdw/edit?usp=sharing) + [Homework 1 Template](https://replit.com/@MarkSantolucito/geometry)
+
 # Week 2 
 Topic: Conditionals, Iteration, functions vs methods
 
