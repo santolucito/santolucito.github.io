@@ -20,6 +20,8 @@ Topic: semantics, Intro to Python, Strings, programs as files, functions
 # Week 2 
 Topic: Conditionals, Iteration, functions vs methods
 
+[Day 1](https://docs.google.com/presentation/d/1DLLhgtmfF-G0I_qJN8l_rllAeuUl3Ja3cnuwodq7m-I/edit?usp=sharing)
+
 # Week 3 
 Topic: Lists, dictionaries, sets, reading and writing to files
 
