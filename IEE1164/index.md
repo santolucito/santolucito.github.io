@@ -22,6 +22,8 @@ Topic: Conditionals, Iteration, functions vs methods
 
 [Day 1](https://docs.google.com/presentation/d/1DLLhgtmfF-G0I_qJN8l_rllAeuUl3Ja3cnuwodq7m-I/edit?usp=sharing)
 
+[Day 2](https://docs.google.com/presentation/d/1mcSOodg20UPBFRNu0qVzj0gK-omWlgqmARZF2Pf_P28/edit?usp=sharing)
+
 # Week 3 
 Topic: Lists, dictionaries, sets, reading and writing to files
 
