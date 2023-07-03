@@ -5,6 +5,8 @@ If you find something that is ambiguously defined, please send me an email!
 If you are interested in implementing this in Haskell let me know and we can work together!
 I have a sketch of the code already.
 
+Also, read <a href="https://www.marksantolucito.com/papers/iticse2021.pdf">a paper about this game</a> for more details.
+
 ## Stage 1 - Dealing the cards
 
 Each player gets 8 cards, with 4 in each row, alternating between face up and face down.
