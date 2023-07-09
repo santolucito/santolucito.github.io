@@ -29,7 +29,10 @@ Topic: Conditionals, Iteration, functions vs methods
 [Day 4](https://docs.google.com/presentation/d/1sJ2Edudn2ZE3nV0kpjyB8nOxqHQ2aYnBIOjmgmRPpFY/edit?usp=sharing)
 
 # Week 3 
-Topic: Lists, dictionaries, sets, reading and writing to files
+Topic: Lists, sets, dictionaries, reading and writing to files
+
+[Day 1](https://docs.google.com/presentation/d/1-xjBBvVIcSUGUVqZYGKKDlopdyKS9EVV7eT2iEka77k/edit?usp=sharing)
+
 
 # Week 4 
 Topics: Audio programming, sequencing events in time, randomness, signal processing
