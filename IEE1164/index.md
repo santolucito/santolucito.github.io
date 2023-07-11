@@ -35,6 +35,8 @@ Topic: Lists, sets, dictionaries, reading and writing to files
 
 [Day 2](https://docs.google.com/presentation/d/1D89fRvRc4VNYOknzdJttX7-4PQH2AG73nWnIZlTGecU/edit?usp=sharing)
 
+[Day 3](https://docs.google.com/presentation/d/1pQuZ6e1pg2D3uFFAZDN3La2UlwbRdUCqf6wpgC0MPUA/edit?usp=sharing)
+
 # Week 4 
 Topics: Audio programming, sequencing events in time, randomness, signal processing
 
