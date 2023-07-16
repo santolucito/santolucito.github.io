@@ -40,6 +40,8 @@ Topic: Lists, sets, dictionaries, reading and writing to files
 # Week 4 
 Topics: Audio programming, sequencing events in time, randomness, signal processing
 
+[Day 1](https://docs.google.com/presentation/d/1CHv_upPF0lKtFtMfEgV_hwg-RkbtdIz0FVxrvaQz4i4/edit?usp=sharing)
+
 # Week 5 
 Topics: Animations, Graphics, User interaction, Performance considerations
 
