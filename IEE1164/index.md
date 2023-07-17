@@ -42,6 +42,8 @@ Topics: Audio programming, sequencing events in time, randomness, signal process
 
 [Day 1](https://docs.google.com/presentation/d/1CHv_upPF0lKtFtMfEgV_hwg-RkbtdIz0FVxrvaQz4i4/edit?usp=sharing)
 
+[Day 2](https://docs.google.com/presentation/d/1f351RiIvtSitSLWNzxf8yuz61iTASuYycx6uyOxc1YE/edit?usp=sharing)
+
 # Week 5 
 Topics: Animations, Graphics, User interaction, Performance considerations
 
