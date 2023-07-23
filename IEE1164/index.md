@@ -51,5 +51,7 @@ Topics: Audio programming, sequencing events in time, randomness, signal process
 # Week 5 
 Topics: Animations, Graphics, User interaction, Performance considerations
 
+[Day 1](https://docs.google.com/presentation/d/1Q8vNOiEMZ16XOqlJOjw07FA6krMX2z535djpJNeZsSA/edit?usp=sharing)
+
 # Week 6
 Topics: Introduction to generative AI, Stable Diffusion, Text processing
