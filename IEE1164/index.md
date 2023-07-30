@@ -61,3 +61,5 @@ Topics: Animations, Graphics, User interaction, Performance considerations
 
 # Week 6
 Topics: Introduction to generative AI, Stable Diffusion, Text processing
+
+[Day 1](https://docs.google.com/presentation/d/1jRhqhEkc50VONpehVGM0xKlmVRQiUT9dgwG7P0rwFhI/edit?usp=sharing)
