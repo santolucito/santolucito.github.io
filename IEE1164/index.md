@@ -65,3 +65,5 @@ Topics: Introduction to generative AI, Stable Diffusion, Text processing
 [Day 1](https://docs.google.com/presentation/d/1jRhqhEkc50VONpehVGM0xKlmVRQiUT9dgwG7P0rwFhI/edit?usp=sharing)
 
 [Day 2](https://docs.google.com/presentation/d/1RnoqN981-fUBv7yLNeIeLVLMEFSCOo-PnmimbFXpqns/edit?usp=sharing)
+
+[Day 3](https://docs.google.com/presentation/d/13UJqnnrBqS_D3kTooA62MehAdYjtoLWeYT1qbDQ52og/edit?usp=sharing)
