@@ -63,3 +63,5 @@ Topics: Animations, Graphics, User interaction, Performance considerations
 Topics: Introduction to generative AI, Stable Diffusion, Text processing
 
 [Day 1](https://docs.google.com/presentation/d/1jRhqhEkc50VONpehVGM0xKlmVRQiUT9dgwG7P0rwFhI/edit?usp=sharing)
+
+[Day 2](https://docs.google.com/presentation/d/1RnoqN981-fUBv7yLNeIeLVLMEFSCOo-PnmimbFXpqns/edit?usp=sharing)
