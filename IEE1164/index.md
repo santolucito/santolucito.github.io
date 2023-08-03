@@ -8,8 +8,8 @@ title: IE1164
 At Yonsei University (YISS)
 Summer 2023
 
-<img src="class.jpg">
-<img src="board.jpg">
+<img src="class.jpg" style="max-width:600px;width:100%">
+<img src="board.jpg" style="max-width:600px;width:100%">
 
 ## Week 1
 Topic: semantics, Intro to Python, Strings, programs as files, functions
