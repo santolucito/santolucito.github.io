@@ -8,6 +8,8 @@ title: Lab1
 For this lab you will build your own keyboard on the web using WebAudio.
 This assignment mostly serves give you a familiarity with the basic workflow and structure of working with WebAudio.
 
+See a demo of how to get started coding in WebAudio here: (https://youtu.be/fzBOvsVxFKk)[https://youtu.be/fzBOvsVxFKk]
+
 ## the basics (4 pts)
 
 To get started, we will build a simple keyboard interface that plays a single note.
