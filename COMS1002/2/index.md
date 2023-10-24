@@ -56,6 +56,7 @@ Does the documentation highlight both the artistic aspect of your work, as well 
 
 ## Lecture 2-1: Technicals of Audio  
 
+https://docs.google.com/presentation/d/14o-OaOWX7zwejh8IHnCKAh89SrrJ3vnTPMu60T6Wqxk/edit?usp=sharing
 
 What is digital audio? How is sound represented in a computer?
 What new challenges arise in programming audio as opposed to non-time domain programming?
