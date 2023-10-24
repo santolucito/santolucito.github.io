@@ -1,4 +1,4 @@
-# Module 1: Visuals
+# Module 2: Interactive Animation
 
 Processing is an easy to use programming framework for creating visual arts.
 We will use Processing in Python mode to create our own visual art with code.
@@ -8,9 +8,9 @@ During the creation process, some of the key questions we ask are:
 - What does it mean to be an artist vs a programmer?
 
 
-<a name="project1"></a>
+<a name="project2"></a>
 
-## Project 1: Generative Animation
+## Project 2: Generative Animation
 
 - Due Wednesday Nov 9, 11:59pm
 
