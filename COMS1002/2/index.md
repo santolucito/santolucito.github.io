@@ -70,10 +70,6 @@ https://docs.google.com/presentation/d/1GRB-i_KYCa-KAku-XM8XZEPdbnenraJ5bXYKBngu
 
 ## Lab: Sonic Pi
 
-
-
-[Slides for Lecture 2-1](https://docs.google.com/presentation/d/15GVnhcprkbth51CwEFJyHwlS0OdxUY8D2bP3TILpk9o/edit?usp=sharing)
-
 Installing and finding your way around Sonic Pi.
 
 The goal of this lab is for you to install Sonic Pi, learn the basic interface, and make a short recording. 
