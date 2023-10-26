@@ -64,6 +64,7 @@ What new challenges arise in programming audio as opposed to non-time domain pro
 
 ## Lecture 2-2: Live coding How to 
 
+https://docs.google.com/presentation/d/1GRB-i_KYCa-KAku-XM8XZEPdbnenraJ5bXYKBnguwsY/edit?usp=sharing
 
 <a name="lab2"></a>
 
