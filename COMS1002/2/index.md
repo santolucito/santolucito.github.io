@@ -91,12 +91,15 @@ Please be sure you are recording the sound *directly* from your computer, and no
 
 ## Lecture 2-3: Live coding ethos
 
+https://docs.google.com/presentation/d/1RTROZiomVgFj6PGKguJcqWhoqLcFnBGo83bCgl388Fk/edit?usp=sharing
+
 We start be examining the design of languages around creativity - how does the structure of a programming language encourage exploration and creativity?
 We then look at the practice of live coding and algoraves.
 How can language design guide us to ensure code does not break on stage?
 We ask - if code is art, what is virtuosity in code?
 
-## Lecture 2-3: Live coding visuals
+
+## Lecture 2-4: Live coding visuals
 
 Live coding in Hydra - how to program in a language you have never seen.
 
