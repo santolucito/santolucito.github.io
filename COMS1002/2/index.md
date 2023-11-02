@@ -101,6 +101,8 @@ We ask - if code is art, what is virtuosity in code?
 
 ## Lecture 2-4: Live coding visuals
 
+https://docs.google.com/presentation/d/1C1to9CnMwM2WImtZL5XSJmPFrzmHkb5minvRBjVurko/edit?usp=sharing
+
 Live coding in Hydra - how to program in a language you have never seen.
 
 ## Lab 5: Project 2 help
