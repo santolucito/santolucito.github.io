@@ -12,7 +12,6 @@ During the creation process, some of the key questions we ask are:
 
 ## Project 2: Generative Animation
 
-- Due Wednesday Nov 9, 11:59pm
 
 Your goal is to create a new work of art with Processing in Python mode, or with Blender using Python scripting with the ```bpy``` package.
 This is an open-ended assignment - which may be an uncomfortable space for you if this is new to you.
@@ -47,11 +46,9 @@ An example of an A+ project is here [https://www.youtube.com/watch?v=OCe36rvdrFI
 
 <hr>
 
-## Lecture 1-1: 
+## Lecture 2-1: 
 
-Oct 25
-
-slides - https://docs.google.com/presentation/d/19_aM9lGcngPQDzwll8MkjKBmKnL1xN5bAzWfe9BHc7k/edit?usp=sharing
+https://docs.google.com/presentation/d/1pSxaEp1JHl4fXMMINx95IAjD-Acfg3A4yCRQ_HDYuAQ/edit?usp=sharing
 
 In this lecture we get into the technical aspects of generative visuals.
 We will cover the graphics system used by Processing and explore the ways in which we communicate visual instructions to a computer.
@@ -59,11 +56,8 @@ We will tackle the generation of both static images and animations.
 One key point is to ensure that we understand performance bottlenecks and other basic issues in graphics systems, and how our code can impact the quality of our renderings.
 
 
-## Lecture 1-2:
+## Lecture 2-2:
 
-Oct 27
-
-slides - https://docs.google.com/presentation/d/1ROUIlclygquDHawnaLrTM6Je9lzx2jOGME5vhFxgLUs/edit?usp=sharing
 
 Creativity and Code. Context in digital art. 
 How can code itself be a visual artistic object? Can we treat code as literature?
@@ -82,7 +76,6 @@ In class reading: [https://hai.stanford.edu/blog/humans-loop-design-interactive-
 
 ## Lab 1-1: Processing
 
-Oct 28
 
 Installing [Processing](https://processing.org/download/). Once you have installed Processing, proceed to install Python mode. To do this, click the top right button that says Java, and then click "Add Mode" and find the Python mode.
 
@@ -111,25 +104,12 @@ Post your video recording publicly, and save the link. Add that link as a commen
 
 <hr>
 
-## Lecture 1-3: 
+## Lecture 2-3: 
 
-Nov 1
 
-slides - https://docs.google.com/presentation/d/1J_ty_J0rnksw_0tkljc2BcTo4hm0mtLjZv8hm7xXR9c/edit?usp=sharing
-
-Intro to Blender and the bpy package. We explore the basics of Blender from a coding perspective. This class focuses on the basics of the interface and how to write code. 
-
-Download Blender her: https://www.blender.org/
 
 ## Lecture 1-4:
 
-Nov 3
-
-slides - https://docs.google.com/presentation/d/1suUSGNwcsFQTLQCpu57IYXZvDXVXAOrkbmiJ17Qjxwk/edit?usp=sharing
-
-Review of Blender topics and discussion of code reuse
-
 ## Lab 1-2: 
 
-Nov 4 (no lab due to break)
 
