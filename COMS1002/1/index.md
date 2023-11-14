@@ -58,6 +58,7 @@ One key point is to ensure that we understand performance bottlenecks and other 
 
 ## Lecture 2-2:
 
+https://docs.google.com/presentation/d/1OxjK_jvpsAkfWgdiDlInHIv5g_3tcKJljUeqoZ-VZ9M/edit?usp=sharing
 
 Creativity and Code. Context in digital art. 
 How can code itself be a visual artistic object? Can we treat code as literature?
