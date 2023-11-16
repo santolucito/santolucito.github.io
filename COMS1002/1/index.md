@@ -13,7 +13,8 @@ During the creation process, some of the key questions we ask are:
 ## Project 2: Generative Animation
 
 
-Your goal is to create a new work of art with Processing in Python mode, or with Blender using Python scripting with the ```bpy``` package.
+Your goal is to create a new work of art with Processing in Python mode (or one of the replacement tools that are Processing-like).
+Ideally, focus on an interactive animation, as we will focus on non-interactive animation in the next module.
 This is an open-ended assignment - which may be an uncomfortable space for you if this is new to you.
 The guiding principle should be to create something that you are proud to call your own creation.
 
@@ -21,8 +22,6 @@ As a more concrete guide, here are some guideposts you should hit:
 
 - set the size of your canvas
 - set default colors for fill and stroke - or turn off fill and stroke
-- have code that draws at least 10 distinct shapes
-- some, or all, of the parameters of your shapes should depend on program variables rather than being hard coded
 - a level of randomness using the ```random()``` function, or something similar (e.g. ```Basics > Math > Noise 2```)
 - have some level of user interaction (through the mouse or keyboard)
 
@@ -106,7 +105,7 @@ Post your video recording publicly, and save the link. Add that link as a commen
 <hr>
 
 ## Lecture 2-3: 
-
+https://docs.google.com/presentation/d/1XymBAxs9Jtfp28DkmHXsCmv-oZOgf6TwBhaT9aAyIx8/edit?usp=sharing
 
 
 ## Lecture 1-4:
