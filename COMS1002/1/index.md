@@ -110,6 +110,10 @@ https://docs.google.com/presentation/d/1XymBAxs9Jtfp28DkmHXsCmv-oZOgf6TwBhaT9aAy
 
 ## Lecture 1-4:
 
+https://docs.google.com/presentation/d/1I1EmDo7OgCmB3zpu5ErF1tW806XmgiYe9yNQklV9EtQ/edit?usp=sharing
+
+
 ## Lab 1-2: 
 
+None: break
 
