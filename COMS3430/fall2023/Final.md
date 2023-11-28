@@ -19,7 +19,7 @@ If you are working as a group of 3, ~75 total effort-hours should be committed t
 This final project is 30 points - which is 30% of your grade.
 No late work can be accepted for this final project.
 
-## Proposal 
+## Proposal (2 pts)
 
 Submit a write up describing your proposed project. 
 Your write up should be at least two paragraphs, but can be longer if needed.
