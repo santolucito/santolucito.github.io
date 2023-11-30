@@ -3,7 +3,7 @@ import asyncio
 
 async def tcp_echo_client(message):
     reader, writer = await asyncio.open_connection("0.0.0.0", 8888)
-    #'161.35.14.211', 8888)
+    #'167.71.169.185', 8888)
 
     print(f"Send: {message!r}")
     writer.write(message.encode())
