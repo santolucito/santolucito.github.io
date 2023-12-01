@@ -10,7 +10,7 @@ During the creation process, some of the key questions we ask are:
 
 <a name="project2"></a>
 
-## Project 2: Generative Animation
+## Project 2: Interactive Animation
 
 
 Your goal is to create a new work of art with Processing in Python mode (or one of the replacement tools that are Processing-like).
@@ -29,7 +29,7 @@ You do not need to have every single point here, but you should have at least 3.
 
 ### What to hand in?
 
-- Your program code in a .zip folder. Be sure to include any .png images (or similar) in your submission or we will not be able to run your code. 
+- All your program code files. Be sure to include any .png images (or similar) in your submission or we will not be able to run your code. 
 - Leave a comment in your code with a link to the publicly posted video recording of your Processing sketch. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up of the process you took in your work. You can think of this as an artist's statement. If your artistic endeavor goes beyond the sketch itself (e.g. making a stencil template for street art, credit to Davy from 2021), be sure to document (in the video, or in the video description) the full life-cycle of your artistic product (e.g. the stencil in action).
 
 ### How am I graded?
