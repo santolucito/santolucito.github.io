@@ -59,4 +59,8 @@ For this lab, submit your code, which includes a link to the video you uploaded
 
 # Lec 3
 
+https://docs.google.com/presentation/d/11IqlVDZolvnCOSR5h9tk2bq0TQdrZZag89sRc2IPBqM/edit?usp=sharing
+
 # Lec 4
+
+Exam
