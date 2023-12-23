@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Button with Star Animation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    @keyframes starburst {
+      from {
+        opacity: 1;
+        transform: scale(0.5);
+      }
+      to {
+        opacity: 0;
+        transform: scale(1) translateY(-50vw) rotateY(2turn);
+      }
+    }
+    .star {
+      position: absolute;
+      width: 2rem;
+      height: 2rem;
+      background-image: url("./star.png");
+      background-size: cover;
+      animation: starburst 3s linear forwards;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+    .button-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      -webkit-text-stroke: 1px black;
+
+    }
+    .magic-button {
+      position: absolute;
+      border-radius: 50%; /* Make the button a circle */
+      transition: transform 1s ease-in-out, background-color 1s ease;
+      padding: 0;
+      width: 100px; /* Circle size */
+      height: 100px; /* Circle size */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background-color: #8B5CF6; /* Tailwind purple-500 */
+    }
+    .text-white {
+      color: #ffffff;
+    }
+    .font-bold {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+<div class="button-container">
+  <button id="magicButton" class="magic-button text-white font-bold">
+    Click me
+  </button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('magicButton');
+    const container = document.querySelector('.button-container');
+    const minimumMovement = 50; // Minimum pixels the button should move
+    const colors = ['pink', 'purple', 'green', 'blue', 'yellow', 'red', 'orange']; // Array of colors for the button
+    let colorIndex = 0; // To keep track of the current color index
+
+    button.addEventListener('click', function() {
+      // Change the button color
+      colorIndex = (colorIndex + 1) % colors.length;
+      button.style.backgroundColor = colors[colorIndex];
+
+      // Calculate new position
+      const maxX = container.clientWidth - button.clientWidth;
+      const maxY = container.clientHeight - button.clientHeight;
+      let newX = button.offsetLeft + (Math.random() * maxX) - maxX/2;
+      let newY = button.offsetTop + (Math.random() * maxY) - maxY/2;
+
+      // Ensure the button moves at least the minimumMovement
+      if (Math.abs(newX - button.offsetLeft) < minimumMovement) {
+        newX = newX < button.offsetLeft ? button.offsetLeft - minimumMovement : button.offsetLeft + minimumMovement;
+      }
+      if (Math.abs(newY - button.offsetTop) < minimumMovement) {
+        newY = newY < button.offsetTop ? button.offsetTop - minimumMovement : button.offsetTop + minimumMovement;
+      }
+
+      // Ensure new position does not exceed the size of the screen
+      newX = Math.min(maxX, Math.max(0, newX));
+      newY = Math.min(maxY, Math.max(0, newY));
+
+      // Move the button
+      button.style.transform = `translate(${newX - button.offsetLeft}px, ${newY - button.offsetTop}px)`;
+      button.innerHTML = colors[colorIndex].toUpperCase();
+
+      // Add star animation
+      for (let i = 0; i < 15; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = `${Math.random() * button.clientHeight * 1.5 - button.clientHeight/2}px`;
+        star.style.left = `${Math.random() * button.clientWidth * 1.5 - button.clientWidth/2}px`;
+        button.appendChild(star);
+
+        setTimeout(() => {
+          star.remove();
+        }, 1500);
+      }
+    });
+  });
+</script>
+</body>
+</html>
