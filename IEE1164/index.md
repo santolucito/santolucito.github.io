@@ -8,6 +8,9 @@ title: IE1164
 At Yonsei University (YISS)
 Summer 2023
 
+<img src="class.jpg" style="max-width:600px;width:100%">
+<img src="board.jpg" style="max-width:600px;width:100%">
+
 ## Week 1
 Topic: semantics, Intro to Python, Strings, programs as files, functions
 
@@ -61,3 +64,9 @@ Topics: Animations, Graphics, User interaction, Performance considerations
 
 # Week 6
 Topics: Introduction to generative AI, Stable Diffusion, Text processing
+
+[Day 1](https://docs.google.com/presentation/d/1jRhqhEkc50VONpehVGM0xKlmVRQiUT9dgwG7P0rwFhI/edit?usp=sharing)
+
+[Day 2](https://docs.google.com/presentation/d/1RnoqN981-fUBv7yLNeIeLVLMEFSCOo-PnmimbFXpqns/edit?usp=sharing)
+
+[Day 3](https://docs.google.com/presentation/d/13UJqnnrBqS_D3kTooA62MehAdYjtoLWeYT1qbDQ52og/edit?usp=sharing)

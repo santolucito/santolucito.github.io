@@ -1,4 +1,4 @@
-# Module 1: Visuals
+# Module 2: Interactive Animation
 
 Processing is an easy to use programming framework for creating visual arts.
 We will use Processing in Python mode to create our own visual art with code.
@@ -8,13 +8,13 @@ During the creation process, some of the key questions we ask are:
 - What does it mean to be an artist vs a programmer?
 
 
-<a name="project1"></a>
+<a name="project2"></a>
 
-## Project 1: Generative Animation
+## Project 2: Interactive Animation
 
-- Due Wednesday Nov 9, 11:59pm
 
-Your goal is to create a new work of art with Processing in Python mode, or with Blender using Python scripting with the ```bpy``` package.
+Your goal is to create a new work of art with Processing in Python mode (or one of the replacement tools that are Processing-like).
+Ideally, focus on an interactive animation, as we will focus on non-interactive animation in the next module.
 This is an open-ended assignment - which may be an uncomfortable space for you if this is new to you.
 The guiding principle should be to create something that you are proud to call your own creation.
 
@@ -22,8 +22,6 @@ As a more concrete guide, here are some guideposts you should hit:
 
 - set the size of your canvas
 - set default colors for fill and stroke - or turn off fill and stroke
-- have code that draws at least 10 distinct shapes
-- some, or all, of the parameters of your shapes should depend on program variables rather than being hard coded
 - a level of randomness using the ```random()``` function, or something similar (e.g. ```Basics > Math > Noise 2```)
 - have some level of user interaction (through the mouse or keyboard)
 
@@ -31,7 +29,7 @@ You do not need to have every single point here, but you should have at least 3.
 
 ### What to hand in?
 
-- Your program code in a .zip folder. Be sure to include any .png images (or similar) in your submission or we will not be able to run your code. 
+- All your program code files. Be sure to include any .png images (or similar) in your submission or we will not be able to run your code. 
 - Leave a comment in your code with a link to the publicly posted video recording of your Processing sketch. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up of the process you took in your work. You can think of this as an artist's statement. If your artistic endeavor goes beyond the sketch itself (e.g. making a stencil template for street art, credit to Davy from 2021), be sure to document (in the video, or in the video description) the full life-cycle of your artistic product (e.g. the stencil in action).
 
 ### How am I graded?
@@ -47,11 +45,9 @@ An example of an A+ project is here [https://www.youtube.com/watch?v=OCe36rvdrFI
 
 <hr>
 
-## Lecture 1-1: 
+## Lecture 2-1: 
 
-Oct 25
-
-slides - https://docs.google.com/presentation/d/19_aM9lGcngPQDzwll8MkjKBmKnL1xN5bAzWfe9BHc7k/edit?usp=sharing
+https://docs.google.com/presentation/d/1pSxaEp1JHl4fXMMINx95IAjD-Acfg3A4yCRQ_HDYuAQ/edit?usp=sharing
 
 In this lecture we get into the technical aspects of generative visuals.
 We will cover the graphics system used by Processing and explore the ways in which we communicate visual instructions to a computer.
@@ -59,11 +55,9 @@ We will tackle the generation of both static images and animations.
 One key point is to ensure that we understand performance bottlenecks and other basic issues in graphics systems, and how our code can impact the quality of our renderings.
 
 
-## Lecture 1-2:
+## Lecture 2-2:
 
-Oct 27
-
-slides - https://docs.google.com/presentation/d/1ROUIlclygquDHawnaLrTM6Je9lzx2jOGME5vhFxgLUs/edit?usp=sharing
+https://docs.google.com/presentation/d/1OxjK_jvpsAkfWgdiDlInHIv5g_3tcKJljUeqoZ-VZ9M/edit?usp=sharing
 
 Creativity and Code. Context in digital art. 
 How can code itself be a visual artistic object? Can we treat code as literature?
@@ -82,7 +76,6 @@ In class reading: [https://hai.stanford.edu/blog/humans-loop-design-interactive-
 
 ## Lab 1-1: Processing
 
-Oct 28
 
 Installing [Processing](https://processing.org/download/). Once you have installed Processing, proceed to install Python mode. To do this, click the top right button that says Java, and then click "Add Mode" and find the Python mode.
 
@@ -111,25 +104,16 @@ Post your video recording publicly, and save the link. Add that link as a commen
 
 <hr>
 
-## Lecture 1-3: 
+## Lecture 2-3: 
+https://docs.google.com/presentation/d/1XymBAxs9Jtfp28DkmHXsCmv-oZOgf6TwBhaT9aAyIx8/edit?usp=sharing
 
-Nov 1
-
-slides - https://docs.google.com/presentation/d/1J_ty_J0rnksw_0tkljc2BcTo4hm0mtLjZv8hm7xXR9c/edit?usp=sharing
-
-Intro to Blender and the bpy package. We explore the basics of Blender from a coding perspective. This class focuses on the basics of the interface and how to write code. 
-
-Download Blender her: https://www.blender.org/
 
 ## Lecture 1-4:
 
-Nov 3
+https://docs.google.com/presentation/d/1I1EmDo7OgCmB3zpu5ErF1tW806XmgiYe9yNQklV9EtQ/edit?usp=sharing
 
-slides - https://docs.google.com/presentation/d/1suUSGNwcsFQTLQCpu57IYXZvDXVXAOrkbmiJ17Qjxwk/edit?usp=sharing
-
-Review of Blender topics and discussion of code reuse
 
 ## Lab 1-2: 
 
-Nov 4 (no lab due to break)
+None: break
 

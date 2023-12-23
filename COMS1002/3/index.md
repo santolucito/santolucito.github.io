@@ -1,83 +1,66 @@
-# Module 3: Text-to-Image Machine Learning
-
-More details to come
+# Module 3: Professional Animation and Machine Learning
 
 <a name="project3"></a>
 
-## Project 3: Using Text-to-image
+## Project 3: Blender Animation
 
-- Due Fri Dec 16, 11:59pm
+Your goal is to create a new animation with Blender.
+Your animation should be short - roughly 2-10 seconds.
+This is an open-ended assignment - which may be an uncomfortable space for you if this is new to you.
+The guiding principle should be to create something that you are proud to call your own creation.
 
-Your goal is to experience first-hand using a text-to-image (Stable Diffusion) to generate a piece of media.
+As a more concrete guide, here are some guideposts you should hit:
 
-You will need to:
+- include code that deletes all objects and materials at the start of your script as discussed in class
+- set the bpy.context.scene.frame_end to a value greater than 250 (its default value)
+- use keyframe_insert to create an animation
+- use a for loop to create multiple copies of an object, such as multiple meshs, materials, lights, etc
+- add a bpy.ops.object.constraint_add(type='TRACK_TO') to the camera
+- create a material and add it to a mesh
 
-- find a text to use as source material (e.g. project gutenberg [https://www.gutenberg.org/]). Download the .txt file then upload it into your colab. You will then read in this file with code similar to this:
+### What to hand in?
 
-```
-f = open("/content/pg2641.txt", "r")
-text = f.read()
-```
+- Your python script that starts with import bpy
+- Leave a comment in your code with a link to the publicly posted video recording of your Blender animation. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up of the process you took in your work. You can think of this as an artist's statement. 
 
-- compute the most frequent noun phrases (use .noun_phrases [https://github.com/sloria/textblob] to get the noun phrases, then filter the list to select only the noun phrases that contain only alpha characters or spaces, the get the most frequent). you might need to do further filtering, for example, based on the length of the words. Do as you see fit!
-- generate a set of 4 images from the 4 most common noun phrases using Stable Diffusion (you will need to design your own prompt - you must include a negative prompt and utilize weights) (note: you might not be able to generate all four at once, but will need to call 'pipe' on one prompt at a time otherwise colab's GPU will run out of memory).
+# Lec 1
 
-This will require you leverage your Python skills from the first half of the class, as well as a bit of prompt engineering.
+Intro to Blender
 
-Optional: fine-tune the model to produce images in a particular style
+https://docs.google.com/presentation/d/14hPU3g4M32dgNvU3DAo2xITeI-Ase5S8eJMT4Lde07s/edit?usp=sharing
 
-As an example, I used the book A Room With A View, by E. M. Forster.
-I obtained the following noun phrase frequencies: ('lucy', 449), ('cecil', 235), ('miss bartlett', 198), ('freddy', 124).
+# Lec 2
 
-Then, I generated the following four images. I used a promt for each image that included the most frequent work and the title of the book.
+More Blender + ML
 
-![Lucy](pics/lucy.png)
-![Cecil](pics/cecil.png)
-![Miss Barlett](pics/bartlett.png)
-![Freddy](pics/freddy.png)
+https://docs.google.com/presentation/d/1D12nbs6eqWsFCv3oh_AunOPuVmqSKAB7GJegeRkW0kw/edit?usp=sharing
 
-### tips
+<a name="lab3"></a>
 
-The students who were in class on Thursday got some good tips - try to reach out and talk to them if you are stuck!
-One issue that came up was with the ```pipe.enable_xformers_memory_efficient_attention()``` line which seems to have broken since last week.
-You can just comment this out and change ```num_images = 4``` to ```num_images = 1``` and it should fix the out of memory error for you.
+## Module 3 Lab: Exporting a video
 
-### To turn in
-Download any code you have written as .ipynb (in colab and/or jyupter).
-You will submit the code and the four images as seperate files.
-Most of you should expect to submit 5 (if you only used colab) or 6 (if you used colab and jyupter) files, including the 4 images.
-You don't need to include the .txt unless you want to.
+For lab 3, you will need to boot up Blender, create a script (using the code linked below as a starting point), export a video, and upload a link to that video.
 
-<hr> 
+To create a video from Blender, follow the instructions in this video: https://www.youtube.com/watch?v=0h-TfXdzbcE&list=PLVUpXDC9TyrXtzJ9y9JMw9x7oARmzsJSK&index=4
 
-## Lecture 3-1: Intro to Text-to-image
+Note: if you are seeing a low-quality video, you might need to change the output quality. Within the output tab (where you changed the folder to output to, go to Output > Encoding > Video > Output Quality) and choose Lossless or Perceptually Lossless for higher quality video output.
 
-https://docs.google.com/presentation/d/16KVanb8DUQrtvyibYqlryn-ZnpCHDidwuv-aK8FjnhU/edit?usp=sharing
+Use this script to create a simple animation.
 
-<hr> 
+https://gist.github.com/santolucito/2007891422e15f45c712416b344b9f0d
 
-## Lecture 3-2: Prompt Engineering
+With the script I have given you, you should get a video that looks like this: https://youtu.be/9nT23gPfEb8
 
-https://docs.google.com/presentation/d/1Tm-CL_Pynli3ZJmQeA3VwJ6TKikhSpRdfhetPLvTtpM/edit?usp=sharing
+But before you make this video, make one simple change to the code. For example, you could change the color of the material, or the way the donut rotates, or change the donut into a cube, or make 100 donuts that flip instead of just one (just know that the more objects you have, the slower Blender will render the animation).
 
-<hr> 
+## What to submit
 
-## Lab 3: Testing out Stable Diffusion
+For this lab, submit your code, which includes a link to the video you uploaded
 
-The goal of this lab is to ensure you are ready to start interfacing with stable diffusion.
-Your goal is to explore the impact of the ```inference_steps``` parameter.
-Start by setting a random seed, and then design a prompt of your choosing, and generate 10 images, each with an increasing number of ```inference_steps``` (a range of roughly 1-150 is reasonable).
-Write up a short description of what you observe.
-How does the image change with more inference steps?
+# Lec 3
 
-You should use this colab notebook as a starting point: [https://colab.research.google.com/drive/16vaTJi1o5139AlPPU-k-dggc3bx9qnL1?usp=sharing]
-Make a copy of the notebook in your own drive, then generate the images.
-Turn in your 
+https://docs.google.com/presentation/d/11IqlVDZolvnCOSR5h9tk2bq0TQdrZZag89sRc2IPBqM/edit?usp=sharing
 
-<hr> 
+# Lec 4
 
-## Lecture 3-1: Fine tuning
-
-<hr> 
-
-## Lecture 3-1: More fine tuning and wrappping up
+Exam
