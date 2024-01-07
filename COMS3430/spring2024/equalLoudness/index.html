@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="refTone">Play Reference tone: 440Hz @ 0.2 gain</button>
+    <button id="newTone">Play Current Tone:</button> <input type="text" value="880" id="currentFreq">Hz</input>
+    <button id="record">Record gain value</button>
+    <button id="newFreq">get new freq</button>
+    <input type="range" min="1" max="100" orient="vertical" id="gainLevel"/>
+
+    <h2>COMS3430 Equal Loudness Curve</h2>
+    <p>
+        This tool will allow you to reconstruct the Fletcher-Muson equal loudness curve according to your own (or your partner's) ear.
+        You will be constructing a single Fletcher-Muson curve at the reference tone's frequency and amplitude.
+        Start by playing the reference tone.
+        Then play the current tone.
+        Then adjust the gain slider such that - to the listenting ear (your or your partner) the gain of the two tones is equal.
+        You may need to go back and forth between the two tones a few times.
+        Once you believe the tones to be of equal loudness, click "record gain value".
+        You can then click "get new freq" to continue with the experiment with a new tone.
+        Once you have finished the experiment, click "export data" to get a csv of your equal loudness curve!
+    </p>
+    <div id="my_dataviz"></div>
+    <button id="export">export data</button>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="graph.js"> </script>
+    <script src="audio.js"> </script>
+
+</body>
+</html>
