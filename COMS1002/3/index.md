@@ -11,17 +11,18 @@ The guiding principle should be to create something that you are proud to call y
 
 As a more concrete guide, here are some guideposts you should hit:
 
-- include code that deletes all objects and materials at the start of your script as discussed in class
-- set the bpy.context.scene.frame_end to a value greater than 250 (its default value)
-- use keyframe_insert to create an animation
-- use a for loop to create multiple copies of an object, such as multiple meshs, materials, lights, etc
-- add a bpy.ops.object.constraint_add(type='TRACK_TO') to the camera
-- create a material and add it to a mesh
+- include code that deletes all objects and materials at the start of your script as discussed in class (20 points)
+- set the bpy.context.scene.frame_end to a value greater than 250 (its default value) (10 points)
+- use keyframe_insert to create an animation (10 points)
+- use a for loop to create multiple copies of an object, such as multiple meshs, materials, lights, etc (10 points)
+- add a bpy.ops.object.constraint_add(type='TRACK_TO') to the camera (5 points)
+- create a material and add it to a mesh (5 points)
 
 ### What to hand in?
 
-- Your python script that starts with import bpy
-- Leave a comment in your code with a link to the publicly posted video recording of your Blender animation. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up of the process you took in your work. You can think of this as an artist's statement. 
+(100 points total)
+- Your python script that starts with import bpy and meets the above guideposts (60 points)
+- Leave a comment in your code with a link to the publicly posted video recording of your Blender animation (20 points). The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up of the process you took in your work. You can think of this as an artist's statement. (20 points) 
 
 # Lec 1
 
