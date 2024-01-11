@@ -3,7 +3,7 @@ layout: default
 title: COMS3930
 ---
  
-# Creative Embedded Systems (Spring 2022)
+# Creative Embedded Systems (Spring 2023)
 
 
 Modules will be added as we go through the course.

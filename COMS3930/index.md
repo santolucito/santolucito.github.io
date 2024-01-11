@@ -5,6 +5,8 @@ title: COMS3930
 
 # Creative Embedded Systems
 
+[Spring 2024 Course Site](./spring2024/)
+
 [Spring 2023 Course Site](./spring2023/)
 
 [Spring 2022 Course Site](./spring2022/)
