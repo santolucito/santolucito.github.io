@@ -3,16 +3,19 @@ layout: default
 title: COMS3430
 ---
  
-# Computational Sound (Fall 2023)
+# Computational Sound (Spring 2024)
 
 
 Modules will be added as we go through the course.
-You may find the [material from last year](../fall2022) helpful as a guide.
+You may find the [material from previous years](../index.md) helpful as a guide.
 Note that the course changes year to year, including in some cases covering different topics and assignments.
 
 you can find the [syllabus here](./syllabus.pdf)
 
+[The slides are here](https://drive.google.com/drive/folders/1o9AQB42xDqnKHA0Lyx8wZhg2Ob-UsbpH?usp=sharing)
+
 [Watch a tutorial](https://youtu.be/fzBOvsVxFKk) on the suggested dev environment you will need for the webaudio work.
+
 
 ## Module 1: Audio DSP (4 weeks)
 
@@ -26,7 +29,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Delay](./delay)
 
-[Homework 1](./Lab1)
+<!-- [Homework 1](./Lab1) -->
 
 [In-class activity: Sensation caused by two pure tones](./beatingDemo)
 
@@ -52,7 +55,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: LFO + Frequency Modulation](./lfofm)
 
-[Homework 2](./Lab2)
+<!-- [Homework 2](./Lab2) -->
 
 - Filters
 
@@ -74,7 +77,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Karplus Strong](./karplus_strong)
 
-[Homework 3]()
+<!-- [Homework 3]() -->
 
 ## Module 2: Audio Plugin Development (3 weeks)
 
@@ -88,7 +91,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Live Coding (Pitch)](./liveCodePitch)
 
-[Homework 4: Live Coding](/Lab4.md)
+<!-- [Homework 4: Live Coding](/Lab4.md) -->
 
 ## Assorted
 
