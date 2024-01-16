@@ -17,7 +17,7 @@ you can find the [syllabus here](./syllabus.pdf)
 [Watch a tutorial](https://youtu.be/fzBOvsVxFKk) on the suggested dev environment you will need for the webaudio work.
 
 
-## Module 1: Audio DSP (4 weeks)
+## Module 1: Audio DSP (5 weeks)
 
 - Synthesis 
 
@@ -83,7 +83,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - Multichannel processing and spatialization
 
-## Module 3: Live Coding (4 weeks) 
+## Module 3: Live Coding and Automated Composition (4 weeks) 
 
 - build your own live coding language
 
@@ -91,9 +91,6 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Live Coding (Pitch)](./liveCodePitch)
 
-<!-- [Homework 4: Live Coding](/Lab4.md) -->
-
-## Assorted
 
 [Demo: Notes](./notes)
 
@@ -101,9 +98,11 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Magenta](./magenta)
 
+<!-- [Homework 4: Live Coding](/Lab4.md) -->
+
+## Music Information Retrieval (1 Week)
+
 [Demo: Phone Control](./phonecontrol)
 
-
-## Final Project (2 weeks)
-
+## Final Project (1 Week)
 [Final Project](./Final)
