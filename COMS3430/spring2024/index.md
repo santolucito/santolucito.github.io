@@ -5,6 +5,10 @@ title: COMS3430
  
 # Computational Sound (Spring 2024)
 
+First class on Zoom here:
+
+https://columbiauniversity.zoom.us/j/6741197714?pwd=dFNlNlhUbnNwbXFzSVZWZGNIb2I4UT09
+
 
 Modules will be added as we go through the course.
 You may find the [material from previous years](../index.md) helpful as a guide.
