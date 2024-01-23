@@ -8,7 +8,11 @@ title: Lab1
 For this lab you will build your own keyboard on the web using WebAudio.
 This assignment mostly serves give you a familiarity with the basic workflow and structure of working with WebAudio.
 
-See a demo of how to get started coding in WebAudio here: (https://youtu.be/fzBOvsVxFKk)[https://youtu.be/fzBOvsVxFKk]
+See a demo of how to get started coding in WebAudio here: [https://youtu.be/fzBOvsVxFKk](https://youtu.be/fzBOvsVxFKk)
+
+To submit, you will need to point to a live demo of your code.
+You can use Github pages, Glitch.com, or a similar tool.
+Do not provide a link a Github repository or a raw js file.
 
 ## the basics (4 pts)
 

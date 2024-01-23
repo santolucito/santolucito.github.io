@@ -23,6 +23,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 ## Module 1: Audio DSP (5 weeks)
 
+[Homework 1](./Lab1)
+
 - Synthesis 
 
 [Demo: Basic](./basic)
@@ -32,8 +34,6 @@ you can find the [syllabus here](./syllabus.pdf)
 [Demo: Listener with slider](./listener_slider)
 
 [Delay](./delay)
-
-<!-- [Homework 1](./Lab1) -->
 
 [In-class activity: Sensation caused by two pure tones](./beatingDemo)
 
