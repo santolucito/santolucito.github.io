@@ -13,6 +13,8 @@ As such, we will follow a different schedule, including in some cases covering d
 
 You can find the [syllabus here](./syllabus.pdf)
 
+You can find [slides here](https://drive.google.com/drive/folders/1TLkQV01c1aaTameAVkDYsXYsBRe5q38P?usp=drive_link)
+
 ## parts list
 
 - LilyGo ESP32 TTGO T-Display
