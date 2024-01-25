@@ -15,6 +15,8 @@ You can find the [syllabus here](./syllabus.pdf)
 
 You can find [slides here](https://drive.google.com/drive/folders/1TLkQV01c1aaTameAVkDYsXYsBRe5q38P?usp=drive_link)
 
+https://columbiauniversity.zoom.us/j/6741197714?pwd=dFNlNlhUbnNwbXFzSVZWZGNIb2I4UT09
+
 ## parts list
 
 - LilyGo ESP32 TTGO T-Display
