@@ -3,7 +3,7 @@ layout: default
 title: Lab2
 ---
 
-# Lab 2 - Build your own synth (12 pts)
+# Homework 2 - Build your own synth (12 pts)
 
 In our previous lab, you built your own keyboard, but the sounds were a bit lackluster - we were only using one oscillator at a time per key press.
 To make things more interesting, we will start playing with more complex sounds.
