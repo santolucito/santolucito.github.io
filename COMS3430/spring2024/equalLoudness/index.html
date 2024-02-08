@@ -23,6 +23,7 @@
         You can then click "get new freq" to continue with the experiment with a new tone.
         Once you have finished the experiment, click "export data" to get a csv of your equal loudness curve!
     </p>
+    <p> I will use the collected data, merge it together with <code>awk '(NR == 1) || (FNR > 1)' *.csv > merged.csv</code> then plot this to see how we compare as a class to the Fletcher-Munson curves.</p>
     <div id="my_dataviz"></div>
     <button id="export">export data</button>
     <script src="https://d3js.org/d3.v4.js"></script>
