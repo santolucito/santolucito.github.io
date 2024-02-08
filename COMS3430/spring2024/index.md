@@ -76,6 +76,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: 3D panning](./3dpanning)
 
+[Activity: 3D viz/altitude experiment](./altitude)
+
 [Demo: Gain worklet](./gain_worklet)
 
 [Demo: MIDI](./midi)
