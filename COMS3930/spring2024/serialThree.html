@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.min.js"></script>
-  </head>
-  <body>
-    <script src="serialThree.js"></script>
-      
-  </body>
-</html>
 
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css">
+
+
+</head>
+
+<body>
+
+  <h2>This code goes on your ESP32 TTGO T1 Display</h2>
+  <p>Then connect to this window, click anywhere, and a drop down will appear letting you select teh board. The serial
+    messages will be piped to the browser and used to turn the cube from red to pink.</p>
+  <div class="code-window">
+    <pre><code class="language-javascript">
+#define BUTTON 35
+//this is the right button on the TTGO T1 Display
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(BUTTON, INPUT);
+}
+
+void loop() {
+  Serial.print(digitalRead(BUTTON));
+  delay(100);
+}
+  </code></pre>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+
+  <script src="serialThree.js"></script>
+
+</body>
+
+</html>
