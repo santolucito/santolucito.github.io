@@ -29,15 +29,19 @@ https://columbiauniversity.zoom.us/j/6741197714?pwd=dFNlNlhUbnNwbXFzSVZWZGNIb2I4
 
 Link to google drive folder with slides to be posted
 
-## Module 1: Batteries and displays
+## [Module 1: Batteries and displays](./mod1.md)
 
 Learn how power works, connect a battery, configure your display, do your first installation.
 
-## Module 2: Sensors and WebSerial
+## [Module 2: Sensors and WebSerial](mod2.md)
 
 Create an interactive audio-visual webpage that is controlled by a set of physical sensors.
 
 Build an enclosure, maybe.
+
+[Demo: WebSerial Audio](./serialAudio.html)
+[Demo: WebSerial Visual](./serialVisual.html)
+[Demo: WebSerial Three js](./serialThree.html)
 
 ## Module 3: Dual Core and APIs
 
