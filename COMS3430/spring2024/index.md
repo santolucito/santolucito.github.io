@@ -84,7 +84,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Karplus Strong](./karplus_strong)
 
-<!-- [Homework 3]() -->
+[Homework 3](./Lab3)
 
 ## Module 2: Audio Plugin Development (3 weeks)
 
