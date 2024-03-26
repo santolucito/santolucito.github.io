@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Lab4
+title: Lab5
 ---
 
 # Lab 5 - Live Coding (12 pts)
