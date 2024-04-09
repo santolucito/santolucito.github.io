@@ -5,7 +5,7 @@ title: Final Project
 
 # Final Project (30 pts)
 
-The final project should be turned in on Courseworks on Sunday, Dec 17, midnight AoE.
+The final project should be turned in on Courseworks on May 9.
 
 This project may be completed as a group of up to 3.
 When working as a group, you must use a git repository to track each group members' commits and include a link to the repo in your submission.
@@ -28,7 +28,7 @@ I will provide feedback that is focused on the scope and feasibility of the prop
 
 ## Implementation (16 pts)
 
-The final project is an open-ended project with WebAudio.
+The final project is an open-ended project with (likely) WebAudio.
 
 Broadly, your projects will fall into one of three categories, reflecting the three modules we have covered in class
 
@@ -38,6 +38,7 @@ Broadly, your projects will fall into one of three categories, reflecting the th
 
 While your project will have a focus on one topic, it may require some combination of these topics.
 You may use another language, but must consult with me 1-on-1 beforehand.
+You may also do something else entirely.
 Permission will only be granted under the circumstances of an exceptionally well thought-out project.
 
 - Concepts from class: Apply one idea from class to your project. For example, the idea of FM synthesis, or focus on one point from the Live Code Manifesto. You do not need to replicate the concept exactly as used in class (although you can if you like). This confirms your comprehension of course material at a high level. (4 pts)
@@ -48,14 +49,9 @@ Permission will only be granted under the circumstances of an exceptionally well
 
 ## Presentation (6 pts)
 
-You will give an ``in-progress'' presentation in class on the last day of class. 
+You will give submit a video demo of your work. 
+Do a screencast with sound. You do not need to show your face, but you should be speaking and explaining the work.
 Your presentations should be 4 minutes per group member, up to a maximum of 10 minutes.
-You should present your final vision, as well as your progress towards that goal.
-
-- Progess: have you made substaintial progress? (equivlent of 1 homework's worth of effort-hours) (3 pts)
-- Presentation: is your progress and end-goal clearly communicated? (3 pts) 
-
-You will need to submit slides prior to the class period in which we have the presentations.
 
 ## Write up (6 pts)
 
