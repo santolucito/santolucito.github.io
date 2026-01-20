@@ -6,6 +6,8 @@ title: COMS3430
 
 # Computational Sound
 
+[Spring 2026 Course Site](./spring2026/)
+
 [Spring 2024 Course Site](./spring2024/)
 
 [Fall 2023 Course Site](./fall2023/)
