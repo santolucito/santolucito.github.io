@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title> Karplus-Strong </title>
+</head>
+
+<body>
+    <h1>Karplus-Strong</h1>
+    <p>Decay</p>
+    <input type='range' min=0.8 max='0.999' value='0.9' step='any' id='decaySlider'>
+    <span id='decayLabel'></span>
+    <p>Delay (ms)</p>
+    <input type='range' min=0 max=20 value=10 step='any' id='delaySlider'>
+    <span id='delayLabel'></span>
+    <p>Width of impulse (ms)</p>
+    <input type='range' min=0 max='20' value=10 step='any' id='widthSlider'>
+    <span id='widthLabel'></span>
+    <p>
+        <input type='button' value='Start' id='start'>
+    <p> press start, then press your keyboard for sound</p>
+
+    <p> See the js code for the Kaplus-Strong worklet <a href='./modules.js'>here</a></p>
+</body>
+<script src="main.js"> </script>
+
+
+</html>
