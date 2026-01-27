@@ -3,12 +3,7 @@ layout: default
 title: COMS3430
 ---
  
-# Computational Sound (Spring 2024)
-
-First class on Zoom here:
-
-https://columbiauniversity.zoom.us/j/6741197714?pwd=dFNlNlhUbnNwbXFzSVZWZGNIb2I4UT09
-
+# Computational Sound (Spring 2026)
 
 Modules will be added as we go through the course.
 You may find the [material from previous years](../index.md) helpful as a guide.
@@ -16,7 +11,7 @@ Note that the course changes year to year, including in some cases covering diff
 
 you can find the [syllabus here](./syllabus.pdf)
 
-[The slides are here](https://drive.google.com/drive/folders/1o9AQB42xDqnKHA0Lyx8wZhg2Ob-UsbpH?usp=sharing)
+[The slides are here](https://drive.google.com/drive/folders/19Ur3mPuSuJcDyvUfpT6nImJbJBv_gc8f?usp=sharing)
 
 [Watch a tutorial](https://youtu.be/fzBOvsVxFKk) on the suggested dev environment you will need for the webaudio work.
 
