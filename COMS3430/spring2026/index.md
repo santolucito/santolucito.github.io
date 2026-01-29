@@ -38,7 +38,7 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Peak Logger](./peak_logger)
 
-[Amplitude visualizer](https://stackoverflow.com/a/44360729/1609406)
+[Amplitude visualizer](./peak-meter-example)
 
 [Demo: Additive Synthesis](./addititive)
 
