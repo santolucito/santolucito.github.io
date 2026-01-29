@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Audio Peak Meter Example</title>
+</head>
+<body>
+  <h1>Peak Meter with AnalyserNode</h1>
+
+  <button id="toggle">Start</button>
+
+  <p>
+    Short average
+    <meter id="avg-level" min="-100" max="10" value="-100"></meter>
+    <span id="avg-level-text">—</span> dB
+  </p>
+
+  <p>
+    Instantaneous
+    <meter id="inst-level" min="-100" max="10" value="-100"></meter>
+    <span id="inst-level-text">—</span> dB
+  </p>
+
+  <script>
+    let audioCtx;
+    let source;
+    let analyser;
+    let audioBuffer;
+    let isPlaying = false;
+    let animationId;
+
+    async function loadBuffer(bufferURL) {
+      const response = await fetch(bufferURL);
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+      return buffer;
+    }
+
+    function displayNumber(id, value) {
+      const meter = document.getElementById(id + '-level');
+      const text = document.getElementById(id + '-level-text');
+      text.textContent = value.toFixed(2);
+      meter.value = isFinite(value) ? value : meter.min;
+    }
+
+    function loop() {
+      const sampleBuffer = new Float32Array(analyser.fftSize);
+      analyser.getFloatTimeDomainData(sampleBuffer);
+
+      // Compute average power over the interval.
+      let sumOfSquares = 0;
+      for (let i = 0; i < sampleBuffer.length; i++) {
+        sumOfSquares += sampleBuffer[i] ** 2;
+      }
+      const avgPowerDecibels = 10 * Math.log10(sumOfSquares / sampleBuffer.length);
+
+      // Compute peak instantaneous power over the interval.
+      let peakInstantaneousPower = 0;
+      for (let i = 0; i < sampleBuffer.length; i++) {
+        const power = sampleBuffer[i] ** 2;
+        peakInstantaneousPower = Math.max(power, peakInstantaneousPower);
+      }
+      const peakInstantaneousPowerDecibels = 10 * Math.log10(peakInstantaneousPower);
+
+      displayNumber('avg', avgPowerDecibels);
+      displayNumber('inst', peakInstantaneousPowerDecibels);
+
+      animationId = requestAnimationFrame(loop);
+    }
+
+    async function start() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 2048;
+        audioBuffer = await loadBuffer('../../fall2020/samples/barnard.mp3');
+      }
+
+      source = audioCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      source.loop = true;
+      source.start();
+
+      loop();
+      isPlaying = true;
+      document.getElementById('toggle').textContent = 'Stop';
+    }
+
+    function stop() {
+      if (source) {
+        source.stop();
+        source.disconnect();
+      }
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+      isPlaying = false;
+      document.getElementById('toggle').textContent = 'Start';
+      displayNumber('avg', -100);
+      displayNumber('inst', -100);
+    }
+
+    document.getElementById('toggle').addEventListener('click', async () => {
+      if (isPlaying) {
+        stop();
+      } else {
+        await start();
+      }
+    });
+  </script>
+</body>
+</html>
