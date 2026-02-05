@@ -46,6 +46,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Amplitude Modulation](./am)
 
+[Demo: Amplitude Modulation Explination](./am_explain)
+
 [Demo: Frequency Modulation](./fm)
 
 [Demo: Parallel Multi-Modulator Frequency Modulation](./parmmfm)

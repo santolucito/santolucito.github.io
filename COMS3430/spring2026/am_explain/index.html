@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AM / Beating Demo (WebAudio)</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; padding: 18px; line-height: 1.35; }
+    .card { border: 1px solid #ddd; border-radius: 14px; padding: 16px; max-width: 900px; }
+    button { padding: 10px 12px; border-radius: 10px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+    button:hover { background: #f6f6f6; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; align-items: center; }
+    label { display: inline-flex; align-items: center; gap: 10px; margin-right: 14px; }
+    input[type="range"] { width: 260px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; }
+    .small { color: #444; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+    @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
+    .pill { display:inline-block; padding:2px 8px; border:1px solid #ddd; border-radius:999px; font-size:12px; }
+    .warn { color: #7a3; font-weight: 600; }
+    .hr { border-top: 1px solid #eee; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2 style="margin:0 0 8px 0;">Beating → AM Sidebands Demo (with Spread)</h2>
+    <div class="small">
+      Set a frequency spread <b>Δ</b>. The tones will be:
+      <span class="mono">f0 = 440</span>,
+      <span class="mono">f- = 440 − Δ</span>,
+      <span class="mono">f+ = 440 + Δ</span>.
+      <div class="warn" style="margin-top:6px;">Start quiet. Headphones recommended.</div>
+    </div>
+
+    <div class="row" style="margin-top:12px;">
+      <button id="startBtn">Start Audio</button>
+      <button id="stopBtn" disabled>Stop</button>
+      <span id="status" class="pill">stopped</span>
+    </div>
+
+    <div class="grid">
+      <div>
+        <h3 style="margin:12px 0 8px 0;">Presets</h3>
+        <div class="row">
+          <button class="preset" data-mode="carrier">1) 440 only</button>
+          <button class="preset" data-mode="carrier+minus">2) 440 + (440−Δ)</button>
+          <button class="preset" data-mode="carrier+plus">3) 440 + (440+Δ)</button>
+          <button class="preset" data-mode="carrier+both">4) 440 + (440−Δ) + (440+Δ)</button>
+          <button class="preset" data-mode="pair">5) (440−Δ) + (440+Δ) (no 440)</button>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="small">
+          To make pitch differences obvious, try <b>Δ = 7</b>.
+          For slow beating, try <b>Δ = 2</b> (beat rate will be <b>2Δ</b> Hz for the pair-only case).
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin:12px 0 8px 0;">Controls</h3>
+
+        <div class="row">
+          <label>Δ (Hz)
+            <input id="spread" type="range" min="1" max="100" step="1" value="7">
+            <span id="spreadVal" class="mono">7</span>
+          </label>
+        </div>
+
+        <div class="row">
+          <span class="pill">f-: <span id="fMinus" class="mono">438</span> Hz</span>
+          <span class="pill">f0: <span id="f0" class="mono">440</span> Hz</span>
+          <span class="pill">f+: <span id="fPlus" class="mono">442</span> Hz</span>
+        </div>
+
+        <div class="row" style="margin-top:6px;">
+          <label>Master
+            <input id="master" type="range" min="0" max="0.25" step="0.001" value="0.05">
+            <span id="masterVal" class="mono">0.050</span>
+          </label>
+        </div>
+
+        <div class="row">
+          <label>440 (carrier)
+            <input id="g0" type="range" min="0" max="1" step="0.001" value="1">
+            <span id="g0Val" class="mono">1.000</span>
+          </label>
+        </div>
+        <div class="row">
+          <label>f- (440−Δ)
+            <input id="gMinus" type="range" min="0" max="1" step="0.001" value="0">
+            <span id="gMinusVal" class="mono">0.000</span>
+          </label>
+        </div>
+        <div class="row">
+          <label>f+ (440+Δ)
+            <input id="gPlus" type="range" min="0" max="1" step="0.001" value="0">
+            <span id="gPlusVal" class="mono">0.000</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let ctx = null;
+    let osc0, oscMinus, oscPlus;
+    let g0, gMinus, gPlus, masterGain;
+    let started = false;
+
+    const $ = (id) => document.getElementById(id);
+
+    function setStatus(text){ $("status").textContent = text; }
+    function updateLabel(id, val){ $(id).textContent = Number(val).toFixed(3); }
+
+    function smoothSet(audioParam, value, rampSec = 0.02){
+      if(!ctx) return;
+      const now = ctx.currentTime;
+      audioParam.cancelScheduledValues(now);
+      audioParam.setValueAtTime(audioParam.value, now);
+      audioParam.linearRampToValueAtTime(value, now + rampSec);
+    }
+
+    function getSpread(){
+      return parseFloat($("spread").value);
+    }
+
+    function setFrequencies(){
+      const d = getSpread();
+      const f0 = 440;
+      const fMinus = f0 - d;
+      const fPlus = f0 + d;
+
+      $("spreadVal").textContent = String(d);
+      $("fMinus").textContent = String(fMinus);
+      $("f0").textContent = String(f0);
+      $("fPlus").textContent = String(fPlus);
+
+      if(osc0) osc0.frequency.setValueAtTime(f0, ctx.currentTime);
+      if(oscMinus) oscMinus.frequency.setValueAtTime(fMinus, ctx.currentTime);
+      if(oscPlus) oscPlus.frequency.setValueAtTime(fPlus, ctx.currentTime);
+    }
+
+    function applyPreset(mode){
+      const presets = {
+        "carrier":       { a0: 1.0, aM: 0.0, aP: 0.0 },
+        "carrier+minus": { a0: 1.0, aM: 0.9, aP: 0.0 },
+        "carrier+plus":  { a0: 1.0, aM: 0.0, aP: 0.9 }, // <-- NEW
+        "carrier+both":  { a0: 1.0, aM: 0.6, aP: 0.6 },
+        "pair":          { a0: 0.0, aM: 1.0, aP: 1.0 },
+      };
+      const p = presets[mode];
+      if(!p || !g0 || !gMinus || !gPlus) return;
+
+      smoothSet(g0.gain, p.a0);
+      smoothSet(gMinus.gain, p.aM);
+      smoothSet(gPlus.gain, p.aP);
+
+      $("g0").value = p.a0;
+      $("gMinus").value = p.aM;
+      $("gPlus").value = p.aP;
+
+      $("g0Val").textContent = Number(p.a0).toFixed(3);
+      $("gMinusVal").textContent = Number(p.aM).toFixed(3);
+      $("gPlusVal").textContent = Number(p.aP).toFixed(3);
+    }
+
+    async function startAudio(){
+      if(started) return;
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+      masterGain = ctx.createGain();
+      masterGain.gain.value = parseFloat($("master").value);
+
+      g0 = ctx.createGain();      g0.gain.value = parseFloat($("g0").value);
+      gMinus = ctx.createGain();  gMinus.gain.value = parseFloat($("gMinus").value);
+      gPlus = ctx.createGain();   gPlus.gain.value = parseFloat($("gPlus").value);
+
+      osc0 = ctx.createOscillator();     osc0.type = "sine";
+      oscMinus = ctx.createOscillator(); oscMinus.type = "sine";
+      oscPlus = ctx.createOscillator();  oscPlus.type = "sine";
+
+      // Wire: osc -> gain -> master -> destination
+      osc0.connect(g0).connect(masterGain);
+      oscMinus.connect(gMinus).connect(masterGain);
+      oscPlus.connect(gPlus).connect(masterGain);
+      masterGain.connect(ctx.destination);
+
+      // Start together (helps coherence; not required, but reduces "clicky" perception)
+      const t0 = ctx.currentTime + 0.05;
+      osc0.start(t0);
+      oscMinus.start(t0);
+      oscPlus.start(t0);
+
+      started = true;
+      $("startBtn").disabled = true;
+      $("stopBtn").disabled = false;
+      setStatus("running");
+
+      setFrequencies();
+      applyPreset("carrier");
+    }
+
+    function stopAudio(){
+      if(!started) return;
+
+      smoothSet(masterGain.gain, 0.0, 0.03);
+      const stopAt = ctx.currentTime + 0.05;
+
+      osc0.stop(stopAt);
+      oscMinus.stop(stopAt);
+      oscPlus.stop(stopAt);
+
+      setTimeout(async () => {
+        try { await ctx.close(); } catch(e) {}
+        ctx = null;
+        started = false;
+        $("startBtn").disabled = false;
+        $("stopBtn").disabled = true;
+        setStatus("stopped");
+      }, 90);
+    }
+
+    // UI
+    $("startBtn").addEventListener("click", startAudio);
+    $("stopBtn").addEventListener("click", stopAudio);
+
+    document.querySelectorAll(".preset").forEach(btn => {
+      btn.addEventListener("click", () => applyPreset(btn.dataset.mode));
+    });
+
+    $("spread").addEventListener("input", () => setFrequencies());
+
+    $("master").addEventListener("input", (e) => {
+      const v = parseFloat(e.target.value);
+      $("masterVal").textContent = Number(v).toFixed(3);
+      if(masterGain) smoothSet(masterGain.gain, v, 0.03);
+    });
+
+    $("g0").addEventListener("input", (e) => {
+      const v = parseFloat(e.target.value);
+      $("g0Val").textContent = Number(v).toFixed(3);
+      if(g0) smoothSet(g0.gain, v);
+    });
+    $("gMinus").addEventListener("input", (e) => {
+      const v = parseFloat(e.target.value);
+      $("gMinusVal").textContent = Number(v).toFixed(3);
+      if(gMinus) smoothSet(gMinus.gain, v);
+    });
+    $("gPlus").addEventListener("input", (e) => {
+      const v = parseFloat(e.target.value);
+      $("gPlusVal").textContent = Number(v).toFixed(3);
+      if(gPlus) smoothSet(gPlus.gain, v);
+    });
+  </script>
+</body>
+</html>
+
