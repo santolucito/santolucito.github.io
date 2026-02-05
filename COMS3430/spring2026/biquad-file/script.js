@@ -37,7 +37,7 @@ async function loadBuffer(url) {
 async function initBiquad() {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-    audioBuffer = await loadBuffer('../../fall2020/samples/barnard.mp3');
+    audioBuffer = await loadBuffer('/COMS3430/fall2020/samples/barnard.mp3');
 
     biquadFilter = audioCtx.createBiquadFilter();
     biquadFilter.type = "lowpass";
@@ -75,19 +75,19 @@ function stopPlayback() {
 }
 
 function changeFilterType(filterType) {
-    biquadFilter.type = filterType;
+    if (biquadFilter) biquadFilter.type = filterType;
 }
 
 function updateFreq(val) {
-    biquadFilter.frequency.value = val;
+    if (biquadFilter) biquadFilter.frequency.value = val;
 }
 
 function updateIndex(val) {
-    biquadFilter.gain.value = val;
+    if (biquadFilter) biquadFilter.gain.value = val;
 }
 
 function updateQ(val) {
-    biquadFilter.Q.value = val;
+    if (biquadFilter) biquadFilter.Q.value = val;
 }
 
 const playButton = document.getElementById('start');
