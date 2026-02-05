@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>FFT Explainer</title>
+</head>
+
+<body>
+  <h1>FFT (Fast Fourier Transform) Explainer</h1>
+
+  <p>The FFT converts a signal from the <b>time domain</b> (amplitude over time) to the <b>frequency domain</b> (amplitude over frequency).
+    Add sinusoidal components below and observe both representations side by side.</p>
+
+  <button id="start">Play / Stop</button><br><br>
+
+  <h3>Sinusoidal Components</h3>
+  <p>Each component is a sine wave at a given frequency and amplitude. The signal you hear (and see in the time domain) is the sum of all components.</p>
+
+  <div id="components">
+    <div class="component" id="comp0">
+      Component 1:
+      <input type="range" min="50" max="2000" value="220" oninput="updateComp(0, 'freq', this.value)"> Freq: <span id="freq0">220</span> Hz
+      <input type="range" min="0" max="100" value="80" oninput="updateComp(0, 'amp', this.value)"> Amp: <span id="amp0">80</span>%
+    </div>
+    <div class="component" id="comp1">
+      Component 2:
+      <input type="range" min="50" max="2000" value="440" oninput="updateComp(1, 'freq', this.value)"> Freq: <span id="freq1">440</span> Hz
+      <input type="range" min="0" max="100" value="50" oninput="updateComp(1, 'amp', this.value)"> Amp: <span id="amp1">50</span>%
+    </div>
+    <div class="component" id="comp2">
+      Component 3:
+      <input type="range" min="50" max="2000" value="880" oninput="updateComp(2, 'freq', this.value)"> Freq: <span id="freq2">880</span> Hz
+      <input type="range" min="0" max="100" value="0" oninput="updateComp(2, 'amp', this.value)"> Amp: <span id="amp2">0</span>% (off)
+    </div>
+  </div>
+  <br>
+
+  <h3>FFT Size</h3>
+  <p>FFT size controls the frequency resolution. Larger FFT = more frequency bins = sharper peaks, but slower response.
+    The number of frequency bins is always FFT size / 2.</p>
+  <select id="fftSizeSelect" onchange="updateFFTSize(this.value)">
+    <option value="256">256 (128 bins)</option>
+    <option value="512">512 (256 bins)</option>
+    <option value="1024">1024 (512 bins)</option>
+    <option value="2048" selected>2048 (1024 bins)</option>
+    <option value="4096">4096 (2048 bins)</option>
+    <option value="8192">8192 (4096 bins)</option>
+  </select>
+  <p>Frequency resolution = sample rate / FFT size = <span id="freqRes">--</span> Hz per bin</p>
+
+  <br>
+  <h3>Time Domain (Waveform)</h3>
+  <p>This is the raw signal: amplitude vs. time. It is the sum of all the sine wave components above.</p>
+  <canvas id="timeDomain" width="800" height="200" style="border:1px solid #000000"></canvas>
+
+  <h3>Frequency Domain (FFT Output)</h3>
+  <p>The FFT decomposes the signal into its frequency components. Each bar shows how much energy exists at that frequency. You should see peaks at the frequencies of the active components above.</p>
+  <canvas id="freqDomain" width="800" height="300" style="border:1px solid #000000"></canvas>
+  <p id="freqAxisLabel"></p>
+
+  <h3>How does the FFT work?</h3>
+  <p>The Discrete Fourier Transform (DFT) computes the correlation of the input signal with sine and cosine waves at each frequency bin.
+    The FFT is simply a fast algorithm for computing the DFT in O(N log N) instead of O(N^2) time.</p>
+  <p>Key relationships:</p>
+  <ul>
+    <li><b>FFT size (N)</b>: the number of samples analyzed at once</li>
+    <li><b>Frequency bins</b>: N/2 bins, each representing a frequency range</li>
+    <li><b>Bin width</b>: sampleRate / N Hz (e.g., 48000/2048 = ~23.4 Hz)</li>
+    <li><b>Max frequency</b>: sampleRate / 2 (Nyquist frequency)</li>
+  </ul>
+  <p>Try changing the FFT size and notice how the peaks become sharper or broader.
+    Try moving two component frequencies close together and increasing the FFT size to see them resolve into separate peaks.</p>
+
+</body>
+<script src="main.js"></script>
+
+</html>

@@ -61,6 +61,8 @@ you can find the [syllabus here](./syllabus.pdf)
 
 - Filters
 
+[Demo: FFT Explainer](./fft)
+
 [Demo: Biquad (and FFT visualizer)](./biquad)
 
 [Demo: Loading files](./loadFile)
