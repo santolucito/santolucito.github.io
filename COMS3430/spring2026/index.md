@@ -65,8 +65,6 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Biquad (and FFT visualizer)](./biquad)
 
-[Demo: Biquad on audio file](./biquad-file)
-
 [Demo: Loading files](./loadFile)
 
 [Demo: Granular Synthesis](./granular)

@@ -53,7 +53,7 @@ function initBiquad() {
     analyser = audioCtx.createAnalyser();
     biquadFilter.connect(analyser);
     analyser.connect(audioCtx.destination);
-    analyser.fftSize = 2048;
+    analyser.fftSize = 4096;
     bufferLength = analyser.frequencyBinCount;
     console.log(bufferLength);
     dataArray = new Uint8Array(bufferLength);
