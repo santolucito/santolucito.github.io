@@ -1,47 +1,21 @@
 # Assignment
 
-## Generative Art (20 pts)
+## Distributed Systems (20 pts)
+
+This is a group project. You must work in a group of 4-5.
 
 In this lab you will use your:
 
 - ESP32 TTGO T-display
-- battery
+- self-made enclosure
 
-The goal is to create a generative art installation in the fifth floor Milstein. 
-This is a collaborative installation project that we will complete as a class.
-We will hang everyone's ESP32 in a small paper envelop in the hallway with the elevators.
-The devices will run off a battery and be up for the duration of a clas period.
+This assignment requires that you work with the ESPNOW communication protocol to build a multiplayer game.  
 
-From a software perspective, you will write a single ESP32 program that visualizes a text of your choice on the screen of the ESP32.
+You will be assigned a team of four to five (depending on the class size) group members. Please contact the instructor and/or preceptor ahead of time if you have requests for group formation in the negative (i.e. we will honor preferences for people you do *not* want to work with, but will not accommodate preferences for who you do want to work with).
 
-### Task #1
+Your assignment will be to build some meaningful addition to the code here: https://github.com/santolucito/ESP32aceTeam
 
-(2 pts)
-
-Deadline listed on courseworks
-
-Start by running the example code shown in class.
-Record a video of your device running this example code, upload to a public video hosting platform, and submit the link on courseworks.
-
-### Task #2
-
-(18 points)
-
-Deadline listed on courseworks (the Sunday after the installation)
-
-This is an open-ended, creatively driven project. There are two main goals. The first goal is to introduce you to the challenge of working with an underspecified problem and writing code that is creatively driven rather than driven by specifications. The second goal is to get you comfortable with showing you art to the world in a low stakes way.
-
-Submit a link to your blog post on the course blog. That post should contain:
-
-### Project Specific Deliverables:
-
-(8 pts total - see below for breakdown) 
-
-A link to your git repository with a program that runs on the ESP32 TTGO T-Display to generate a visual for your display. The program must meet the following criteria:
-
-(5 pts) Be generative as discussed in class (i.e. cannot be the moral equivalent of a .gif).
-(2 pts) Uses a context-appropriate text
-(1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.
+As always, the standard deliverables. If working in a group, you may all submit the same code repository, but each need to submit your own blog. The post should detail, in your own words, the creative vision of the device you have created. You should detail the technical challenges you specifically (as opposed to other group members) faced during the implementation of the device.
 
 ### Standard Documentation Deliverables:
 

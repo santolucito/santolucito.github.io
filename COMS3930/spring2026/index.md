@@ -14,3 +14,15 @@ As such, we will follow a different schedule, including in some cases covering d
 You can find the [syllabus here](./syllabus.pdf)
 
 You can find [slides here](https://drive.google.com/drive/folders/1WrkcgqDK-MwQD_jio9iEe_7JEsKLnJxQ?usp=drive_link)
+
+## Homework 0
+
+Soldering Scultpure
+
+## Homework 1
+
+[PCB Pendant](./mod1.md)
+
+## Homework 2
+
+[ESP32 Battery Installation](./mod2)

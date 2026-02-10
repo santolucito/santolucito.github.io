@@ -1,21 +1,36 @@
 # Assignment
 
-## Distributed Systems (20 pts)
-
-This is a group project. You must work in a group of 4-5.
+## Interactive Devices (20 pts)
 
 In this lab you will use your:
 
 - ESP32 TTGO T-display
-- self-made enclosure
+- a button
+- a joystick
+- a potentiometer
 
-This assignment requires that you work with the ESPNOW communication protocol to build a multiplayer game.  
+The goal is to create an interactive device with the provided hardware. 
+The devices will run off wired power and send data back to your laptop for visualization, sonfication, or whatever media generation process you prefer.
 
-You will be assigned a team of four to five (depending on the class size) group members. Please contact the instructor and/or preceptor ahead of time if you have requests for group formation in the negative (i.e. we will honor preferences for people you do *not* want to work with, but will not accommodate preferences for who you do want to work with).
+From a hardware perspective, you will need to connect the specified components to the ESP32 and create an enclosure for the device.
+From a software perspective, you will write an ESP32 program that collects sensor data and sends it over either a serial or wifi connection to a laptop.
+You will also write a media generation program on your laptop to handle this data and create something interesting with it.
 
-Your assignment will be to build some meaningful addition to the code here: https://github.com/santolucito/ESP32aceTeam
+We will use a breadboard to connect all these components.
 
-As always, the standard deliverables. If working in a group, you may all submit the same code repository, but each need to submit your own blog. The post should detail, in your own words, the creative vision of the device you have created. You should detail the technical challenges you specifically (as opposed to other group members) faced during the implementation of the device.
+Deadline listed on courseworks
+
+Submit a link to your blog post on the course blog. That post should contain:
+
+### Project Specific Deliverables:
+
+(8 pts total - see below for breakdown) 
+
+A link to your git repository with a program that runs on the ESP32 TTGO T-Display, as well as the medi generation program (in a language of your choosing). The system must meet the following criteria:
+
+(5 pts) Be interactive as discussed in class.
+(2 pts) Utilize all three provided sensors.
+(1 pts) Is in the spirit of the class as broadly interpreted by the instructors. Art is subjective, we want you to get comfortable with this ethos.
 
 ### Standard Documentation Deliverables:
 
