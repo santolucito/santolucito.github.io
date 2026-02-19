@@ -11,9 +11,9 @@ const playGrain = (bufferSource, startPos) => {
   const duration = bufferSource.duration * Math.random()* 0.02;
   amp.gain.setValueAtTime(0.0, now);
   amp.gain.linearRampToValueAtTime(
-      Math.random()*0.5, now + duration * 0.1);
+      Math.random()*1.5, now + duration * 0.1);
   amp.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-  source.playbackRate.value = Math.random()*0.5+0.1;
+  source.playbackRate.value = Math.random()*0.2+1;
   source.start(
       now,
       startPos,
