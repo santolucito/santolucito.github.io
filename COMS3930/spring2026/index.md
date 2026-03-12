@@ -26,3 +26,7 @@ Soldering Scultpure
 ## Homework 2
 
 [ESP32 Battery Installation](./mod2)
+
+## Homework 3
+
+[ESP32 Battery Installation](./mod3)
