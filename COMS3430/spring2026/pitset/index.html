@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitch Set Theory Interactive Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .piano {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 3px;
+            margin-top: 15px;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .key {
+            padding: 15px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.85em;
+        }
+
+        .key:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .key.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .key-label {
+            font-size: 0.7em;
+            opacity: 0.7;
+            margin-top: 3px;
+        }
+
+        .result-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            border-radius: 3px;
+        }
+
+        .result-section h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .result-content {
+            color: #333;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            word-break: break-all;
+        }
+
+        .pitch-set-display {
+            font-size: 1.2em;
+            color: #667eea;
+            font-weight: bold;
+            padding: 15px;
+            background: #f0f4ff;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .operations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .operation-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .operation-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .transformation-result {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .transformation-result h4 {
+            color: #333;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+
+        .transformation-result .pitch-set {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .help-text {
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .composition-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+
+        .composition-card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .sequence-list {
+            background: #f9f9f9;
+            border: 2px dashed #e0e0e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            min-height: 60px;
+        }
+
+        .sequence-item {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 5px 5px 5px 0;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .sequence-item .remove {
+            margin-left: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .sequence-item .remove:hover {
+            opacity: 0.8;
+        }
+
+        .composition-output {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .composition-output h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .phrase-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .phrase-box {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            padding: 12px;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .phrase-box.active {
+            background: #ffd700;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+            transform: scale(1.05);
+        }
+
+        .phrase-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }
+
+        .phrase-notes {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #333;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+
+
+        @media (max-width: 768px) {
+            .main-grid, .operations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 Pitch Set Theory</h1>
+            <p>Interactive Transformation Tool</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Pitch Set Creator -->
+            <div class="card">
+                <h2>Create Pitch Set</h2>
+                <p class="help-text">Select pitches on the piano or enter numbers (0-11)</p>
+                <div class="piano" id="pianoKeyboard"></div>
+                <div class="pitch-set-display" id="currentPitchSet">Selected: {}</div>
+                <button onclick="clearPitchSet()">Clear</button>
+            </div>
+
+            <!-- Pitch Class Converter -->
+            <div class="card">
+                <h2>Pitch Class Converter</h2>
+                <div class="input-group">
+                    <label for="pcInput">Enter Number (0-11):</label>
+                    <input type="number" id="pcInput" min="0" max="11" placeholder="0-11">
+                </div>
+                <button onclick="convertPitchClass()">Convert to Note</button>
+                <div class="result-section" id="pcResult" style="display: none;">
+                    <h3>Result:</h3>
+                    <div class="result-content" id="pcResultContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Operations Grid -->
+        <div class="operations-grid">
+            <!-- Transposition -->
+            <div class="operation-card">
+                <h3>Transposition (T)</h3>
+                <p class="help-text">Move all pitches up by n semitones</p>
+                <div class="input-group">
+                    <label for="transposeAmount">Semitones to transpose:</label>
+                    <input type="number" id="transposeAmount" min="0" max="11" value="1" placeholder="0-11">
+                </div>
+                <button onclick="applyTransposition()">Transpose</button>
+                <div class="transformation-result" id="transposeResult" style="display: none;">
+                    <h4>Transposed Pitch Set:</h4>
+                    <div class="pitch-set" id="transposeResultSet"></div>
+                </div>
+            </div>
+
+            <!-- Transposition-Inversion -->
+            <div class="operation-card">
+                <h3>Transposition-Inversion (Ti)</h3>
+                <p class="help-text">Invert pitches, then transpose up by n semitones</p>
+                <div class="input-group">
+                    <label for="tiAmount">Semitones to transpose:</label>
+                    <input type="number" id="tiAmount" min="0" max="11" value="0" placeholder="0-11">
+                </div>
+                <button onclick="applyTI()">Apply Ti</button>
+                <div class="transformation-result" id="tiResult" style="display: none;">
+                    <h4>Transformed Pitch Set:</h4>
+                    <div class="pitch-set" id="tiResultSet"></div>
+                </div>
+            </div>
+
+            <!-- Inversion -->
+            <div class="operation-card">
+                <h3>Inversion (I)</h3>
+                <p class="help-text">Invert all pitches</p>
+                <button onclick="applyInversion()">Invert</button>
+                <div class="transformation-result" id="inversionResult" style="display: none;">
+                    <h4>Inverted Pitch Set:</h4>
+                    <div class="pitch-set" id="inversionResultSet"></div>
+                </div>
+            </div>
+
+            <!-- Pitch Set Info -->
+            <div class="operation-card">
+                <h3>Pitch Set Information</h3>
+                <button onclick="showPitchSetInfo()">Get Info</button>
+                <div class="transformation-result" id="infoResult" style="display: none;">
+                    <div id="infoResultContent"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Composition Generator -->
+        <div class="composition-card">
+            <h2>🎼 Automated Composition Generator</h2>
+            <p class="help-text">Build a sequence of transformations to generate a musical piece</p>
+
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: #667eea; margin-bottom: 10px;">📚 Load Example Composition</h3>
+                <p class="help-text">Try a composition from the original repository</p>
+                <button onclick="loadPreset('piece1')" style="background: #764ba2; width: 100%;">Load Piece 1 [0,1,2,3]</button>
+            </div>
+
+            <div class="input-group">
+                <label>Transformation Sequence</label>
+                <div style="display: grid; grid-template-columns: auto 1fr auto; gap: 10px;">
+                    <select id="operationType" style="width: auto;">
+                        <option value="t">Transposition (T)</option>
+                        <option value="ti">Transposition-Inversion (Ti)</option>
+                        <option value="i">Inversion (I)</option>
+                    </select>
+                    <input type="number" id="operationAmount" min="0" max="11" placeholder="Amount (0-11)" style="display: none;">
+                    <button onclick="addOperation()" style="width: auto;">Add to Sequence</button>
+                </div>
+                <div class="sequence-list" id="operationSequence"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="compositionOctaveOffset">Base Octave Offset (0-127):</label>
+                <input type="number" id="compositionOctaveOffset" min="0" max="127" value="60" placeholder="MIDI octave offset">
+                <p class="help-text">60 = middle C. MIDI range 0-127</p>
+            </div>
+
+            <button onclick="generateComposition()" style="margin-bottom: 20px;">Generate Composition</button>
+
+            <div id="compositionResult" style="display: none;">
+                <div class="composition-output">
+                    <h4>Generated Pitch Sequence</h4>
+                    <div class="pitch-sequence" id="compositionOutput"></div>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <h3 style="color: #667eea; margin-bottom: 10px;">Playback Controls</h3>
+                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 15px; margin-bottom: 15px;">
+                        <button onclick="playComposition()" style="margin-right: 10px;">▶ Play</button>
+                        <button onclick="stopComposition()" style="background: #764ba2;">⏹ Stop</button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: auto auto; gap: 15px; margin-bottom: 15px;">
+                        <label>
+                            <input type="range" id="tempoSlider" min="1" max="300" value="120" style="width: 150px; vertical-align: middle;">
+                            BPM: <span id="tempoValue">120</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" id="loopComposition" checked>
+                            Loop
+                        </label>
+                    </div>
+                    <div style="display: grid; grid-template-columns: auto auto; gap: 15px;">
+                        <label>
+                            <input type="checkbox" id="roundMode">
+                            Round Mode (layered phrases)
+                        </label>
+                        <label>
+                            Reverb: <input type="range" id="reverbAmount" min="0" max="100" value="40" style="width: 120px; vertical-align: middle;"> <span id="reverbValue">40</span>%
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="pitchset.js"></script>
+</body>
+</html>
