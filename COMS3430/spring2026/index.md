@@ -104,9 +104,9 @@ you can find the [syllabus here](./syllabus.pdf)
 
 [Demo: Magenta](./magenta)
 
-[Homework 5: Live Coding](/Lab4.md) -->
+[Homework 4: Live Coding](/Lab4.md) 
 
-## Music Information Retrieval (1 Week)
+[Homework 5: Live Coding](/Lab5.md)
 
 [Demo: Phone Control](./phonecontrol)
 

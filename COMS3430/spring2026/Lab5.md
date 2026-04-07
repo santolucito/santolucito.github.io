@@ -5,7 +5,6 @@ title: Lab5
 
 # Lab 5 - Automated Composition (12 pts)
 
-This lab should be turned in on by Nov 15.
 
 For this lab you will implement two automated composition techniques and reflect on the experience
 First, you will use the ```magenta.js``` library to implement neural network-driven composition.
@@ -16,20 +15,7 @@ As a reminder, these are:
 - Cellular Automata
 - Pitch Set Theory
 
-## Part I (2 pts)
-
-For this, you will start with the code at [Demo: Magenta](./magenta). Walk through this code to understand what is happening (it is gratuitously commented). You can check the reference material cited below for more information.
-
-You task is to hook this up to your synth from Lab2 (or a classmate's synth if you are not happy with your Lab2 synth).
-
-The tutorial on which this code is based: https://hello-magenta.glitch.me/
-
-Full API reference for Magenta.js is here:
-https://magenta.github.io/magenta-js/music/globals.html
-
-There is more you can do with Magenta.js. Check out some demos here: https://magenta.tensorflow.org/demos/web/
-
-## Part II (6 pts)
+## Part I (8 pts)
 
 Now we implement automated composition from scratch. Choose from below:
 
@@ -59,7 +45,7 @@ You do not need to implement a normalization procedure. You can assume the input
 
 Check the course slides for more information on pitch set theory resources.
 
-## Part II Extra Step (1 pt)
+## Part II (1 pt)
 
 Go above and beyond the expectations above.
 This point will be awarded to the top ~10% of submissions.
