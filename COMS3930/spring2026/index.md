@@ -30,3 +30,15 @@ Soldering Scultpure
 ## Homework 3
 
 [ESP32 Battery Installation](./mod3)
+
+## Homework 4
+
+Interactive Devices
+
+## Homework 5
+
+Pachinko Board
+
+## Final Project
+
+[Final Project](./final)

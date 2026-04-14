@@ -24,7 +24,7 @@ You will be evaluated on the following points:
 - Do you have a live demo of your device (2 points)
 - Did you complete your presentation before the 3 min timer went off (2 points)
 - Have you made concrete progress in a way that suggests to the instructor that you will have a complete submission by the deadline (2 points)
-- Have you provided feedback to your peers. At the time of presentation, each of you must post your slides to the discord #showcases channel and starting a thread. Students should provide feedback to your peers within that thread for project on which you have constructive comments. (3 points)
+- Have you provided feedback to your peers. At the time of presentation, each of you must post your slides to discussions section of courseworks, thereby starting a thread. Students should provide feedback to your peers within that thread for project on which you have constructive comments. (3 points)
 
 ### [Final Project Documentation](#documentation) (30 points)
 
