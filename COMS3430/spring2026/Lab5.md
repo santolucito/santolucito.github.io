@@ -6,9 +6,7 @@ title: Lab5
 # Lab 5 - Automated Composition (12 pts)
 
 
-For this lab you will implement two automated composition techniques and reflect on the experience
-First, you will use the ```magenta.js``` library to implement neural network-driven composition.
-Then, you will implement one of the three automated composition techniques we discussed this week from scratch.
+For this lab you will implement one of the three automated composition techniques we discussed in class from scratch.
 As a reminder, these are:
 
 - Markov Chain Learning
