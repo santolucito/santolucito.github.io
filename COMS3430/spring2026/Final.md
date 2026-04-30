@@ -47,10 +47,9 @@ Permission will only be granted under the circumstances of an exceptionally well
 - Quality of code. You should not have any copy-paste in your code. Your variable names should be sensible. Your functions should be short. Code should be appropriately commented. Etc, etc. Practice good development habits. (2 pts)
 - Subjective measure: Have you completed a project that goes above and beyond expectations. This measures how well you have understood the nature of working in a creative domain such as computational sound and the inherently self-direct style of exploration it requires. (4 pts)
 
-## Presentation (6 pts)
+## In-Presentation (6 pts)
 
-You will give submit a video demo of your work. 
-Do a screencast with sound. You do not need to show your face, but you should be speaking and explaining the work.
+You will either present in class or submit a video demo of your work in progress. 
 Your presentations should be 4 minutes per group member, up to a maximum of 10 minutes.
 
 ## Write up (6 pts)
