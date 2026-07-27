@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acceptance conditions for ω-automata — Büchi, co-Büchi, Rabin, Streett</title>
+<meta name="description" content="A visual reference for the four classical acceptance conditions on infinite runs: Büchi, co-Büchi, Rabin and Streett, with an interactive acceptance checker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Public+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#15181c; --ink2:#4a5058; --ink3:#7c838b;
+  --paper:#f4f5f3; --card:#ffffff; --rule:#dfe1dc;
+  --good:#17795c; --good-bg:#dcefe7;
+  --bad:#b3372b;  --bad-bg:#f7e3e0;
+  --neutral:#c2c7ca;
+  --display:"Newsreader",Georgia,serif;
+  --body:"Public Sans",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --maxw:940px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#e8eae6; --ink2:#adb3b0; --ink3:#858b8c;
+    --paper:#0f1214; --card:#171b1e; --rule:#2b3135;
+    --good:#59cba2; --good-bg:#12362c;
+    --bad:#e8776a;  --bad-bg:#3a1e1b;
+    --neutral:#4e565a;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px}
+a{color:inherit; text-underline-offset:3px; text-decoration-thickness:1px}
+h1,h2,h3{font-family:var(--display); font-weight:500; line-height:1.15; margin:0}
+h1{font-size:clamp(2.1rem,5.2vw,3.4rem); letter-spacing:-.015em}
+h2{font-size:clamp(1.5rem,3.2vw,2rem); letter-spacing:-.01em}
+h3{font-size:1.28rem}
+p{margin:0 0 1em}
+code,.mono{font-family:var(--mono); font-size:.92em; font-variant-ligatures:none}
+.eyebrow{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink3); margin:0 0 1.1rem
+}
+
+/* ---------- hero: the infinite run ---------- */
+.hero{padding:76px 0 20px; border-bottom:1px solid var(--rule)}
+.hero p.lede{
+  font-family:var(--display); font-size:clamp(1.05rem,2.2vw,1.3rem);
+  color:var(--ink2); max-width:34em; margin:1.1rem 0 0
+}
+.tape{
+  margin:44px 0 0; overflow:hidden; position:relative; padding:18px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+}
+.tape::before{
+  content:""; position:absolute; left:0; right:0; top:50%; height:1px;
+  background:var(--rule)
+}
+.tape-inner{display:flex; gap:26px; width:max-content; animation:drift 34s linear infinite}
+@keyframes drift{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tape-inner{animation:none}}
+.tape-cap{
+  display:flex; justify-content:space-between; font-family:var(--mono);
+  font-size:.72rem; color:var(--ink3); margin-top:2px
+}
+
+/* ---------- marks ---------- */
+.m{display:inline-block; flex:none; position:relative; z-index:1}
+.m.good{width:11px; height:11px; border-radius:50%; background:var(--good)}
+.m.bad{width:10px; height:10px; border-radius:2px; background:var(--bad)}
+.m.dot{width:7px; height:7px; border-radius:50%; background:var(--neutral)}
+
+.track{
+  display:flex; align-items:center; gap:22px; position:relative;
+  padding:14px 0; overflow-x:auto; scrollbar-width:none
+}
+.track::-webkit-scrollbar{display:none}
+.track::before{
+  content:""; position:absolute; left:0; right:34px; top:50%; height:1px;
+  background:var(--rule)
+}
+.track .tail{
+  font-family:var(--mono); color:var(--ink3); font-size:.9rem;
+  flex:none; margin-left:4px; position:relative; z-index:1
+}
+.cut{
+  flex:none; width:1px; height:26px; background:var(--ink3); opacity:.55;
+  position:relative; z-index:1
+}
+.track-label{
+  font-family:var(--mono); font-size:.72rem; color:var(--ink3);
+  flex:none; width:52px; position:relative; z-index:1
+}
+
+/* ---------- legend ---------- */
+.legend{
+  display:flex; flex-wrap:wrap; gap:8px 28px; padding:20px 0 0;
+  font-family:var(--mono); font-size:.78rem; color:var(--ink2)
+}
+.legend span{display:flex; align-items:center; gap:9px}
+
+/* ---------- sections ---------- */
+section{padding:64px 0}
+section + section{border-top:1px solid var(--rule)}
+.prose{max-width:62ch}
+.prose p{color:var(--ink2)}
+
+/* ---------- cards ---------- */
+.card{
+  background:var(--card); border:1px solid var(--rule); border-radius:10px;
+  padding:26px 28px; margin:26px 0
+}
+.card-head{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 16px;
+  margin-bottom:14px
+}
+.card-head h3{margin-right:auto}
+.tag{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.06em;
+  color:var(--ink3); border:1px solid var(--rule); border-radius:99px;
+  padding:2px 10px; white-space:nowrap
+}
+.formula{
+  font-family:var(--mono); font-size:1.02rem; color:var(--ink);
+  background:var(--paper); border:1px solid var(--rule); border-radius:6px;
+  padding:12px 16px; margin:0 0 14px; overflow-x:auto; white-space:nowrap
+}
+.gloss{color:var(--ink2); margin:0 0 6px; max-width:64ch}
+.note{
+  font-size:.9rem; color:var(--ink3); margin:10px 0 0; max-width:64ch;
+  border-left:2px solid var(--rule); padding-left:14px
+}
+
+/* ---------- checker ---------- */
+.checker{
+  background:var(--card); border:1px solid var(--rule); border-radius:10px;
+  padding:26px 28px; margin:26px 0
+}
+.chips{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 26px}
+.chip{
+  font-family:var(--mono); font-size:.86rem; color:var(--ink2);
+  background:transparent; border:1px solid var(--rule); border-radius:99px;
+  padding:7px 15px 7px 12px; cursor:pointer; display:flex; align-items:center;
+  gap:9px; transition:border-color .15s, color .15s, background .15s
+}
+.chip:hover{border-color:var(--ink3)}
+.chip:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
+.chip .m{opacity:.3; transition:opacity .15s}
+.chip[aria-pressed="true"]{color:var(--ink); border-color:var(--ink3)}
+.chip[aria-pressed="true"] .m{opacity:1}
+.chip[aria-pressed="true"].on-good{background:var(--good-bg); border-color:transparent}
+.chip[aria-pressed="true"].on-bad{background:var(--bad-bg); border-color:transparent}
+
+.verdicts{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:8px; overflow:hidden}
+.verdict{background:var(--card); padding:16px 18px}
+.verdict .vname{font-family:var(--display); font-size:1.08rem; margin-bottom:4px}
+.verdict .vstate{font-family:var(--mono); font-size:.8rem; letter-spacing:.06em; text-transform:uppercase}
+.verdict.acc .vstate{color:var(--good)}
+.verdict.rej .vstate{color:var(--bad)}
+.verdict .vwhy{font-size:.85rem; color:var(--ink3); margin-top:7px; line-height:1.5}
+
+/* ---------- table ---------- */
+.tbl{width:100%; border-collapse:collapse; font-size:.92rem; margin:22px 0 0}
+.tbl th,.tbl td{
+  text-align:left; padding:11px 14px 11px 0; border-bottom:1px solid var(--rule);
+  vertical-align:top
+}
+.tbl th{
+  font-family:var(--mono); font-size:.72rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink3); font-weight:400
+}
+.tbl td:first-child{font-family:var(--display); font-size:1.02rem; white-space:nowrap; padding-right:22px}
+.tbl td{color:var(--ink2)}
+
+footer{
+  border-top:1px solid var(--rule); padding:32px 0 60px;
+  font-size:.85rem; color:var(--ink3)
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  section{padding:48px 0}
+  .card,.checker{padding:20px 18px}
+  .track{gap:16px}
+  .track-label{width:44px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Büchi · co-Büchi · Rabin · Streett</p>
+    <h1>Acceptance conditions<br>for ω-automata</h1>
+    <p class="lede">A run on an infinite word never ends, so acceptance can't be “did we stop somewhere good?” It has to be a property of what happens <em>infinitely often</em>. Four classical answers, side by side.</p>
+  </div>
+  <div class="tape" aria-hidden="true">
+    <div class="tape-inner">
+      <i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m bad"></i><i class="m dot"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m bad"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m bad"></i><i class="m good"></i><i class="m dot"></i>
+      <i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m bad"></i><i class="m dot"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m bad"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m bad"></i><i class="m good"></i><i class="m dot"></i>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="tape-cap"><span>ρ = q₀ q₁ q₂ …</span><span>ω</span></div>
+    <div class="legend">
+      <span><i class="m good"></i> good set — F, Gᵢ</span>
+      <span><i class="m bad"></i> bad set — Bᵢ</span>
+      <span><i class="m dot"></i> everything else</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap prose">
+    <p class="eyebrow">The one thing that matters</p>
+    <h2>Only the limit set counts</h2>
+    <p>For a run ρ, write <code>Inf(ρ)</code> for the set of states visited infinitely often. Since the state space is finite, <code>Inf(ρ)</code> is non-empty, and every finite prefix of the run is irrelevant to it. Every condition below is a predicate on <code>Inf(ρ)</code> and nothing else — two runs with the same limit set are accepted or rejected together.</p>
+    <p>Two abbreviations do all the work:</p>
+    <p class="formula">Inf(S) ≡ Inf(ρ) ∩ S ≠ ∅&nbsp;&nbsp;&nbsp;&nbsp;Fin(S) ≡ Inf(ρ) ∩ S = ∅</p>
+    <p>Read <code>Inf(S)</code> as “the run keeps coming back to S” and <code>Fin(S)</code> as “the run eventually leaves S and never returns.” Note that <code>Fin</code> is exactly <code>¬Inf</code> — the duality between the conditions falls out of that one fact.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">The four conditions</p>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>Büchi</h3>
+        <span class="tag">recurrence</span>
+        <span class="tag">GF φ</span>
+      </div>
+      <p class="formula">Inf(F)&nbsp;&nbsp;≡&nbsp;&nbsp;Inf(ρ) ∩ F ≠ ∅</p>
+      <p class="gloss">A single set F of accepting states. The run is accepted if it hits F again and again, forever. The simplest possible answer, and the one most tools are built around.</p>
+      <div class="track">
+        <span class="track-label">ρ</span>
+        <i class="m dot"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m good"></i>
+        <span class="tail">⋯</span>
+      </div>
+      <p class="note">The gaps between visits can grow without bound. Büchi says nothing about how often — only that there is always a next time.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>co-Büchi</h3>
+        <span class="tag">persistence</span>
+        <span class="tag">FG φ</span>
+      </div>
+      <p class="formula">Fin(F)&nbsp;&nbsp;≡&nbsp;&nbsp;Inf(ρ) ∩ F = ∅</p>
+      <p class="gloss">The complement of Büchi. Now F marks states the run must eventually stop visiting: there is some point after which the run stays out of F forever. Good for “eventually the system settles.”</p>
+      <div class="track">
+        <span class="track-label">ρ</span>
+        <i class="m bad"></i><i class="m bad"></i><i class="m dot"></i><i class="m bad"></i><span class="cut"></span><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i>
+        <span class="tail">⋯</span>
+      </div>
+      <p class="note">The vertical rule marks the last visit to F. Its position is unbounded — no fixed deadline exists, which is exactly why deterministic co-Büchi automata cannot express recurrence.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>Rabin</h3>
+        <span class="tag">∃ pair</span>
+        <span class="tag">Fin ∧ Inf</span>
+      </div>
+      <p class="formula">⋁ᵢ ( Fin(Bᵢ) ∧ Inf(Gᵢ) )</p>
+      <p class="gloss">A list of pairs (B₁,G₁) … (B_k,G_k). The run is accepted if <em>at least one</em> pair works out: the run eventually abandons Bᵢ for good, while returning to Gᵢ forever. One witnessing pair is enough; the others may fail freely.</p>
+      <div class="track">
+        <span class="track-label">pair i</span>
+        <i class="m bad"></i><i class="m dot"></i><i class="m bad"></i><span class="cut"></span><i class="m good"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m good"></i><i class="m dot"></i><i class="m good"></i>
+        <span class="tail">⋯</span>
+      </div>
+      <p class="note">Bᵢ stops (Fin) and Gᵢ keeps recurring (Inf) — the pair is witnessed. Because acceptance is a disjunction, Rabin sits naturally on the existential side: it is the condition you get from Safra determinization.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>Streett</h3>
+        <span class="tag">∀ pairs</span>
+        <span class="tag">Fin ∨ Inf</span>
+      </div>
+      <p class="formula">⋀ᵢ ( Fin(Bᵢ) ∨ Inf(Gᵢ) )</p>
+      <p class="gloss">The dual of Rabin. <em>Every</em> pair must hold, and each one is a promise rather than a demand: if the run keeps returning to Bᵢ, it must also keep returning to Gᵢ. Read Bᵢ as “request” and Gᵢ as “grant” and this is strong fairness — GF request → GF grant.</p>
+      <div class="track">
+        <span class="track-label">pair 1</span>
+        <i class="m bad"></i><i class="m good"></i><i class="m bad"></i><i class="m good"></i><i class="m bad"></i><i class="m good"></i><i class="m bad"></i><i class="m good"></i><i class="m bad"></i><i class="m good"></i>
+        <span class="tail">⋯</span>
+      </div>
+      <div class="track">
+        <span class="track-label">pair 2</span>
+        <i class="m bad"></i><i class="m bad"></i><span class="cut"></span><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i><i class="m dot"></i>
+        <span class="tail">⋯</span>
+      </div>
+      <p class="note">Pair 1 is satisfied by granting; pair 2 is satisfied by silence — the requests stop, so nothing is owed. Both must hold simultaneously for the run to be accepted.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Try it</p>
+    <h2>Check a run against all four</h2>
+    <div class="prose">
+      <p>Since acceptance depends only on <code>Inf(ρ)</code>, a run is fully described for our purposes by which sets it visits infinitely often. Toggle them and watch the four verdicts move.</p>
+    </div>
+    <div class="checker">
+      <p class="eyebrow" style="margin-bottom:0">In Inf(ρ)?</p>
+      <div class="chips" id="chips">
+        <button class="chip on-good" data-k="F"  aria-pressed="true"><i class="m good"></i>F</button>
+        <button class="chip on-bad"  data-k="B1" aria-pressed="false"><i class="m bad"></i>B₁</button>
+        <button class="chip on-good" data-k="G1" aria-pressed="true"><i class="m good"></i>G₁</button>
+        <button class="chip on-bad"  data-k="B2" aria-pressed="false"><i class="m bad"></i>B₂</button>
+        <button class="chip on-good" data-k="G2" aria-pressed="false"><i class="m good"></i>G₂</button>
+      </div>
+      <div class="verdicts" id="verdicts" aria-live="polite">
+        <div class="verdict" id="v-buchi"><div class="vname">Büchi</div><div class="vstate"></div><div class="vwhy"></div></div>
+        <div class="verdict" id="v-cobuchi"><div class="vname">co-Büchi</div><div class="vstate"></div><div class="vwhy"></div></div>
+        <div class="verdict" id="v-rabin"><div class="vname">Rabin</div><div class="vstate"></div><div class="vwhy"></div></div>
+        <div class="verdict" id="v-streett"><div class="vname">Streett</div><div class="vstate"></div><div class="vwhy"></div></div>
+      </div>
+      <p class="note">Büchi and co-Büchi use F. Rabin and Streett use the two pairs (B₁,G₁) and (B₂,G₂).</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap prose">
+    <p class="eyebrow">Relationships</p>
+    <h2>Duality, degeneracy, and where parity sits</h2>
+    <p>Push a negation through Rabin and De Morgan hands you Streett with the components swapped, because <code>¬Fin = Inf</code> and <code>¬Inf = Fin</code>. The same move takes Büchi to co-Büchi. Complementing an automaton is therefore free at the level of the acceptance condition — the cost is all in determinization.</p>
+    <p>Both single-set conditions are degenerate one-pair cases: Büchi is Rabin with B = ∅, and co-Büchi is Streett with G = ∅.</p>
+    <p>Parity is the condition expressible as both a Rabin and a Streett condition — the chain case, where the sets are linearly ordered by inclusion. That is why parity games are the ones that sit in NP ∩ co-NP and why parity is the target of choice for synthesis: it inherits the closure properties of Rabin and Streett while keeping memoryless determinacy for both players.</p>
+    <table class="tbl">
+      <thead><tr><th>Condition</th><th>Deterministic power</th><th>Games</th></tr></thead>
+      <tbody>
+        <tr><td>Büchi</td><td>Strictly weaker than ω-regular</td><td>Polynomial</td></tr>
+        <tr><td>co-Büchi</td><td>Strictly weaker; incomparable to Büchi</td><td>Polynomial</td></tr>
+        <tr><td>Parity</td><td>All of ω-regular</td><td>NP ∩ co-NP; quasi-polynomial</td></tr>
+        <tr><td>Rabin</td><td>All of ω-regular</td><td>NP-complete</td></tr>
+        <tr><td>Streett</td><td>All of ω-regular</td><td>co-NP-complete</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:26px">Memoryless strategies exist for the protagonist in Rabin games and for the antagonist in Streett games — the asymmetry is the same duality showing up in strategy complexity. The classic example separating deterministic Büchi from ω-regular is FG a: no deterministic Büchi automaton recognizes it.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap prose">
+    <p class="eyebrow">A note on conventions</p>
+    <h2>Which component carries the Inf?</h2>
+    <p>This page follows the HOA format convention: pairs are written (B, G) with <code>Fin</code> on the first component and <code>Inf</code> on the second, for both Rabin and Streett. That orientation makes the De Morgan duality literal — flip the connectives, swap Fin and Inf, and you have the other condition.</p>
+    <p>Many textbooks instead write Streett pairs as (E, F) with the condition “for all i, if F is visited infinitely often then E is too,” which puts the <code>Inf</code> on the first component. The conditions are the same; only the naming differs. It is worth flagging explicitly when teaching, because students reading two sources at once will otherwise conclude that one of them is wrong.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Acceptance conditions for ω-automata. Free to reuse and adapt.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var S = {F:true, B1:false, G1:true, B2:false, G2:false};
+
+  function set(id, ok, why){
+    var el = document.getElementById(id);
+    el.classList.toggle('acc', ok);
+    el.classList.toggle('rej', !ok);
+    el.querySelector('.vstate').textContent = ok ? 'Accepted' : 'Rejected';
+    el.querySelector('.vwhy').textContent = why;
+  }
+
+  function pair(b, g, n){
+    if (!S[b] && S[g]) return {ok:true,  why:'pair ' + n + ': B stops, G recurs'};
+    if (!S[b] && !S[g]) return {ok:false, why:'pair ' + n + ': G never recurs'};
+    if (S[b] && S[g])  return {ok:false, why:'pair ' + n + ': B keeps recurring'};
+    return {ok:false, why:'pair ' + n + ': B recurs, G does not'};
+  }
+
+  function render(){
+    set('v-buchi', S.F,
+      S.F ? 'F is visited infinitely often' : 'F is eventually abandoned');
+    set('v-cobuchi', !S.F,
+      S.F ? 'F keeps recurring' : 'F is eventually abandoned for good');
+
+    var p1 = pair('B1','G1',1), p2 = pair('B2','G2',2);
+    var rabin = p1.ok || p2.ok;
+    set('v-rabin', rabin,
+      rabin ? 'witnessed by ' + (p1.ok ? 'pair 1' : 'pair 2') + ' — one is enough'
+            : 'no pair is witnessed');
+
+    // Streett: for each pair, Fin(B) or Inf(G)
+    var s1 = !S.B1 || S.G1, s2 = !S.B2 || S.G2;
+    var streett = s1 && s2;
+    var why;
+    if (streett) why = 'every request that recurs is granted';
+    else if (!s1 && !s2) why = 'pairs 1 and 2 both leave a request ungranted';
+    else why = 'pair ' + (s1 ? 2 : 1) + ' leaves a recurring request ungranted';
+    set('v-streett', streett, why);
+  }
+
+  document.getElementById('chips').addEventListener('click', function(e){
+    var btn = e.target.closest('.chip');
+    if (!btn) return;
+    var k = btn.dataset.k;
+    S[k] = !S[k];
+    btn.setAttribute('aria-pressed', S[k] ? 'true' : 'false');
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
