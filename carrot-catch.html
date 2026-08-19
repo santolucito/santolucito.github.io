@@ -1,0 +1,905 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carrot Catcher</title>
+  <style>
+    :root {
+      --bg: #2c2f36;
+      --panel: #3a3f4b;
+      --soil1: #6a3b12;
+      --soil2: #7a4416;
+      --wall: #a86824;
+      --wallEdge: #8b531c;
+      --carrot: #f2a21a;
+      --carrotGlow: rgba(242,162,26,.45);
+      --leaf: #43c35f;
+      --ui: #f7f3e9;
+      --muted: rgba(247,243,233,.7);
+      --danger: #ff5a7a;
+      --good: #5cff8a;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: radial-gradient(1200px 700px at 50% 20%, #3a3f4b 0%, var(--bg) 60%, #1f2228 100%);
+      color: var(--ui);
+      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .wrap {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      box-sizing: border-box;
+    }
+
+    .frame {
+      width: min(1100px, 96vw);
+      aspect-ratio: 16 / 9;
+      background: linear-gradient(#4a4f5c, #2f333c);
+      border-radius: 22px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      padding: 14px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 16px;
+      background: #2b2f38;
+    }
+
+    .hint {
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      font-size: 14px;
+      color: var(--muted);
+      background: rgba(0,0,0,.18);
+      padding: 8px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(6px);
+      user-select: none;
+    }
+
+    .hint kbd {
+      font: 600 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: rgba(255,255,255,.12);
+      padding: 2px 7px;
+      border-radius: 7px;
+      margin: 0 2px;
+      color: var(--ui);
+    }
+
+    .toast {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.28);
+      color: var(--ui);
+      font-weight: 600;
+      letter-spacing: .2px;
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+      user-select: none;
+      text-align: center;
+      max-width: calc(100% - 24px);
+    }
+
+    .toast.show { opacity: 1; }
+    .toast small { display:block; font-weight: 500; color: var(--muted); margin-top: 2px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="frame">
+      <canvas id="c" width="1280" height="720"></canvas>
+      <div class="toast" id="toast"></div>
+      <div class="hint">
+        Move <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd>
+        · Restart <kbd>R</kbd> · Pause <kbd>P</kbd>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      // ====== Canvas setup ======
+      const canvas = document.getElementById("c");
+      const ctx = canvas.getContext("2d");
+      const toastEl = document.getElementById("toast");
+
+      const W = canvas.width;
+      const H = canvas.height;
+
+      // ====== Game config ======
+      const GRID_COLS = 23;
+      const GRID_ROWS = 13;
+      const TILE = 48; // fits 23*48=1104, 13*48=624
+      const BOARD_W = GRID_COLS * TILE;
+      const BOARD_H = GRID_ROWS * TILE;
+
+      const UI_H = H - BOARD_H; // top bar
+      const BOARD_X = Math.floor((W - BOARD_W) / 2);
+      const BOARD_Y = UI_H + Math.floor((H - UI_H - BOARD_H) / 2);
+
+      const COLORS = {
+        soil1: getCSS("--soil1"),
+        soil2: getCSS("--soil2"),
+        wall: getCSS("--wall"),
+        wallEdge: getCSS("--wallEdge"),
+        carrot: getCSS("--carrot"),
+        carrotGlow: getCSS("--carrotGlow"),
+        leaf: getCSS("--leaf"),
+        ui: getCSS("--ui"),
+        muted: getCSS("--muted"),
+        danger: getCSS("--danger"),
+        good: getCSS("--good"),
+      };
+
+      function getCSS(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      }
+
+      // Simple rounded rectangle
+      function roundRect(x, y, w, h, r) {
+        const rr = Math.min(r, w / 2, h / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + rr, y);
+        ctx.arcTo(x + w, y, x + w, y + h, rr);
+        ctx.arcTo(x + w, y + h, x, y + h, rr);
+        ctx.arcTo(x, y + h, x, y, rr);
+        ctx.arcTo(x, y, x + w, y, rr);
+        ctx.closePath();
+      }
+
+      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+      // ====== Maze (1=wall, 0=path) ======
+      // Hand-crafted to feel like the screenshot: chunky walls and corridors.
+      const MAZE = [
+        "11111111111111111111111",
+        "10000010000000000100001",
+        "10111010111101110101101",
+        "10100000100101000000101",
+        "10101111100101111110101",
+        "10001000000000000010001",
+        "11101011101111101010111",
+        "10000010000000000100001",
+        "10111110111101111111101",
+        "10100000100101000000101",
+        "10101111100101111110101",
+        "10001000000000000010001",
+        "11111111111111111111111",
+      ].map(row => row.split("").map(c => c === "1" ? 1 : 0));
+
+      // ====== Entities ======
+      const player = {
+        x: 0, y: 0, // pixels
+        r: 18,
+        speed: 220, // px/sec
+        vx: 0, vy: 0,
+        score: 0,
+        carrots: 0
+      };
+
+      const rival = {
+        x: 0, y: 0,
+        r: 18,
+        speed: 165, // slower than player
+        vx: 0, vy: 0,
+        score: 0,
+        carrots: 0,
+        path: [],
+        repathTimer: 0
+      };
+
+      const carrots = []; // {cx, cy, kind:"normal"|"gold"}
+      const MAX_CARROTS = 36;
+      let goldCarrot = null;
+
+      let level = 1;
+      let timeLeft = 180; // seconds
+      let paused = false;
+      let gameOver = false;
+
+      // ====== Input ======
+      const keys = new Set();
+      window.addEventListener("keydown", (e) => {
+        const k = e.key.toLowerCase();
+        if (["arrowup","arrowdown","arrowleft","arrowright","w","a","s","d","p","r"].includes(k)) e.preventDefault();
+        keys.add(k);
+
+        if (k === "p") togglePause();
+        if (k === "r") restart(true);
+        if (k === " " && gameOver) restart(true);
+      });
+      window.addEventListener("keyup", (e) => keys.delete(e.key.toLowerCase()));
+
+      function togglePause() {
+        if (gameOver) return;
+        paused = !paused;
+        showToast(paused ? "Paused" : "", paused ? "Press P to resume" : "");
+      }
+
+      // ====== Helpers: grid <-> world ======
+      function toCell(px, py) {
+        const x = Math.floor((px - BOARD_X) / TILE);
+        const y = Math.floor((py - BOARD_Y) / TILE);
+        return { x, y };
+      }
+
+      function cellCenter(cx, cy) {
+        return {
+          x: BOARD_X + cx * TILE + TILE / 2,
+          y: BOARD_Y + cy * TILE + TILE / 2
+        };
+      }
+
+      function isWallCell(cx, cy) {
+        if (cx < 0 || cy < 0 || cx >= GRID_COLS || cy >= GRID_ROWS) return true;
+        return MAZE[cy][cx] === 1;
+      }
+
+      // Circle vs tile collision (AABB-ish with correction)
+      function collideCircleWithWalls(ent) {
+        // Keep within board bounds
+        ent.x = clamp(ent.x, BOARD_X + ent.r, BOARD_X + BOARD_W - ent.r);
+        ent.y = clamp(ent.y, BOARD_Y + ent.r, BOARD_Y + BOARD_H - ent.r);
+
+        const minCx = Math.floor((ent.x - ent.r - BOARD_X) / TILE);
+        const maxCx = Math.floor((ent.x + ent.r - BOARD_X) / TILE);
+        const minCy = Math.floor((ent.y - ent.r - BOARD_Y) / TILE);
+        const maxCy = Math.floor((ent.y + ent.r - BOARD_Y) / TILE);
+
+        for (let cy = minCy; cy <= maxCy; cy++) {
+          for (let cx = minCx; cx <= maxCx; cx++) {
+            if (!isWallCell(cx, cy)) continue;
+
+            const rx = BOARD_X + cx * TILE;
+            const ry = BOARD_Y + cy * TILE;
+
+            const closestX = clamp(ent.x, rx, rx + TILE);
+            const closestY = clamp(ent.y, ry, ry + TILE);
+
+            const dx = ent.x - closestX;
+            const dy = ent.y - closestY;
+            const dist2 = dx*dx + dy*dy;
+
+            if (dist2 < ent.r*ent.r - 0.0001) {
+              const dist = Math.sqrt(dist2) || 0.0001;
+              const push = ent.r - dist;
+              ent.x += (dx / dist) * push;
+              ent.y += (dy / dist) * push;
+            }
+          }
+        }
+      }
+
+      // ====== Carrot placement ======
+      function clearCarrots() {
+        carrots.length = 0;
+        goldCarrot = null;
+      }
+
+      function placeCarrots() {
+        clearCarrots();
+
+        // Place gold carrot near center on a path cell
+        const centerCandidates = [];
+        for (let r = 0; r < 6; r++) {
+          for (let cy = Math.floor(GRID_ROWS/2) - r; cy <= Math.floor(GRID_ROWS/2) + r; cy++) {
+            for (let cx = Math.floor(GRID_COLS/2) - r; cx <= Math.floor(GRID_COLS/2) + r; cx++) {
+              if (cx < 0 || cy < 0 || cx >= GRID_COLS || cy >= GRID_ROWS) continue;
+              if (!isWallCell(cx, cy)) centerCandidates.push({cx, cy});
+            }
+          }
+        }
+        const pick = centerCandidates[Math.floor(Math.random() * centerCandidates.length)];
+        goldCarrot = { cx: pick.cx, cy: pick.cy, kind: "gold" };
+        carrots.push(goldCarrot);
+
+        // Place normal carrots randomly on path cells
+        const occupied = new Set([key(pick.cx, pick.cy)]);
+        while (carrots.length < MAX_CARROTS) {
+          const cx = 1 + Math.floor(Math.random() * (GRID_COLS - 2));
+          const cy = 1 + Math.floor(Math.random() * (GRID_ROWS - 2));
+          if (isWallCell(cx, cy)) continue;
+          const k = key(cx, cy);
+          if (occupied.has(k)) continue;
+
+          occupied.add(k);
+          carrots.push({ cx, cy, kind: "normal" });
+        }
+      }
+
+      function key(cx, cy) { return `${cx},${cy}`; }
+
+      function collectIfOnCarrot(ent, isPlayer) {
+        const c = toCell(ent.x, ent.y);
+        for (let i = 0; i < carrots.length; i++) {
+          const cr = carrots[i];
+          if (cr.cx === c.x && cr.cy === c.y) {
+            carrots.splice(i, 1);
+            const pts = (cr.kind === "gold") ? 15 : 1;
+            ent.score += pts;
+            ent.carrots += 1;
+
+            if (isPlayer) {
+              showToast(cr.kind === "gold" ? "+15 (GOLD!)" : "+1", cr.kind === "gold" ? "Nice." : "");
+            }
+
+            return true;
+          }
+        }
+        return false;
+      }
+
+      // ====== BFS pathfinding for rival ======
+      function bfsPath(start, goal) {
+        // start/goal: {x,y} in cells
+        const q = [];
+        const prev = new Map();
+        const startK = key(start.x, start.y);
+        prev.set(startK, null);
+        q.push(start);
+
+        const dirs = [[1,0],[-1,0],[0,1],[0,-1]];
+        while (q.length) {
+          const cur = q.shift();
+          if (cur.x === goal.x && cur.y === goal.y) break;
+          for (const [dx,dy] of dirs) {
+            const nx = cur.x + dx, ny = cur.y + dy;
+            if (isWallCell(nx, ny)) continue;
+            const nk = key(nx, ny);
+            if (prev.has(nk)) continue;
+            prev.set(nk, cur);
+            q.push({x:nx, y:ny});
+          }
+        }
+
+        const goalK = key(goal.x, goal.y);
+        if (!prev.has(goalK)) return []; // unreachable
+
+        // Reconstruct
+        const path = [];
+        let cur = goal;
+        while (cur) {
+          path.push(cur);
+          cur = prev.get(key(cur.x, cur.y));
+        }
+        path.reverse();
+        return path;
+      }
+
+      function rivalChooseTarget() {
+        if (carrots.length === 0) return null;
+
+        // nearest carrot (by Manhattan) among a sample for speed
+        const rCell = toCell(rival.x, rival.y);
+        let best = null;
+        let bestD = Infinity;
+
+        // Sample up to 20 carrots
+        const sampleCount = Math.min(20, carrots.length);
+        for (let s = 0; s < sampleCount; s++) {
+          const cr = carrots[Math.floor(Math.random() * carrots.length)];
+          const d = Math.abs(cr.cx - rCell.x) + Math.abs(cr.cy - rCell.y);
+          // bias toward gold if not too far
+          const bias = (cr.kind === "gold") ? -3 : 0;
+          const scoreD = d + bias;
+          if (scoreD < bestD) { bestD = scoreD; best = cr; }
+        }
+        return best;
+      }
+
+      // ====== Start positions ======
+      function spawn(ent, corner = "left") {
+        // Find an open cell near a corner
+        const candidates = [];
+        const xRange = corner === "left" ? [1, 6] : [GRID_COLS-7, GRID_COLS-2];
+        const yRange = corner === "left" ? [GRID_ROWS-6, GRID_ROWS-2] : [GRID_ROWS-6, GRID_ROWS-2];
+
+        for (let cy = yRange[0]; cy <= yRange[1]; cy++) {
+          for (let cx = xRange[0]; cx <= xRange[1]; cx++) {
+            if (!isWallCell(cx, cy)) candidates.push({cx, cy});
+          }
+        }
+        const cell = candidates[Math.floor(Math.random() * candidates.length)];
+        const p = cellCenter(cell.cx, cell.cy);
+        ent.x = p.x;
+        ent.y = p.y;
+        ent.vx = ent.vy = 0;
+      }
+
+      // ====== Game loop ======
+      let last = performance.now();
+
+      function restart(showMsg=false) {
+        level = 1;
+        timeLeft = 180;
+        paused = false;
+        gameOver = false;
+
+        player.score = 0; player.carrots = 0;
+        rival.score = 0;  rival.carrots = 0;
+        rival.path = [];  rival.repathTimer = 0;
+
+        placeCarrots();
+        spawn(player, "left");
+        spawn(rival, "right");
+
+        if (showMsg) showToast("New Run", "Beat the rival bunny 🐇");
+      }
+
+      function nextLevel() {
+        level++;
+        timeLeft = Math.min(240, timeLeft + 40); // small time bonus
+        placeCarrots();
+        spawn(player, "left");
+        spawn(rival, "right");
+        rival.path = [];
+        rival.repathTimer = 0;
+        showToast(`Level ${level}`, "Carrots refilled.");
+      }
+
+      function endGame() {
+        gameOver = true;
+        paused = false;
+        const win = player.score >= rival.score;
+        showToast(
+          win ? "Time! You win 🥕" : "Time! Rival wins 🐇",
+          `You: ${player.score} · Rival: ${rival.score} — Press R to restart`
+        );
+      }
+
+      function update(dt) {
+        if (paused || gameOver) return;
+
+        // Timer
+        timeLeft -= dt;
+        if (timeLeft <= 0) {
+          timeLeft = 0;
+          endGame();
+          return;
+        }
+
+        // Player movement intent
+        let ix = 0, iy = 0;
+        if (keys.has("arrowleft") || keys.has("a")) ix -= 1;
+        if (keys.has("arrowright") || keys.has("d")) ix += 1;
+        if (keys.has("arrowup") || keys.has("w")) iy -= 1;
+        if (keys.has("arrowdown") || keys.has("s")) iy += 1;
+
+        // Normalize diagonal
+        if (ix !== 0 && iy !== 0) {
+          const inv = 1 / Math.sqrt(2);
+          ix *= inv; iy *= inv;
+        }
+
+        player.vx = ix * player.speed;
+        player.vy = iy * player.speed;
+
+        player.x += player.vx * dt;
+        player.y += player.vy * dt;
+        collideCircleWithWalls(player);
+
+        // Rival AI
+        rival.repathTimer -= dt;
+        if (rival.repathTimer <= 0 || rival.path.length === 0) {
+          const target = rivalChooseTarget();
+          if (target) {
+            const s = toCell(rival.x, rival.y);
+            const g = { x: target.cx, y: target.cy };
+            rival.path = bfsPath(s, g);
+          }
+          rival.repathTimer = 0.45; // re-evaluate often
+        }
+
+        // Follow path
+        if (rival.path.length > 1) {
+          const next = rival.path[1];
+          const p = cellCenter(next.x, next.y);
+
+          const dx = p.x - rival.x;
+          const dy = p.y - rival.y;
+          const d = Math.hypot(dx, dy) || 0.0001;
+
+          rival.vx = (dx / d) * rival.speed;
+          rival.vy = (dy / d) * rival.speed;
+
+          rival.x += rival.vx * dt;
+          rival.y += rival.vy * dt;
+
+          collideCircleWithWalls(rival);
+
+          // If close to next waypoint, pop it
+          if (Math.hypot(p.x - rival.x, p.y - rival.y) < 8) {
+            rival.path.shift();
+          }
+        } else {
+          rival.vx = rival.vy = 0;
+        }
+
+        // Collect carrots
+        collectIfOnCarrot(player, true);
+        collectIfOnCarrot(rival, false);
+
+        // If all carrots collected -> next level
+        if (carrots.length === 0) nextLevel();
+      }
+
+      function draw() {
+        // background
+        ctx.clearRect(0, 0, W, H);
+
+        // UI bar
+        drawUI();
+
+        // Board background (rounded)
+        ctx.save();
+        roundRect(BOARD_X - 18, BOARD_Y - 18, BOARD_W + 36, BOARD_H + 36, 40);
+        ctx.fillStyle = "rgba(0,0,0,.22)";
+        ctx.fill();
+        ctx.restore();
+
+        // Soil
+        drawSoil();
+
+        // Maze walls
+        drawWalls();
+
+        // Carrots
+        drawCarrots();
+
+        // Bunnies
+        drawBunny(rival, false);
+        drawBunny(player, true);
+
+        // Overlays
+        if (paused && !gameOver) {
+          ctx.save();
+          ctx.fillStyle = "rgba(0,0,0,.35)";
+          ctx.fillRect(0, 0, W, H);
+          ctx.fillStyle = COLORS.ui;
+          ctx.font = "800 54px ui-rounded, system-ui";
+          ctx.textAlign = "center";
+          ctx.fillText("Paused", W/2, H/2 - 10);
+          ctx.font = "600 18px ui-rounded, system-ui";
+          ctx.fillStyle = COLORS.muted;
+          ctx.fillText("Press P to resume", W/2, H/2 + 26);
+          ctx.restore();
+        }
+
+        if (gameOver) {
+          ctx.save();
+          ctx.fillStyle = "rgba(0,0,0,.35)";
+          ctx.fillRect(0, 0, W, H);
+          ctx.fillStyle = COLORS.ui;
+          ctx.font = "800 54px ui-rounded, system-ui";
+          ctx.textAlign = "center";
+          const win = player.score >= rival.score;
+          ctx.fillText(win ? "You win!" : "Rival wins!", W/2, H/2 - 20);
+          ctx.font = "700 20px ui-rounded, system-ui";
+          ctx.fillStyle = COLORS.muted;
+          ctx.fillText("Press R to restart", W/2, H/2 + 18);
+          ctx.restore();
+        }
+      }
+
+      function drawUI() {
+        // Top bar like the screenshot
+        ctx.save();
+        ctx.fillStyle = "#8d5a1f";
+        roundRect(BOARD_X - 18, 18, BOARD_W + 36, UI_H - 26, 30);
+        ctx.fill();
+
+        // Score/time panels
+        const pad = 18;
+        const boxW = 280;
+        const boxH = UI_H - 46;
+        const y = 28;
+
+        // left: player score
+        drawStatBox(BOARD_X - 2 + pad, y, boxW, boxH,
+          `${String(player.score).padStart(4,"0")}`, "YOU");
+
+        // right: rival score
+        drawStatBox(BOARD_X + BOARD_W + 2 - pad - boxW, y, boxW, boxH,
+          `${String(rival.score).padStart(4,"0")}`, "RIVAL");
+
+        // middle: timer
+        const midX = BOARD_X + BOARD_W/2;
+        ctx.fillStyle = "rgba(0,0,0,.18)";
+        roundRect(midX - 190, y, 380, boxH, 26);
+        ctx.fill();
+
+        const mm = Math.floor(timeLeft / 60);
+        const ss = Math.floor(timeLeft % 60);
+        const tStr = `${mm}:${String(ss).padStart(2,"0")}`;
+        ctx.fillStyle = COLORS.ui;
+        ctx.font = "900 64px ui-rounded, system-ui";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(tStr, midX, y + boxH/2 + 2);
+
+        // small level indicator
+        ctx.font = "700 18px ui-rounded, system-ui";
+        ctx.fillStyle = COLORS.muted;
+        ctx.textAlign = "center";
+        ctx.fillText(`Level ${level}`, midX, y + boxH - 16);
+
+        ctx.restore();
+      }
+
+      function drawStatBox(x, y, w, h, bigText, label) {
+        ctx.save();
+        ctx.fillStyle = "rgba(0,0,0,.18)";
+        roundRect(x, y, w, h, 26);
+        ctx.fill();
+
+        ctx.fillStyle = COLORS.ui;
+        ctx.font = "900 64px ui-rounded, system-ui";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText(bigText, x + 16, y + h/2);
+
+        ctx.font = "800 14px ui-rounded, system-ui";
+        ctx.fillStyle = COLORS.muted;
+        ctx.textAlign = "right";
+        ctx.fillText(label, x + w - 16, y + 20);
+        ctx.restore();
+      }
+
+      function drawSoil() {
+        ctx.save();
+        // base soil
+        ctx.fillStyle = COLORS.soil1;
+        roundRect(BOARD_X, BOARD_Y, BOARD_W, BOARD_H, 34);
+        ctx.fill();
+
+        // sprinkle pattern (like tiny carrots/leaves)
+        const sprCount = 260;
+        for (let i = 0; i < sprCount; i++) {
+          const rx = BOARD_X + 14 + Math.random() * (BOARD_W - 28);
+          const ry = BOARD_Y + 14 + Math.random() * (BOARD_H - 28);
+          const isLeaf = Math.random() < 0.35;
+          ctx.save();
+          ctx.translate(rx, ry);
+          ctx.rotate((Math.random() * Math.PI) / 2);
+          ctx.globalAlpha = 0.8;
+          ctx.fillStyle = isLeaf ? COLORS.leaf : "#ff9a2e";
+          roundRect(-6, -2.5, 12, 5, 3);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        ctx.restore();
+      }
+
+      function drawWalls() {
+        ctx.save();
+
+        // draw tiles with chunky rounded corners
+        for (let cy = 0; cy < GRID_ROWS; cy++) {
+          for (let cx = 0; cx < GRID_COLS; cx++) {
+            if (!isWallCell(cx, cy)) continue;
+            const x = BOARD_X + cx * TILE;
+            const y = BOARD_Y + cy * TILE;
+
+            // Inset for a softer look
+            const inset = 5;
+            const w = TILE - inset*2;
+            const h = TILE - inset*2;
+
+            // body
+            ctx.fillStyle = COLORS.wall;
+            roundRect(x + inset, y + inset, w, h, 14);
+            ctx.fill();
+
+            // edge shade
+            ctx.strokeStyle = COLORS.wallEdge;
+            ctx.lineWidth = 4;
+            ctx.globalAlpha = 0.55;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+
+        ctx.restore();
+      }
+
+      function drawCarrots() {
+        for (const cr of carrots) {
+          const p = cellCenter(cr.cx, cr.cy);
+          drawCarrot(p.x, p.y, cr.kind === "gold");
+        }
+      }
+
+      function drawCarrot(x, y, isGold) {
+        ctx.save();
+
+        // glow
+        ctx.globalAlpha = isGold ? 0.95 : 0.6;
+        ctx.fillStyle = COLORS.carrotGlow;
+        ctx.beginPath();
+        ctx.arc(x, y, isGold ? 26 : 18, 0, Math.PI*2);
+        ctx.fill();
+
+        // carrot body
+        ctx.globalAlpha = 1;
+        ctx.translate(x, y);
+        ctx.rotate(-0.25);
+
+        const bodyW = isGold ? 22 : 16;
+        const bodyH = isGold ? 44 : 32;
+
+        // body gradient-ish via two layers
+        ctx.fillStyle = isGold ? "#ffd26a" : COLORS.carrot;
+        roundRect(-bodyW/2, -bodyH/2 + 8, bodyW, bodyH, 10);
+        ctx.fill();
+
+        ctx.globalAlpha = 0.25;
+        ctx.fillStyle = "#ffffff";
+        roundRect(-bodyW/2 + 3, -bodyH/2 + 12, Math.max(6, bodyW*0.35), bodyH - 10, 8);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // tip
+        ctx.beginPath();
+        ctx.moveTo(-bodyW/2, bodyH/2 - 4);
+        ctx.lineTo(bodyW/2, bodyH/2 - 4);
+        ctx.lineTo(0, bodyH/2 + 14);
+        ctx.closePath();
+        ctx.fillStyle = isGold ? "#ffc84e" : "#f08f12";
+        ctx.fill();
+
+        // leaves
+        ctx.fillStyle = isGold ? "#7dff9c" : COLORS.leaf;
+        for (let i = 0; i < 3; i++) {
+          ctx.save();
+          ctx.rotate(-0.6 + i*0.6);
+          roundRect(-3, -bodyH/2 - 16, 6, 18, 4);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        ctx.restore();
+      }
+
+      function drawBunny(ent, isPlayer) {
+        const x = ent.x, y = ent.y;
+        ctx.save();
+
+        // shadow
+        ctx.globalAlpha = 0.22;
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.ellipse(x, y + 16, 16, 8, 0, 0, Math.PI*2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+
+        // body
+        const bodyColor = isPlayer ? "#ffffff" : "#fff0f4";
+        const outline = isPlayer ? "rgba(0,0,0,.18)" : "rgba(0,0,0,.16)";
+
+        // ears direction based on velocity
+        const ang = Math.atan2(ent.vy, ent.vx);
+        const moving = (Math.hypot(ent.vx, ent.vy) > 1);
+
+        ctx.translate(x, y);
+        ctx.rotate(moving ? ang * 0.15 : 0);
+
+        // ears
+        ctx.fillStyle = bodyColor;
+        ctx.strokeStyle = outline;
+        ctx.lineWidth = 3;
+
+        for (let s of [-1, 1]) {
+          ctx.save();
+          ctx.translate(8*s, -18);
+          ctx.rotate(0.1*s + (moving ? Math.sin(performance.now()/120)*0.08*s : 0));
+          roundRect(-6, -30, 12, 34, 8);
+          ctx.fill();
+          ctx.stroke();
+
+          // inner ear
+          ctx.globalAlpha = 0.55;
+          ctx.fillStyle = isPlayer ? "#ffced6" : "#ffc0cb";
+          roundRect(-3.5, -26, 7, 26, 6);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.restore();
+        }
+
+        // head
+        ctx.fillStyle = bodyColor;
+        ctx.beginPath();
+        ctx.arc(0, 0, ent.r, 0, Math.PI*2);
+        ctx.fill();
+        ctx.stroke();
+
+        // eyes
+        ctx.fillStyle = "#222";
+        const eyeY = -3;
+        ctx.beginPath(); ctx.arc(-6, eyeY, 2.4, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc( 6, eyeY, 2.4, 0, Math.PI*2); ctx.fill();
+
+        // nose
+        ctx.fillStyle = "#ff6b8a";
+        ctx.beginPath();
+        ctx.arc(0, 4, 2.8, 0, Math.PI*2);
+        ctx.fill();
+
+        // scarf for player
+        if (isPlayer) {
+          ctx.save();
+          ctx.translate(0, 14);
+          ctx.fillStyle = "#ffd26a";
+          roundRect(-16, -6, 32, 12, 10);
+          ctx.fill();
+          ctx.globalAlpha = 0.9;
+          roundRect(6, -2, 18, 8, 8);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        ctx.restore();
+      }
+
+      // ====== Toast ======
+      let toastTimer = 0;
+      function showToast(title, subtitle = "") {
+        if (!title) {
+          toastEl.classList.remove("show");
+          toastTimer = 0;
+          return;
+        }
+        toastEl.innerHTML = `${escapeHtml(title)}${subtitle ? `<small>${escapeHtml(subtitle)}</small>` : ""}`;
+        toastEl.classList.add("show");
+        toastTimer = 2.2;
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, m => ({
+          "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"
+        }[m]));
+      }
+
+      // ====== Main loop ======
+      function tick(now) {
+        const dt = Math.min(0.033, (now - last) / 1000);
+        last = now;
+
+        // toast lifetime
+        if (toastTimer > 0) {
+          toastTimer -= dt;
+          if (toastTimer <= 0) toastEl.classList.remove("show");
+        }
+
+        update(dt);
+        draw();
+        requestAnimationFrame(tick);
+      }
+
+      // ====== Boot ======
+      restart(false);
+      showToast("Carrot Catcher", "Collect carrots before time runs out!");
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
