@@ -32,6 +32,7 @@ Schedule and readings are tentative and will be adjusted as the semester progres
 Week 1 - Class introduction: prediction vs. reasoning, the case for structure
 - [On the Measure of Intelligence (Chollet, 2019)](https://arxiv.org/abs/1911.01547)
 - Thinking, Fast and Slow (Kahneman, 2011) - selected excerpts on System 1 and System 2
+- [Thinking Fast and Slow in AI (Booch, Rossi, et al., 2020)](https://arxiv.org/abs/2010.06002)
 
 Week 2 - The neurosymbolic landscape
 - [Neurosymbolic AI: The 3rd Wave (Garcez & Lamb, 2020)](https://arxiv.org/abs/2012.05876)
