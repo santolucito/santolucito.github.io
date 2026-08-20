@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurosymbolic AI Seminar Poster</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600;700&family=Bebas+Neue&display=swap');
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .poster {
+            width: 8.5in;
+            height: 11in;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 0.75in;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            margin: auto;
+        }
+
+        /* Animated background elements */
+        .neural-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .neural-bg svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .symbol-grid {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40%;
+            height: 60%;
+            opacity: 0.08;
+            background-image:
+                linear-gradient(90deg, #00d9ff 1px, transparent 1px),
+                linear-gradient(#00d9ff 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: skewX(-15deg);
+        }
+
+        /* Content layers */
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .header {
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .course-code {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #00d9ff;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+        }
+
+        .title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .title .highlight {
+            background: linear-gradient(135deg, #00d9ff 0%, #ff006e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline;
+            position: relative;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: #b8b8ff;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        /* Bridge element - visual metaphor */
+        .bridge {
+            display: flex;
+            align-items: stretch;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+            position: relative;
+            z-index: 3;
+        }
+
+        .paradigm {
+            flex: 1;
+            padding: 0.6rem;
+            border-radius: 4px;
+            backdrop-filter: blur(10px);
+            border: 1.5px solid;
+            font-size: 0.65rem;
+        }
+
+        .neural-side {
+            border-color: rgba(255, 0, 110, 0.4);
+            background: rgba(255, 0, 110, 0.05);
+        }
+
+        .symbolic-side {
+            border-color: rgba(0, 217, 255, 0.4);
+            background: rgba(0, 217, 255, 0.05);
+            text-align: right;
+        }
+
+        .paradigm-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .neural-side .paradigm-label {
+            color: #ff006e;
+        }
+
+        .symbolic-side .paradigm-label {
+            color: #00d9ff;
+        }
+
+        .paradigm-desc {
+            font-size: 0.65rem;
+            line-height: 1.3;
+            opacity: 0.9;
+        }
+
+        .connector {
+            width: 30px;
+            height: 1.5px;
+            background: linear-gradient(90deg, #ff006e, #00d9ff);
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .connector::before,
+        .connector::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00d9ff;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .connector::before {
+            left: -8px;
+            background: #ff006e;
+        }
+
+        .connector::after {
+            right: -8px;
+        }
+
+        .footer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.8s ease-out 0.2s both;
+            margin-top: auto;
+        }
+
+        .footer-section {
+            font-size: 0.65rem;
+            line-height: 1.4;
+        }
+
+        .footer-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.55rem;
+            letter-spacing: 0.8px;
+            color: #00d9ff;
+            margin-bottom: 0.2rem;
+        }
+
+        .footer-content {
+            color: #d0d0d0;
+        }
+
+        .cta-box {
+            background: rgba(0, 217, 255, 0.1);
+            border: 1.5px solid #00d9ff;
+            border-radius: 3px;
+            padding: 0.5rem;
+            text-align: center;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            font-size: 0.7rem;
+            color: #00d9ff;
+            letter-spacing: 0.3px;
+            animation: glow 2s ease-in-out infinite;
+            line-height: 1.3;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(0, 217, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                margin: 0;
+                padding: 0;
+            }
+            .poster {
+                box-shadow: none;
+                width: 8.5in;
+                height: 11in;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <!-- Background elements -->
+        <div class="neural-bg">
+            <svg viewBox="0 0 400 600" preserveAspectRatio="none">
+                <!-- Animated neural network visualization -->
+                <g stroke="rgba(255, 0, 110, 0.5)" stroke-width="0.5" fill="none">
+                    <circle cx="60" cy="100" r="8" />
+                    <circle cx="120" cy="80" r="6" />
+                    <circle cx="150" cy="150" r="7" />
+                    <circle cx="200" cy="120" r="6" />
+                    <line x1="60" y1="100" x2="120" y2="80" />
+                    <line x1="120" y1="80" x2="150" y2="150" />
+                    <line x1="150" y1="150" x2="200" y2="120" />
+                    <line x1="60" y1="100" x2="150" y2="150" />
+                    <line x1="120" y1="80" x2="200" y2="120" />
+                </g>
+            </svg>
+        </div>
+        <div class="symbol-grid"></div>
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="header">
+                <div class="course-code">COMS 3997 BC</div>
+                <h1 class="title">
+                    <span class="highlight">NEUROSYMBOLIC</span> AI
+                </h1>
+                <p class="subtitle">New Directions in Computing</p>
+            </div>
+
+            <!-- The bridge: two paradigms meeting -->
+            <div class="bridge">
+                <div class="paradigm neural-side">
+                    <div class="paradigm-label">Neural</div>
+                    <div class="paradigm-desc">Learning from data, pattern recognition, continuous approximation</div>
+                </div>
+                <div class="connector"></div>
+                <div class="paradigm symbolic-side">
+                    <div class="paradigm-label">Symbolic</div>
+                    <div class="paradigm-desc">Logic, reasoning, discrete structure, interpretability</div>
+                </div>
+            </div>
+
+            <!-- Footer with details -->
+            <div class="footer">
+                <div class="footer-section">
+                    <div class="footer-label">When</div>
+                    <div class="footer-content">Fall 2026</div>
+                </div>
+                <div class="footer-section">
+                    <div class="footer-label">Where</div>
+                    <div class="footer-content">Columbia University</div>
+                </div>
+            </div>
+
+            <div class="cta-box">
+                Join us as we explore the frontier where neural networks meet symbolic reasoning
+            </div>
+        </div>
+    </div>
+</body>
+</html>

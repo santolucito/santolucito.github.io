@@ -2,8 +2,12 @@
 layout: default
 title: COMS3997
 course_name: "New Directions in Computing"
-course_description: "A rotating topics seminar on emerging areas of computing, including program synthesis and arts and computing."
+course_description: "A rotating topics seminar on emerging areas of computing, including neurosymbolic AI, program synthesis, and arts and computing."
 ---
+
+# New Directions in Computing: Neurosymbolic AI (Fall 2026)
+
+[Course Site](./fall2026/)
 
 # New Directions in Computing: Program Synthesis seminar (Spring 2023)
 
