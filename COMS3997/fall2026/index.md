@@ -43,6 +43,7 @@ Week 3 - Classical program synthesis: inductive synthesis and search
 Week 4 - Neural program synthesis
 - [DeepCoder: Learning to Write Programs (Balog et al., 2017)](https://arxiv.org/abs/1611.01989)
 - [RobustFill: Neural Program Learning under Noisy I/O (Devlin et al., 2017)](https://arxiv.org/abs/1703.07469)
+- [Grammar Filtering for Syntax Guided Synthesis (Morton et al., AAAI 2020)](https://www.marksantolucito.com/papers/aaai2020.pdf)
 
 Week 5 - LLMs as code generators
 - [Evaluating Large Language Models Trained on Code (Chen et al., 2021)](https://arxiv.org/abs/2107.03374)
@@ -70,8 +71,12 @@ Week 11 - Autoformalization and proof sketching
 - [Autoformalization with Large Language Models (Wu et al., 2022)](https://arxiv.org/abs/2205.12615)
 - [Draft, Sketch, and Prove (Jiang et al., ICLR 2023)](https://arxiv.org/abs/2210.12283)
 
-Week 12 - Temporal logic as guardrails for agents
+Week 12 - Temporal logic and formal guardrails for agents
 - [Safe Reinforcement Learning via Shielding (Alshiekh et al., AAAI 2018)](https://arxiv.org/abs/1708.08611)
+- Automated reasoning in industry at AWS:
+  [Semantic-based Automated Reasoning for AWS Access Policies using SMT (Backes et al., FMCAD 2018)](https://www.amazon.science/publications/semantic-based-automated-reasoning-for-aws-access-policies-using-smt)
+  and [Automated Reasoning checks in Amazon Bedrock Guardrails](https://aws.amazon.com/bedrock/guardrails/)
+- Optional: [Cedar: A New Language for Expressive, Fast, Safe, and Analyzable Authorization (Cutler et al., 2024)](https://arxiv.org/abs/2403.04651)
 
 Week 13 - Project in-progress presentations
 
