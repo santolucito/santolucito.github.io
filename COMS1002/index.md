@@ -1,6 +1,8 @@
 ---
 layout: default
 title: COMS1002
+course_name: "Computing in Context: Computing and the Arts"
+course_description: "An introduction to computing through the arts — writing code to generate and manipulate multimedia, and examining authorship and the roles of artist, audience, and programmer in computational art."
 ---
  
 # Computing in Context: Computing and the Arts

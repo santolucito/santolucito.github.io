@@ -1,6 +1,8 @@
 ---
 layout: default
 title: COMS3930
+course_name: "Creative Embedded Systems"
+course_description: "Building interactive art and installations with embedded systems and microcontrollers."
 ---
 
 # Creative Embedded Systems

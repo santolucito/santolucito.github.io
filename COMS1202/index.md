@@ -1,6 +1,8 @@
 ---
 layout: default
 title: COMS1202
+course_name: "Methods and Problems in Computer Science"
+course_description: "A survey of methods and problems across computer science."
 ---
  
 # Methods and Problems in Computer Science

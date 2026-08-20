@@ -4,9 +4,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>{{ page.title }}</title>
     <link rel="stylesheet" href="/css/site.css" type="text/css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
-
+{% if page.course_name %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": {{ page.course_name | jsonify }},
+      "courseCode": {{ page.title | jsonify }},
+      "description": {{ page.course_description | jsonify }},
+      "url": "https://www.marksantolucito.com{{ page.url }}",
+      "provider": {
+        "@type": "CollegeOrUniversity",
+        "name": "Barnard College, Columbia University",
+        "url": "https://barnard.edu/"
+      },
+      "instructor": {
+        "@type": "Person",
+        "@id": "https://www.marksantolucito.com/#person",
+        "name": "Mark Santolucito",
+        "url": "https://www.marksantolucito.com/"
+      }
+    }
+    </script>
+{% endif %}
 </head>
 <body>
   <div class="container">

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: COMS3997
+course_name: "New Directions in Computing"
+course_description: "A rotating topics seminar on emerging areas of computing, including program synthesis and arts and computing."
 ---
 
 # New Directions in Computing: Program Synthesis seminar (Spring 2023)

@@ -1,6 +1,8 @@
 ---
 layout: default
 title: COMS3430
+course_name: "Computational Sound"
+course_description: "Working with sound computationally — digital audio fundamentals, synthesis, and music programming."
 ---
  
 
