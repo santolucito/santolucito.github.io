@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!--
+  Babbitt's Hexachord Theorem — an animated proof-by-sliding
+  ==========================================================
+  A 9:16 (vertical / Shorts-format) self-running visualization.
+
+  THE THEOREM
+  Split the 12 pitch classes of the chromatic scale into any two
+  complementary 6-note sets (a hexachord A, green, and its complement
+  B, red). For every distance d, A contains exactly as many pairs of
+  notes d semitones apart as B does — despite sharing no notes at all.
+  First stated by Milton Babbitt; first proved by Babbitt & Lewin,
+  then Ralph Fox. See S. K. Blau, Mathematics Magazine 72(4), 1999,
+  and Andreatta-Guichaoua-Juillet, arXiv:2402.00507, for history.
+
+  WHY THE SLIDING RING IS A PROOF
+  Sliding the outer copy of the clock by d is a bijection: every note
+  lands on exactly one position. The 6 green sliding notes must land
+  somewhere (green-on-green + leaks-out = 6) and the 6 green fixed
+  notes must be covered (green-on-green + leaks-in = 6). Same totals,
+  same first term, so leaks-out = leaks-in — which forces
+  red-on-red = green-on-green at every d. Nothing musical is used;
+  only that a rigid slide is a perfect matching.
+
+  WHAT YOU SEE
+  - Outer ring slides by d; green/red connectors mark same-set
+    landings, dashed gray marks mismatches ("leaks").
+  - Each same-set landing draws its interval chord inside the clock,
+    source-to-target, after a halo highlights the pair.
+  - The same intervals draw simultaneously as slurs on the two staves
+    below (real pitch content, treble clef, sharps).
+  - The tally counts green and red intervals live; each completed
+    slide deposits a "d: n = n" chip. Eleven equalities per lap is
+    the theorem.
+
+  KEYS
+  space pause/resume - left/right step d - N toggle pair numbers
+  B toggle A-only mode - R reset - click clock notes to change the set
+  (clicking a note into a 5-vs-7 split shows the generalized theorem:
+  the counts then differ by a constant |12 - 2|A||.)
+
+  Self-contained; fonts (Inter, Noto Music) from Google Fonts.
+  MIT license.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hexachord — 9:16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Music&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#ffffff;--panel:#f4f4f2;--ink:#111111;--mut:#6f6f6b;--hair:#e2e2de;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#ececea;}
+  body{display:flex;align-items:center;justify-content:center;font-family:Inter,system-ui,sans-serif;color:var(--ink);}
+  .stage{aspect-ratio:9/16;height:100vh;max-width:56.25vh;width:100vw;max-height:177.78vw;
+    background:var(--bg);display:flex;flex-direction:column;padding:3% 4% 2%;overflow:hidden;}
+  .dread{display:flex;align-items:baseline;justify-content:center;gap:.3em;margin-top:1vh;}
+  .dread .lbl{font-size:clamp(13px,2vh,20px);color:var(--mut);}
+  .dread .num{font-family:Inter,system-ui,sans-serif;font-weight:500;font-size:clamp(34px,6.4vh,66px);
+    min-width:1.3em;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);}
+  .clockwrap{flex:0 0 auto;display:flex;justify-content:center;margin-top:.5vh;}
+  .clockwrap svg{width:min(96%,52vh);}
+  svg{display:block}
+  .staves{margin-top:1vh;display:flex;flex-direction:column;gap:.6vh;flex:1 1 auto;min-height:0;justify-content:center;}
+  .staves svg{width:100%;height:auto;max-height:20vh;}
+  .tally{display:flex;align-items:baseline;justify-content:center;gap:.45em;padding:.4vh 0;}
+  .tally .tnum{font-family:Inter,system-ui,sans-serif;font-weight:500;font-size:clamp(26px,4.6vh,48px);
+    min-width:1.2em;text-align:center;font-variant-numeric:tabular-nums;}
+  .tally .teq{font-family:Inter,system-ui,sans-serif;font-size:clamp(20px,3.4vh,36px);color:var(--mut);min-width:1em;text-align:center;}
+  .hist{display:flex;justify-content:center;gap:.5%;padding:0 0 .8vh;flex-wrap:nowrap;min-height:3vh;}
+  .hist .chip{font-size:clamp(9px,1.4vh,13px);font-variant-numeric:tabular-nums;
+    border:1px solid var(--hair);border-radius:6px;padding:.25em .45em;color:var(--ink);background:var(--panel);white-space:nowrap;}
+  .hist .chip b{font-weight:500;color:#0c8a3e;}
+  .hist .chip i{font-style:normal;font-weight:500;color:#d1202a;}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="dread"><span class="lbl">slide</span><span class="num" id="dnum">0</span><span class="lbl">semitones</span></div>
+
+  <div class="clockwrap">
+    <svg id="clock" viewBox="0 0 340 340" style="" role="img" aria-label="Sliding ring over a fixed twelve-note clock">
+      <g id="chords"></g><g id="ticks"></g><g id="inner"></g><g id="outer"></g><g id="halos"></g>
+    </svg>
+  </div>
+
+  <div class="staves">
+    <svg id="staffA" viewBox="0 0 520 172" style="width:100%;height:auto;" role="img" aria-label="Hexachord A on a staff"></svg>
+    <svg id="staffB" viewBox="0 0 520 172" style="width:100%;height:auto;" role="img" aria-label="Complement B on a staff"></svg>
+  </div>
+
+  <div class="tally">
+    <span class="tnum" id="tg" style="color:#0c8a3e;">0</span>
+    <span class="teq" id="teq">·</span>
+    <span class="tnum" id="tr" style="color:#d1202a;">0</span>
+  </div>
+  <div class="hist" id="hist"></div>
+</div>
+
+<script>
+/* ---- geometry & state ---- */
+const NS="http://www.w3.org/2000/svg";
+const cx=170,cy=170,rIn=100,rOut=140;
+let inA=[1,1,0,1,0,1,1,0,0,1,0,0].map(x=>!!x);
+let d=0,angle=0,animId=null,seqId=null,playing=true,showNums=true,aOnly=false;
+let tgN=0,trN=0;
+function resetTally(){tgN=0;trN=0;
+  document.getElementById("tg").textContent="0";
+  document.getElementById("tr").textContent="0";
+  document.getElementById("teq").textContent="\u00B7";
+  document.getElementById("tr").style.visibility=aOnly?"hidden":"visible";
+  document.getElementById("teq").style.visibility=aOnly?"hidden":"visible";}
+function bumpTally(flag){if(flag)tgN++;else trN++;
+  document.getElementById("tg").textContent=tgN;
+  document.getElementById("tr").textContent=trN;}
+function finishTally(dd){
+  if(dd===0)return;
+  if(!aOnly)document.getElementById("teq").textContent=(tgN===trN?"=":"\u2260");
+  const chip=document.createElement("span");chip.className="chip";
+  chip.innerHTML="d"+dd+" <b>"+tgN+"</b>"+(aOnly?"":(tgN===trN?"=":"\u2260")+"<i>"+trN+"</i>");
+  document.getElementById("hist").appendChild(chip);}
+function clearHist(){document.getElementById("hist").innerHTML="";}
+const GREEN="#0c8a3e",GREENFILL="#12a94e",RED="#d1202a",REDFILL="#e5303a";
+const NODETX="#ffffff";
+const NOTEINK="#111111",NOTEDIM="#c9c9c4",STAFFLINE="#3c3c38",NEUTRAL="#c2c2bd";
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function setCol(flag){return flag?GREEN:RED;}
+function setFill(flag){return flag?GREENFILL:REDFILL;}
+
+function pos(i,r,rot){const a=((i*30+(rot||0))-90)*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+
+/* ---- the two rings (inner fixed, outer slides) ---- */
+function buildRing(gid,clickable){
+  const g=document.getElementById(gid);g.innerHTML="";
+  for(let i=0;i<12;i++){
+    const grp=document.createElementNS(NS,"g");grp.dataset.i=i;
+    const c=document.createElementNS(NS,"circle");
+    c.setAttribute("r",gid==="inner"?"14":"11");c.setAttribute("stroke-width","2");
+    const t=document.createElementNS(NS,"text");
+    t.setAttribute("text-anchor","middle");t.setAttribute("dy","3.5");
+    t.setAttribute("style","font-size:11px;font-weight:500;font-family:Inter;pointer-events:none;");
+    t.textContent=i;grp.appendChild(c);grp.appendChild(t);
+    if(clickable){grp.style.cursor="pointer";
+      grp.addEventListener("click",()=>{inA[i]=!inA[i];rebuildStaves();paint();settle();});}
+    g.appendChild(grp);
+  }
+}
+function paintRing(gid,rad,rot){
+  [...document.getElementById(gid).children].forEach(grp=>{
+    const i=+grp.dataset.i,p=pos(i,rad,rot),c=grp.firstChild,t=grp.lastChild,a=inA[i];
+    c.setAttribute("cx",p[0]);c.setAttribute("cy",p[1]);t.setAttribute("x",p[0]);t.setAttribute("y",p[1]);
+    c.setAttribute("fill",setFill(a));c.setAttribute("stroke",setCol(a));
+    c.setAttribute("fill-opacity",gid==="outer"?"0.45":"1");
+    t.setAttribute("fill",gid==="outer"?"#111111":NODETX);
+  });
+}
+function chordPairsOrdered(dd,flag){
+  const out=[];if(dd===0)return out;
+  const seen=new Set();
+  for(let x=0;x<12;x++){const y=(x+dd)%12;
+    if(inA[x]===flag&&inA[y]===flag){
+      const key=Math.min(x,y)+"-"+Math.max(x,y);
+      if(!seen.has(key)){seen.add(key);out.push([x,y]);}
+    }}
+  return out;}
+
+/* ---- landing connectors: who covers whom at this d ---- */
+function paintTicks(rot){
+  const ticks=document.getElementById("ticks");ticks.innerHTML="";
+  const norm=((rot%360)+360)%360;
+  const dd=Math.round(norm/30)%12;
+  if(Math.abs(norm-Math.round(norm/30)*30)>=0.5)return null;
+  for(let i=0;i<12;i++){
+    const tgt=(i+dd)%12,o=inA[i],t=inA[tgt];
+    const p1=pos(i,rOut,rot),p2=pos(tgt,rIn+14,0);
+    const len=Math.hypot(p2[0]-p1[0],p2[1]-p1[1]);
+    const trim=Math.min(13,len*0.4);
+    const s1=[p1[0]+(p2[0]-p1[0])/len*trim, p1[1]+(p2[1]-p1[1])/len*trim];
+    const L=document.createElementNS(NS,"line");
+    L.setAttribute("x1",s1[0]);L.setAttribute("y1",s1[1]);L.setAttribute("x2",p2[0]);L.setAttribute("y2",p2[1]);
+    if(o&&t){L.setAttribute("stroke",GREEN);L.setAttribute("stroke-width","2.5");}
+    else if(!o&&!t){
+      if(aOnly){L.setAttribute("stroke",NEUTRAL);L.setAttribute("stroke-width","1.2");}
+      else{L.setAttribute("stroke",RED);L.setAttribute("stroke-width","2.5");}
+    }
+    else{L.setAttribute("stroke",NEUTRAL);L.setAttribute("stroke-width","1.2");L.setAttribute("stroke-dasharray","3 3");}
+    ticks.appendChild(L);
+  }
+  return dd;
+}
+
+/* ---- staff notation (hand-rolled engraving; clef self-calibrates via getBBox) ---- */
+const DIA=[[0,0],[0,1],[1,0],[1,1],[2,0],[3,0],[3,1],[4,0],[4,1],[5,0],[5,1],[6,0]];
+const STAFF={top:56,gap:14,left:14,right:506,noteStart:96,noteEnd:478};
+function buildStaff(svgId,flag){
+  const s=document.getElementById(svgId);s.innerHTML="";
+  const {top,gap,left,right,noteStart,noteEnd}=STAFF;
+  const arcs=document.createElementNS(NS,"g");arcs.id=svgId+"-arcs";s.appendChild(arcs);
+  for(let l=0;l<5;l++){
+    const L=document.createElementNS(NS,"line");
+    L.setAttribute("x1",left);L.setAttribute("x2",right);
+    L.setAttribute("y1",top+l*gap);L.setAttribute("y2",top+l*gap);
+    L.setAttribute("stroke",STAFFLINE);L.setAttribute("stroke-width","1.3");
+    s.appendChild(L);
+  }
+  const clef=document.createElementNS(NS,"text");
+  clef.setAttribute("x","0");clef.setAttribute("y","0");
+  clef.setAttribute("style","font-family:'Noto Music';font-size:100px;fill:"+NOTEINK+";");
+  clef.textContent="\uD834\uDD1E";
+  s.appendChild(clef);
+  const bb=clef.getBBox();
+  if(bb.height>0){
+    const scale=(7.5*gap)/bb.height;
+    const tx=(left+4)-bb.x*scale, ty=(top-2*gap)-bb.y*scale;
+    clef.setAttribute("transform","translate("+tx+","+ty+") scale("+scale+")");
+  }
+  const notes=inA.map((v,i)=>i).filter(i=>inA[i]===flag);
+  const y0=top+5*gap+gap/2;
+  const noteg=document.createElementNS(NS,"g");noteg.id=svgId+"-notes";s.appendChild(noteg);
+  notes.forEach((pc,k)=>{
+    const x=noteStart+k*((noteEnd-noteStart)/Math.max(notes.length-1,1));
+    const [step,sharp]=DIA[pc];
+    const y=y0-step*(gap/2);
+    if(step===0){
+      const led=document.createElementNS(NS,"line");
+      led.setAttribute("x1",x-16);led.setAttribute("x2",x+16);
+      led.setAttribute("y1",y);led.setAttribute("y2",y);
+      led.setAttribute("stroke",STAFFLINE);led.setAttribute("stroke-width","1.3");
+      noteg.appendChild(led);
+    }
+    const e=document.createElementNS(NS,"ellipse");
+    e.setAttribute("cx",x);e.setAttribute("cy",y);e.setAttribute("rx","10.2");e.setAttribute("ry","7.7");
+    e.setAttribute("transform","rotate(-18 "+x+" "+y+")");
+    e.setAttribute("fill",NOTEDIM);e.setAttribute("stroke",NOTEDIM);e.setAttribute("stroke-width","1.4");
+    e.dataset.pc=pc;e.dataset.x=x;e.dataset.y=y;
+    noteg.appendChild(e);
+    if(sharp){
+      const sh=document.createElementNS(NS,"text");
+      sh.setAttribute("x",x-28);sh.setAttribute("y",y+8);
+      sh.dataset.accpc=pc;
+      sh.setAttribute("style","font-size:34px;fill:"+NOTEDIM+";font-family:'Noto Music',serif;");
+      sh.textContent="\u266F";noteg.appendChild(sh);
+    }
+  });
+}
+function staffHeads(svgId){
+  const heads={};
+  [...document.getElementById(svgId+"-notes").children].forEach(el=>{
+    if(el.dataset&&el.dataset.pc!==undefined)heads[el.dataset.pc]=[+el.dataset.x,+el.dataset.y];});
+  return heads;
+}
+function dimStaff(svgId){
+  [...document.getElementById(svgId+"-notes").children].forEach(el=>{
+    if(el.tagName==="ellipse"){el.setAttribute("fill",NOTEDIM);el.setAttribute("stroke",NOTEDIM);}
+    if(el.tagName==="text"&&el.dataset.accpc!==undefined)el.style.fill=NOTEDIM;
+  });
+  document.getElementById(svgId+"-arcs").innerHTML="";
+}
+function litNote(svgId,pc){
+  [...document.getElementById(svgId+"-notes").children].forEach(el=>{
+    if(el.tagName==="ellipse"&&+el.dataset.pc===pc){el.setAttribute("fill",NOTEINK);el.setAttribute("stroke",NOTEINK);}
+    if(el.tagName==="text"&&+el.dataset.accpc===pc)el.style.fill=NOTEINK;
+  });
+}
+
+function clearSeq(){if(seqId){clearTimeout(seqId);seqId=null;}}
+function drawAnimated(el,parent,dur,done){
+  parent.appendChild(el);
+  const len=el.getTotalLength?el.getTotalLength():Math.hypot(
+    +el.getAttribute("x2")-+el.getAttribute("x1"),+el.getAttribute("y2")-+el.getAttribute("y1"));
+  if(reduced||!(len>1)){if(done)done();return;}
+  el.setAttribute("stroke-dasharray",len);
+  el.setAttribute("stroke-dashoffset",len);
+  const t0=performance.now();
+  function step(t){
+    const u=Math.min((t-t0)/dur,1);
+    el.setAttribute("stroke-dashoffset",len*Math.pow(1-u,2));
+    if(u<1)requestAnimationFrame(step);
+    else{el.removeAttribute("stroke-dasharray");el.removeAttribute("stroke-dashoffset");if(done)done();}
+  }
+  requestAnimationFrame(step);
+}
+function badge(parent,x,y,col,n){
+  const bg=document.createElementNS(NS,"circle");
+  bg.setAttribute("cx",x);bg.setAttribute("cy",y);bg.setAttribute("r","8");
+  bg.setAttribute("fill","#ffffff");bg.setAttribute("stroke",col);bg.setAttribute("stroke-width","1.5");
+  parent.appendChild(bg);
+  const t=document.createElementNS(NS,"text");
+  t.setAttribute("x",x);t.setAttribute("y",y);t.setAttribute("dy","3.2");t.setAttribute("text-anchor","middle");
+  t.setAttribute("style","font-size:10px;font-weight:500;font-family:Inter;fill:"+col+";");
+  t.textContent=n;parent.appendChild(t);
+}
+function makeHalo(x,y,r,col){
+  const h=document.createElementNS(NS,"circle");
+  h.setAttribute("cx",x);h.setAttribute("cy",y);h.setAttribute("r",r);
+  h.setAttribute("fill","none");h.setAttribute("stroke",col);h.setAttribute("stroke-width","3");
+  h.setAttribute("opacity","0");
+  document.getElementById("halos").appendChild(h);
+  if(!reduced){
+    const t0=performance.now();
+    function fad(t){const u=Math.min((t-t0)/180,1);h.setAttribute("opacity",u*0.95);if(u<1)requestAnimationFrame(fad);}
+    requestAnimationFrame(fad);
+  } else h.setAttribute("opacity","0.95");
+  return h;
+}
+function fadeHalo(h){
+  if(reduced){h.remove();return;}
+  const start=parseFloat(h.getAttribute("opacity"))||0.95;
+  const t0=performance.now();
+  function fad(t){
+    const u=Math.min((t-t0)/500,1);
+    h.setAttribute("opacity",start*(1-u));
+    if(u<1)requestAnimationFrame(fad);else h.remove();
+  }
+  requestAnimationFrame(fad);
+}
+
+/* ---- the per-slide animation: halo pair, draw chord + slur, bump tally ---- */
+function runSequence(dd,onFinished){
+  clearSeq();
+  const chordg=document.getElementById("chords");chordg.innerHTML="";
+  document.getElementById("halos").innerHTML="";
+  dimStaff("staffA");dimStaff("staffB");
+  resetTally();
+  if(dd===0){clearHist();if(onFinished)onFinished();return;}
+  const jobs=[];
+  (aOnly?[true]:[true,false]).forEach(flag=>{
+    const heads=staffHeads(flag?"staffA":"staffB");
+    chordPairsOrdered(dd,flag).forEach((pr,idx)=>jobs.push({flag,pr,idx,heads}));
+  });
+  const HL=520, DRAW=340, GAP=150, GROUPGAP=900;
+  let j=0;
+  function next(){
+    if(j>=jobs.length){finishTally(dd);if(onFinished)seqId=setTimeout(onFinished,500);return;}
+    const {flag,pr,idx,heads}=jobs[j++];
+    const groupBreak=(j<jobs.length&&jobs[j].flag!==flag);
+    const col=setCol(flag);
+    const pi=pos(pr[0],rIn,0), po=pos(pr[0],rOut,angle);
+    const h1c=makeHalo(pi[0],pi[1],19,col);
+    const h2c=makeHalo(po[0],po[1],16,col);
+    seqId=setTimeout(()=>{
+      const q1=pos(pr[0],rIn-16,0),q2=pos(pr[1],rIn-16,0);
+      const C=document.createElementNS(NS,"line");
+      C.setAttribute("x1",q1[0]);C.setAttribute("y1",q1[1]);C.setAttribute("x2",q2[0]);C.setAttribute("y2",q2[1]);
+      C.setAttribute("stroke",col);C.setAttribute("stroke-width","3");
+      C.setAttribute("stroke-linecap","round");C.setAttribute("opacity","0.95");
+      drawAnimated(C,chordg,DRAW,()=>{
+        fadeHalo(h1c);fadeHalo(h2c);
+        bumpTally(flag);
+        if(showNums){
+          const t=0.34+(idx%3)*0.14;
+          badge(chordg,q1[0]+(q2[0]-q1[0])*t,q1[1]+(q2[1]-q1[1])*t,col,idx+1);
+        }
+      });
+      const svgId=flag?"staffA":"staffB";
+      const h1=heads[pr[0]],h2=heads[pr[1]];
+      if(h1&&h2){
+        const arcs=document.getElementById(svgId+"-arcs");
+        const yTop=Math.min(h1[1],h2[1]);
+        const lift=19+(idx%3)*13+Math.min(Math.abs(h2[0]-h1[0])*0.06,12);
+        const P=document.createElementNS(NS,"path");
+        P.setAttribute("d","M "+h1[0]+" "+(h1[1]-12)+" C "+h1[0]+" "+(yTop-lift)+", "+h2[0]+" "+(yTop-lift)+", "+h2[0]+" "+(h2[1]-12));
+        P.setAttribute("fill","none");P.setAttribute("stroke",col);P.setAttribute("stroke-width","2");
+        litNote(svgId,pr[0]);
+        drawAnimated(P,arcs,DRAW,()=>{
+          litNote(svgId,pr[1]);
+          if(showNums)badge(arcs,(h1[0]+h2[0])/2,yTop-lift+3,col,idx+1);
+        });
+      }
+      seqId=setTimeout(next,DRAW+GAP+(groupBreak?GROUPGAP:0));
+    },HL);
+  }
+  next();
+}
+
+function paint(){
+  paintRing("inner",rIn,0);paintRing("outer",rOut,angle);
+  paintTicks(angle);
+  document.getElementById("dnum").textContent=d;
+}
+function rebuildStaves(){buildStaff("staffA",true);buildStaff("staffB",false);}
+function settle(){
+  const dd=paintTicks(angle);
+  if(dd!==null)runSequence(dd,playing?()=>{seqId=setTimeout(()=>{if(playing)setD(d>=6?0:d+1,true);},700);}:null);
+}
+/* ---- rotation control: shortest-path slide, then settle & run sequence ---- */
+function setD(nd,animate){
+  d=((nd%12)+12)%12;
+  document.getElementById("dnum").textContent=d;
+  clearSeq();
+  document.getElementById("chords").innerHTML="";
+  document.getElementById("halos").innerHTML="";
+  dimStaff("staffA");dimStaff("staffB");
+  const target=d*30,start=angle;
+  let delta=(((target-start)%360)+540)%360-180;
+  if(playing&&delta<0)delta+=360;
+  if(!animate||reduced||Math.abs(delta)<0.5){angle=target;paint();settle();return;}
+  const t0=performance.now(),dur=Math.min(500+Math.abs(delta)*12,2200);
+  cancelAnimationFrame(animId);
+  function step(t){const u=Math.min((t-t0)/dur,1),e=u<0.5?2*u*u:1-Math.pow(-2*u+2,2)/2;
+    angle=start+delta*e;paint();
+    if(u<1)animId=requestAnimationFrame(step);
+    else{angle=target;paint();settle();}}
+  animId=requestAnimationFrame(step);
+}
+function applyAOnly(){
+  document.getElementById("staffB").style.display=aOnly?"none":"";
+  setD(d,false);
+}
+document.addEventListener("keydown",e=>{
+  if(e.code==="Space"){e.preventDefault();
+    playing=!playing;
+    if(playing)setD(d+1,true);else{cancelAnimationFrame(animId);clearSeq();}}
+  else if(e.key==="ArrowRight"){playing=false;setD(d+1,true);}
+  else if(e.key==="ArrowLeft"){playing=false;setD(d-1,true);}
+  else if(e.key==="n"||e.key==="N"){showNums=!showNums;setD(d,false);}
+  else if(e.key==="b"||e.key==="B"){aOnly=!aOnly;applyAOnly();}
+  else if(e.key==="r"||e.key==="R"){
+    playing=true;cancelAnimationFrame(animId);clearSeq();clearHist();
+    angle=0;d=0;setD(0,false);}
+});
+function init(){
+  buildRing("inner",true);buildRing("outer",false);
+  rebuildStaves();
+  paint();settle();
+}
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(init);}
+else init();
+</script>
+</body>
+</html>
