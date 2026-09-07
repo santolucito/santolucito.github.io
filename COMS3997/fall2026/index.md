@@ -9,7 +9,6 @@ title: COMS3997
 
 Prof. Mark Santolucito
 
-[Course poster](./poster.html)
 
 # Summary
 
@@ -27,20 +26,24 @@ Grading: participation and reading responses, paper presentation, and the final 
 
 Schedule and readings are tentative and will be adjusted as the semester progresses.
 
-## Module 1 - Why Neurosymbolic?
+## Week 1 - Class introduction: prediction vs. reasoning, the case for structure
 
-Week 1 - Class introduction: prediction vs. reasoning, the case for structure
+### Readings
 - [On the Measure of Intelligence (Chollet, 2019)](https://arxiv.org/abs/1911.01547)
 - Thinking, Fast and Slow (Kahneman, 2011) - selected excerpts on System 1 and System 2
 - [Thinking Fast and Slow in AI (Booch, Rossi, et al., 2020)](https://arxiv.org/abs/2010.06002)
 
-Week 2 - The neurosymbolic landscape
-- [Neurosymbolic AI: The 3rd Wave (Garcez & Lamb, 2020)](https://arxiv.org/abs/2012.05876)
+### Homework
+Start by solving some ARC tasks by hand. Pick one that is interesting. Write a program (feel free to us an LLM) that solves some tasks in 3 different programming paradigms (e.g. imperative, functional, logic). 
 
-## Module 2 - Program Synthesis and LLM-Guided Code Generation
+## Week 2 - The neurosymbolic landscape
+
+REMOTE Lecture 9-10
+
 
 Week 3 - Classical program synthesis: inductive synthesis and search
 - FlashFill: Automating String Processing in Spreadsheets Using Input-Output Examples (Gulwani, POPL 2011)
+- HBoMC2, Chapter on Program Synthesis (on courseworks)
 
 Week 4 - Neural program synthesis
 - [DeepCoder: Learning to Write Programs (Balog et al., 2017)](https://arxiv.org/abs/1611.01989)
@@ -51,7 +54,6 @@ Week 5 - LLMs as code generators
 - [Evaluating Large Language Models Trained on Code (Chen et al., 2021)](https://arxiv.org/abs/2107.03374)
 - [Competition-Level Code Generation with AlphaCode (Li et al., 2022)](https://arxiv.org/abs/2203.07814)
 
-## Module 3 - Learning as Program Induction
 
 Week 6 - Concept learning as program induction
 - Human-level concept learning through probabilistic program induction (Lake, Salakhutdinov, Tenenbaum, Science 2015)
@@ -62,9 +64,7 @@ Week 7 - Wake-sleep library learning
 Week 8 - Abstraction and compression
 - [Top-Down Synthesis for Library Learning / Stitch (Bowers et al., POPL 2023)](https://arxiv.org/abs/2211.16605)
 
-Week 9 - Abstraction benchmarks: ARC and beyond (project proposals due)
-
-## Module 4 - Formal Methods Meets Neural Systems
+Week 9 - (project proposals due)
 
 Week 10 - Neural theorem proving in Lean
 - [LeanDojo: Theorem Proving with Retrieval-Augmented Language Models (Yang et al., NeurIPS 2023)](https://arxiv.org/abs/2306.15626)
