@@ -20,7 +20,15 @@ Prerequisite: Advanced Programming or equivalent.
 
 Each week we will read and discuss 1-2 research papers. Every student will take a presentation role several times during the semester, and everyone posts a short reading response before each class. The second deliverable is a hands-on project, done individually or in pairs — building, extending, or empirically studying a neurosymbolic system — with a proposal, an in-progress presentation, and a final writeup and presentation.
 
-Grading: participation and reading responses, paper presentations, and the final project. (Exact breakdown on the syllabus.)
+*Grading*
+
+
+| Component | Weight |
+| --- | --- |
+| Participation and reading responses | 20% |
+| Paper presentation (Author) | 25% |
+| Paper presentation (Champion, Critic, Implementer) | 15% (5% x 3) |
+| Final project | 40% |
 
 ## Presentations
 
