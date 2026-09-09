@@ -41,6 +41,7 @@ Schedule and readings are tentative and will be adjusted as the semester progres
 
 ## 1
 Basics of live coding in Rattle, communities
+
 *hw* live code on stream with rattle https://forg-lab.github.io/rattle/
 
 - [TOPLAP ManifestoDraft](https://toplap.org/wiki/ManifestoDraft)
@@ -48,12 +49,14 @@ Basics of live coding in Rattle, communities
 
 ## 2
 pattern based languages with Strudel/Tidal, visuals with [Hydra](https://hydra.ojack.xyz/)
+
 *hw* live code on stream with strudel https://strudel.cc/
 
 - McLean - Making programming languages to dance to: Live coding with Tidal (FARM, 2014)
 
 ## 3
 An impressive display of manual dexterity
+
 *hw* practice vim bindings https://vim-adventures.com/ https://www.vim-hero.com/
 
 - [Live Coding: A User's Manual (Blackwell, Cocker, Cox, McLean, Magnusson, 2022)](https://livecodingbook.toplap.org/) - selected chapters
@@ -70,6 +73,7 @@ From Vim to Autocomplete to LLMs. The meaning of intention and control in code.
 
 ## 6
 Language paradigms - ergonomics of syntax and semantics
+
 *hw* vibe code your own live coding language
 
 - Steele - Growing a Language (OOPSLA, 1998) https://www.youtube.com/watch?v=lw6TaiXzHAE
@@ -93,6 +97,7 @@ Live coding beyond music - dance, textiles, games
 
 ## 10
 going beyond the screen - connecting to physical interfaces
+
 *hw* connect some external device for parameter control
 
 ## 11
