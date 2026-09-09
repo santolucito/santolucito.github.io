@@ -57,7 +57,7 @@ In pairs, start by solving some ARC v1 tasks by hand. Pick one that is interesti
 
 ### Week 2 - Pure Symbolic Methods
 
-*REMOTE Lecture 9-10*
+*REMOTE Lecture 9am-10am*
 
 *In class*
 Intro to Satisfiability Modulo Theories (SMT) and Inductive Logic Programming 
