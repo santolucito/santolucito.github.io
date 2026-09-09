@@ -19,60 +19,91 @@ Students will read and discuss key texts, develop their own live coding practice
 
 # Course Structure
 
-Each week combines seminar discussion of readings with hands-on live coding practice. Every student will lead at least one discussion during the semester and post a short reading response before each class. Alongside the readings, students will develop a personal live coding practice through a series of short in-class performances (études). The final étude asks each student to design - with AI assistance - a small bespoke live coding language of their own and perform in it. The course culminates in a final performance and an accompanying written artist statement situating the work in the ideas of the course.
+Each week combines seminar discussion of readings with hands-on live coding practice. Every student will lead at least one discussion during the semester and post a short reading response before each class. Alongside the readings, students will develop a personal live coding practice through a series of short in-class performances (études).
 
-Grading: participation and reading responses, discussion leading, études, and the final performance and writeup. (Exact breakdown on the syllabus.)
+One of the most important parts of Live Coding, as with any performance practice, is practice.
+To the end, we will have a component to this class which involves regular public performance of life coding.
+Our plan is to set up a Twitch live stream, for which we all have access, and will live code on.
+Everyone will be required to live code for one hour a week on this channel.
+You'll also be expected to do 20 minutes (across 2 periods of 10 minutes) of listening on this channel to your peers, and to leave comments during their sessions.
+The goal of this is both to get practice live coding, but also to practice live coding in (virtual) public setting.
+
+Grading:
+
+- participation and reading responses (30%)
+- Twitch live coding (15%) (1% x 10 streams + 0.25% x 20 listening sessions  )
+- in class études (25%)
+- Algoraves (30% - 10% x 3)
 
 # Schedule
 
 Schedule and readings are tentative and will be adjusted as the semester progresses.
 
-## Module 1 - What is Live Coding?
+## 1
+Basics of live coding in Rattle, communities
+*hw* live code on stream with rattle https://forg-lab.github.io/rattle/
 
-Week 1 - Class introduction: code as performance, performance as code
 - [TOPLAP ManifestoDraft](https://toplap.org/wiki/ManifestoDraft)
-- Collins, McLean, Rohrhuber, Ward - Live coding in laptop performance (Organised Sound, 2003)
+- Show Us Your Screens (documentary, 2011) https://louismccallum.com/portfolio/show-us-your-screens
 
-Week 2 - Histories and communities
+## 2
+pattern based languages with Strudel/Tidal, visuals with [Hydra](https://hydra.ojack.xyz/)
+*hw* live code on stream with strudel https://strudel.cc/
+
+- McLean - Making programming languages to dance to: Live coding with Tidal (FARM, 2014)
+
+## 3
+An impressive display of manual dexterity
+*hw* practice vim bindings https://vim-adventures.com/ https://www.vim-hero.com/
+
 - [Live Coding: A User's Manual (Blackwell, Cocker, Cox, McLean, Magnusson, 2022)](https://livecodingbook.toplap.org/) - selected chapters
 - Collins & McLean - Algorave: Live performance of algorithmic electronic dance music (NIME, 2014)
 
-## Module 2 - Languages to Perform With
+## 4
+Algorave - rattle
+*at Movement Lab*
 
-Week 3 - Language design for liveness: SuperCollider and just-in-time programming
-- Rohrhuber, de Campo, Wieser - Algorithms today: Notes on language design for just in time programming (ICMC, 2005)
+## 5
+From Vim to Autocomplete to LLMs. The meaning of intention and control in code.
 
-Week 4 - Patterns as programs: [TidalCycles](https://tidalcycles.org/) and [Strudel](https://strudel.cc/)
-- McLean - Making programming languages to dance to: Live coding with Tidal (FARM, 2014)
+- Aaron - Sonic Pi: performance in education, technology and art (2016) [Sonic Pi](https://sonic-pi.net/)
 
-Week 5 - Notation, instruments, and the human element of language design
-- Blackwell & Collins - The programming language as a musical instrument (PPIG, 2005)
-- Magnusson - Algorithms as Scores: Coding Live Music (Leonardo Music Journal, 2011)
-- Magnusson - Designing Constraints: Composing and Performing with Digital Musical Systems (Computer Music Journal, 2010)
+## 6
+Language paradigms - ergonomics of syntax and semantics
+*hw* vibe code your own live coding language
 
-Week 6 - Live coding beyond sound: visuals with [Hydra](https://hydra.ojack.xyz/), live coding in education with [Sonic Pi](https://sonic-pi.net/)
-- Aaron - Sonic Pi: performance in education, technology and art (2016)
+- Steele - Growing a Language (OOPSLA, 1998) https://www.youtube.com/watch?v=lw6TaiXzHAE
+- Magnusson - ixi lang: a SuperCollider parasite for live coding (ICMC, 2011)
 
-## Module 3 - The Artistic Practice of Live Coding
+## 7
+Showcase/critique of student languages
 
-Week 7 - Liveness, risk, and error
+- Creative Systems Framework
+
+## 8
+Algorave - your own language
+*at Movement Lab*
+
+## 9
+Live coding beyond music - dance, textiles, games
+
+- Sicchio - Hacking Choreography: Dance and Live Coding (Computer Music Journal, 2014)
+- Harlizius-Klück & McLean - Introduction: Weaving Codes, Coding Weaves (TEXTILE: The Journal of Cloth and Culture, 2017) https://www.tandfonline.com/doi/full/10.1080/14759756.2017.1298232
+- Cocker - Live Notation: Reflections on a Kairotic Practice (Performance Research, 2013)
+
+## 10
+going beyond the screen - connecting to physical interfaces
+*hw* connect some external device for parameter control
+
+## 11
+Laptop Orchestras: Networked live coding
+
+## 12
+Liveness, risk, and error. reflecting on the semester
+
 - Magnusson - Herding Cats: Observing Live Coding in the Wild (Computer Music Journal, 2014)
-
-Week 8 - Show us your screens: projection, legibility, and the audience
-- Show Us Your Screens (documentary, 2011)
 - Cox - Speaking Code: Coding as Aesthetic and Political Expression (2013) - selected chapters
 
-Week 9 - Embodiment and virtuosity (études showcase)
-
-## Module 4 - Code as Performance in the Age of AI
-
-Week 10 - When the machine writes the code: LLMs in live coding; authorship, labor, and the value of writing code live
-
-Week 11 - Languages on demand: AI-assisted design of bespoke live coding languages
-- Steele - Growing a Language (OOPSLA, 1998)
-- Magnusson - ixi lang: a SuperCollider parasite for live coding (ICMC, 2011)
-- étude: with AI assistance, grow a small bespoke language of your own and perform in it
-
-Week 12 - Final performance workshop
-
-Week 13 - Final performances + course wrap-up
+## 13
+Algorave
+*at Movement Lab*
