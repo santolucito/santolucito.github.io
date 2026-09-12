@@ -20,7 +20,7 @@ Other learning objectives:
 - Understand key areas and issues in computational art
 - Have the confidence to work with code in an array of artistic domains
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Og-QfiMmc2g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d32VBBa8GN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Pre-context labs
 
