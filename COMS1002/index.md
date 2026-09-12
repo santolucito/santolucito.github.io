@@ -20,7 +20,7 @@ Other learning objectives:
 - Understand key areas and issues in computational art
 - Have the confidence to work with code in an array of artistic domains
 
- ## [Try Rattle](https://forg-lab.github.io/rattle/)
+## [Try Rattle](https://forg-lab.github.io/rattle/)
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d32VBBa8GN4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
