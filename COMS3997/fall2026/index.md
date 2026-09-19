@@ -103,6 +103,7 @@ Write an enumerative program synthesis engine for programming by example
 
 - [Safe Reinforcement Learning via Shielding (Alshiekh, Bloem, Ehlers, Konighofer, Niekum, Topcu, AAAI 2018)](https://arxiv.org/abs/1708.08611)
 - [nl2spec: Interactively Translating Unstructured Natural Language to Temporal Logics with Large Language Models (Cosler, Hahn, Mendoza, Schmitt, Trippel, CAV 2023)](https://arxiv.org/abs/2303.04864)
+- Background (no presentation): [SVAEval: An Evaluation Framework for LLM-based SVA Property Generators (Shih, Cho, Gupta, Malik, FMCAD 2026)](https://repositum.tuwien.at/bitstream/20.500.12708/230567/1/Shih-2026-72SVAEval%20An%20Evaluation%20Framework%20for%20LLM-based%20SVA%20Property%20Ge...-vor.pdf)
 
 ### Week 9 - Lean
 
