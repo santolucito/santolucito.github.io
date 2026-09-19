@@ -102,7 +102,7 @@ Write an enumerative program synthesis engine for programming by example
 ### Week 8 - Temporal logic and Games
 
 - [Safe Reinforcement Learning via Shielding (Alshiekh, Bloem, Ehlers, Konighofer, Niekum, Topcu, AAAI 2018)](https://arxiv.org/abs/1708.08611)
-- [Mining Beyond the Bools: Learning Data Transformations and Temporal Specifications (Kouteili, Fishell, Scaff, Santolucito, Piskac, 2026)](https://arxiv.org/abs/2603.06710)
+- [nl2spec: Interactively Translating Unstructured Natural Language to Temporal Logics with Large Language Models (Cosler, Hahn, Mendoza, Schmitt, Trippel, CAV 2023)](https://arxiv.org/abs/2303.04864)
 
 ### Week 9 - Lean
 
