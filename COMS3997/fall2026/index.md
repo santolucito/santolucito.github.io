@@ -85,13 +85,14 @@ Write an enumerative program synthesis engine for programming by example
 
 ### Week 5 - Concept learning as program induction
 
-- [Human-level Concept Learning through Probabilistic Program Induction (Lake, Salakhutdinov, Tenenbaum, Science 2015)](https://www.cs.cmu.edu/~rsalakhu/papers/LakeEtAl2015Science.pdf)
 - [DreamCoder: Growing Generalizable, Interpretable Knowledge with Wake-Sleep Bayesian Program Learning (Ellis, Wong, Nye, Sable-Meyer, Cary, Morales, Hewitt, Solar-Lezama, Tenenbaum, PLDI 2021)](https://arxiv.org/abs/2006.08381)
-
-### Week 6 - Abstraction and compression
-
-- [babble: Learning Better Abstractions with E-Graphs and Anti-Unification (Cao, Kunkel, Nandi, Willsey, Tatlock, Polikarpova, POPL 2023)](https://arxiv.org/abs/2212.04596)
 - [Stitch: Top-Down Synthesis for Library Learning (Bowers, Olausson, Wong, Grand, Tenenbaum, Ellis, Solar-Lezama, POPL 2023)](https://arxiv.org/abs/2211.16605)
+- Optional: [Human-level Concept Learning through Probabilistic Program Induction (Lake, Salakhutdinov, Tenenbaum, Science 2015)](https://www.cs.cmu.edu/~rsalakhu/papers/LakeEtAl2015Science.pdf)
+
+### Week 6 - Types as specifications
+
+- [Program Synthesis from Polymorphic Refinement Types (Polikarpova, Kuraj, Solar-Lezama, PLDI 2016)](https://cseweb.ucsd.edu/~npolikarpova/publications/pldi16.pdf)
+- [Laurel: Unblocking Automated Verification with Large Language Models (Mugnier, Anaya Gonzalez, Polikarpova, Jhala, Zhou, OOPSLA 2025)](https://arxiv.org/abs/2405.16792)
 
 ### Week 7 - Looping models
 
