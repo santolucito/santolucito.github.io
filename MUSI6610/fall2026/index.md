@@ -70,6 +70,10 @@ pattern based languages with Strudel/Tidal, visuals with [Hydra](https://hydra.o
 From Vim to Autocomplete to LLMs. The meaning of intention and control in code.
 
 - Aaron - Sonic Pi: performance in education, technology and art (2016) [Sonic Pi](https://sonic-pi.net/)
+- [Blackwell & Collins - The Programming Language as a Musical Instrument (PPIG, 2005)](https://ppig.org/papers/2005-ppig-17th-blackwell/)
+- [Nilson - Live Coding Practice (NIME, 2007)](https://composerprogrammer.com/research/livecodingpractice.pdf)
+- [Magnusson - Of Epistemic Tools: Musical Instruments as Cognitive Extensions (Organised Sound, 2009)](https://cris.brighton.ac.uk/ws/files/217297/Of_epistemic_tools.pdf)
+- [Blackwell - Coding or AI? Tools for Control, Surprise and Creativity (PPIG, 2022)](https://www.ppig.org/files/2022-PPIG-33rd-blackwell.pdf)
 
 ## 5 — October 7
 
