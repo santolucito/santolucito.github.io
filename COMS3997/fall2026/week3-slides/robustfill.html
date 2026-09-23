@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RobustFill (Devlin et al., ICML 2017)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400..700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+  html, body { margin: 0; height: 100%; background: #0E131A; overflow: hidden; }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center center; }
+  .slide { position: absolute; inset: 0; display: none; }
+  .slide.active { display: block; }
+  .slide > section { position: relative; width: 1920px; height: 1080px; box-sizing: border-box; overflow: hidden; }
+  section * { margin: 0; box-sizing: border-box; }
+  section h1, section h2, section h3 { font-weight: 600; }
+  section table { border-collapse: collapse; }
+  section th, section td { padding: 0.35em 0.6em; text-align: left; vertical-align: top; border-bottom: 1px solid #DDD7C8; }
+  section th { font-weight: 600; }
+  section aside { display: none; }
+  x-shape { display: block; flex: none; }
+  x-shape[kind="ellipse"] { border-radius: 50%; }
+  x-shape[kind="rounded"] { border-radius: 16px; }
+  #notes { position: fixed; left: 0; right: 0; bottom: 0; max-height: 40vh; overflow: auto; display: none;
+           background: rgba(14,19,26,0.94); color: #E4EAF0; font: 16px/1.5 'IBM Plex Sans', Arial, sans-serif;
+           padding: 16px 24px; white-space: pre-wrap; border-top: 1px solid #2E3B4D; }
+  #notes.show { display: block; }
+  #counter { position: fixed; right: 12px; bottom: 8px; color: #8A939C; font: 13px 'IBM Plex Sans', Arial, sans-serif; }
+  #help { position: fixed; left: 12px; bottom: 8px; color: #5E6873; font: 13px 'IBM Plex Sans', Arial, sans-serif; }
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { overflow: visible; background: none; }
+    #stage { position: static; transform: none !important; width: auto; height: auto; }
+    .slide { position: relative; display: block; page-break-after: always; width: 1920px; height: 1080px; }
+    #notes, #counter, #help { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+<div class="slide" data-id="cover">
+<section id="cover" data-transition="fade" style="background:#1B2430; color:#F7F5EF; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:space-between">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#7FD1A5">COMS 3997 · Neurosymbolic AI · Week 3</p>
+  <div style="display:flex; flex-direction:column; gap:32px; width:840px">
+    <h1 style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.05; color:#F7F5EF">RobustFill</h1>
+    <p style="font-size:40px; line-height:1.3; color:#C9D3DC">Neural Program Learning under Noisy I/O</p>
+  </div>
+  <p style="font-size:32px; line-height:1.4; color:#C9D3DC; width:860px">Devlin, Uesato, Bhupatiraju, Singh, Mohamed, Kohli · ICML 2017</p>
+  <table style="position:absolute; left:1032px; top:300px; width:760px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; color:#F7F5EF; background:#243040; border-radius:16px">
+    <tr style="background:#2E3B4D"><th style="width:54%; color:#7FD1A5">Input</th><th style="width:46%; color:#7FD1A5">Output</th></tr>
+    <tr><td>john Smith</td><td>Smith, Jhn</td></tr>
+    <tr><td>DOUG Q. Macklin</td><td>Macklin, Doug</td></tr>
+    <tr><td>Frank Lee (123)</td><td>LEe, Frank</td></tr>
+    <tr><td>Laura Jane Jones</td><td>Jones, Laura</td></tr>
+    <tr><td>Steve P. Green (9)</td><td style="color:#7FD1A5">Green, Steve</td></tr>
+  </table>
+  <p style="position:absolute; left:1032px; top:730px; width:760px; font-size:24px; line-height:1.4; color:#9FB0BF">Figure 1 of the paper: the user's outputs contain typos (“Jhn”, “LEe”). The last row should still come out right.</p>
+  <aside>I'll present this as its author. The one thing to remember: learn the search. A neural network proposes programs in a FlashFill-style DSL, and executing them checks whether they're consistent. Because the proposer is learned, it can be trained to shrug off typos. The table is Figure 1 of the paper. Two of the example outputs have typos, so FlashFill's exact-match intersection would come back empty. The program the paper shows is GetToken(Alpha, -1) | ',' | ' ' | ToCase(Proper, GetToken(Alpha, 1)).</aside>
+</section>
+</div>
+<div class="slide" data-id="problem">
+<section id="problem" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">The problem</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Two ways to learn string programs, each lacking</h2>
+  <div style="display:flex; gap:40px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <h3 style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">Rule-based (FlashFill)</h3>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">Hand-crafted operator semantics, pruning and ranking. Accurate on clean examples.</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">But: “difficult to extend and fragile to noise”. Its efficiency rests on exact string matching.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <h3 style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">Neural (before this paper)</h3>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">Learned from data, so in principle extensible and tolerant of noise.</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">But: the best prior model (Parisotto et al., 2017) solved only 34% of real FlashFill tasks.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">2</p>
+  <aside>This is the gap we set out to close. Rule-based PBE systems like FlashFill work, but they're hand-engineered: each operator needs its inverse semantics written by hand, and exact matching means a typo breaks them. "Difficult to extend and fragile to noise" is our phrase from the introduction. The 34% figure is Parisotto et al.'s R3NN at beam 1000, from our Section 5.1 table. We also wanted the first head-to-head comparison of neural synthesis (generate a program) with neural induction (generate the output directly) on a real test set.</aside>
+</section>
+</div>
+<div class="slide" data-id="legacy">
+<section id="legacy" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <hr style="position:absolute; left:128px; top:430px; width:1664px; height:0px; border-top:3px solid #C9C3B3">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Where this comes from</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">From FlashFill to a neural FlashFill</h2>
+  <div style="display:flex; gap:40px; align-items:start">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <x-shape kind="ellipse" style="width:32px; height:32px; background:#1F7A4D"></x-shape>
+      <p style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">2011</p>
+      <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1B2430">FlashFill</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">Version spaces over a string DSL (POPL)</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <x-shape kind="ellipse" style="width:32px; height:32px; background:#1F7A4D"></x-shape>
+      <p style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">2013</p>
+      <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1B2430">Flash Fill in Excel</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">Ships in Excel 2013: program synthesis behind a single keystroke</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <x-shape kind="ellipse" style="width:32px; height:32px; background:#1F7A4D"></x-shape>
+      <p style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">2015</p>
+      <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1B2430">FlashMeta / PROSE</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">The same idea for any DSL (Polozov and Gulwani, OOPSLA)</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px">
+      <x-shape kind="ellipse" style="width:32px; height:32px; background:#1F7A4D"></x-shape>
+      <p style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">2017</p>
+      <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1B2430">RobustFill</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">A neural model on a FlashFill-style DSL, tolerating noisy examples (ICML). This paper.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">3</p>
+  <aside>This picks up from the FlashFill talk. FlashFill went from a POPL paper to Excel within two years, and FlashMeta turned its witness-function and version-space machinery into a framework for any DSL. RobustFill keeps a very similar DSL but replaces the symbolic search with a sequence model, partly to handle noisy examples, which is exactly where version-space intersection is brittle. The test set, FlashFillTest, came from the FlashFill authors.</aside>
+</section>
+</div>
+<div class="slide" data-id="keyidea">
+<section id="keyidea" data-transition="fade" style="background:#1F7A4D; color:#F7F5EF; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:48px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#D6EEDF">The one idea to remember</p>
+  <h1 style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.05; color:#F7F5EF">Learn the search. Let execution check it.</h1>
+  <p style="font-size:40px; line-height:1.35; color:#E6F4EB; width:1400px">A network trained on hundreds of millions of random programs proposes a beam of candidates. Running each one on the examples keeps only the consistent ones. Noise becomes something to train on, not something that empties the search.</p>
+  <aside>This is the slide to remember. FlashFill computes the exact set of consistent programs and then ranks them. We don't compute that set at all. A model proposes likely programs, and the DSL's deterministic interpreter filters them. That split, a neural proposer with a symbolic checker, is what makes this a neurosymbolic paper rather than a purely neural one. The training numbers are from Section 4.4: 2 million minibatches of 128 programs, so 256 million random programs.</aside>
+</section>
+</div>
+<div class="slide" data-id="contrast">
+<section id="contrast" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Side by side</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Same task, opposite machinery</h2>
+  <table style="width:1664px; font-size:28px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:20%; color:#F7F5EF"></th><th style="width:40%; color:#F7F5EF">FlashFill (2011)</th><th style="width:40%; color:#F7F5EF">RobustFill (2017)</th></tr>
+    <tr><td>Search</td><td>Version-space algebra: every consistent program, as DAGs; intersect</td><td>Beam search from a learned model</td></tr>
+    <tr><td>Prior</td><td>Hand-written ranking (Occam's razor)</td><td>Learned from 256M random programs</td></tr>
+    <tr><td>Consistency</td><td>Guaranteed by construction</td><td>Checked by executing each candidate</td></tr>
+    <tr><td>Noise</td><td>Exact matching; one heuristic flags a single odd example as a likely typo</td><td>Trained on noisy examples; pick by edit distance</td></tr>
+    <tr><td>Engineering</td><td>Inverse semantics for every operator</td><td>A DSL interpreter plus a random program generator</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">5</p>
+  <aside>This is the contrast to keep in mind for the rest of the talk. Both systems solve the same PBE problem over a similar DSL. FlashFill's guarantees come from exact reasoning, and so does its brittleness. We give up the guarantee that every consistent program was considered, but we get robustness and extensibility: to add an operator, you add it to the interpreter and the generator, and you don't write its inverse. FlashFill isn't defenceless against noise. Its Section 5.2 says that when the classifier fails, it drops a singleton partition, treats that example as a likely typo and asks the user (the "Kimberley" vs "Kimberly" example). That's a heuristic for one bad example, though, not robustness learned from data. Our noise handling is Section 7: train with synthetic character edits, and select the best program by character edit rate instead of exact match.</aside>
+</section>
+</div>
+<div class="slide" data-id="dsl">
+<section id="dsl" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">The language</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">A FlashFill-style DSL, with nesting and regex spans</h2>
+  <div style="display:flex; gap:48px; align-items:start">
+    <div style="width:900px; display:flex; flex-direction:column; gap:4px; background:#1B2430; border-radius:16px; padding:40px; font-family:'JetBrains Mono', 'Courier New', monospace">
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">p</span> := Concat(e1, e2, e3, …)</p>
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">e</span> := f | n | n1(n2) | n(f) | ConstStr(c)</p>
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">f</span> := SubStr(k1, k2)</p>
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF">&#160;&#160;&#160;| GetSpan(r1, i1, y1, r2, i2, y2)</p>
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">n</span> := GetToken(t, i) | ToCase(s)</p>
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF">&#160;&#160;&#160;| Replace(δ1, δ2) | Trim()</p>
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF">&#160;&#160;&#160;| GetUpto(r) | GetFrom(r)</p>
+      <p style="font-size:28px; line-height:1.5; color:#F7F5EF">&#160;&#160;&#160;| GetFirst(t, i) | GetAll(t)</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:40px">
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <p style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1F7A4D">~30M</p>
+        <p style="font-size:32px; line-height:1.4; color:#3E4A56">unique expressions e, concatenated into programs of any length</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <p style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1F7A4D">~20%</p>
+        <p style="font-size:32px; line-height:1.4; color:#3E4A56">of test tasks need GetSpan, which grew the search space 10×</p>
+      </div>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017 · Figure 2, Sections 3.2 and 5.1</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">6</p>
+  <aside>Figure 2 gives the syntax. Types t are Number, Word, Alphanum, AllCaps, PropCase, Lower, Digit and Char. Positions k run from -100 to 100, and indices i from -5 to 5, with negatives counting from the right. GetSpan returns the text between the i1-th match of r1 and the i2-th match of r2, and y picks the start or end of each match. From Section 3.2: there are about 30 million unique expressions, and search without inverse semantics can't prune partial expressions, so even dynamic programming would face millions of candidates. The 20% and 10× figures are from Section 5.1 and its footnote 6. Unlike FlashFill's DSL, there's no Switch or Loop: a program is a single concatenation.</aside>
+</section>
+</div>
+<div class="slide" data-id="setup">
+<section id="setup" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Synthesis, with induction as the baseline</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">RobustFill writes programs, not answers</h2>
+  <p style="position:absolute; left:128px; top:312px; width:1664px; font-size:28px; line-height:1.4; font-weight:600; color:#1F7A4D">Synthesis: this is RobustFill (Sections 4, 5 and 7)</p>
+  <x-connector x1="432" y1="408" x2="500" y2="408" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="768" y1="408" x2="836" y2="408" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="1244" y1="408" x2="1312" y2="408" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <div style="position:absolute; left:128px; top:360px; width:300px; height:96px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:12px"><p style="font-size:28px; line-height:1.3; text-align:center">4 I/O examples</p></div>
+  <div style="position:absolute; left:504px; top:360px; width:260px; height:96px; display:flex; align-items:center; justify-content:center; background:#1B2430; border-radius:12px"><p style="font-size:28px; line-height:1.3; text-align:center; color:#F7F5EF">Neural net</p></div>
+  <div style="position:absolute; left:840px; top:360px; width:400px; height:96px; display:flex; align-items:center; justify-content:center; background:#E3F1E8; border:2px solid #1F7A4D; border-radius:12px"><p style="font-size:28px; line-height:1.3; text-align:center; color:#1F7A4D">A DSL program P</p></div>
+  <div style="position:absolute; left:1316px; top:360px; width:476px; height:96px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:12px"><p style="font-size:28px; line-height:1.3; text-align:center">Interpreter runs P on new rows</p></div>
+  <p style="position:absolute; left:128px; top:476px; width:1664px; font-size:24px; line-height:1.4; color:#3E4A56">For example, P = GetToken(Alpha, −1) | “, ” | ToCase(Proper, GetToken(Alpha, 1)). The <b>net</b> is probabilistic and proposes candidates; <b>P</b> is an ordinary deterministic program: same input, same output, every time. It can be checked against the examples, read and reused.</p>
+  <p style="position:absolute; left:128px; top:590px; width:1664px; font-size:28px; line-height:1.4; font-weight:600; color:#5E6873">Induction: a baseline the paper also trains, for comparison only (Section 6)</p>
+  <x-connector x1="432" y1="686" x2="500" y2="686" head="end" style="color:#8A939C; border-width:3px"></x-connector>
+  <x-connector x1="768" y1="686" x2="1312" y2="686" head="end" style="color:#8A939C; border-width:3px; border-style:dashed"></x-connector>
+  <div style="position:absolute; left:128px; top:638px; width:300px; height:96px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:12px"><p style="font-size:28px; line-height:1.3; text-align:center">4 I/O examples + a new input</p></div>
+  <div style="position:absolute; left:504px; top:638px; width:260px; height:96px; display:flex; align-items:center; justify-content:center; background:#5E6873; border-radius:12px"><p style="font-size:28px; line-height:1.3; text-align:center; color:#F7F5EF">Neural net</p></div>
+  <p style="position:absolute; left:830px; top:700px; width:420px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">no program in between</p>
+  <div style="position:absolute; left:1316px; top:638px; width:476px; height:96px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:12px"><p style="font-size:28px; line-height:1.3; text-align:center">The output string, char by char</p></div>
+  <p style="position:absolute; left:128px; top:790px; width:1664px; font-size:28px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:16px; padding:24px 32px">Everything from here on (architecture, beam search, results, noise) is the synthesis model. Only slide 11 brings induction back, to ask whether writing a program is worth it.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017 · Sections 3.1 and 6</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">7</p>
+  <aside>Students often mix these up, so say it plainly: RobustFill is a program synthesizer. The neural network is a proposal mechanism. Beam search over it yields candidate programs in the DSL, and each candidate is an ordinary deterministic program that a normal interpreter runs. That's how RobustFill checks candidates against the observed examples, and how the final answer can be read and reused. The randomness lives only in the proposer, never in the program. The example program is the one in Figure 1 of the paper.
+
+Induction is the road not taken. The same kind of network is trained to emit the output string directly, one character at a time, with the program left implicit in its weights. The paper builds it only to compare (Section 6): 81% for synthesis vs. 53% for induction on all-examples-correct, although induction gets partial credit more often. Evaluation for both: a test task shows 4 examples and holds out 6, and it counts only if all 6 held-out outputs are exactly right.</aside>
+</section>
+</div>
+<div class="slide" data-id="architecture">
+<section id="architecture" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Architecture</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Attention per example, pooled at every step</h2>
+  <x-connector x1="260" y1="732" x2="260" y2="696" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="520" y1="732" x2="520" y2="696" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="780" y1="732" x2="780" y2="696" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="260" y1="628" x2="260" y2="592" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="520" y1="628" x2="520" y2="592" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="780" y1="628" x2="780" y2="592" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="260" y1="524" x2="260" y2="488" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="520" y1="524" x2="520" y2="488" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="780" y1="524" x2="780" y2="488" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="520" y1="420" x2="520" y2="384" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <div style="position:absolute; left:150px; top:316px; width:740px; height:64px; display:flex; align-items:center; justify-content:center; background:#1B2430; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center; color:#F7F5EF">Output softmax → next program token</p></div>
+  <div style="position:absolute; left:150px; top:420px; width:740px; height:64px; display:flex; align-items:center; justify-content:center; background:#1F7A4D; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center; color:#F7F5EF">FC + MaxPool across examples</p></div>
+  <div style="position:absolute; left:150px; top:524px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #1F7A4D; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">P1 · program</p></div>
+  <div style="position:absolute; left:410px; top:524px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #1F7A4D; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">P2 · program</p></div>
+  <div style="position:absolute; left:670px; top:524px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #1F7A4D; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">Pn · program</p></div>
+  <div style="position:absolute; left:150px; top:628px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">O1 · output</p></div>
+  <div style="position:absolute; left:410px; top:628px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">O2 · output</p></div>
+  <div style="position:absolute; left:670px; top:628px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">On · output</p></div>
+  <div style="position:absolute; left:150px; top:732px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">I1 · input</p></div>
+  <div style="position:absolute; left:410px; top:732px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">I2 · input</p></div>
+  <div style="position:absolute; left:670px; top:732px; width:220px; height:64px; display:flex; align-items:center; justify-content:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:10px"><p style="font-size:24px; line-height:1.3; text-align:center">In · input</p></div>
+  <p style="position:absolute; left:150px; top:820px; width:740px; font-size:24px; line-height:1.4; color:#5E6873">Weights shared across examples. The P layers' hidden states are max-pooled at every step.</p>
+  <table style="position:absolute; left:960px; top:316px; width:832px; font-size:28px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:36%; color:#F7F5EF">Variant</th><th style="width:64%; color:#F7F5EF">What it adds</th></tr>
+    <tr><td>Basic Seq-to-Seq</td><td>LSTMs, no attention</td></tr>
+    <tr><td>Attention-A</td><td>O attends to I; P attends to O</td></tr>
+    <tr><td>Attention-B</td><td>P attends to O and I (double attention)</td></tr>
+    <tr style="background:#E3F1E8"><td>Attention-C</td><td>B, with bidirectional I and O encoders</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017 · Section 4</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">8</p>
+  <aside>The input is an unordered, variable-size set of I/O pairs, not one sequence. Late pooling is our answer. Each example gets its own I, O and P layers with shared weights, and P's hidden states are max-pooled across examples at every decoding step, before a single softmax. Parisotto et al. pooled at the encoder instead, which rules out attention. Strings are encoded at the character level over the 95 printable ASCII characters. Programs are linearized over a 430-token vocabulary. Layers have 512 units and embeddings 128. Training ran 2 million minibatches of 128 programs, about 24 hours on 2 Titan X GPUs (Section 4.4).</aside>
+</section>
+</div>
+<div class="slide" data-id="decoding">
+<section id="decoding" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Decoding</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">The network proposes, the interpreter disposes</h2>
+  <div style="display:flex; gap:16px; align-items:center">
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#1B2430; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:12px; padding:24px">Beam search: the k best programs</p>
+    <p style="font-size:32px; color:#1F7A4D">→</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#1B2430; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:12px; padding:24px">Run each on the 4 observed inputs</p>
+    <p style="font-size:32px; color:#1F7A4D">→</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:12px; padding:24px">Keep the highest-scoring consistent one</p>
+  </div>
+  <div style="display:flex; gap:32px; align-items:stretch">
+    <div style="flex:1.3; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <h3 style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">DP-Beam</h3>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">Each time an expression is completed, execute the partial program. If its output isn't a prefix of the target output, drop it from the beam. This works because the DSL is concatenative.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1F7A4D">~0.3 s</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">per task on a Titan X GPU (Attention-C-DP, beam 100: 89%)</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017 · Section 5</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">9</p>
+  <aside>Unlike machine translation, we don't just take the 1-best output. We execute every candidate in the beam and take the highest-scoring one that is consistent with all observed examples. Footnote 5 says alternatives like "take the shortest program" didn't do better. DP-Beam adds roughly 5 points of accuracy. It's a lightweight symbolic check inside the search, in the same spirit as FlashFill's exact matching, so there's a bit of FlashFill living inside RobustFill. The 0.3 s figure is amortized end-to-end decoding cost with an unoptimized decoder.</aside>
+</section>
+</div>
+<div class="slide" data-id="results">
+<section id="results" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Results on FlashFillTest</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Attention and pruning take neural synthesis from 34% to 92%</h2>
+  <div style="display:flex; gap:48px; align-items:start">
+    <table style="width:1040px; font-size:32px; color:#1B2430; background:#FFFFFF">
+      <tr style="background:#1B2430"><th style="width:52%; color:#F7F5EF">System</th><th style="width:24%; color:#F7F5EF; text-align:right">Beam 100</th><th style="width:24%; color:#F7F5EF; text-align:right">Beam 1000</th></tr>
+      <tr><td>Parisotto et al. (2017)</td><td style="text-align:right">23%</td><td style="text-align:right">34%</td></tr>
+      <tr><td>Basic Seq-to-Seq</td><td style="text-align:right">51%</td><td style="text-align:right">56%</td></tr>
+      <tr><td>Attention-C</td><td style="text-align:right">83%</td><td style="text-align:right">86%</td></tr>
+      <tr style="background:#E3F1E8"><td>Attention-C-DP</td><td style="text-align:right">89%</td><td style="text-align:right; color:#1F7A4D">92%</td></tr>
+    </table>
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px">
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56"><b>205</b> real tasks from Excel spreadsheets, supplied by the FlashFill and Parisotto authors.</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">Attention alone adds roughly <b>25 points</b> over the basic model.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017 · Sections 3.3 and 5.1</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">10</p>
+  <aside>The table is verbatim from Section 5.1. The metric is generalization accuracy: all six held-out outputs exactly right. We attribute the jump over Parisotto et al. to two things. Late pooling lets us use attention, and the DSL is more expressive, with GetSpan needed for about 20% of tasks. From Section 5: all the attentional variants beat the basic model by roughly 25 points absolute, and B and C each add roughly 2 to 5 more. The consistency analysis (Figure 5) shows that beam 1 finds a consistent program only about 50% of the time, so the learned semantics are "still far from perfect", and search is doing real work.</aside>
+</section>
+</div>
+<div class="slide" data-id="induction">
+<section id="induction" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Synthesis vs. induction</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Which approach wins depends on the metric</h2>
+  <div style="display:flex; gap:32px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1F7A4D">81%</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">synthesis (Attention-A, beam 100). All or nothing: under 10% of tasks partly right.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1B2430">53%</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">induction, same architecture. 33% of tasks partly right, since each output is decoded separately.</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:32px; align-items:stretch">
+    <p style="flex:1; font-size:32px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:16px; padding:32px">Fill a whole column: prefer synthesis. When it answers, every row is right.</p>
+    <p style="flex:1; font-size:32px; line-height:1.4; color:#1B2430; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:32px">Per-cell autocomplete: induction's partial credit counts for more.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017 · Section 6</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">11</p>
+  <aside>This is the first direct comparison of synthesis and induction on a real-world set, and it's a contribution in its own right. The induction model is Attention-A with late pooling, except that it decodes the output string and adds an encoder for the new input. It uses beam 3 and doesn't improve with a larger beam, because there's no way to check candidates. On all-example accuracy it's 53% vs 81% (Section 6.1). On average-example accuracy, synthesis still leads by about 10 points absolute, but induction gets partial credit far more often (Section 6.2). Our point is that the right choice depends on the product.</aside>
+</section>
+</div>
+<div class="slide" data-id="noise">
+<section id="noise" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Noisy examples</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Equal on clean data; far apart once there are typos</h2>
+  <div style="display:flex; gap:32px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1B2430">92%</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">Excel FlashFill with no noise, matching our best model</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1F7A4D">80%</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">RobustFill with noise; about 2 points lost per noisy character</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#9A3B2E">6%</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">Excel FlashFill with noise: “effectively broken” after 1–2 characters</p>
+    </div>
+  </div>
+  <p style="font-size:32px; line-height:1.4; color:#3E4A56">Noise = random character insertions, deletions and substitutions in the observed examples. RobustFill trains on the same kind of noise and picks the program with the lowest edit distance to the examples.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017 · Section 1 and Section 7</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">12</p>
+  <aside>This is the headline result. The 80% vs 6% comparison is from our contributions list in Section 1. Section 7 and Figure 8 show the curve: the neural models degrade by about 2 points absolute per noise character, while Excel FlashFill is "effectively broken" with just one or two characters of noise. That's expected, because its algorithm is built around exact string matching. Its only noise defence is a heuristic that flags one example it can't classify as a likely typo (FlashFill Section 5.2), and that doesn't cover typos scattered across several examples. Only two changes were needed: inject noise into the training data (this didn't hurt clean accuracy, footnote 9), and select P* by character edit rate instead of exact match. The Excel numbers come from a macro in Excel 2016. Be upfront about footnote 11: FlashFill was manually developed on this exact test set, so its clean 92% is on its home turf.</aside>
+</section>
+</div>
+<div class="slide" data-id="champion">
+<section id="champion" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Champion · the case for a best paper award</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Why this paper matters beyond its benchmark</h2>
+  <div style="position:absolute; left:128px; top:312px; width:1664px; display:flex; flex-direction:row; gap:32px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-top:6px solid #1F7A4D; border-radius:16px; padding:32px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1F7A4D">Neural synthesis that works</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">92% on 205 real spreadsheet tasks, up from 34% for the best earlier neural model, and on par with FlashFill on clean data.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-top:6px solid #1F7A4D; border-radius:16px; padding:32px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1F7A4D">No hand-written inverses</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">To add an operator, add it to the interpreter and the random generator. Typos become something you train on: 80% vs 6% with noise.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-top:6px solid #1F7A4D; border-radius:16px; padding:32px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1F7A4D">What I'd build on it</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">The template of a neural proposer with a symbolic checker. Next week, DeepCoder uses a network to guide a symbolic search instead of replacing it.</p>
+    </div>
+  </div>
+  <div style="position:absolute; left:128px; top:660px; width:1664px; display:flex; flex-direction:column; gap:12px; background:#1B2430; border-radius:16px; padding:28px 40px">
+    <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#7FD1A5">Conceded up front: the training programs and the noise are synthetic</h3>
+    <p style="font-size:28px; line-height:1.4; color:#F7F5EF">Both come from generators the authors wrote, and the noise at test time has the same form as in training. That doesn't sink it: the headline accuracy is measured on 205 real tasks, and the core claim, that a learned proposer checked by execution rivals a hand-built synthesizer, is tested there.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">13</p>
+  <aside>The Champion argues for a best paper award, specific rather than enthusiastic, and concedes the biggest weakness first. The three cards: the result (92% vs 34%, Section 5.1), extensibility and noise (80% vs 6%, Sections 1 and 7), and the design pattern that later work builds on. The concession is the synthetic data and noise; the defence is that the test set is real (FlashFillTest, Section 3.3). Be ready for the Critic's comeback: footnote 11 says FlashFill was developed on this same test set, which cuts both ways.</aside>
+</section>
+</div>
+<div class="slide" data-id="critique">
+<section id="critique" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Critic · Reviewer 2, recommends reject</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Claims the evidence does not yet support</h2>
+  <table style="width:1664px; font-size:24px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:36%; color:#F7F5EF">Concern</th><th style="width:64%; color:#F7F5EF">An experiment that would test it</th></tr>
+    <tr><td>The noise is synthetic, uniform character edits, matched to training</td><td>Evaluate on real user typos, and on noise types the model never trained on.</td></tr>
+    <tr><td>FlashFill's noise defence is one heuristic for a single odd example</td><td>Compare against a version-space algebra with approximate matching, or leave-one-example-out voting.</td></tr>
+    <tr><td>Beam 1 is consistent only ~50% of the time, so search does much of the work</td><td>Give an enumerative synthesizer with DP pruning the same time budget, and compare.</td></tr>
+    <tr><td>Random programs on random ASCII strings</td><td>Test how accuracy changes as inputs drift from the generator's distribution.</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; top:790px; width:1664px; font-size:28px; line-height:1.4; color:#1B2430; background:#EDEAE0; border-left:6px solid #9A3B2E; border-radius:12px; padding:20px 32px"><b>The one experiment that would change my score:</b> Test on real user typos against a FlashFill that also selects programs by edit distance, with an equal compute budget.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">RobustFill · Devlin et al., ICML 2017</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">14</p>
+  <aside>The Critic's slide: attack the claims, not the authors, and close with one experiment. As the author, my answers: training on random data works because the model learns function semantics, not a data distribution (our argument in Section 3.3). Beam search plus execution is part of the method, not a crutch. The fair points: noise at test time has the same form as noise at training time, and the FlashFill baseline's only noise handling is its single-typo heuristic (FlashFill Section 5.2), not a symbolic system designed for noise. Also note the compute asymmetry: about 24 hours of training on two GPUs versus a hand-built CPU system.</aside>
+</section>
+</div>
+<div class="slide" data-id="discuss">
+<section id="discuss" data-transition="fade" style="background:#1B2430; color:#F7F5EF; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#7FD1A5">Discussion</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#F7F5EF">What would we have to believe?</h2>
+  <div style="display:flex; flex-direction:column; gap:48px">
+    <div style="display:flex; gap:40px; align-items:start">
+      <p style="width:80px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1; color:#7FD1A5">1</p>
+      <p style="flex:1; font-size:40px; line-height:1.35; color:#E4EAF0">RobustFill still needs the DSL to generate its training data and to check its answers. Is it neural, or neurosymbolic?</p>
+    </div>
+    <div style="display:flex; gap:40px; align-items:start">
+      <p style="width:80px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1; color:#7FD1A5">2</p>
+      <p style="flex:1; font-size:40px; line-height:1.35; color:#E4EAF0">Synthesis wins on all-or-nothing accuracy; induction earns partial credit. Which matches what users want?</p>
+    </div>
+    <div style="display:flex; gap:40px; align-items:start">
+      <p style="width:80px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1; color:#7FD1A5">3</p>
+      <p style="flex:1; font-size:40px; line-height:1.35; color:#E4EAF0">Could one system have FlashFill's guarantees and RobustFill's tolerance for typos? What would it look like?</p>
+    </div>
+  </div>
+  <aside>These questions link the two papers of the week. For question 1, point out that the symbolic parts (the interpreter, DP-Beam pruning and the random program generator) do a lot of work. For question 3, possible directions include neural proposals checked by version spaces, version spaces over edit-tolerant matching, and learned ranking (as in later PROSE work). This also sets up next week's DeepCoder, where the network guides a symbolic search instead of replacing it.</aside>
+</section>
+</div>
+</div>
+<div id="notes"></div>
+<div id="counter"></div>
+<div id="help">← → or click to move · N notes · F fullscreen</div>
+<script>
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  // Draw each <x-connector x1 y1 x2 y2> as an SVG arrow in canvas coordinates.
+  document.querySelectorAll('x-connector').forEach(function (el, i) {
+    var cs = el.style, color = cs.color || '#1B2430';
+    var w = parseFloat(cs.borderWidth) || 2, dashed = /dash/.test(cs.borderStyle), dotted = /dot/.test(cs.borderStyle);
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('width', 1920); svg.setAttribute('height', 1080);
+    svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;pointer-events:none';
+    var id = 'arrow' + i;
+    var defs = document.createElementNS(SVGNS, 'defs');
+    var m = document.createElementNS(SVGNS, 'marker');
+    m.setAttribute('id', id); m.setAttribute('viewBox', '0 0 10 10'); m.setAttribute('refX', 9); m.setAttribute('refY', 5);
+    m.setAttribute('markerWidth', 5); m.setAttribute('markerHeight', 5); m.setAttribute('orient', 'auto-start-reverse');
+    var p = document.createElementNS(SVGNS, 'path'); p.setAttribute('d', 'M0 0 L10 5 L0 10 z'); p.setAttribute('fill', color);
+    m.appendChild(p); defs.appendChild(m); svg.appendChild(defs);
+    var line = document.createElementNS(SVGNS, 'line');
+    ['x1', 'y1', 'x2', 'y2'].forEach(function (a) { line.setAttribute(a, el.getAttribute(a)); });
+    line.setAttribute('stroke', color); line.setAttribute('stroke-width', w);
+    if (dashed) line.setAttribute('stroke-dasharray', (3 * w) + ' ' + (2 * w));
+    if (dotted) line.setAttribute('stroke-dasharray', w + ' ' + w);
+    var head = el.getAttribute('head') || 'end';
+    if (head === 'end' || head === 'both') line.setAttribute('marker-end', 'url(#' + id + ')');
+    if (head === 'both') line.setAttribute('marker-start', 'url(#' + id + ')');
+    svg.appendChild(line);
+    el.replaceWith(svg);
+  });
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var stage = document.getElementById('stage'), notes = document.getElementById('notes'), counter = document.getElementById('counter');
+  var cur = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+
+  function fit() {
+    var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  function show(n) {
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+    var aside = slides[cur].querySelector('aside');
+    notes.textContent = aside ? aside.textContent.trim() : '(no notes)';
+    counter.textContent = (cur + 1) + ' / ' + slides.length;
+    history.replaceState(null, '', '#' + (cur + 1));
+  }
+  document.addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { show(cur + 1); e.preventDefault(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].indexOf(e.key) >= 0) { show(cur - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'n' || e.key === 'N') notes.classList.toggle('show');
+    else if (e.key === 'f' || e.key === 'F') { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (notes.contains(e.target)) return;
+    show(e.clientX > window.innerWidth / 2 ? cur + 1 : cur - 1);
+  });
+  window.addEventListener('resize', fit);
+  fit(); show(cur);
+})();
+</script>
+</body>
+</html>

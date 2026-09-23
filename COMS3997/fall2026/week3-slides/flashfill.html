@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlashFill (Gulwani, POPL 2011)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400..700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<style>
+  html, body { margin: 0; height: 100%; background: #0E131A; overflow: hidden; }
+  #stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center center; }
+  .slide { position: absolute; inset: 0; display: none; }
+  .slide.active { display: block; }
+  .slide > section { position: relative; width: 1920px; height: 1080px; box-sizing: border-box; overflow: hidden; }
+  section * { margin: 0; box-sizing: border-box; }
+  section h1, section h2, section h3 { font-weight: 600; }
+  section table { border-collapse: collapse; }
+  section th, section td { padding: 0.35em 0.6em; text-align: left; vertical-align: top; border-bottom: 1px solid #DDD7C8; }
+  section th { font-weight: 600; }
+  section aside { display: none; }
+  x-shape { display: block; flex: none; }
+  x-shape[kind="ellipse"] { border-radius: 50%; }
+  x-shape[kind="rounded"] { border-radius: 16px; }
+  #notes { position: fixed; left: 0; right: 0; bottom: 0; max-height: 40vh; overflow: auto; display: none;
+           background: rgba(14,19,26,0.94); color: #E4EAF0; font: 16px/1.5 'IBM Plex Sans', Arial, sans-serif;
+           padding: 16px 24px; white-space: pre-wrap; border-top: 1px solid #2E3B4D; }
+  #notes.show { display: block; }
+  #counter { position: fixed; right: 12px; bottom: 8px; color: #8A939C; font: 13px 'IBM Plex Sans', Arial, sans-serif; }
+  #help { position: fixed; left: 12px; bottom: 8px; color: #5E6873; font: 13px 'IBM Plex Sans', Arial, sans-serif; }
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { overflow: visible; background: none; }
+    #stage { position: static; transform: none !important; width: auto; height: auto; }
+    .slide { position: relative; display: block; page-break-after: always; width: 1920px; height: 1080px; }
+    #notes, #counter, #help { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+<div class="slide" data-id="cover">
+<section id="cover" data-transition="fade" style="background:#1B2430; color:#F7F5EF; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:space-between">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#7FD1A5">COMS 3997 · Neurosymbolic AI · Week 3</p>
+  <div style="display:flex; flex-direction:column; gap:32px; width:840px">
+    <h1 style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.05; color:#F7F5EF">FlashFill</h1>
+    <p style="font-size:40px; line-height:1.3; color:#C9D3DC">Automating String Processing in Spreadsheets Using Input-Output Examples</p>
+  </div>
+  <p style="font-size:32px; line-height:1.4; color:#C9D3DC">Sumit Gulwani · POPL 2011</p>
+  <table style="position:absolute; left:1072px; top:320px; width:720px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; color:#F7F5EF; background:#243040; border-radius:16px">
+    <tr style="background:#2E3B4D"><th style="width:50%; color:#7FD1A5">Input</th><th style="width:50%; color:#7FD1A5">Output</th></tr>
+    <tr><td>Alan Turing</td><td>Turing, A.</td></tr>
+    <tr><td>Grace Hopper</td><td style="color:#7FD1A5">Hopper, G.</td></tr>
+    <tr><td>Ada Lovelace</td><td style="color:#7FD1A5">Lovelace, A.</td></tr>
+    <tr><td>Edsger Dijkstra</td><td style="color:#7FD1A5">Dijkstra, E.</td></tr>
+  </table>
+  <p style="position:absolute; left:1072px; top:700px; width:720px; font-size:24px; line-height:1.4; color:#9FB0BF">The user types the first output. The program fills in the green cells.</p>
+  <aside>I'll present this as its author. The one thing to remember: don't search for a single program. Represent every program consistent with the examples at once, intersect as more examples arrive, and rank at the end. The table on the right is the whole interaction model: the user types one output, and the column fills in.</aside>
+</section>
+</div>
+<div class="slide" data-id="problem">
+<section id="problem" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">The problem</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">End users can show the task, not code it</h2>
+  <div style="display:flex; gap:64px; align-items:start">
+    <div style="flex:1; display:flex; flex-direction:column; gap:32px">
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56; border-left:4px solid #1F7A4D; padding:0 0 0 24px">Spreadsheet help forums are full of requests for one-off string reformatting: names, dates, phone numbers, addresses.</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56; border-left:4px solid #1F7A4D; padding:0 0 0 24px">The person asking can give examples of what they want, but not a formula or a script.</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56; border-left:4px solid #1F7A4D; padding:0 0 0 24px">Goal: learn the transformation from a few examples, fast enough to feel instant.</p>
+    </div>
+    <div style="width:800px; display:flex; flex-direction:column; gap:24px">
+      <table style="width:800px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:28px; color:#1B2430; background:#FFFFFF">
+        <tr style="background:#1B2430"><th style="width:50%; color:#F7F5EF">Input</th><th style="width:50%; color:#F7F5EF">Output</th></tr>
+        <tr><td>323-708-7700</td><td>323-708-7700</td></tr>
+        <tr><td>(425)-706-7709</td><td>425-706-7709</td></tr>
+        <tr><td>510.220.5586</td><td>510-220-5586</td></tr>
+        <tr style="background:#E3F1E8"><td>(206) 555 0133</td><td style="color:#1F7A4D">206-555-0133</td></tr>
+      </table>
+      <p style="font-size:24px; line-height:1.4; color:#5E6873">Three formats, one program: take the 1st, 2nd and 3rd run of digits and join them with “-”. The last row is filled in by the program.</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">2</p>
+  <aside>The motivation comes from real help-forum threads. The users aren't programmers, but they can easily produce examples. The phone-number table shows what the DSL is good at: it doesn't need a conditional per format, because "the k-th run of digits" is a single rule. That's the token-based design paying off, and we'll come back to it.</aside>
+</section>
+</div>
+<div class="slide" data-id="ambiguity">
+<section id="ambiguity" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Why it's hard</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">One example fits many programs</h2>
+  <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:1.3; color:#1B2430; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:12px; padding:24px 32px">“Alan Turing”  →  “Turing, A.”</p>
+  <table style="width:1664px; font-size:28px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:58%; color:#F7F5EF">Candidate program (all consistent with the example)</th><th style="width:42%; color:#F7F5EF">On “Grace Brewster Hopper”</th></tr>
+    <tr><td>Always output the constant “Turing, A.”</td><td>“Turing, A.”</td></tr>
+    <tr><td>Characters 5–10, then “, ”, character 0, “.”</td><td>“ Brews, G.”</td></tr>
+    <tr><td>Everything after the first space, then “, ”, first letter, “.”</td><td>“Brewster Hopper, G.”</td></tr>
+    <tr><td>The second word, then “, ”, first letter, “.”</td><td>“Brewster, G.”</td></tr>
+    <tr style="background:#E3F1E8"><td>The last word, then “, ”, first letter, “.”</td><td style="color:#1F7A4D">“Hopper, G.” (intended)</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">3</p>
+  <aside>Every row agrees on "Alan Turing". They only come apart on an input the user hasn't shown us. So the synthesizer has two jobs: keep every consistent program without enumerating them, and guess which one the user meant. Ask the room which one they'd pick, and why. That intuition is what the ranking function has to encode.</aside>
+</section>
+</div>
+<div class="slide" data-id="keyidea">
+<section id="keyidea" data-transition="fade" style="background:#1F7A4D; color:#F7F5EF; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:48px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#D6EEDF">The one idea to remember</p>
+  <h1 style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.05; color:#F7F5EF">Don't pick a program. Keep all of them, then intersect.</h1>
+  <p style="font-size:40px; line-height:1.35; color:#E6F4EB; width:1400px">A version-space algebra over a string DSL: exponentially many consistent programs, stored in a polynomial-size DAG. Each new example is an intersection. Ranking picks one at the end.</p>
+  <aside>This is the slide to remember. Classical enumerative synthesis searches for one program and checks it. FlashFill builds a data structure that denotes the set of all programs consistent with an example, and it does this without enumerating them. More examples mean intersecting these sets. Choosing among the survivors is a separate step: ranking. The term "version space" comes from Mitchell's concept learning, and Lau et al. applied it to programming by demonstration.</aside>
+</section>
+</div>
+<div class="slide" data-id="dsl">
+<section id="dsl" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">The language</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">A small DSL built for string edits</h2>
+  <div style="display:flex; gap:48px; align-items:start">
+    <div style="width:820px; display:flex; flex-direction:column; gap:4px; background:#1B2430; border-radius:16px; padding:48px; font-family:'JetBrains Mono', 'Courier New', monospace">
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">P</span> := Switch((b1,e1), …, (bn,en))</p>
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">e</span> := Concatenate(f1, …, fn)</p>
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">f</span> := ConstStr(s)</p>
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF">&#160;&#160;&#160;| SubStr(vi, p1, p2)</p>
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF">&#160;&#160;&#160;| Loop(λw. e)</p>
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">p</span> := CPos(k) | Pos(r1, r2, c)</p>
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">r</span> := TokenSeq(T1, …, Tm)</p>
+      <p style="font-size:32px; line-height:1.5; color:#F7F5EF"><span style="color:#7FD1A5">b</span> := ∨ of ∧ of Match(vi, r, k)</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:40px">
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1F7A4D">A program is a concatenation</h3>
+        <p style="font-size:32px; line-height:1.4; color:#3E4A56">Constant strings and substrings of the inputs, glued together.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1F7A4D">Substrings are cut at positions</h3>
+        <p style="font-size:32px; line-height:1.4; color:#3E4A56">A fixed index CPos(k), or a context Pos(r1, r2, c). Regexes are just sequences of tokens.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px">
+        <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1F7A4D">Conditionals and loops on top</h3>
+        <p style="font-size:32px; line-height:1.4; color:#3E4A56">Switch chooses a trace by Match predicates. Loop repeats one for w = 1, 2, …</p>
+      </div>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">5</p>
+  <aside>The DSL is where most of the design effort went. It's expressive enough for the forum tasks and restricted enough that the set of consistent programs has a compact representation. The integer c inside Pos can be k or k1·w + k2, and that is how Loop's variable w reaches positions. Tokens are character classes such as AlphaTok, NumTok, UpperTok, LowerTok, WhiteSpaceTok, StartTok and EndTok, plus special characters. Negative k or c counts from the end.</aside>
+</section>
+</div>
+<div class="slide" data-id="positions">
+<section id="positions" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Positions, part 1</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Where do you cut? Fixed indices break</h2>
+  <p style="position:absolute; left:160px; top:306px; width:820px; font-size:24px; line-height:1.4; color:#3E4A56">“Alan Turing”: cut at gap 5 copies <b>“Turing”</b>, correct</p>
+  <p style="position:absolute; left:160px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">A</p>
+  <p style="position:absolute; left:230px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">l</p>
+  <p style="position:absolute; left:300px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">a</p>
+  <p style="position:absolute; left:370px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">n</p>
+  <p style="position:absolute; left:440px; top:360px; width:64px; height:80px; font-size:24px; line-height:3.33; text-align:center; background:#FFFFFF; border:2px dashed #C9C3B3; border-radius:8px; color:#8A939C">␣</p>
+  <p style="position:absolute; left:510px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#E3F1E8; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">T</p>
+  <p style="position:absolute; left:580px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#E3F1E8; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">u</p>
+  <p style="position:absolute; left:650px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#E3F1E8; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">r</p>
+  <p style="position:absolute; left:720px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#E3F1E8; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">i</p>
+  <p style="position:absolute; left:790px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#E3F1E8; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">n</p>
+  <p style="position:absolute; left:860px; top:360px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#E3F1E8; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">g</p>
+  <p style="position:absolute; left:137px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">0</p>
+  <p style="position:absolute; left:207px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">1</p>
+  <p style="position:absolute; left:277px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">2</p>
+  <p style="position:absolute; left:347px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">3</p>
+  <p style="position:absolute; left:417px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">4</p>
+  <p style="position:absolute; left:487px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">5</p>
+  <p style="position:absolute; left:557px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">6</p>
+  <p style="position:absolute; left:627px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">7</p>
+  <p style="position:absolute; left:697px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">8</p>
+  <p style="position:absolute; left:767px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">9</p>
+  <p style="position:absolute; left:837px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">10</p>
+  <p style="position:absolute; left:907px; top:448px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">11</p>
+  <div style="position:absolute; left:504px; top:350px; width:6px; height:100px; background:#1F7A4D"></div>
+  <p style="position:absolute; left:160px; top:526px; width:820px; font-size:24px; line-height:1.4; color:#3E4A56">“Ada Lovelace”: cut at gap 5 copies <b>“ovelace”</b>, wrong</p>
+  <p style="position:absolute; left:160px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">A</p>
+  <p style="position:absolute; left:230px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">d</p>
+  <p style="position:absolute; left:300px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">a</p>
+  <p style="position:absolute; left:370px; top:580px; width:64px; height:80px; font-size:24px; line-height:3.33; text-align:center; background:#FFFFFF; border:2px dashed #C9C3B3; border-radius:8px; color:#8A939C">␣</p>
+  <p style="position:absolute; left:440px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">L</p>
+  <p style="position:absolute; left:510px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#F6E3DA; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">o</p>
+  <p style="position:absolute; left:580px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#F6E3DA; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">v</p>
+  <p style="position:absolute; left:650px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#F6E3DA; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">e</p>
+  <p style="position:absolute; left:720px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#F6E3DA; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">l</p>
+  <p style="position:absolute; left:790px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#F6E3DA; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">a</p>
+  <p style="position:absolute; left:860px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#F6E3DA; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">c</p>
+  <p style="position:absolute; left:930px; top:580px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#F6E3DA; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">e</p>
+  <p style="position:absolute; left:137px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">0</p>
+  <p style="position:absolute; left:207px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">1</p>
+  <p style="position:absolute; left:277px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">2</p>
+  <p style="position:absolute; left:347px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">3</p>
+  <p style="position:absolute; left:417px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">4</p>
+  <p style="position:absolute; left:487px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">5</p>
+  <p style="position:absolute; left:557px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">6</p>
+  <p style="position:absolute; left:627px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">7</p>
+  <p style="position:absolute; left:697px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">8</p>
+  <p style="position:absolute; left:767px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">9</p>
+  <p style="position:absolute; left:837px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">10</p>
+  <p style="position:absolute; left:907px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">11</p>
+  <p style="position:absolute; left:977px; top:668px; width:40px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">12</p>
+  <div style="position:absolute; left:504px; top:570px; width:6px; height:100px; background:#A34A28"></div>
+  <div style="position:absolute; left:1072px; top:306px; width:720px; display:flex; flex-direction:column; gap:28px">
+    <p style="font-size:28px; line-height:1.4; color:#3E4A56">A <b>position</b> is a gap between characters, numbered from 0 up to the string's length.</p>
+    <p style="font-size:28px; line-height:1.4; color:#3E4A56"><span style="color:#1F7A4D">SubStr(v1, p1, p2)</span> copies whatever lies between two positions of input v1.</p>
+    <p style="font-size:28px; line-height:1.4; color:#3E4A56">The simplest position is a number: <span style="color:#1F7A4D">CPos(5)</span> means “gap 5”. It fits the first example, then cuts the second name mid-word.</p>
+  </div>
+  <p style="position:absolute; left:128px; top:776px; width:1664px; font-size:32px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:16px; padding:24px 32px">What we mean is “the gap right after the space, where the letters start”. The next slide shows how to write that down.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">6</p>
+  <aside>Build this up slowly: students have not seen the DSL in action yet. SubStr takes an input and two positions and copies the text between them. Positions are gaps, not characters: "Alan Turing" has 11 characters and 12 gaps, numbered 0 to 11. The obvious way to name a gap is by its number. CPos(k) does that, and a negative k counts from the end, so CPos(-1) is always the end of the string. Gap 5 works for Alan Turing because "Alan" has four letters, but Ada is three letters, so gap 5 lands inside "Lovelace". The name is a stand-in: a fixed index bakes the length of the first name into the program. Ask the class what rule a person would use; they'll say "after the space". That is what Pos captures.</aside>
+</section>
+</div>
+<div class="slide" data-id="posctx">
+<section id="posctx" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Positions, part 2</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Describe a cut by what surrounds it</h2>
+  <table style="position:absolute; left:128px; top:312px; width:820px; font-size:24px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:52%; color:#F7F5EF">Token (a character class)</th><th style="width:48%; color:#F7F5EF">Matches</th></tr>
+    <tr><td>AlphaTok</td><td>a run of letters</td></tr>
+    <tr><td>NumTok</td><td>a run of digits</td></tr>
+    <tr><td>UpperTok, LowerTok</td><td>capitals, lower-case</td></tr>
+    <tr><td>WhiteSpaceTok</td><td>a run of spaces</td></tr>
+    <tr><td>StartTok, EndTok</td><td>start, end of the string</td></tr>
+    <tr><td>HyphenTok, CommaTok, …</td><td>one per punctuation mark</td></tr>
+  </table>
+  <div style="position:absolute; left:1008px; top:312px; width:784px; display:flex; flex-direction:column; gap:20px">
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; line-height:1.3; color:#1F7A4D">Pos(r1, r2, c)</p>
+    <p style="font-size:28px; line-height:1.4; color:#3E4A56">The c-th gap where the text just <b>before</b> it matches r1 and the text just <b>after</b> it matches r2. r1 and r2 are sequences of tokens. c = 1 is the first such gap, and c = −1 is the last.</p>
+    <p style="font-size:28px; line-height:1.4; color:#3E4A56"><span style="color:#1F7A4D">Pos(WhiteSpaceTok, AlphaTok, 1)</span> is “after a space, before letters”: gap 5 in Alan Turing and gap 4 in Ada Lovelace. It's one description, and it's right for both.</p>
+  </div>
+  <p style="position:absolute; left:447px; top:690px; width:260px; font-size:24px; line-height:1.4; text-align:center; font-weight:600; color:#1F7A4D">c = 1 (gap 6)</p>
+  <p style="position:absolute; left:1077px; top:690px; width:260px; font-size:24px; line-height:1.4; text-align:center; font-weight:600; color:#1F7A4D">c = −1 (gap 15)</p>
+  <p style="position:absolute; left:160px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">G</p>
+  <p style="position:absolute; left:230px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">r</p>
+  <p style="position:absolute; left:300px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">a</p>
+  <p style="position:absolute; left:370px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">c</p>
+  <p style="position:absolute; left:440px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">e</p>
+  <p style="position:absolute; left:510px; top:740px; width:64px; height:80px; font-size:24px; line-height:3.33; text-align:center; background:#FFFFFF; border:2px dashed #C9C3B3; border-radius:8px; color:#8A939C">␣</p>
+  <p style="position:absolute; left:580px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">B</p>
+  <p style="position:absolute; left:650px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">r</p>
+  <p style="position:absolute; left:720px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">e</p>
+  <p style="position:absolute; left:790px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">w</p>
+  <p style="position:absolute; left:860px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">s</p>
+  <p style="position:absolute; left:930px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">t</p>
+  <p style="position:absolute; left:1000px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">e</p>
+  <p style="position:absolute; left:1070px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">r</p>
+  <p style="position:absolute; left:1140px; top:740px; width:64px; height:80px; font-size:24px; line-height:3.33; text-align:center; background:#FFFFFF; border:2px dashed #C9C3B3; border-radius:8px; color:#8A939C">␣</p>
+  <p style="position:absolute; left:1210px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">H</p>
+  <p style="position:absolute; left:1280px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">o</p>
+  <p style="position:absolute; left:1350px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">p</p>
+  <p style="position:absolute; left:1420px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">p</p>
+  <p style="position:absolute; left:1490px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">e</p>
+  <p style="position:absolute; left:1560px; top:740px; width:64px; height:80px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:40px; line-height:2; text-align:center; background:#FFFFFF; border:2px solid #C9C3B3; border-radius:8px; color:#1B2430">r</p>
+  <div style="position:absolute; left:574px; top:730px; width:6px; height:100px; background:#1F7A4D"></div>
+  <div style="position:absolute; left:1204px; top:730px; width:6px; height:100px; background:#1F7A4D"></div>
+  <p style="position:absolute; left:128px; top:840px; width:1664px; font-size:24px; line-height:1.4; color:#3E4A56">On “Grace Brewster Hopper” two gaps have a space before and letters after: c = 1 gives “Brewster Hopper”, c = −1 gives “Hopper”. On “Alan Turing” both pick gap 5, so one example can't tell them apart.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011 · Section 3</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">7</p>
+  <aside>This is the construct that makes FlashFill generalize, so take your time. Tokens are character classes: AlphaTok matches one or more letters, NumTok one or more digits, and so on, with a special token for each punctuation character plus StartTok and EndTok. r1 and r2 are short sequences of tokens, and the empty sequence ε matches anything, for when one side doesn't matter. Pos(r1, r2, c) picks the c-th gap t where r1 matches some text ending at t and r2 matches some text starting at t. Negative c counts from the end. Walk the class through the grid: which gaps have whitespace on the left and letters on the right? Gaps 6 and 15. So c = 1 and c = -1 are different programs that agree on every two-word name. That sets up the ambiguity the version space has to keep, and that the ranking or another example has to resolve.</aside>
+</section>
+</div>
+<div class="slide" data-id="vsintro">
+<section id="vsintro" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Version spaces</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Keep the choices, not the programs</h2>
+  <p style="position:absolute; left:128px; top:306px; width:1664px; font-size:28px; line-height:1.4; color:#3E4A56">A <b>version space</b> is the set of all programs consistent with the examples so far. After one example it is enormous: too big to list, let alone test one by one. FlashFill's trick is to store it as independent <b>choices</b>.</p>
+  <div style="position:absolute; left:128px; top:446px; width:1664px; display:flex; flex-direction:row; gap:24px; align-items:center">
+    <div style="width:560px; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:28px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1B2430">Where “Turing” starts</h3>
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#3E4A56">CPos(5)<br>Pos(WhiteSpaceTok, AlphaTok, 1)<br>Pos(WhiteSpaceTok, AlphaTok, -1)</p>
+    </div>
+    <p style="font-size:64px; line-height:1; color:#1F7A4D">×</p>
+    <div style="width:520px; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:28px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1B2430">Where it ends</h3>
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#3E4A56">CPos(11)<br>CPos(-1)<br>Pos(AlphaTok, EndTok, 1)</p>
+    </div>
+    <p style="font-size:64px; line-height:1; color:#1F7A4D">=</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:16px; padding:28px"><b>9 programs</b> SubStr(v1, start, end), stored as <b>3 + 3</b> entries</p>
+  </div>
+  <p style="position:absolute; left:128px; top:690px; width:1664px; font-size:28px; line-height:1.4; color:#3E4A56">Real sets are far bigger, and the saving compounds at every level: token sets inside positions, positions inside substrings, substrings inside the concatenation. The <b>algebra</b> is the set of operations on these factored sets: intersect them, count them and run them, all without listing programs.</p>
+  <div style="position:absolute; left:128px; top:818px; width:1664px; display:flex; flex-direction:row; gap:16px; align-items:center">
+    <p style="flex:1; padding:12px 24px; font-size:24px; line-height:1.4; color:#1B2430; background:#EDEAE0; border-radius:12px"><b>Mitchell 1982:</b> version spaces for concept learning</p>
+    <p style="font-size:32px; color:#1F7A4D">→</p>
+    <p style="flex:1; padding:12px 24px; font-size:24px; line-height:1.4; color:#1B2430; background:#EDEAE0; border-radius:12px"><b>Lau et al. 2000:</b> version-space algebra for demonstration</p>
+    <p style="font-size:32px; color:#1F7A4D">→</p>
+    <p style="flex:1; padding:12px 24px; font-size:24px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:12px"><b>FlashFill 2011:</b> lifted to examples, with conditionals and loops</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011 · Sections 4.1 and 7</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">8</p>
+  <aside>This is the conceptual pivot of the talk. The term comes from Tom Mitchell's "Generalization as search" (1982): in concept learning you keep the set of all hypotheses consistent with the data and shrink it as examples arrive. Lau, Domingos and Weld (ICML 2000) turned it into an algebra: build the version space of a complex function by composing the version spaces of its parts. FlashFill lifts that to programming by example.
+
+The picture: take just the "Turing" piece of the output. Using what we saw on the positions slides, there are several ways to say where it starts and several ways to say where it ends. Any start can pair with any end, so 3 × 3 = 9 SubStr programs. But you don't store 9 programs; you store the two lists of 3. That's the whole idea in miniature: a product of choices stored as a sum. The same factoring happens inside each Pos (sets of r1, r2 and c) and across the pieces of the output, which is the next slide. These three-item lists are illustrative; the real sets are larger.</aside>
+</section>
+</div>
+<div class="slide" data-id="splits">
+<section id="splits" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">From splits to a graph</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Why a graph? Each path is one way to split the output</h2>
+  <p style="position:absolute; left:128px; top:300px; width:1664px; font-size:28px; line-height:1.4; color:#3E4A56">A program glues pieces together, but which pieces? “Turing, A.” could be one piece, or “Turing” + “, A.”, or “Turing” + “, ” + “A” + “.”, and so on. Put a node at each place the output could be cut, and an edge for each piece:</p>
+  <svg aria-label="A graph with five nodes labelled 0, 6, 8, 9 and 10 in a row. Straight green edges link neighbours: Turing, comma-space, A, period. Grey arcs above skip one node, for Turing-comma-space, comma-space-A, and A-period. Grey arcs below skip more, for Turing-comma-space-A, comma-space-A-period, and the whole string." width="1664" height="400" viewBox="0 0 1664 400" style="position:absolute; left:128px; top:400px; width:1664px; height:400px">
+    <defs>
+      <marker id="sg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8A939C"/></marker>
+      <marker id="sgr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1F7A4D"/></marker>
+    </defs>
+    <path d="M132 174 Q502 -20 872 174" fill="none" stroke="#8A939C" stroke-width="3" marker-end="url(#sg)"/>
+    <path d="M572 174 Q852 -20 1132 174" fill="none" stroke="#8A939C" stroke-width="3" marker-end="url(#sg)"/>
+    <path d="M872 174 Q1152 -20 1432 174" fill="none" stroke="#8A939C" stroke-width="3" marker-end="url(#sg)"/>
+    <path d="M132 226 Q632 380 1132 226" fill="none" stroke="#8A939C" stroke-width="3" marker-end="url(#sg)"/>
+    <path d="M572 226 Q1002 380 1432 226" fill="none" stroke="#8A939C" stroke-width="3" marker-end="url(#sg)"/>
+    <path d="M132 226 Q782 500 1432 226" fill="none" stroke="#8A939C" stroke-width="3" marker-end="url(#sg)"/>
+    <line x1="160" y1="200" x2="542" y2="200" stroke="#1F7A4D" stroke-width="5" marker-end="url(#sgr)"/>
+    <line x1="600" y1="200" x2="842" y2="200" stroke="#1F7A4D" stroke-width="5" marker-end="url(#sgr)"/>
+    <line x1="900" y1="200" x2="1102" y2="200" stroke="#1F7A4D" stroke-width="5" marker-end="url(#sgr)"/>
+    <line x1="1160" y1="200" x2="1402" y2="200" stroke="#1F7A4D" stroke-width="5" marker-end="url(#sgr)"/>
+    <circle cx="132" cy="200" r="26" fill="#FFFDF8" stroke="#1F7A4D" stroke-width="4"/>
+    <circle cx="572" cy="200" r="26" fill="#FFFDF8" stroke="#1F7A4D" stroke-width="4"/>
+    <circle cx="872" cy="200" r="26" fill="#FFFDF8" stroke="#1F7A4D" stroke-width="4"/>
+    <circle cx="1132" cy="200" r="26" fill="#FFFDF8" stroke="#1F7A4D" stroke-width="4"/>
+    <circle cx="1432" cy="200" r="26" fill="#FFFDF8" stroke="#1F7A4D" stroke-width="4"/>
+  </svg>
+  <p style="position:absolute; left:232px; top:583px; width:56px; font-size:24px; line-height:1.4; text-align:center; font-weight:600; color:#1B2430">0</p>
+  <p style="position:absolute; left:672px; top:583px; width:56px; font-size:24px; line-height:1.4; text-align:center; font-weight:600; color:#1B2430">6</p>
+  <p style="position:absolute; left:972px; top:583px; width:56px; font-size:24px; line-height:1.4; text-align:center; font-weight:600; color:#1B2430">8</p>
+  <p style="position:absolute; left:1232px; top:583px; width:56px; font-size:24px; line-height:1.4; text-align:center; font-weight:600; color:#1B2430">9</p>
+  <p style="position:absolute; left:1532px; top:583px; width:56px; font-size:24px; line-height:1.4; text-align:center; font-weight:600; color:#1B2430">10</p>
+  <p style="position:absolute; left:380px; top:540px; width:200px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#1F7A4D">“Turing”</p>
+  <p style="position:absolute; left:790px; top:540px; width:120px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#1F7A4D">“, ”</p>
+  <p style="position:absolute; left:1080px; top:540px; width:100px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#1F7A4D">“A”</p>
+  <p style="position:absolute; left:1360px; top:540px; width:100px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#1F7A4D">“.”</p>
+  <p style="position:absolute; left:540px; top:476px; width:180px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#5E6873; background:#FFFFFF">“Turing, ”</p>
+  <p style="position:absolute; left:920px; top:476px; width:120px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#5E6873; background:#FFFFFF">“, A”</p>
+  <p style="position:absolute; left:1220px; top:476px; width:120px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#5E6873; background:#FFFFFF">“A.”</p>
+  <p style="position:absolute; left:640px; top:676px; width:240px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#5E6873; background:#FFFFFF">“Turing, A”</p>
+  <p style="position:absolute; left:1050px; top:676px; width:160px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#5E6873; background:#FFFFFF">“, A.”</p>
+  <p style="position:absolute; left:780px; top:736px; width:260px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.4; text-align:center; color:#5E6873; background:#FFFFFF">“Turing, A.”</p>
+  <p style="position:absolute; left:128px; top:820px; width:1664px; font-size:24px; line-height:1.4; color:#3E4A56">Any path from 0 to 10 spells the output: the green one is “Turing” + “, ” + “A” + “.”. Edges only go left to right and never loop back, so this is a <b>directed acyclic graph (DAG)</b>. Drawn here: 5 nodes, 8 paths. The real one has a node at every character: 11 nodes, 55 edges, 512 paths.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011 · Section 4.3</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">9</p>
+  <aside>This slide answers "where did the DAG come from?" The output is built by Concatenate, gluing pieces, but the synthesizer doesn't know how the user's output was cut into pieces. Maybe "Turing, A." is one constant string; maybe it's four pieces. Trying every split separately would be exponential: a 10-character output has 2^9 = 512 ways to cut it. The paper's key observation (Section 4.3) is that there are only quadratically many pieces, one per substring: 55 here. So make a node for each cut point and an edge for each piece. Then every split is a path, and the 512 splits share just 55 edges. It's "directed" because edges go left to right, and "acyclic" because you can never return to an earlier position. For readability I've drawn only the cut points at word boundaries: 5 nodes and 8 paths instead of 11 nodes and 512.</aside>
+</section>
+</div>
+<div class="slide" data-id="dag">
+<section id="dag" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">GenerateStr · the version space for the whole output</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Label each edge with every way to make its piece</h2>
+  <p style="position:absolute; left:320px; top:316px; width:400px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; line-height:1.3; text-align:center; color:#1F7A4D">“Turing”</p>
+  <p style="position:absolute; left:880px; top:316px; width:200px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; line-height:1.3; text-align:center; color:#1F7A4D">“, ”</p>
+  <p style="position:absolute; left:1180px; top:316px; width:200px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; line-height:1.3; text-align:center; color:#1F7A4D">“A”</p>
+  <p style="position:absolute; left:1460px; top:316px; width:200px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:32px; line-height:1.3; text-align:center; color:#1F7A4D">“.”</p>
+  <x-connector x1="252" y1="400" x2="788" y2="400" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="852" y1="400" x2="1108" y2="400" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="1172" y1="400" x2="1388" y2="400" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-connector x1="1452" y1="400" x2="1668" y2="400" head="end" style="color:#1B2430; border-width:3px"></x-connector>
+  <x-shape kind="ellipse" style="position:absolute; left:192px; top:372px; width:56px; height:56px; background:#FFFFFF; border:4px solid #1F7A4D"></x-shape>
+  <x-shape kind="ellipse" style="position:absolute; left:792px; top:372px; width:56px; height:56px; background:#FFFFFF; border:4px solid #1F7A4D"></x-shape>
+  <x-shape kind="ellipse" style="position:absolute; left:1112px; top:372px; width:56px; height:56px; background:#FFFFFF; border:4px solid #1F7A4D"></x-shape>
+  <x-shape kind="ellipse" style="position:absolute; left:1392px; top:372px; width:56px; height:56px; background:#FFFFFF; border:4px solid #1F7A4D"></x-shape>
+  <x-shape kind="ellipse" style="position:absolute; left:1672px; top:372px; width:56px; height:56px; background:#FFFFFF; border:4px solid #1F7A4D"></x-shape>
+  <p style="position:absolute; left:192px; top:372px; width:56px; height:56px; font-size:24px; line-height:2.33; text-align:center; font-weight:600; color:#1B2430">0</p>
+  <p style="position:absolute; left:792px; top:372px; width:56px; height:56px; font-size:24px; line-height:2.33; text-align:center; font-weight:600; color:#1B2430">6</p>
+  <p style="position:absolute; left:1112px; top:372px; width:56px; height:56px; font-size:24px; line-height:2.33; text-align:center; font-weight:600; color:#1B2430">8</p>
+  <p style="position:absolute; left:1392px; top:372px; width:56px; height:56px; font-size:24px; line-height:2.33; text-align:center; font-weight:600; color:#1B2430">9</p>
+  <p style="position:absolute; left:1672px; top:372px; width:56px; height:56px; font-size:24px; line-height:2.33; text-align:center; font-weight:600; color:#1B2430">10</p>
+  <p style="position:absolute; left:128px; top:464px; width:1664px; font-size:24px; line-height:1.4; text-align:center; color:#5E6873">Same graph as the last slide (only the green path drawn). Each edge now carries a set: every atomic expression that produces its piece, a constant or a SubStr with sets of positions.</p>
+  <div style="position:absolute; left:128px; top:552px; width:700px; height:300px; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:32px">
+    <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1B2430">Edge 0 → 6, “Turing”</h3>
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#3E4A56">ConstStr(“Turing”), SubStr(v1, {CPos(5), Pos(WhiteSpaceTok, AlphaTok, 1), …}, {CPos(11), CPos(-1), Pos(AlphaTok, EndTok, 1), …})</p>
+  </div>
+  <div style="position:absolute; left:860px; top:552px; width:480px; height:300px; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:32px">
+    <h3 style="font-size:32px; font-weight:600; line-height:1.2; color:#1B2430">Edge 8 → 9, “A”</h3>
+    <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#3E4A56">ConstStr(“A”), SubStr(v1, {CPos(0), Pos(StartTok, AlphaTok, 1), …}, {CPos(1), …})</p>
+  </div>
+  <div style="position:absolute; left:1372px; top:552px; width:420px; height:300px; display:flex; flex-direction:column; justify-content:center; background:#1F7A4D; border-radius:16px; padding:32px">
+    <p style="font-size:32px; line-height:1.4; color:#F7F5EF">Choose a path, then one expression per edge: that is one program.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">10</p>
+  <aside>This completes the picture from the last two slides. The graph gives every way to split the output; each edge label is the version space for one piece, built exactly as on the "keep the choices" slide. The nodes are positions in the output string "Turing, A.". The full DAG has an edge from i to j for every i &lt; j, labelled with the set of atomic expressions that produce output[i:j]. I've drawn only one path. Positions within SubStr are sets too: every regex pair that picks out that index. So one DAG, polynomial in the length of the strings, stands for a huge number of programs. Reading off a path, and one choice per set along it, gives you a concrete program.</aside>
+</section>
+</div>
+<div class="slide" data-id="vsa">
+<section id="vsa" data-transition="fade" style="background:#FFFFFF">
+  <p id="e1-10zqkxp" style="position:absolute; bottom:64px; left:128px; width:1200px; font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; line-height:1.4; color:#5e6873">FlashFill · Gulwani, POPL 2011 · Section 4.1</p>
+  <p id="e2-10zqkxp" style="position:absolute; right:128px; bottom:64px; width:200px; font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; line-height:1.4; text-align:right; color:#5e6873">11</p>
+  <p id="29d1aad5" style="position:absolute; top:128px; left:128px; width:1664px; font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; font-weight:600; line-height:1.4; letter-spacing:2px; text-transform:uppercase; color:#1f7a4d">Version-space algebra: the operations</p>
+  <h2 id="c436de22" style="position:absolute; top:202px; left:128px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1b2430">Lift the DSL from programs to sets of programs</h2>
+  <div id="aa7c5e5e" style="position:absolute; top:312px; left:128px; width:1664px; height:450px; display:flex; flex-direction:column; gap:16px">
+    <div style="display:flex; flex-direction:row; gap:32px; align-items:stretch">
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px; padding:32px; background:#1b2430; border-radius:16px">
+        <h3 style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:28px; font-weight:600; line-height:1.2; color:#7fd1a5">A set of programs, and what it means</h3>
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#f7f5ef">SubStr(vi, P, P') means<br>&#160;&#160;every SubStr(vi, p, p'), p∈P, p'∈P'<br>Pos(R1, R2, C) means<br>&#160;&#160;every Pos(r1, r2, c), r1∈R1, r2∈R2, c∈C<br>Dag(nodes, s, t, edges, W) means<br>&#160;&#160;every Concatenate(f1, …, fn) along a<br>&#160;&#160;path s→t, with each fi ∈ W(edge i)</p>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:12px; padding:32px; background:#1b2430; border-radius:16px">
+        <h3 style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:28px; font-weight:600; line-height:1.2; color:#7fd1a5">Intersect, rule by rule</h3>
+        <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#f7f5ef">SubStr(vi,P1,P2) ∩ SubStr(vi,P1',P2')<br>&#160;&#160;= SubStr(vi, P1∩P1', P2∩P2')<br>Pos(R1,R2,C) ∩ Pos(R1',R2',C')<br>&#160;&#160;= Pos(R1∩R1', R2∩R2', C∩C')<br>ConstStr(s) ∩ ConstStr(s) = ConstStr(s)<br>Dag1 ∩ Dag2 = Dag on node pairs, labels ∩<br>anything else = ∅</p>
+      </div>
+    </div>
+    <p style="font-family:'IBM Plex Sans', Arial, sans-serif; font-size:24px; line-height:1.4; color:#3e4a56">Two more operations work on the sets directly: <b>Size</b> counts the programs without listing them (next slide), and <b>Evaluate</b> runs all of them on a new input, highlighting any cell where they disagree.</p>
+  </div>
+  <p id="b3489fa8" style="position:absolute; top:790px; left:128px; width:1664px; padding:24px 32px; font-family:'IBM Plex Sans', Arial, sans-serif; font-size:32px; line-height:1.4; color:#f7f5ef; background:#1f7a4d; border-radius:16px">So a new example costs one intersection over these sets. FlashFill never enumerates programs, not even to check them.</p>
+  <aside>This is the technical heart of the paper. A version space is the set of all hypotheses consistent with the examples seen so far, an idea from Mitchell's "Generalization as search" (1982). Lau, Domingos and Weld (ICML 2000) made it an algebra: build version spaces for complex functions by composing version spaces for their parts. In its own words, FlashFill shows "how the concepts of version-space algebra can be lifted to the PBE setting."
+
+Left card: the DSL is re-read so that every constructor takes sets of arguments, and a set-expression means every program you get by choosing one element from each set. Right card: intersection works structurally, constructor by constructor, and never lists programs. DAGs intersect like automata: nodes become pairs, and each edge label is the intersection of the two label sets. I've simplified the notation; the paper also has rules for Loop, CPos and TokenSeq (all pointwise), and Intersect returns ∅ when the constructors don't match. The paper compares the structure to BDDs, which represent huge sets of states succinctly and operate on them directly. (Source: Figures 3 and 4, and Section 5.1 for evaluation.)</aside>
+</section>
+</div>
+<div class="slide" data-id="vsasize">
+<section id="vsasize" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Why the version space stays small</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Options add up in memory but multiply in programs</h2>
+  <p style="position:absolute; left:128px; top:312px; width:1664px; font-size:28px; line-height:1.4; color:#3E4A56">One more option costs <b>one more stored entry</b>, but <b>multiplies</b> the number of programs. Here's the running example, with 3 options per list as on slide 8:</p>
+  <table style="position:absolute; left:128px; top:400px; width:1664px; font-size:28px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:25%; color:#F7F5EF">Level</th><th style="width:31%; color:#F7F5EF">What is stored</th><th style="width:19%; color:#F7F5EF">Stored entries</th><th style="width:25%; color:#F7F5EF">Programs represented</th></tr>
+    <tr><td>One piece: “Turing”</td><td>3 starts, 3 ends, 1 constant</td><td>3 + 3 + 1 = 7</td><td>3 × 3 + 1 = 10</td></tr>
+    <tr><td>One split: “Turing” + “, ” + “A” + “.”</td><td>one such set per piece (“, ” and “.” can only be constants)</td><td>7 + 1 + 7 + 1 = 16</td><td>10 × 1 × 10 × 1 = 100</td></tr>
+    <tr style="background:#E3F1E8"><td>Every split of “Turing, A.”</td><td>one set per DAG edge, shared by every path</td><td>55 edge sets</td><td>the sum over all 512 paths of each path's product</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; top:800px; width:1664px; font-size:28px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:16px; padding:20px 32px">Counting, intersecting and running the set all work on the stored entries: multiply along a path, add across paths. No program is ever listed.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011 · Sections 4.1–4.3</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">12</p>
+  <aside>Walk the table top to bottom; each row builds on the one above.
+
+Row 1: the "Turing" piece. As on slide 8, there are 3 ways to say where it starts and 3 ways to say where it ends, plus the option of just typing the constant "Turing". FlashFill stores those 7 things. Any start can pair with any end, so they stand for 3 × 3 = 9 SubStr programs, plus the constant: 10.
+
+Row 2: one way of splitting the output, "Turing" + ", " + "A" + ".". Each piece gets its own set. The comma-space and the period don't appear in the input, so they can only be constants: 1 option each. "A" works like "Turing": 10 options. Storage adds up to 16 entries, but the programs multiply: 10 × 1 × 10 × 1 = 100, because you choose independently for each piece.
+
+Row 3: every split at once. That's the DAG from slides 9 and 10: 55 edges, each with its own set, and 512 paths through them. The paths share edges, so storage is just the 55 sets, while the number of programs is the sum over all paths of that path's product.
+
+The punchline: the Size function (Fig. 5 in the paper) computes this count directly from the stored sets, multiplying along paths and adding across them with dynamic programming, and intersection and evaluation also work on the stored sets. The 3-per-list numbers are illustrative; real sets are larger, which only makes the gap bigger. Section 4.2 adds one more saving: tokens that match exactly the same places in the input are merged into one, so the sets stay small to begin with (the paper's example lists several ways to extract "706" from "425-706-7709").</aside>
+</section>
+</div>
+<div class="slide" data-id="intersect">
+<section id="intersect" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">More examples</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">A second example intersects the DAGs</h2>
+  <table style="width:1664px; font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:20%; color:#F7F5EF">Example</th><th style="width:44%; color:#F7F5EF">Where the surname starts</th><th style="width:36%; color:#F7F5EF">Where it ends</th></tr>
+    <tr><td>Alan Turing</td><td>CPos(5), Pos(WhiteSpaceTok, AlphaTok, 1), Pos(WhiteSpaceTok, AlphaTok, -1), …</td><td>CPos(11), CPos(-1), Pos(AlphaTok, EndTok, 1), …</td></tr>
+    <tr><td>Grace Hopper</td><td>CPos(6), Pos(WhiteSpaceTok, AlphaTok, 1), Pos(WhiteSpaceTok, AlphaTok, -1), …</td><td>CPos(12), CPos(-1), Pos(AlphaTok, EndTok, 1), …</td></tr>
+    <tr style="background:#E3F1E8"><td style="color:#1F7A4D">Both (∩)</td><td>Pos(WhiteSpaceTok, AlphaTok, 1), Pos(WhiteSpaceTok, AlphaTok, -1), …</td><td>CPos(-1), Pos(AlphaTok, EndTok, 1), …</td></tr>
+  </table>
+  <p style="font-size:32px; line-height:1.4; color:#3E4A56">Constants and fixed indices drop out. The “first space” and “last space” rules both survive: they only disagree on names like “Grace Brewster Hopper”. A third example, or the ranking, has to settle it.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">13</p>
+  <aside>Intersecting two DAGs is a product construction, like intersecting two automata. Nodes are pairs, and each edge label is the intersection of the two label sets, with position sets intersected pointwise. The table shows what's left for the surname piece. A c of -1 means the last occurrence, which is why it's the rule that gets "Grace Brewster Hopper" right.</aside>
+</section>
+</div>
+<div class="slide" data-id="conditionals">
+<section id="conditionals" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Beyond one trace</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">When the intersection is empty: Switch and Loop</h2>
+  <div style="display:flex; gap:40px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <h3 style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">Switch</h3>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">GeneratePartition greedily merges examples whose DAGs still intersect. GenerateBoolClassifier then learns Match predicates that tell the groups apart.</p>
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#1B2430; background:#EDEAE0; border-radius:8px; padding:20px">“Hopper, Grace” → “Hopper, G.”<br>“Alan Turing” → “Turing, A.”<br>Switch((Match(v1, CommaTok), e1),<br>&#160;&#160;&#160;&#160;&#160;&#160;&#160;(¬Match(v1, CommaTok), e2))</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:24px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <h3 style="font-size:40px; font-weight:600; line-height:1.2; color:#1F7A4D">Loop</h3>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">Adjacent DAG pieces that are the same expression, differing only in an integer, get unified. That integer becomes the loop variable w.</p>
+      <p style="font-family:'JetBrains Mono', 'Courier New', monospace; font-size:24px; line-height:1.5; color:#1B2430; background:#EDEAE0; border-radius:8px; padding:20px">“Alan Mathison Turing” → “AMT”<br>Loop(λw. Concatenate(<br>&#160;&#160;SubStr2(v1, UpperTok, w)))</p>
+    </div>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">14</p>
+  <aside>If no single trace fits every example, FlashFill partitions the examples. The partition step prefers merges that leave larger intersections, which pushes toward fewer cases. It then learns a boolean classifier over Match predicates to route new inputs to a case. SubStr2(v, r, c) is the paper's shorthand for the c-th occurrence of regex r. Loops apply the same unification idea to the DAG itself. The two examples on this slide are mine, not the paper's.</aside>
+</section>
+</div>
+<div class="slide" data-id="ranking">
+<section id="ranking" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Ranking</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Many programs survive; Occam's razor picks one</h2>
+  <table style="width:1664px; font-size:28px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:30%; color:#F7F5EF">Simpler</th><th style="width:28%; color:#F7F5EF">Than</th><th style="width:42%; color:#F7F5EF">Why (from the paper)</th></tr>
+    <tr><td>SubStr</td><td>ConstStr, Concatenate</td><td>output constants rarely occur in the input; a long match is likely one extraction</td></tr>
+    <tr><td>Pos(r1, r2, c)</td><td>CPos(k)</td><td>constant offsets get less preference</td></tr>
+    <tr><td>Fewer arguments</td><td>More arguments</td><td>for Concatenate and TokenSeq</td></tr>
+    <tr><td>StartTok, EndTok</td><td>Other tokens</td><td>extraction from start or end is common</td></tr>
+    <tr><td>Larger character class</td><td>Smaller one</td><td>favor generality</td></tr>
+  </table>
+  <div style="display:flex; gap:16px; align-items:center">
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#1B2430; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:12px; padding:24px">User types one output</p>
+    <p style="font-size:32px; color:#1F7A4D">→</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#1B2430; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:12px; padding:24px">Top-ranked program fills the column</p>
+    <p style="font-size:32px; color:#1F7A4D">→</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#1B2430; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:12px; padding:24px">User fixes a wrong cell</p>
+    <p style="font-size:32px; color:#1F7A4D">→</p>
+    <p style="flex:1; font-size:28px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:12px; padding:24px">The fix is a new example: intersect again</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011 · Section 5.3</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">15</p>
+  <aside>Section 5.3 defines a partial order on expressions, justified by Occam's razor. The paper admits that "some of these choices are subjective, but have been observed to work well," and it floats personalizing the order to the user. The Generate procedures use this order to return an ordered set of solutions. Ranking is where the prior lives: the version space says what is possible, and the ranking says what is likely. Later PROSE work learns it. The interaction loop at the bottom matches Section 6.1. When several outputs are possible, the tool fills in the top one but highlights the cell, and it shows "??" when no program fits. Any fix re-runs learning with the extra example.</aside>
+</section>
+</div>
+<div class="slide" data-id="results">
+<section id="results" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Evaluation</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">What the experiments show</h2>
+  <div style="display:flex; gap:32px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1F7A4D">100+</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">problem instances, from online help forums and the Excel product team</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1F7A4D">&lt;0.1 s</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">average synthesis time, with up to 10 examples of up to 100 characters</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:16px; background:#FFFFFF; border:1px solid #DDD7C8; border-radius:16px; padding:48px">
+      <p style="font-family:'Source Serif 4', Georgia, serif; font-size:120px; font-weight:600; line-height:1.1; color:#1F7A4D">≤ 4</p>
+      <p style="font-size:32px; line-height:1.4; color:#3E4A56">interactive rounds in any scenario (2–3 typical); at most 10 examples</p>
+    </div>
+  </div>
+  <div style="display:flex; gap:32px; align-items:stretch">
+    <p style="flex:1; font-size:32px; line-height:1.4; color:#F7F5EF; background:#1F7A4D; border-radius:16px; padding:32px">No task expressible in the DSL where it failed to converge on the right program.</p>
+    <p style="flex:1; font-size:32px; line-height:1.4; color:#1B2430; background:#EDEAE0; border-radius:16px; padding:32px">The failures were outside the DSL: semantic tasks like turning a date into a weekday.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011 · Section 6.2</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">16</p>
+  <aside>All numbers are from Section 6.2 of the paper. The prototype was an Excel 2010 add-in called QuickCode, written in under 5,000 lines of C#, and the timings were taken on a Core 2 Duo at 2.8 GHz. The tool typically needs just one round when the user starts with one example per input format, which is usually 1 to 3 examples. The success claim is phrased relative to the DSL: nothing expressible failed to converge. That's an informal completeness claim, not a measured success rate. Note for the Critic: the benchmarks were collected by the author, and there's no baseline, user study or held-out set. It's an existence proof more than a controlled study, and forum questions may not represent what spreadsheet users actually do.</aside>
+</section>
+</div>
+<div class="slide" data-id="champion">
+<section id="champion" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif">
+  <p style="position:absolute; left:128px; top:128px; width:1664px; font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Champion · the case for a best paper award</p>
+  <h2 style="position:absolute; left:128px; top:202px; width:1664px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Why this paper matters beyond its benchmark</h2>
+  <div style="position:absolute; left:128px; top:312px; width:1664px; display:flex; flex-direction:row; gap:32px; align-items:stretch">
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-top:6px solid #1F7A4D; border-radius:16px; padding:32px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1F7A4D">It proved synthesis can ship</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">Within two years it was Flash Fill in Excel 2013: program synthesis behind a single keystroke, used by people who have never written code.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-top:6px solid #1F7A4D; border-radius:16px; padding:32px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1F7A4D">It is a recipe, not a trick</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">Sets of programs, intersection and ranking work for any DSL. FlashMeta/PROSE (2015) turned exactly this into a framework for building synthesizers.</p>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:12px; background:#FFFFFF; border:1px solid #DDD7C8; border-top:6px solid #1F7A4D; border-radius:16px; padding:32px">
+      <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#1F7A4D">What I'd build on it</h3>
+      <p style="font-size:28px; line-height:1.4; color:#3E4A56">Keep the version space for its guarantees, but learn the ranking and the noise handling from data. That is the gap RobustFill and later neurosymbolic work go after.</p>
+    </div>
+  </div>
+  <div style="position:absolute; left:128px; top:660px; width:1664px; display:flex; flex-direction:column; gap:12px; background:#1B2430; border-radius:16px; padding:28px 40px">
+    <h3 style="font-size:28px; font-weight:600; line-height:1.2; color:#7FD1A5">Conceded up front: the DSL and ranking are hand-engineered</h3>
+    <p style="font-size:28px; line-height:1.4; color:#F7F5EF">It only generalizes as far as its designer anticipated, and every failure in Section 6.2 is outside the DSL. That doesn't sink it: the contribution is the algorithm (represent, intersect, rank), and PROSE showed that algorithm transfers to other DSLs.</p>
+  </div>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">17</p>
+  <aside>The Champion argues for a best paper award, specific rather than enthusiastic, and concedes the biggest weakness first. The three cards: impact (Excel 2013), generality (the version-space algebra became FlashMeta/PROSE, Polozov and Gulwani, OOPSLA 2015), and what comes next (learned ranking and noise tolerance, which is RobustFill's opening). The concession: the DSL and ranking are hand-built, and the paper's own failures are semantic tasks outside the DSL, such as date to day of week (Section 6.2). The defence: the reusable contribution is the algorithmic recipe, not the particular string DSL.</aside>
+</section>
+</div>
+<div class="slide" data-id="critique">
+<section id="critique" data-transition="fade" style="background:#FFFFFF; color:#1B2430; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px 128px 160px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#1F7A4D">Critic · Reviewer 2, recommends reject</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#1B2430">Claims the evidence does not yet support</h2>
+  <table style="width:1664px; font-size:24px; color:#1B2430; background:#FFFFFF">
+    <tr style="background:#1B2430"><th style="width:34%; color:#F7F5EF">Concern</th><th style="width:66%; color:#F7F5EF">An experiment that would test it</th></tr>
+    <tr><td>The DSL does the generalizing</td><td>Run on tasks just outside the DSL, such as date arithmetic. Does it fail loudly, or return a wrong program?</td></tr>
+    <tr><td>The ranking is hand-tuned</td><td>Swap in a uniform or learned ranker and count how many extra examples each task needs.</td></tr>
+    <tr><td>Noise handling is a heuristic</td><td>Section 5.2 only flags a lone example that breaks classification. Corrupt 1, 2, 3 examples and measure recovery. (RobustFill's opening.)</td></tr>
+    <tr><td>Benchmarks come from forums</td><td>Collect tasks from real spreadsheet usage and compare the distribution of task types.</td></tr>
+  </table>
+  <p style="position:absolute; left:128px; top:790px; width:1664px; font-size:28px; line-height:1.4; color:#1B2430; background:#EDEAE0; border-left:6px solid #9A3B2E; border-radius:12px; padding:20px 32px"><b>The one experiment that would change my score:</b> Run FlashFill on string tasks collected independently of the author, and report how often it silently returns a wrong program.</p>
+  <p style="position:absolute; left:128px; bottom:64px; width:1200px; font-size:24px; line-height:1.4; color:#5E6873">FlashFill · Gulwani, POPL 2011</p>
+  <p style="position:absolute; right:128px; bottom:64px; width:200px; font-size:24px; line-height:1.4; color:#5E6873; text-align:right">18</p>
+  <aside>The Critic's slide: attack the claims, not the authors, and close with one experiment. As the author, my answer to the first two: the DSL and ranking are the contribution. They encode what a spreadsheet user means. The third point is real. Section 5.2 does handle noise a little: when no boolean classifier separates the partitions, it drops a singleton partition, treats that example as a typo, and asks the user (the "Kimberley" example). But that's one heuristic for one bad example, and it's the right place to hand over to RobustFill.</aside>
+</section>
+</div>
+<div class="slide" data-id="discuss">
+<section id="discuss" data-transition="fade" style="background:#1B2430; color:#F7F5EF; font-family:'IBM Plex Sans', Arial, sans-serif; padding:128px; display:flex; flex-direction:column; gap:40px">
+  <p style="font-size:24px; line-height:1.4; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#7FD1A5">Discussion</p>
+  <h2 style="font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1.1; color:#F7F5EF">What would we have to believe?</h2>
+  <div style="display:flex; flex-direction:column; gap:48px">
+    <div style="display:flex; gap:40px; align-items:start">
+      <p style="width:80px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1; color:#7FD1A5">1</p>
+      <p style="flex:1; font-size:40px; line-height:1.35; color:#E4EAF0">FlashFill generalizes from one or two examples. Is that reasoning, or is the DSL's prior doing all the work?</p>
+    </div>
+    <div style="display:flex; gap:40px; align-items:start">
+      <p style="width:80px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1; color:#7FD1A5">2</p>
+      <p style="flex:1; font-size:40px; line-height:1.35; color:#E4EAF0">RobustFill learns the search instead. What does a neural model gain over a version space, and what does it give up?</p>
+    </div>
+    <div style="display:flex; gap:40px; align-items:start">
+      <p style="width:80px; font-family:'Source Serif 4', Georgia, serif; font-size:64px; font-weight:600; line-height:1; color:#7FD1A5">3</p>
+      <p style="flex:1; font-size:40px; line-height:1.35; color:#E4EAF0">An LLM can handle most of these tasks today. Which part of FlashFill's contribution still matters?</p>
+    </div>
+  </div>
+  <aside>These tie back to Week 1's prediction-versus-reasoning framing and to Chollet's measure of intelligence: generalizing from few examples with a strong prior. For question 3, push on guarantees: FlashFill's output is always consistent with the examples and is an inspectable program. An LLM's answer is neither by default.</aside>
+</section>
+</div>
+</div>
+<div id="notes"></div>
+<div id="counter"></div>
+<div id="help">← → or click to move · N notes · F fullscreen</div>
+<script>
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  // Draw each <x-connector x1 y1 x2 y2> as an SVG arrow in canvas coordinates.
+  document.querySelectorAll('x-connector').forEach(function (el, i) {
+    var cs = el.style, color = cs.color || '#1B2430';
+    var w = parseFloat(cs.borderWidth) || 2, dashed = /dash/.test(cs.borderStyle), dotted = /dot/.test(cs.borderStyle);
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('width', 1920); svg.setAttribute('height', 1080);
+    svg.style.cssText = 'position:absolute;left:0;top:0;overflow:visible;pointer-events:none';
+    var id = 'arrow' + i;
+    var defs = document.createElementNS(SVGNS, 'defs');
+    var m = document.createElementNS(SVGNS, 'marker');
+    m.setAttribute('id', id); m.setAttribute('viewBox', '0 0 10 10'); m.setAttribute('refX', 9); m.setAttribute('refY', 5);
+    m.setAttribute('markerWidth', 5); m.setAttribute('markerHeight', 5); m.setAttribute('orient', 'auto-start-reverse');
+    var p = document.createElementNS(SVGNS, 'path'); p.setAttribute('d', 'M0 0 L10 5 L0 10 z'); p.setAttribute('fill', color);
+    m.appendChild(p); defs.appendChild(m); svg.appendChild(defs);
+    var line = document.createElementNS(SVGNS, 'line');
+    ['x1', 'y1', 'x2', 'y2'].forEach(function (a) { line.setAttribute(a, el.getAttribute(a)); });
+    line.setAttribute('stroke', color); line.setAttribute('stroke-width', w);
+    if (dashed) line.setAttribute('stroke-dasharray', (3 * w) + ' ' + (2 * w));
+    if (dotted) line.setAttribute('stroke-dasharray', w + ' ' + w);
+    var head = el.getAttribute('head') || 'end';
+    if (head === 'end' || head === 'both') line.setAttribute('marker-end', 'url(#' + id + ')');
+    if (head === 'both') line.setAttribute('marker-start', 'url(#' + id + ')');
+    svg.appendChild(line);
+    el.replaceWith(svg);
+  });
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var stage = document.getElementById('stage'), notes = document.getElementById('notes'), counter = document.getElementById('counter');
+  var cur = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1), 10) || 1) - 1));
+
+  function fit() {
+    var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+  }
+  function show(n) {
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+    var aside = slides[cur].querySelector('aside');
+    notes.textContent = aside ? aside.textContent.trim() : '(no notes)';
+    counter.textContent = (cur + 1) + ' / ' + slides.length;
+    history.replaceState(null, '', '#' + (cur + 1));
+  }
+  document.addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { show(cur + 1); e.preventDefault(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].indexOf(e.key) >= 0) { show(cur - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'n' || e.key === 'N') notes.classList.toggle('show');
+    else if (e.key === 'f' || e.key === 'F') { if (document.fullscreenElement) document.exitFullscreen(); else document.documentElement.requestFullscreen(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (notes.contains(e.target)) return;
+    show(e.clientX > window.innerWidth / 2 ? cur + 1 : cur - 1);
+  });
+  window.addEventListener('resize', fit);
+  fit(); show(cur);
+})();
+</script>
+</body>
+</html>
