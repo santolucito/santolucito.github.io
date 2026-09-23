@@ -39,7 +39,7 @@ Grading:
 
 Schedule and readings are tentative and will be adjusted as the semester progresses.
 
-## 1
+## 1 — September 9
 Basics of live coding in Rattle, communities
 
 *hw* live code on stream with rattle https://forg-lab.github.io/rattle/
@@ -47,31 +47,32 @@ Basics of live coding in Rattle, communities
 - [TOPLAP ManifestoDraft](https://toplap.org/wiki/ManifestoDraft)
 - Show Us Your Screens (documentary, 2011) https://louismccallum.com/portfolio/show-us-your-screens
 
-## 2
-pattern based languages with Strudel/Tidal, visuals with [Hydra](https://hydra.ojack.xyz/)
+## 2 — September 16
+MaxMSP
 
 *hw* live code on stream with strudel https://strudel.cc/
 
 - McLean - Making programming languages to dance to: Live coding with Tidal (FARM, 2014)
 
-## 3
+## 3 — September 23
 An impressive display of manual dexterity
+
+Installing Tidal locally
+pattern based languages with Strudel/Tidal, visuals with [Hydra](https://hydra.ojack.xyz/)
 
 *hw* practice vim bindings https://vim-adventures.com/ https://www.vim-hero.com/
 
 - [Live Coding: A User's Manual (Blackwell, Cocker, Cox, McLean, Magnusson, 2022)](https://livecodingbook.toplap.org/) - selected chapters
 - Collins & McLean - Algorave: Live performance of algorithmic electronic dance music (NIME, 2014)
 
-## 4
-Algorave - rattle
-*at Movement Lab*
+## 4 — September 30
 
-## 5
 From Vim to Autocomplete to LLMs. The meaning of intention and control in code.
 
 - Aaron - Sonic Pi: performance in education, technology and art (2016) [Sonic Pi](https://sonic-pi.net/)
 
-## 6
+## 5 — October 7
+
 Language paradigms - ergonomics of syntax and semantics
 
 *hw* vibe code your own live coding language
@@ -79,36 +80,41 @@ Language paradigms - ergonomics of syntax and semantics
 - Steele - Growing a Language (OOPSLA, 1998) https://www.youtube.com/watch?v=lw6TaiXzHAE
 - Magnusson - ixi lang: a SuperCollider parasite for live coding (ICMC, 2011)
 
-## 7
+
+## 6 — October 14
+Algorave - rattle
+*at Movement Lab*
+
+## 7 — October 21
 Showcase/critique of student languages
 
 - Creative Systems Framework
 
-## 8
+## 8 — October 28
 Algorave - your own language
 *at Movement Lab*
 
-## 9
+## 9 — November 4
 Live coding beyond music - dance, textiles, games
 
 - Sicchio - Hacking Choreography: Dance and Live Coding (Computer Music Journal, 2014)
 - Harlizius-Klück & McLean - Introduction: Weaving Codes, Coding Weaves (TEXTILE: The Journal of Cloth and Culture, 2017) https://www.tandfonline.com/doi/full/10.1080/14759756.2017.1298232
 - Cocker - Live Notation: Reflections on a Kairotic Practice (Performance Research, 2013)
 
-## 10
+## 10 — November 11
 going beyond the screen - connecting to physical interfaces
 
 *hw* connect some external device for parameter control
 
-## 11
+## 11 — November 18
 Laptop Orchestras: Networked live coding
 
-## 12
+## 12 — December 2
 Liveness, risk, and error. reflecting on the semester
 
 - Magnusson - Herding Cats: Observing Live Coding in the Wild (Computer Music Journal, 2014)
 - Cox - Speaking Code: Coding as Aesthetic and Political Expression (2013) - selected chapters
 
-## 13
+## 13 — December 9
 Algorave
 *at Movement Lab*
