@@ -110,11 +110,11 @@ going beyond the screen - connecting to physical interfaces
 Laptop Orchestras: Networked live coding
 
 ## 12 — December 2
+Algorave
+*at Movement Lab*
+
+## 13 — December 9
 Liveness, risk, and error. reflecting on the semester
 
 - Magnusson - Herding Cats: Observing Live Coding in the Wild (Computer Music Journal, 2014)
 - Cox - Speaking Code: Coding as Aesthetic and Political Expression (2013) - selected chapters
-
-## 13 — December 9
-Algorave
-*at Movement Lab*
