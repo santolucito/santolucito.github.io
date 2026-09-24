@@ -75,6 +75,10 @@ Write a Sudoku (or similar) solver in SMT and ILP
 - [FlashFill: Automating String Processing in Spreadsheets Using Input-Output Examples (Gulwani, POPL 2011)](https://www.microsoft.com/en-us/research/publication/automating-string-processing-spreadsheets-using-input-output-examples/)
 - [RobustFill: Neural Program Learning under Noisy I/O (Devlin, Uesato, Bhupatiraju, Singh, Mohamed, Kohli, ICML 2017)](https://arxiv.org/abs/1703.07469)
 
+*Materials*
+- Slides: [FlashFill](week3-slides/flashfill.html), [RobustFill](week3-slides/robustfill.html)
+- [Code: minimal Python implementations of FlashFill and RobustFill](https://github.com/santolucito/santolucito.github.io/tree/master/COMS3997/fall2026/week3-code)
+
 *Homework*
 Write an enumerative program synthesis engine for programming by example
 
