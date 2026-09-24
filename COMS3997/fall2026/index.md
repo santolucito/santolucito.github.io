@@ -48,14 +48,16 @@ For all roles: read any one paper this work cites and any one that cites it (you
 
 # Schedule
 
+Jump to week: [1](#week1) · [2](#week2) · [3](#week3) · [4](#week4) · [5](#week5) · [6](#week6) · [7](#week7) · [8](#week8) · [9](#week9) · [10](#week10) · [11](#week11) · [12](#week12) · [13](#week13)
+
 Schedule and readings are tentative and will be adjusted as the semester progresses.
 
-### Week 1 - Class introduction: prediction vs. reasoning, the case for structure
+### Week 1 - Class introduction: prediction vs. reasoning, the case for structure {#week1}
 
 *In class*
 In pairs, start by solving some ARC v1 tasks by hand. Pick one that is interesting. Write a program (feel free to use an LLM) that solves some tasks in 3 different programming paradigms (e.g. imperative, functional, logic programming, smt). 
 
-### Week 2 - Pure Symbolic Methods
+### Week 2 - Pure Symbolic Methods {#week2}
 
 *REMOTE Lecture 9am-10am*
 
@@ -70,7 +72,7 @@ Intro to Satisfiability Modulo Theories (SMT) and Inductive Logic Programming
 *Homework*
 Write a Sudoku (or similar) solver in SMT and ILP
 
-### Week 3 - FlashFill and RobustFill
+### Week 3 - FlashFill and RobustFill {#week3}
 
 - [FlashFill: Automating String Processing in Spreadsheets Using Input-Output Examples (Gulwani, POPL 2011)](https://www.microsoft.com/en-us/research/publication/automating-string-processing-spreadsheets-using-input-output-examples/)
 - [RobustFill: Neural Program Learning under Noisy I/O (Devlin, Uesato, Bhupatiraju, Singh, Mohamed, Kohli, ICML 2017)](https://arxiv.org/abs/1703.07469)
@@ -82,34 +84,34 @@ Write a Sudoku (or similar) solver in SMT and ILP
 *Homework*
 Write an enumerative program synthesis engine for programming by example
 
-### Week 4 - Neural program synthesis
+### Week 4 - Neural program synthesis {#week4}
 
 - [DeepCoder: Learning to Write Programs (Balog, Gaunt, Brockschmidt, Nowozin, Tarlow, ICLR 2017)](https://arxiv.org/abs/1611.01989)
 - [Grammar Filtering for Syntax-Guided Synthesis (Morton, Hallahan, Shum, Piskac, Santolucito, AAAI 2020)](https://www.marksantolucito.com/papers/aaai2020.pdf)
 
-### Week 5 - Concept learning as program induction
+### Week 5 - Concept learning as program induction {#week5}
 
 - [DreamCoder: Growing Generalizable, Interpretable Knowledge with Wake-Sleep Bayesian Program Learning (Ellis, Wong, Nye, Sable-Meyer, Cary, Morales, Hewitt, Solar-Lezama, Tenenbaum, PLDI 2021)](https://arxiv.org/abs/2006.08381)
 - [Stitch: Top-Down Synthesis for Library Learning (Bowers, Olausson, Wong, Grand, Tenenbaum, Ellis, Solar-Lezama, POPL 2023)](https://arxiv.org/abs/2211.16605)
 - Optional: [Human-level Concept Learning through Probabilistic Program Induction (Lake, Salakhutdinov, Tenenbaum, Science 2015)](https://www.cs.cmu.edu/~rsalakhu/papers/LakeEtAl2015Science.pdf)
 
-### Week 6 - Types as specifications
+### Week 6 - Types as specifications {#week6}
 
 - [Program Synthesis from Polymorphic Refinement Types (Polikarpova, Kuraj, Solar-Lezama, PLDI 2016)](https://cseweb.ucsd.edu/~npolikarpova/publications/pldi16.pdf)
 - [Laurel: Unblocking Automated Verification with Large Language Models (Mugnier, Anaya Gonzalez, Polikarpova, Jhala, Zhou, OOPSLA 2025)](https://arxiv.org/abs/2405.16792)
 
-### Week 7 - Looping models
+### Week 7 - Looping models {#week7}
 
 - [Diffusion as a Training Curriculum for Timestep-Free Iterative Reasoning (Drozdova, Sirbu, Miotti, Obryk, Etcheverry, Niklasson, Richards, 2026)](https://arxiv.org/abs/2609.01449)
 - [Lattice Deduction Transformers (Davis, Haller, Alfarano, Santolucito, 2026)](https://arxiv.org/abs/2605.08605)
 
-### Week 8 - Temporal logic and Games
+### Week 8 - Temporal logic and Games {#week8}
 
 - [Safe Reinforcement Learning via Shielding (Alshiekh, Bloem, Ehlers, Konighofer, Niekum, Topcu, AAAI 2018)](https://arxiv.org/abs/1708.08611)
 - [nl2spec: Interactively Translating Unstructured Natural Language to Temporal Logics with Large Language Models (Cosler, Hahn, Mendoza, Schmitt, Trippel, CAV 2023)](https://arxiv.org/abs/2303.04864)
 - Background (no presentation): [SVAEval: An Evaluation Framework for LLM-based SVA Property Generators (Shih, Cho, Gupta, Malik, FMCAD 2026)](https://repositum.tuwien.at/bitstream/20.500.12708/230567/1/Shih-2026-72SVAEval%20An%20Evaluation%20Framework%20for%20LLM-based%20SVA%20Property%20Ge...-vor.pdf)
 
-### Week 9 - Lean
+### Week 9 - Lean {#week9}
 
 - [The Lean 4 Theorem Prover and Programming Language (de Moura, Ullrich, CADE 2021)](https://lean-lang.org/papers/lean4.pdf)
 - Optional: [A Metaprogramming Framework for Formal Verification (Ebner, Ullrich, Roesch, Avigad, de Moura, ICFP 2017)](https://lean-lang.org/papers/tactic.pdf)
@@ -119,24 +121,24 @@ Lean Tutorial
 
 (project proposals due)
 
-### Week 10 - Building formal libraries: Mathlib and CSLib
+### Week 10 - Building formal libraries: Mathlib and CSLib {#week10}
 
 - [The Lean Mathematical Library (The mathlib Community, CPP 2020)](https://arxiv.org/abs/1910.09336)
 - [CSLib: The Lean Computer Science Library (Barrett, Chaudhuri, Montesi, Grundy, Kohli, de Moura, Rademaker, Yingchareonthawornchai, 2026)](https://arxiv.org/abs/2602.04846)
 
-### Week 11 - Constrained Decoding
+### Week 11 - Constrained Decoding {#week11}
 
 - [Flexible and Efficient Grammar-Constrained Decoding (Park, Zhou, D'Antoni, ICML 2025)](https://arxiv.org/abs/2502.05111)
 - [ChopChop: A Programmable Framework for Semantically Constraining the Output of Language Models (Nagy, Zhou, Polikarpova, D'Antoni, POPL 2026)](https://arxiv.org/abs/2509.00360)
 
 ### THANKSGIVING BREAK
 
-### Week 12 - Formal Methods in Industry
+### Week 12 - Formal Methods in Industry {#week12}
 
 - [Semantic-based Automated Reasoning for AWS Access Policies using SMT (Backes, Bolignano, Cook, Dodge, Gacek, Luckow, Rungta, Tkachuk, Varming, FMCAD 2018)](https://www.amazon.science/publications/semantic-based-automated-reasoning-for-aws-access-policies-using-smt)
 - [Cedar: A New Language for Expressive, Fast, Safe, and Analyzable Authorization (Cutler, Disselkoen, Eline, He, Headley, Hicks, Hietala, Ioannidis, Kastner, Mamat, McAdams, McCutchen, Rungta, Torlak, Wells, 2024)](https://arxiv.org/abs/2403.04651)
 
-### Week 13 - Project in-progress presentations
+### Week 13 - Project in-progress presentations {#week13}
 
 Present what you have so far, final presentation is via video upload to youtube before end of finals period.
 
