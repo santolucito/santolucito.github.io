@@ -1,7 +1,6 @@
 # Module 2: Interactive Animation
 
-Processing is an easy to use programming framework for creating visual arts.
-We will use Processing in Python mode to create our own visual art with code.
+We will use Rattle to live code visuals.
 During the creation process, some of the key questions we ask are:
 
 - How do we document our work to fully communicate our artistic intentions?
@@ -13,7 +12,7 @@ During the creation process, some of the key questions we ask are:
 ## Project 2: Interactive Animation
 
 
-Your goal is to create a new work of art with Processing in Python mode (or one of the replacement tools that are Processing-like).
+Your goal is to create a new work of art.
 Ideally, focus on an interactive animation, as we will focus on non-interactive animation in the next module.
 This is an open-ended assignment - which may be an uncomfortable space for you if this is new to you.
 The guiding principle should be to create something that you are proud to call your own creation.
@@ -47,7 +46,6 @@ An example of an A+ project is here [https://www.youtube.com/watch?v=OCe36rvdrFI
 
 ## Lecture 2-1: 
 
-https://docs.google.com/presentation/d/1pSxaEp1JHl4fXMMINx95IAjD-Acfg3A4yCRQ_HDYuAQ/edit?usp=sharing
 
 In this lecture we get into the technical aspects of generative visuals.
 We will cover the graphics system used by Processing and explore the ways in which we communicate visual instructions to a computer.
@@ -56,8 +54,6 @@ One key point is to ensure that we understand performance bottlenecks and other 
 
 
 ## Lecture 2-2:
-
-https://docs.google.com/presentation/d/1OxjK_jvpsAkfWgdiDlInHIv5g_3tcKJljUeqoZ-VZ9M/edit?usp=sharing
 
 Creativity and Code. Context in digital art. 
 How can code itself be a visual artistic object? Can we treat code as literature?
@@ -74,14 +70,10 @@ In class reading: [https://hai.stanford.edu/blog/humans-loop-design-interactive-
 
 <a name="lab1"></a>
 
-## Lab 1-1: Processing
+## Lab 2-1: Live Coding Visuals
 
 
-Installing [Processing](https://processing.org/download/). Once you have installed Processing, proceed to install Python mode. To do this, click the top right button that says Java, and then click "Add Mode" and find the Python mode.
-
-Note that you should stick to Processing version 3.5.4 for now (as opposed to 4.0.1). Also, if you are on a newer Mac, you may need to add ```frameRate(30)``` to your ```setup()``` function in case some example sketches are not working for you. See the video below for more details. You are welcome to use 4.0.1, but some students have had issues - if you always have trouble fall back to the older version.
-
-In this lab we have two goals: 1) getting our hands dirty with Processing, and 2) establishing the foundations for documenting work.
+In this lab we have two goals: 1) getting our hands dirty with Rattle, and 2) establishing the foundations for documenting work.
 For the first part of this lab our goal is to  start with the "Yellowtail" example and modify it to additionally display text of your choice.
 The text size should take up the full display window, and the text should "bounce" up and down on the screen.
 You will want to "remix" code from ```Demos > Graphics > Yellowtail``` and ```Basics > Typography > FiveWaysOfWritingText```.
@@ -105,15 +97,11 @@ Post your video recording publicly, and save the link. Add that link as a commen
 <hr>
 
 ## Lecture 2-3: 
-https://docs.google.com/presentation/d/1XymBAxs9Jtfp28DkmHXsCmv-oZOgf6TwBhaT9aAyIx8/edit?usp=sharing
 
 
-## Lecture 1-4:
-
-https://docs.google.com/presentation/d/1I1EmDo7OgCmB3zpu5ErF1tW806XmgiYe9yNQklV9EtQ/edit?usp=sharing
+## Lecture 2-4:
 
 
-## Lab 1-2: 
+## Lab 2-2: 
 
-None: break
 

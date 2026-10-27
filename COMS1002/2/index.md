@@ -8,7 +8,7 @@ In a more practical sense, this is particularly good training for coding intervi
 
 <a name="project1"></a>
 
-## Project 1: Live coding with Sonic Pi
+## Project 1: Live coding with Rattle
 
 - Due Nov XX, 11:59pm
 
@@ -54,32 +54,25 @@ Does the documentation highlight both the artistic aspect of your work, as well 
 
 <hr> 
 
-## Lecture 2-1: Technicals of Audio  
+## Lecture 1-1: Technicals of Audio  
 
-https://docs.google.com/presentation/d/14o-OaOWX7zwejh8IHnCKAh89SrrJ3vnTPMu60T6Wqxk/edit?usp=sharing
+https://docs.google.com/presentation/d/1x-KvHXgALg_QjKiBMyzYV6LRfhywaWjB7rKLcB3P13Q/edit?usp=sharing
 
 What is digital audio? How is sound represented in a computer?
 What new challenges arise in programming audio as opposed to non-time domain programming?
 
 
-## Lecture 2-2: Live coding How to 
-
-https://docs.google.com/presentation/d/1GRB-i_KYCa-KAku-XM8XZEPdbnenraJ5bXYKBnguwsY/edit?usp=sharing
+## Lecture 1-2: Live coding How to 
 
 <a name="lab2"></a>
 
-## Lab: Sonic Pi
+## Lab: Rattle
 
-Installing and finding your way around Sonic Pi.
-
-The goal of this lab is for you to install Sonic Pi, learn the basic interface, and make a short recording. 
-
-Complete sections 1.1, 2, 2.1, 2.2, 2.3, 2.4, 3, 3.1, 3.2, 4, 5.2, and 9.2 in the Sonic Pi tutorial.
+The goal of this lab is for you to practice live coding in Rattle, learn the basic interface, and make a short recording. 
 
 ### To turn in:
 
-Once you have completed the above tutorial sections you will have a good foundation to start live coding yourself. Record a video of you live coding in Sonic Pi. It doesn't have to be fancy or long (less than 30 seconds is fine) - though a loop that plays a single note is enough. This is to confirm that you have the tool installed, understand the basic usage, can record your audio and code at the same time, and can post a video online. Post your video recording publicly, and save the link. For the lab, simply submit the link in a .txt file!
-
+Once you have completed the above tutorial sections you will have a good foundation to start live coding yourself. Record a video of you live coding. It doesn't have to be fancy or long (less than 30 seconds is fine) - though a loop that plays a single note is enough. This is to confirm that you have the tool installed, understand the basic usage, can record your audio and code at the same time, and can post a video online. Post your video recording publicly, and save the link. For the lab, simply submit the link in a .txt file!
 
 ### A note on recording
 
@@ -87,11 +80,7 @@ Please be sure you are recording the sound *directly* from your computer, and no
 
 <hr>
 
-
-
-## Lecture 2-3: Live coding ethos
-
-https://docs.google.com/presentation/d/1RTROZiomVgFj6PGKguJcqWhoqLcFnBGo83bCgl388Fk/edit?usp=sharing
+## Lecture 1-2: Live coding ethos
 
 We start be examining the design of languages around creativity - how does the structure of a programming language encourage exploration and creativity?
 We then look at the practice of live coding and algoraves.
@@ -99,12 +88,8 @@ How can language design guide us to ensure code does not break on stage?
 We ask - if code is art, what is virtuosity in code?
 
 
-## Lecture 2-4: Live coding visuals
+## Lecture 1-4: TBA
 
-https://docs.google.com/presentation/d/1C1to9CnMwM2WImtZL5XSJmPFrzmHkb5minvRBjVurko/edit?usp=sharing
-
-Live coding in Hydra - how to program in a language you have never seen.
-
-## Lab 5: Project 2 help
+## Lab 5: TBA
 
 
