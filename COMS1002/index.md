@@ -34,6 +34,7 @@ Other learning objectives:
 
 [Lab 5: Computationally Collaborative Creativity ](/Lab5.md)
 
+[https://drive.google.com/drive/folders/1ktZQ_AKUgNduw1WvXostOjNLuAkNUYO6?usp=drive_link][https://drive.google.com/drive/folders/1ktZQ_AKUgNduw1WvXostOjNLuAkNUYO6?usp=drive_link]
 
 
 ## [Module 1: Audio](./2)
