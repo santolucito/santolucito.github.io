@@ -48,12 +48,9 @@ button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
 #log li:last-child{color:var(--ink);font-weight:400}
 #log li.mark{color:var(--accent)}
 @keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.result{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;pointer-events:none}
-.result .vals{display:flex;gap:clamp(24px,6vw,56px);flex-wrap:wrap;justify-content:center}
-.result .v{display:flex;flex-direction:column;align-items:center;gap:6px}
-.result .v b{font-weight:300;font-size:clamp(34px,7vw,52px);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.result .v span{color:var(--faint);font-size:10.5px;letter-spacing:.14em}
-.result p{margin:0;color:var(--faint);letter-spacing:.08em;text-align:center}
+.result{position:absolute;left:0;right:0;bottom:6px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;transition:opacity .9s;pointer-events:none}
+.result.show{opacity:1}
+.result p{margin:0;color:var(--faint);letter-spacing:.08em;text-align:center;font-size:12px}
 .result button{pointer-events:auto;border-bottom:1px solid var(--ink)}
 #cam{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:0;top:0}
 @media (prefers-reduced-motion:reduce){#log li{animation:none}}
@@ -101,6 +98,7 @@ let frames = 0, lastCenter = null, lastAnalyze = 0, lastLog = 0, roiTurn = 0, pa
 let regProg = REGIONS.map(() => 0), dim = 0.45, doneAt = 0, leftCheek = 1;
 let guide = null, guideAlpha = 0, lastGuide = null, lastLoggedGuide = null;
 const hist = {ei:[], even:[], lum:[]};
+let regSum = REGIONS.map(() => ({r: 0, g: 0, b: 0, n: 0})), graph = null;
 const off = document.createElement('canvas'), octx = off.getContext('2d', {willReadFrequently:true});
 
 function resize(){
@@ -158,6 +156,7 @@ function analyze(sample, geom, now){
   if (!passing) return;
 
   hist.ei.push(ei); hist.even.push(even); hist.lum.push(lum);
+  sample.forEach((c, i) => { const r = regSum[i]; r.r += c.r; r.g += c.g; r.b += c.b; r.n++; });
   $('#r-ei').textContent = median(hist.ei.slice(-15)).toFixed(1);
   $('#r-even').textContent = median(hist.even.slice(-15)).toFixed(0) + '%';
   // fill by visibility: frontal regions when facing forward, each cheek when it is turned toward the camera
@@ -183,17 +182,13 @@ function finish(now){
   if (stream){ stream.getTracks().forEach(t => t.stop()); stream = null; }
   log(hist.ei.length + ' samples accepted');
   log(mode === 'live' ? 'camera released  buffers cleared' : 'demo stream closed');
-  log('record  redness, evenness, light, n   images 0', 'mark');
-  const ei = median(hist.ei), even = median(hist.even);
+  graph = buildGraph();
+  log('symbolic model  5 roi → 5 features → 4 operators → 4 outputs');
+  log('record  ' + graph.nodes.filter(n => n.layer === 3).map(n => n.value).join('  ') + '   images 0', 'mark');
   const r = $('#result'); r.hidden = false;
-  r.innerHTML = `<div class="vals">
-      <div class="v"><b>${ei.toFixed(1)}</b><span>redness ei</span></div>
-      <div class="v"><b>${even.toFixed(0)}%</b><span>evenness</span></div>
-      <div class="v"><b>${hist.ei.length}</b><span>samples</span></div>
-    </div>
-    <p>camera off · nothing kept but these numbers</p>
-    <button id="again">again</button>`;
+  r.innerHTML = `<p>camera off · nothing kept but these numbers</p><button id="again">again</button>`;
   $('#again').onclick = () => location.reload();
+  setTimeout(() => r.classList.add('show'), 3600);
 }
 
 /* ---------- drawing ---------- */
@@ -209,7 +204,7 @@ function draw(now){
   const W = canvas.clientWidth, H = canvas.clientHeight;
   ctx.clearRect(0, 0, W, H);
   if (!pts) return;
-  const target = phase === 'done' ? 0.1 : phase === 'scanning' ? 1 : 0.5;
+  const target = phase === 'done' ? 0.04 : phase === 'scanning' ? 1 : 0.5;
   dim += (target - dim) * 0.06;
   const s = Math.min(W / frameW, H / frameH) * 0.82, ox = (W - frameW * s) / 2, oy = (H - frameH * s) / 2;
   const P = pts.map(p => [ox + p.x * frameW * s, oy + p.y * frameH * s, p.z]);
@@ -290,6 +285,7 @@ function tick(now){
   if (mode === 'live' && landmarker && video.readyState >= 2 && phase === 'scanning') liveStep(now);
   if (mode !== 'live' && demo) demoStep(now);
   draw(now);
+  if (graph) drawGraph(now);
   requestAnimationFrame(tick);
 }
 
@@ -427,6 +423,107 @@ function demoStep(now){
   let xmin = 1, xmax = 0, ymin = 1, ymax = 0;
   for (const p of pts){ xmin = Math.min(xmin, p.x); xmax = Math.max(xmax, p.x); ymin = Math.min(ymin, p.y); ymax = Math.max(ymax, p.y); }
   analyze(sample, {fcx: (xmin + xmax) / 2, fcy: (ymin + ymax) / 2, faceW: xmax - xmin, dyaw: Math.sin(yaw) * 0.6}, now);
+}
+
+/* ---------- end of scan: symbolic data-flow graph ---------- */
+function rgb2lab({r, g, b}){
+  const f = c => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  const R = f(r), G = f(g), B = f(b);
+  const X = (R * 0.4124 + G * 0.3576 + B * 0.1805) / 0.95047, Y = R * 0.2126 + G * 0.7152 + B * 0.0722, Z = (R * 0.0193 + G * 0.1192 + B * 0.9505) / 1.08883;
+  const h = t => t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
+  return {L: 116 * h(Y) - 16, a: 500 * (h(X) - h(Y)), b: 200 * (h(Y) - h(Z))};
+}
+function itaClass(v){ return v > 55 ? 'very light' : v > 41 ? 'light' : v > 28 ? 'intermediate' : v > 10 ? 'tan' : v > -30 ? 'brown' : 'dark'; }
+function buildGraph(){
+  const roi = regSum.map(s => ({r: s.r / Math.max(s.n, 1), g: s.g / Math.max(s.n, 1), b: s.b / Math.max(s.n, 1)}));
+  const lab = roi.map(rgb2lab);
+  const dex = leftCheek, sin = leftCheek === 1 ? 2 : 1; // mirrored view: subject's left cheek is on the screen right
+  const order = [[0, 'frontalis'], [dex, 'bucc. dex.'], [sin, 'bucc. sin.'], [3, 'nasalis'], [4, 'mentalis']];
+  const mean = a => a.reduce((x, y) => x + y, 0) / a.length;
+  const Ls = lab.map(c => c.L), Lm = mean(Ls), bm = mean(lab.map(c => c.b));
+  const sdL = Math.sqrt(mean(Ls.map(v => (v - Lm) ** 2)));
+  const RG = mean([dex, sin].map(i => roi[i].r / Math.max(roi[i].g, 1)));
+  const da = Math.abs(lab[sin].a - lab[dex].a);
+  const EI = 100 * Math.log10(RG), ITA = Math.atan((Lm - 50) / Math.max(bm, 0.1)) * 180 / Math.PI;
+  const U = 100 * (1 - sdL / Math.max(Lm, 1)), PHI = clamp(0.7 * EI / 20 + 0.3 * da / 6, 0, 1.5);
+  const N = [];
+  const add = (id, layer, label, value, from = [], sub = '', short = label) => N.push({id, layer, label, value, from, sub, short});
+  const roiIds = order.map(([i, nm]) => { add('r' + i, 0, nm, 'a* ' + lab[i].a.toFixed(1)); return 'r' + i; });
+  add('rg', 1, 'ρR/ρG', RG.toFixed(3), ['r' + dex, 'r' + sin]);
+  add('L', 1, 'L* μ', Lm.toFixed(1), roiIds);
+  add('b', 1, 'b* μ', bm.toFixed(1), roiIds);
+  add('sd', 1, 'σ L*', sdL.toFixed(2), roiIds);
+  add('da', 1, 'Δa* sin−dex', da.toFixed(2), ['r' + dex, 'r' + sin], '', 'Δa*');
+  add('oEI', 2, 'EI', '100·log₁₀ ρ', ['rg']);
+  add('oITA', 2, 'ITA°', 'atan((L*−50)/b*)', ['L', 'b']);
+  N[N.length - 1].shortValue = 'atan((L−50)/b)';
+  add('oU', 2, 'U', '1 − σ/μ', ['sd', 'L']);
+  add('oPHI', 2, 'Φ', 'α·EI + β·Δa*', ['rg', 'da']);
+  add('sEI', 3, 'index erythematis', EI.toFixed(1), ['oEI'], '', 'erythema');
+  add('sITA', 3, 'angulus typologicus', ITA.toFixed(1) + '°', ['oITA'], itaClass(ITA), 'typologia');
+  add('sU', 3, 'uniformitas', U.toFixed(0) + '%', ['oU']);
+  add('sPHI', 3, 'onus inflammationis', PHI.toFixed(2), ['oPHI'], '', 'inflammatio');
+  const byId = Object.fromEntries(N.map(n => [n.id, n]));
+  const E = [];
+  N.forEach(n => n.from.forEach((f, k) => E.push({a: byId[f], b: n, seed: (n.id.length * 0.37 + k * 0.29 + f.length * 0.11) % 1})));
+  return {nodes: N, edges: E};
+}
+function layoutGraph(W, H){
+  const vert = W < H * 0.95, Hs = H - 72, small = W < 520;
+  for (let l = 0; l < 4; l++){
+    const ns = graph.nodes.filter(n => n.layer === l), m = ns.length;
+    ns.forEach((n, k) => {
+      if (vert){ n.x = W * (k + 0.5) / m; n.y = Hs * (0.08 + l * 0.29); }
+      else { n.x = W * (0.1 + l * 0.27); n.y = Hs * (0.08 + 0.84 * (k + 0.5) / m); }
+    });
+  }
+  return {vert, small};
+}
+function curvePt(e, t, L){
+  const p0 = e.a.out, p3 = e.b.in, c = L.vert ? [[p0[0], p0[1] + (p3[1] - p0[1]) * 0.5], [p3[0], p3[1] - (p3[1] - p0[1]) * 0.5]]
+                                            : [[p0[0] + (p3[0] - p0[0]) * 0.5, p0[1]], [p3[0] - (p3[0] - p0[0]) * 0.5, p3[1]]];
+  const u = 1 - t;
+  return [u*u*u*p0[0] + 3*u*u*t*c[0][0] + 3*u*t*t*c[1][0] + t*t*t*p3[0], u*u*u*p0[1] + 3*u*u*t*c[0][1] + 3*u*t*t*c[1][1] + t*t*t*p3[1]];
+}
+function drawGraph(now){
+  const W = canvas.clientWidth, H = canvas.clientHeight, L = layoutGraph(W, H), dt = now - doneAt;
+  const appear = l => clamp((dt - 700 - l * 650) / 520, 0, 1);
+  const fs = L.small ? 9.5 : 11, fv = L.small ? 12 : 14, fsum = L.small ? 19 : 26;
+  // text geometry and anchors
+  for (const n of graph.nodes){
+    n.lab = L.small ? n.short : n.label; n.val = L.small && n.shortValue ? n.shortValue : n.value;
+    const big = n.layer === 3 ? fsum : fv;
+    ctx.font = `300 ${fs}px "IBM Plex Mono", monospace`; const w1 = ctx.measureText(n.lab).width;
+    ctx.font = `400 ${big}px "IBM Plex Mono", monospace`; const w2 = ctx.measureText(n.val).width;
+    const w = Math.max(w1, w2), top = fs + 4, bottom = big * 0.4 + (n.sub ? fs + 4 : 0) + 6;
+    n.in = L.vert ? [n.x, n.y - top - 4] : [n.x - w / 2 - 8, n.y];
+    n.out = L.vert ? [n.x, n.y + bottom] : [n.x + w / 2 + 8, n.y];
+  }
+  // edges grow in with their target layer, then carry particles
+  for (const e of graph.edges){
+    const p = appear(e.b.layer); if (p <= 0) continue;
+    ctx.strokeStyle = `rgba(${INK},${0.18})`; ctx.lineWidth = 0.8; ctx.beginPath();
+    const steps = 28;
+    for (let s = 0; s <= steps * p; s++){ const q = curvePt(e, s / steps, L); s ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); }
+    ctx.stroke();
+    if (p >= 1 && !reduced){
+      const t = ((now / 1700) + e.seed) % 1, q = curvePt(e, t, L);
+      ctx.fillStyle = `rgba(${ACC},${0.85 * Math.sin(t * Math.PI)})`; ctx.beginPath(); ctx.arc(q[0], q[1], 1.8, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  // nodes
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+  for (const n of graph.nodes){
+    const a = appear(n.layer); if (a <= 0) continue;
+    const big = n.layer === 3 ? fsum : fv, isOp = n.layer === 2;
+    ctx.font = `300 ${fs}px "IBM Plex Mono", monospace`; ctx.fillStyle = `rgba(${INK},${0.55 * a})`;
+    ctx.fillText(n.lab, n.x, n.y - big * 0.55 - 2);
+    ctx.font = `${isOp ? 300 : 400} ${isOp ? fs + 0.5 : big}px "IBM Plex Mono", monospace`;
+    ctx.fillStyle = n.layer === 3 ? `rgba(${ACC},${a})` : `rgba(${INK},${(isOp ? 0.8 : 0.95) * a})`;
+    ctx.fillText(n.val, n.x, n.y + big * 0.4);
+    if (n.sub){ ctx.font = `300 ${fs}px "IBM Plex Mono", monospace`; ctx.fillStyle = `rgba(${INK},${0.55 * a})`; ctx.fillText(n.sub, n.x, n.y + big * 0.4 + fs + 4); }
+  }
+  ctx.textAlign = 'start';
 }
 
 useDemoMesh(); // idle preview: slow turning mesh behind the begin button
