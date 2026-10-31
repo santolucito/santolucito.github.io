@@ -81,6 +81,8 @@ const REGIONS = [{name:'forehead', idx:151, kind:'front'}, {name:'cheek.a', idx:
                  {name:'nose', idx:197, kind:'front'}, {name:'chin', idx:199, kind:'front'}];
 const INK = '28,31,33', ACC = '154,59,72';
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// remove the start controls outright: works in every browser, no CSS needed
+function hideCta(){ const c = document.getElementById('cta'); if (c) c.remove(); }
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 let mode = 'idle', phase = 'idle', t0 = performance.now();
@@ -173,7 +175,7 @@ function finish(now){
   graph = buildGraph();
   log('symbolic model  5 regions → 5 features → 4 operators → 4 outputs');
   log('record  ' + graph.nodes.filter(n => n.layer === 3).map(n => n.value).join('  ') + '   images 0', 'mark');
-  const r = $('#result'); r.hidden = false;
+  const r = $('#result'); r.removeAttribute('hidden'); r.style.display = 'flex';
   r.innerHTML = `<p>0 images retained · 4 stats → db</p><button id="again">again</button>`;
   $('#again').onclick = () => location.reload();
   setTimeout(() => r.classList.add('show'), 3600);
@@ -279,7 +281,7 @@ function tick(now){
 
 /* ---------- live mode ---------- */
 async function startLive(){
-  $('#cta').hidden = true; t0 = performance.now(); $('#log').innerHTML = '';
+  hideCta(); t0 = performance.now(); $('#log').innerHTML = '';
   log('camera  front-facing');
   try {
     stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user', width: {ideal: 640}, height: {ideal: 480}}, audio: false});
@@ -378,7 +380,7 @@ function buildDemoFace(){
 }
 function useDemoMesh(){ demo = buildDemoFace(); edges = demo.E; contours = demo.C; regionPts = demo.regions; frameW = 640; frameH = 480; demo.start = performance.now(); }
 function startDemo(){
-  $('#cta').hidden = true; mode = 'demo';
+  hideCta(); mode = 'demo';
   if (!demo) useDemoMesh();
   demo.start = performance.now(); demo.scan = true; demo.off = -0.16; demo.scale = 95;
   log('synthetic face  ' + demo.V.length + ' pts  no camera');
