@@ -36,11 +36,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .sub{color:var(--faint);font-size:12px}
 button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
 .hint{position:absolute;left:0;right:0;bottom:2%;text-align:center;letter-spacing:.16em;color:var(--accent);min-height:1em}
-#log{list-style:none;margin:0;padding:0;height:calc(7 * 1.6em);overflow:hidden;line-height:1.6;font-size:13px;font-variant-numeric:tabular-nums;
-  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 45%);mask-image:linear-gradient(to bottom,transparent,#000 45%);
+#log{list-style:none;margin:0;padding:0;height:calc(10 * 1.6em);overflow:hidden;line-height:1.6;font-size:13px;font-variant-numeric:tabular-nums;
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 60%);mask-image:linear-gradient(to bottom,transparent,#000 60%);
   display:flex;flex-direction:column;justify-content:flex-end}
 #log li{flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--faint);animation:in .35s ease-out}
 #log li .t{opacity:.6;margin-right:1.2em}
+#log li:nth-last-child(-n+4){color:var(--ink)}
 #log li:last-child{color:var(--ink);font-weight:400}
 #log li.mark{color:var(--accent)}
 @keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -104,7 +105,7 @@ function log(msg, cls = ''){
   t.textContent = ((performance.now() - t0) / 1000).toFixed(2).padStart(6, '0');
   li.append(t, msg);
   const ol = $('#log'); ol.append(li);
-  while (ol.children.length > 14) ol.firstChild.remove();
+  while (ol.children.length > 16) ol.firstChild.remove();
 }
 const median = a => { if (!a.length) return NaN; const s = [...a].sort((x, y) => x - y); return s[s.length >> 1]; };
 
