@@ -8,74 +8,77 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400&display=swap">
 <style>
-/* Layout: the face mesh is the whole screen. Text lives only at the edges: wordmark top-left,
-   a fading process log bottom-left, four numbers bottom-right. One accent, used only for filling rings.
+/* Layout: stacked instrument. Wordmark row, the mesh stage, a row of four readings, then the
+   process log as the main text the user reads. One accent, used only for progress and guidance.
    Deliberately a single light theme: morning, paper-quiet. */
 :root{
   --ground:#e5e6e3;   /* cool pale stone */
   --ink:#1c1f21;      /* graphite */
-  --faint:#868b8c;    /* secondary text */
-  --hair:#c9cbc7;     /* hairlines */
-  --accent:#9a3b48;   /* oxblood: progress only */
+  --faint:#7f8485;    /* secondary text */
+  --hair:#c6c8c4;     /* hairlines */
+  --accent:#9a3b48;   /* oxblood: progress and guidance only */
   --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   color-scheme:light;
 }
 html,body{height:100%}
-body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--mono);font-weight:300;font-size:12px;overflow:hidden;
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--mono);font-weight:300;font-size:13px;overflow:hidden;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));box-sizing:border-box}
 *{box-sizing:border-box}
-.app{position:relative;height:100%}
+.app{height:100%;max-width:760px;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:14px;padding-block:18px 20px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.word{font-weight:400;font-size:13px;letter-spacing:.45em}
+#stored{color:var(--faint);font-size:12px;letter-spacing:.04em}
+.stage{position:relative;min-height:0}
 #mesh{position:absolute;inset:0;width:100%;height:100%;display:block}
-.top{position:absolute;left:0;right:0;top:18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.word{font-weight:400;font-size:13px;letter-spacing:.45em;text-transform:lowercase}
-#stored{color:var(--faint);letter-spacing:.04em}
-.cta{position:absolute;left:0;right:0;bottom:22%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.cta{position:absolute;left:0;right:0;bottom:6%;display:flex;flex-direction:column;align-items:center;gap:10px}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:6px 10px;letter-spacing:.12em}
-#start{font-size:14px;font-weight:400;border-bottom:1px solid var(--ink);padding-bottom:4px}
-.sub{color:var(--faint);font-size:11px}
+#start{font-size:15px;font-weight:400;border-bottom:1px solid var(--ink);padding-bottom:4px}
+.sub{color:var(--faint);font-size:12px}
 button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
-.hint{position:absolute;left:0;right:0;bottom:17%;text-align:center;letter-spacing:.14em;min-height:1em;transition:opacity .3s}
-.bottom{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
-#log{list-style:none;margin:0;padding:0;max-height:8.4em;overflow:hidden;line-height:1.4;font-variant-numeric:tabular-nums;min-width:0;flex:1 1 280px;
-  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 70%);mask-image:linear-gradient(to bottom,transparent,#000 70%);
+.hint{position:absolute;left:0;right:0;bottom:2%;text-align:center;letter-spacing:.16em;color:var(--accent);min-height:1em}
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;font-variant-numeric:tabular-nums;border-top:1px solid var(--hair);padding-top:12px}
+.nums div{display:flex;flex-direction:column;gap:3px}
+.nums dt{color:var(--faint);font-size:10.5px;letter-spacing:.12em}
+.nums dd{margin:0;font-size:19px;font-weight:400}
+#log{list-style:none;margin:0;padding:0;height:calc(7 * 1.6em);overflow:hidden;line-height:1.6;font-size:13px;font-variant-numeric:tabular-nums;
+  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 45%);mask-image:linear-gradient(to bottom,transparent,#000 45%);
   display:flex;flex-direction:column;justify-content:flex-end}
-#log li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--faint)}
-#log li:last-child{color:var(--ink)}
+#log li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--faint);animation:in .35s ease-out}
+#log li .t{opacity:.6;margin-right:1.2em}
+#log li:last-child{color:var(--ink);font-weight:400}
 #log li.mark{color:var(--accent)}
-.nums{display:flex;gap:20px;margin:0;font-variant-numeric:tabular-nums}
-.nums div{display:flex;flex-direction:column;gap:2px;align-items:flex-end}
-.nums dt{color:var(--faint);font-size:10px;letter-spacing:.12em}
-.nums dd{margin:0;font-size:15px;font-weight:400}
-.result{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;pointer-events:none}
+@keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.result{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;pointer-events:none}
 .result .vals{display:flex;gap:clamp(24px,6vw,56px);flex-wrap:wrap;justify-content:center}
 .result .v{display:flex;flex-direction:column;align-items:center;gap:6px}
 .result .v b{font-weight:300;font-size:clamp(34px,7vw,52px);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.result .v span{color:var(--faint);font-size:10px;letter-spacing:.14em}
-.result p{margin:0;color:var(--faint);letter-spacing:.08em}
+.result .v span{color:var(--faint);font-size:10.5px;letter-spacing:.14em}
+.result p{margin:0;color:var(--faint);letter-spacing:.08em;text-align:center}
 .result button{pointer-events:auto;border-bottom:1px solid var(--ink)}
 #cam{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:0;top:0}
+@media (prefers-reduced-motion:reduce){#log li{animation:none}}
 </style>
 </head>
 <body>
 
 <div class="app">
-  <canvas id="mesh" aria-label="Face mesh"></canvas>
   <div class="top"><span class="word">saint</span><span id="stored">0 images kept</span></div>
-  <div class="cta" id="cta">
-    <button id="start">begin</button>
-    <button id="demo" class="sub">demo without camera</button>
+  <div class="stage">
+    <canvas id="mesh" aria-label="Face mesh"></canvas>
+    <div class="cta" id="cta">
+      <button id="start">begin</button>
+      <button id="demo" class="sub">demo without camera</button>
+    </div>
+    <div class="hint" id="hint" aria-live="polite"></div>
+    <div class="result" id="result" hidden></div>
   </div>
-  <div class="hint" id="hint" aria-live="polite"></div>
-  <div class="bottom">
-    <ol id="log"></ol>
-    <dl class="nums">
-      <div><dt>redness</dt><dd id="r-ei">--</dd></div>
-      <div><dt>evenness</dt><dd id="r-even">--</dd></div>
-      <div><dt>light</dt><dd id="r-lum">--</dd></div>
-      <div><dt>frames</dt><dd id="r-frames">0</dd></div>
-    </dl>
-  </div>
-  <div class="result" id="result" hidden></div>
+  <dl class="nums">
+    <div><dt>redness</dt><dd id="r-ei">--</dd></div>
+    <div><dt>evenness</dt><dd id="r-even">--</dd></div>
+    <div><dt>light</dt><dd id="r-lum">--</dd></div>
+    <div><dt>frames</dt><dd id="r-frames">0</dd></div>
+  </dl>
+  <ol id="log"></ol>
 </div>
 <video id="cam" playsinline muted autoplay></video>
 
@@ -85,15 +88,18 @@ const canvas = $('#mesh'), ctx = canvas.getContext('2d');
 const video = $('#cam');
 const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
 const MODEL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
-const REGIONS = [{name:'forehead', idx:151}, {name:'cheek.l', idx:205}, {name:'cheek.r', idx:425}, {name:'nose', idx:197}, {name:'chin', idx:199}];
+const REGIONS = [{name:'forehead', idx:151, kind:'front'}, {name:'cheek.a', idx:205, kind:'cheek'}, {name:'cheek.b', idx:425, kind:'cheek'},
+                 {name:'nose', idx:197, kind:'front'}, {name:'chin', idx:199, kind:'front'}];
 const INK = '28,31,33', ACC = '154,59,72';
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
 let mode = 'idle', phase = 'idle', t0 = performance.now();
-let landmarker = null, edges = [], contours = [], stream = null;
+let landmarker = null, edges = [], contours = [], stream = null, decimated = false;
 let pts = null, frameW = 640, frameH = 480, regionPts = [];
-let frames = 0, lastNose = null, lastAnalyze = 0, lastLog = 0, roiTurn = 0, passing = false, hintMsg = '';
-let regProg = REGIONS.map(() => 0), dim = 0.45, doneAt = 0;
+let frames = 0, lastCenter = null, lastAnalyze = 0, lastLog = 0, roiTurn = 0, passing = false, hintMsg = '';
+let regProg = REGIONS.map(() => 0), dim = 0.45, doneAt = 0, leftCheek = 1;
+let guide = null, guideAlpha = 0, lastGuide = null;
 const hist = {ei:[], even:[], lum:[]};
 const off = document.createElement('canvas'), octx = off.getContext('2d', {willReadFrequently:true});
 
@@ -106,59 +112,79 @@ addEventListener('resize', resize); resize();
 
 function log(msg, cls = ''){
   const li = document.createElement('li'); if (cls) li.className = cls;
-  const t = ((performance.now() - t0) / 1000).toFixed(2).padStart(6, '0');
-  li.textContent = t + '  ' + msg;
+  const t = document.createElement('span'); t.className = 't';
+  t.textContent = ((performance.now() - t0) / 1000).toFixed(2).padStart(6, '0');
+  li.append(t, msg);
   const ol = $('#log'); ol.append(li);
-  while (ol.children.length > 12) ol.firstChild.remove();
+  while (ol.children.length > 14) ol.firstChild.remove();
 }
 const median = a => { if (!a.length) return NaN; const s = [...a].sort((x, y) => x - y); return s[s.length >> 1]; };
 
+/* geom (display space, mirrored like a selfie): fcx, fcy face center 0..1, faceW, dyaw (+ = nose toward screen right) */
 function analyze(sample, geom, now){
   frames++;
   const lums = sample.map(c => 0.299 * c.r + 0.587 * c.g + 0.114 * c.b);
   const lum = lums.reduce((a, b) => a + b, 0) / lums.length;
-  const cheeks = sample.filter((_, i) => REGIONS[i].name.startsWith('cheek'));
+  const cheeks = sample.filter((_, i) => REGIONS[i].kind === 'cheek');
   const ei = cheeks.reduce((a, c) => a + 100 * Math.log10(Math.max(c.r, 1) / Math.max(c.g, 1)), 0) / cheeks.length;
   const sd = Math.sqrt(lums.reduce((a, l) => a + (l - lum) ** 2, 0) / lums.length);
   const even = Math.max(0, 100 * (1 - sd / Math.max(lum, 1)));
-  const moved = lastNose ? Math.hypot(geom.nose.x - lastNose.x, geom.nose.y - lastNose.y) : 0;
-  lastNose = geom.nose;
-  let hint = '';
+  const moved = lastCenter ? Math.hypot(geom.fcx - lastCenter.x, geom.fcy - lastCenter.y) : 0;
+  lastCenter = {x: geom.fcx, y: geom.fcy};
+
+  // which region still needs work decides the turn guidance
+  const frontDone = REGIONS.every((r, i) => r.kind !== 'front' || regProg[i] >= 1);
+  const li = leftCheek, ri = leftCheek === 1 ? 2 : 1; // indices of screen-left / screen-right cheek
+  let hint = '', g = null;
   if (lum <= 70) hint = 'more light';
   else if (lum >= 215) hint = 'less light';
-  else if (geom.faceW < 0.26) hint = 'closer';
-  else if (geom.faceW > 0.62) hint = 'back';
-  else if (Math.abs(geom.yaw) > 0.09) hint = 'face forward';
-  else if (moved > 0.012) hint = 'still';
+  else if (Math.abs(geom.fcx - 0.5) > 0.12 || Math.abs(geom.fcy - 0.5) > 0.14){ hint = 'center'; g = {type:'center', dx: 0.5 - geom.fcx, dy: 0.5 - geom.fcy}; }
+  else if (geom.faceW < 0.26){ hint = 'closer'; g = {type:'dist', dir: 1}; }
+  else if (geom.faceW > 0.62){ hint = 'back'; g = {type:'dist', dir: -1}; }
+  else if (moved > 0.025) hint = 'still';
   passing = !hint;
-  if (hint !== hintMsg){ $('#hint').textContent = hint; log(hint ? 'gate  ' + hint : 'gates pass  sampling'); hintMsg = hint; }
+  if (passing){
+    if (!frontDone && Math.abs(geom.dyaw) > 0.12) g = {type:'turn', dir: geom.dyaw > 0 ? -1 : 1};
+    else if (frontDone && regProg[li] < 1 && geom.dyaw < 0.1) g = {type:'turn', dir: 1};
+    else if (frontDone && regProg[li] >= 1 && regProg[ri] < 1 && geom.dyaw > -0.1) g = {type:'turn', dir: -1};
+    if (g) hint = 'turn';
+  }
+  guide = g;
+  const gkey = hint + (g && g.dir ? g.dir : '');
+  if (hint !== hintMsg){ $('#hint').textContent = hint; hintMsg = hint; }
+  if (gkey !== lastGuide){ if (hint) log(hint === 'turn' ? `turn ${g.dir > 0 ? 'right' : 'left'}  exposing ${g.dir > 0 ? 'left' : 'right'} cheek` : 'adjust  ' + hint); lastGuide = gkey; }
   $('#r-lum').textContent = lum.toFixed(0);
   $('#r-frames').textContent = frames;
   if (!passing) return;
+
   hist.ei.push(ei); hist.even.push(even); hist.lum.push(lum);
   $('#r-ei').textContent = median(hist.ei.slice(-15)).toFixed(1);
   $('#r-even').textContent = median(hist.even.slice(-15)).toFixed(0) + '%';
-  // fill rings unevenly, like fingerprint enrollment
+  // fill by visibility: frontal regions when facing forward, each cheek when it is turned toward the camera
+  const front = clamp(1 - Math.abs(geom.dyaw) / 0.13, 0, 1);
+  const showL = clamp((geom.dyaw - 0.02) / 0.12, 0, 1), showR = clamp((-geom.dyaw - 0.02) / 0.12, 0, 1);
   regProg = regProg.map((p, i) => {
     if (p >= 1) return 1;
-    const np = Math.min(1, p + 0.16 / 7 * (0.45 + Math.random() * 1.1));
-    if (np >= 1) log('roi:' + REGIONS[i].name + '  complete', 'mark');
+    const w = REGIONS[i].kind === 'front' ? front : (i === li ? Math.max(0.12, showL) : Math.max(0.12, showR));
+    const np = Math.min(1, p + 0.16 / 3.2 * w * (0.5 + Math.random()));
+    if (np >= 1) log((REGIONS[i].kind === 'cheek' ? (i === li ? 'left cheek' : 'right cheek') : REGIONS[i].name) + '  captured', 'mark');
     return np;
   });
-  if (now - lastLog > 360){
+  if (now - lastLog > 420){
     lastLog = now; const i = roiTurn++ % sample.length, c = sample[i];
-    log(`roi:${REGIONS[i].name.padEnd(9)} rgb ${[c.r, c.g, c.b].map(v => v.toFixed(0).padStart(3)).join(' ')}  ei ${(100 * Math.log10(c.r / Math.max(c.g, 1))).toFixed(1)}`);
+    const nm = REGIONS[i].kind === 'cheek' ? (i === li ? 'cheek.l' : 'cheek.r') : REGIONS[i].name;
+    log(`${nm.padEnd(9)} rgb ${[c.r, c.g, c.b].map(v => v.toFixed(0).padStart(3)).join(' ')}   ei ${(100 * Math.log10(c.r / Math.max(c.g, 1))).toFixed(1)}`);
   }
   if (regProg.every(p => p >= 1)) finish(now);
 }
 
 function finish(now){
-  phase = 'done'; doneAt = now; $('#hint').textContent = '';
+  phase = 'done'; doneAt = now; guide = null; $('#hint').textContent = '';
   if (stream){ stream.getTracks().forEach(t => t.stop()); stream = null; }
   log(hist.ei.length + ' samples accepted');
   log(mode === 'live' ? 'camera released  buffers cleared' : 'demo stream closed');
-  log('record  {redness, evenness, light, n}  images 0', 'mark');
-  const ei = median(hist.ei), even = median(hist.even), lum = median(hist.lum);
+  log('record  redness, evenness, light, n   images 0', 'mark');
+  const ei = median(hist.ei), even = median(hist.even);
   const r = $('#result'); r.hidden = false;
   r.innerHTML = `<div class="vals">
       <div class="v"><b>${ei.toFixed(1)}</b><span>redness ei</span></div>
@@ -171,18 +197,26 @@ function finish(now){
 }
 
 /* ---------- drawing ---------- */
+function chevron(x, y, ang, size, a){
+  ctx.save(); ctx.translate(x, y); ctx.rotate(ang);
+  ctx.strokeStyle = `rgba(${ACC},${a})`; ctx.lineWidth = 1.6; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(-size * 0.5, -size); ctx.lineTo(size * 0.5, 0); ctx.lineTo(-size * 0.5, size); ctx.stroke();
+  ctx.restore();
+}
+function marching(k, now){ return reduced ? 0.7 : (Math.sin(now / 260 - k * 1.1) + 1) / 2; }
+
 function draw(now){
   const W = canvas.clientWidth, H = canvas.clientHeight;
   ctx.clearRect(0, 0, W, H);
   if (!pts) return;
-  const target = phase === 'done' ? 0.12 : phase === 'scanning' ? 1 : 0.45;
+  const target = phase === 'done' ? 0.1 : phase === 'scanning' ? 1 : 0.5;
   dim += (target - dim) * 0.06;
-  const s = Math.min(W / frameW, H / frameH) * 1.05, ox = (W - frameW * s) / 2, oy = (H - frameH * s) / 2 - H * 0.03;
+  const s = Math.min(W / frameW, H / frameH) * 0.82, ox = (W - frameW * s) / 2, oy = (H - frameH * s) / 2;
   const P = pts.map(p => [ox + p.x * frameW * s, oy + p.y * frameH * s, p.z]);
-  let zmin = Infinity, zmax = -Infinity, ymin = Infinity, ymax = -Infinity;
-  for (const p of P){ if (p[2] < zmin) zmin = p[2]; if (p[2] > zmax) zmax = p[2]; if (p[1] < ymin) ymin = p[1]; if (p[1] > ymax) ymax = p[1]; }
+  let zmin = Infinity, zmax = -Infinity, xmin = Infinity, xmax = -Infinity, ymin = Infinity, ymax = -Infinity;
+  for (const p of P){ zmin = Math.min(zmin, p[2]); zmax = Math.max(zmax, p[2]); xmin = Math.min(xmin, p[0]); xmax = Math.max(xmax, p[0]); ymin = Math.min(ymin, p[1]); ymax = Math.max(ymax, p[1]); }
   const span = (zmax - zmin) || 1;
-  const sweepY = phase === 'scanning' && passing && !reduced ? ymin + ((now / 2200) % 1) * (ymax - ymin) : -1e9;
+  const sweepY = phase === 'scanning' && passing && !reduced ? ymin + ((now / 2400) % 1) * (ymax - ymin) : -1e9;
   const buckets = [[], [], [], []], hot = [];
   for (const [a, b] of edges){
     const pa = P[a], pb = P[b]; if (!pa || !pb) continue;
@@ -190,37 +224,67 @@ function draw(now){
     const k = Math.min(3, Math.max(0, Math.floor(near * 4)));
     if (Math.abs((pa[1] + pb[1]) / 2 - sweepY) < 6) hot.push(pa, pb); else buckets[k].push(pa, pb);
   }
-  const alpha = [0.08, 0.16, 0.27, 0.42];
-  ctx.lineWidth = 0.6;
+  const alpha = [0.09, 0.17, 0.28, 0.42];
+  ctx.lineWidth = 0.7;
   buckets.forEach((arr, k) => {
     ctx.strokeStyle = `rgba(${INK},${alpha[k] * dim})`; ctx.beginPath();
     for (let i = 0; i < arr.length; i += 2){ ctx.moveTo(arr[i][0], arr[i][1]); ctx.lineTo(arr[i + 1][0], arr[i + 1][1]); }
     ctx.stroke();
   });
   if (hot.length){
-    ctx.strokeStyle = `rgba(${INK},${0.85 * dim})`; ctx.lineWidth = 0.9; ctx.beginPath();
+    ctx.strokeStyle = `rgba(${INK},${0.8 * dim})`; ctx.lineWidth = 1; ctx.beginPath();
     for (let i = 0; i < hot.length; i += 2){ ctx.moveTo(hot[i][0], hot[i][1]); ctx.lineTo(hot[i + 1][0], hot[i + 1][1]); }
     ctx.stroke();
   }
-  ctx.strokeStyle = `rgba(${INK},${0.6 * dim})`; ctx.lineWidth = 0.9; ctx.beginPath();
+  ctx.strokeStyle = `rgba(${INK},${0.7 * dim})`; ctx.lineWidth = 1.1; ctx.beginPath();
   for (const [a, b] of contours){ const pa = P[a], pb = P[b]; if (!pa || !pb) continue; ctx.moveTo(pa[0], pa[1]); ctx.lineTo(pb[0], pb[1]); }
   ctx.stroke();
+
+  // which cheek is on the screen-left right now
+  if (regionPts.length){ const a = P[regionPts[1]], b = P[regionPts[2]]; if (a && b) leftCheek = a[0] <= b[0] ? 1 : 2; }
+
   // enrollment rings
   if (phase !== 'idle'){
     const fade = phase === 'done' ? Math.max(0, 1 - (now - doneAt) / 900) : 1;
     regionPts.forEach((ri, i) => {
       const p = P[ri]; if (!p || fade <= 0) return;
-      const R = 11, prog = regProg[i];
+      const R = Math.max(9, (xmax - xmin) * 0.055), prog = regProg[i];
       ctx.lineWidth = 1; ctx.strokeStyle = `rgba(${INK},${0.22 * fade})`;
       ctx.beginPath(); ctx.arc(p[0], p[1], R, 0, Math.PI * 2); ctx.stroke();
       if (prog > 0){
-        ctx.lineWidth = 2.2; ctx.strokeStyle = `rgba(${ACC},${fade})`;
+        ctx.lineWidth = 2.4; ctx.strokeStyle = `rgba(${ACC},${fade})`;
         ctx.beginPath(); ctx.arc(p[0], p[1], R, -Math.PI / 2, -Math.PI / 2 + prog * Math.PI * 2); ctx.stroke();
       }
       if (prog >= 1){ ctx.fillStyle = `rgba(${ACC},${fade})`; ctx.beginPath(); ctx.arc(p[0], p[1], 3, 0, Math.PI * 2); ctx.fill(); }
     });
   }
+
+  // guidance arrows, fading in and out
+  guideAlpha += ((guide && phase === 'scanning' ? 1 : 0) - guideAlpha) * 0.08;
+  const g = guide || lastDrawnGuide;
+  if (guide) lastDrawnGuide = guide;
+  if (g && guideAlpha > 0.02){
+    const cx = (xmin + xmax) / 2, cy = (ymin + ymax) / 2, fw = xmax - xmin, fh = ymax - ymin, sz = Math.max(7, fw * 0.045);
+    if (g.type === 'turn'){
+      const x0 = cx + g.dir * fw * 0.62;
+      for (let k = 0; k < 3; k++) chevron(x0 + g.dir * k * sz * 1.6, cy, g.dir > 0 ? 0 : Math.PI, sz, guideAlpha * marching(k, now));
+    } else if (g.type === 'center'){
+      const ang = Math.atan2(g.dy * H, g.dx * W);
+      for (let k = 0; k < 3; k++) chevron(cx + Math.cos(ang) * (fw * 0.25 + k * sz * 1.6), cy + Math.sin(ang) * (fh * 0.25 + k * sz * 1.6), ang, sz, guideAlpha * marching(k, now));
+    } else if (g.type === 'dist'){
+      const corners = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+      corners.forEach(([sx, sy]) => {
+        const ang = Math.atan2(sy, sx) + (g.dir > 0 ? 0 : Math.PI);
+        const r0 = Math.hypot(fw, fh) * 0.56;
+        for (let k = 0; k < 2; k++){
+          const r = r0 + (g.dir > 0 ? k : 1 - k) * sz * 1.6;
+          chevron(cx + Math.cos(Math.atan2(sy, sx)) * r, cy + Math.sin(Math.atan2(sy, sx)) * r, ang, sz * 0.8, guideAlpha * marching(k, now));
+        }
+      });
+    }
+  }
 }
+let lastDrawnGuide = null;
 
 function tick(now){
   if (mode === 'live' && landmarker && video.readyState >= 2 && phase === 'scanning') liveStep(now);
@@ -236,11 +300,11 @@ async function startLive(){
   try {
     stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user', width: {ideal: 640}, height: {ideal: 480}}, audio: false});
   } catch (e){
-    log('camera unavailable  ' + (e.name || 'error') + '  simulating'); stream = null; return startDemo();
+    log('camera unavailable  simulating'); stream = null; return startDemo();
   }
   video.srcObject = stream; await video.play().catch(() => {});
   frameW = video.videoWidth || 640; frameH = video.videoHeight || 480;
-  log(`stream ${frameW}x${frameH}  in-memory only`);
+  log(`stream ${frameW}x${frameH}  in memory only`);
   log('loading landmarker  on-device');
   try {
     const {FaceLandmarker, FilesetResolver} = await import(MP + '/vision_bundle.mjs');
@@ -249,20 +313,29 @@ async function startLive(){
     try { landmarker = await FaceLandmarker.createFromOptions(files, opts('GPU')); }
     catch { landmarker = await FaceLandmarker.createFromOptions(files, opts('CPU')); }
     edges = FaceLandmarker.FACE_LANDMARKS_TESSELATION.map(c => [c.start, c.end]);
-    contours = [...FaceLandmarker.FACE_LANDMARKS_LIPS, ...FaceLandmarker.FACE_LANDMARKS_LEFT_EYE, ...FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
-      ...FaceLandmarker.FACE_LANDMARKS_FACE_OVAL, ...FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW, ...FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW].map(c => [c.start, c.end]);
+    // eyes, brows and the face outline only: lips and nose stay part of the quiet mesh
+    contours = [...FaceLandmarker.FACE_LANDMARKS_LEFT_EYE, ...FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE, ...FaceLandmarker.FACE_LANDMARKS_FACE_OVAL,
+      ...FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW, ...FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW].map(c => [c.start, c.end]);
     regionPts = REGIONS.map(r => r.idx);
     log('landmarker ready  478 pts');
-    demo = null; pts = null; mode = 'live'; phase = 'scanning';
+    demo = null; pts = null; mode = 'live'; phase = 'scanning'; decimated = false;
   } catch (e){
     log('face model unavailable  simulating');
     stream.getTracks().forEach(t => t.stop()); stream = null; return startDemo();
   }
 }
+// thin the dense tesselation once: drop the shortest edges (crowded around lips, nose, eyes) and a share of the rest
+function decimate(raw){
+  const len = ([a, b]) => Math.hypot(raw[a].x - raw[b].x, raw[a].y - raw[b].y);
+  const sorted = edges.map(len).sort((x, y) => x - y), med = sorted[sorted.length >> 1];
+  edges = edges.filter(e => len(e) > med * 0.75 && ((e[0] * 7 + e[1] * 13) % 5) !== 0);
+  decimated = true;
+}
 function liveStep(now){
   const res = landmarker.detectForVideo(video, now);
   const raw = res.faceLandmarks && res.faceLandmarks[0];
-  if (!raw){ if (pts){ log('no face'); $('#hint').textContent = 'find the frame'; hintMsg = 'find the frame'; } pts = null; passing = false; return; }
+  if (!raw){ if (pts){ log('no face in view'); $('#hint').textContent = 'find the frame'; hintMsg = 'find the frame'; } pts = null; passing = false; guide = null; return; }
+  if (!decimated) decimate(raw);
   pts = raw.map(p => ({x: 1 - p.x, y: p.y, z: p.z}));
   if (now - lastAnalyze < 160) return; lastAnalyze = now;
   const ow = 192, oh = Math.round(ow * frameH / frameW);
@@ -275,28 +348,28 @@ function liveStep(now){
       if (x < 0 || y < 0 || x >= ow || y >= oh) continue;
       const i = (y * ow + x) * 4; R += data[i]; G += data[i + 1]; B += data[i + 2]; n++;
     }
-    return {r: R / n, g: G / n, b: B / n};
+    return {r: R / Math.max(n, 1), g: G / Math.max(n, 1), b: B / Math.max(n, 1)};
   });
   octx.clearRect(0, 0, ow, oh);
-  let xmin = 1, xmax = 0; for (const p of raw){ if (p.x < xmin) xmin = p.x; if (p.x > xmax) xmax = p.x; }
+  let xmin = 1, xmax = 0, ymin = 1, ymax = 0;
+  for (const p of raw){ xmin = Math.min(xmin, p.x); xmax = Math.max(xmax, p.x); ymin = Math.min(ymin, p.y); ymax = Math.max(ymax, p.y); }
   const l = raw[234], r = raw[454], nose = raw[1];
-  analyze(sample, {faceW: xmax - xmin, yaw: (nose.x - (l.x + r.x) / 2) / Math.max(r.x - l.x, 1e-3), nose}, now);
+  analyze(sample, {fcx: 1 - (xmin + xmax) / 2, fcy: (ymin + ymax) / 2, faceW: xmax - xmin, dyaw: -(nose.x - (l.x + r.x) / 2) / Math.max(Math.abs(r.x - l.x), 1e-3)}, now);
 }
 
 /* ---------- synthetic face (idle preview and demo) ---------- */
 let demo = null;
 function buildDemoFace(){
-  const V = [], E = [], C = [], idx = {};
+  const V = [], E = [], C = [], idx = {}, eyes = [];
   const halfW = y => 0.78 * (y > 0.12 ? 1 - (y - 0.12) * 0.55 : 1);
   const inside = (x, y) => (x / halfW(y)) ** 2 + (y / 1.05) ** 2 < 1;
   const surf = (x, y) => {
     let z = Math.sqrt(Math.max(0, 1 - (x / halfW(y)) ** 2 - (y / 1.05) ** 2)) * 0.8;
-    const nd = Math.hypot(x / 0.11, (y - 0.08) / 0.32); if (nd < 1) z += 0.2 * (1 - nd) ** 2;
-    for (const ex of [-0.3, 0.3]){ const ed = Math.hypot((x - ex) / 0.17, (y + 0.12) / 0.09); if (ed < 1) z -= 0.07 * (1 - ed); }
-    const ld = Math.hypot(x / 0.2, (y - 0.5) / 0.06); if (ld < 1) z += 0.03 * (1 - ld);
+    const nd = Math.hypot(x / 0.1, (y - 0.06) / 0.3); if (nd < 1) z += 0.11 * (1 - nd) ** 2;
+    for (const ex of [-0.3, 0.3]){ const ed = Math.hypot((x - ex) / 0.17, (y + 0.12) / 0.09); if (ed < 1) z -= 0.05 * (1 - ed); }
     return z;
   };
-  const COLS = 25, ROWS = 33;
+  const COLS = 17, ROWS = 23;
   for (let i = 0; i < ROWS; i++) for (let j = 0; j < COLS; j++){
     const x = -0.8 + 1.6 * j / (COLS - 1), y = -1.05 + 2.1 * i / (ROWS - 1);
     if (!inside(x, y)) continue;
@@ -305,42 +378,58 @@ function buildDemoFace(){
     if (L !== undefined) E.push([L, me]); if (U !== undefined) E.push([U, me]);
     const D = (i + j) % 2 ? UL : UR; if (D !== undefined) E.push([D, me]);
   }
-  const ring = (cx, cy, rx, ry, n) => { const s = V.length;
-    for (let k = 0; k < n; k++){ const a = k / n * Math.PI * 2, x = cx + rx * Math.cos(a), y = cy + ry * Math.sin(a); V.push([x, y, surf(x, y) + 0.01]); C.push([s + k, s + (k + 1) % n]); } };
-  ring(-0.3, -0.12, 0.15, 0.06, 20); ring(0.3, -0.12, 0.15, 0.06, 20); ring(0, 0.5, 0.2, 0.06, 24);
+  // almond eyes; each point remembers its rest position so the lids can close
+  for (const ex of [-0.3, 0.3]){
+    const s = V.length, n = 22;
+    for (let k = 0; k < n; k++){
+      const a = k / n * Math.PI * 2, x = ex + 0.15 * Math.cos(a), sn = Math.sin(a);
+      const y0 = -0.12 + (sn < 0 ? 0.075 : 0.045) * sn; // upper lid taller than lower
+      V.push([x, y0, surf(x, -0.12) + 0.01]); C.push([s + k, s + (k + 1) % n]);
+    }
+    eyes.push({s, n, cy: -0.12, rest: V.slice(s, s + n).map(v => v[1])});
+  }
   const nearest = (x, y) => { let b = 0, bd = 1e9; V.forEach((v, i) => { const d = (v[0] - x) ** 2 + (v[1] - y) ** 2; if (d < bd){ bd = d; b = i; } }); return b; };
-  return {V, E, C, regions: [nearest(0, -0.62), nearest(-0.42, 0.18), nearest(0.42, 0.18), nearest(0, 0.0), nearest(0, 0.78)]};
+  return {V, E, C, eyes, regions: [nearest(0, -0.62), nearest(-0.42, 0.18), nearest(0.42, 0.18), nearest(0, 0.0), nearest(0, 0.74)],
+          yaw: 0, off: -0.16, scale: 95};
 }
 function useDemoMesh(){ demo = buildDemoFace(); edges = demo.E; contours = demo.C; regionPts = demo.regions; frameW = 640; frameH = 480; demo.start = performance.now(); }
 function startDemo(){
   $('#cta').hidden = true; mode = 'demo';
   if (!demo) useDemoMesh();
-  demo.start = performance.now(); demo.scan = true;
+  demo.start = performance.now(); demo.scan = true; demo.off = -0.16; demo.scale = 95;
   log('synthetic face  ' + demo.V.length + ' pts  no camera');
   phase = 'scanning';
 }
 function demoStep(now){
   const t = (now - demo.start) / 1000, scanning = demo.scan && phase === 'scanning';
-  const settle = scanning ? Math.min(1, t / 3.5) : 1;
-  const yaw = scanning ? (1 - settle) * 0.42 + Math.sin(t * 0.7) * 0.05 : Math.sin(t * 0.35) * 0.35;
-  const pitch = Math.sin(t * 0.5) * 0.06 - 0.04;
-  const scale = scanning ? 95 + settle * 70 + Math.sin(t * 0.9) * 2 : 160;
+  // slow lids: open most of the time, a soft close every few seconds
+  const cyc = (now / 1000) % 5.2, open = cyc < 4.2 ? 1 : 0.08 + 0.92 * Math.abs(Math.cos((cyc - 4.2) / 1.0 * Math.PI));
+  for (const e of demo.eyes) for (let k = 0; k < e.n; k++){ const v = demo.V[e.s + k]; v[1] = e.cy + (e.rest[k] - e.cy) * (e.rest[k] < e.cy ? open : 0.6 + 0.4 * open); }
+  // the simulated person follows the arrows
+  if (scanning){
+    const ease = 0.025;
+    demo.off += ((t > 1.2 ? 0 : demo.off) - demo.off) * ease * 2;
+    demo.scale += ((t > 2.4 ? 165 : demo.scale) - demo.scale) * ease * 2;
+    const want = guide && guide.type === 'turn' ? guide.dir * 0.32 : (guide ? demo.yaw : 0);
+    demo.yaw += (want - demo.yaw) * ease;
+  } else { demo.yaw = Math.sin((now / 1000) * 0.35) * 0.32; demo.off = 0; demo.scale = 165; }
+  const yaw = demo.yaw + (scanning ? Math.sin(t * 0.7) * 0.015 : 0), pitch = Math.sin(t * 0.5) * 0.05 - 0.04, scale = demo.scale;
   const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
   pts = demo.V.map(([x, y, z]) => {
     let X = x * cy + z * sy, Z = -x * sy + z * cy;
     const Y = y * cp - Z * sp; Z = y * sp + Z * cp;
-    return {x: (320 + X * scale) / 640, y: (235 + Y * scale) / 480, z: -Z};
+    return {x: (320 + X * scale) / 640 + demo.off, y: (235 + Y * scale) / 480, z: -Z};
   });
   if (!scanning || now - lastAnalyze < 160) return; lastAnalyze = now;
   const j = () => (Math.random() - 0.5) * 4;
   const base = [{r: 200, g: 162, b: 146}, {r: 206, g: 150, b: 138}, {r: 203, g: 152, b: 140}, {r: 214, g: 170, b: 152}, {r: 196, g: 158, b: 144}];
   const sample = base.map(c => ({r: c.r + j(), g: c.g + j(), b: c.b + j()}));
-  let xmin = 1, xmax = 0; for (const p of pts){ if (p.x < xmin) xmin = p.x; if (p.x > xmax) xmax = p.x; }
-  const yawSigned = Math.sin(yaw) * 0.6;
-  analyze(sample, {faceW: xmax - xmin, yaw: yawSigned, nose: {x: 0.5 + yawSigned * 0.02, y: 0.5 + Math.sin(t * 3) * (t < 4.5 ? 0.05 : 0.002)}}, now);
+  let xmin = 1, xmax = 0, ymin = 1, ymax = 0;
+  for (const p of pts){ xmin = Math.min(xmin, p.x); xmax = Math.max(xmax, p.x); ymin = Math.min(ymin, p.y); ymax = Math.max(ymax, p.y); }
+  analyze(sample, {fcx: (xmin + xmax) / 2, fcy: (ymin + ymax) / 2, faceW: xmax - xmin, dyaw: Math.sin(yaw) * 0.6}, now);
 }
 
-useDemoMesh(); // idle preview: slow rotating mesh behind the begin button
+useDemoMesh(); // idle preview: slow turning mesh behind the begin button
 log('ready  analysis runs on this device');
 $('#start').onclick = () => startLive();
 $('#demo').onclick = () => startDemo();
