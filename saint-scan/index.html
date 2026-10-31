@@ -43,7 +43,7 @@ button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
 #log{list-style:none;margin:0;padding:0;height:calc(7 * 1.6em);overflow:hidden;line-height:1.6;font-size:13px;font-variant-numeric:tabular-nums;
   -webkit-mask-image:linear-gradient(to bottom,transparent,#000 45%);mask-image:linear-gradient(to bottom,transparent,#000 45%);
   display:flex;flex-direction:column;justify-content:flex-end}
-#log li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--faint);animation:in .35s ease-out}
+#log li{flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--faint);animation:in .35s ease-out}
 #log li .t{opacity:.6;margin-right:1.2em}
 #log li:last-child{color:var(--ink);font-weight:400}
 #log li.mark{color:var(--accent)}
@@ -99,7 +99,7 @@ let landmarker = null, edges = [], contours = [], stream = null, decimated = fal
 let pts = null, frameW = 640, frameH = 480, regionPts = [];
 let frames = 0, lastCenter = null, lastAnalyze = 0, lastLog = 0, roiTurn = 0, passing = false, hintMsg = '';
 let regProg = REGIONS.map(() => 0), dim = 0.45, doneAt = 0, leftCheek = 1;
-let guide = null, guideAlpha = 0, lastGuide = null;
+let guide = null, guideAlpha = 0, lastGuide = null, lastLoggedGuide = null;
 const hist = {ei:[], even:[], lum:[]};
 const off = document.createElement('canvas'), octx = off.getContext('2d', {willReadFrequently:true});
 
@@ -152,7 +152,7 @@ function analyze(sample, geom, now){
   guide = g;
   const gkey = hint + (g && g.dir ? g.dir : '');
   if (hint !== hintMsg){ $('#hint').textContent = hint; hintMsg = hint; }
-  if (gkey !== lastGuide){ if (hint) log(hint === 'turn' ? `turn ${g.dir > 0 ? 'right' : 'left'}  exposing ${g.dir > 0 ? 'left' : 'right'} cheek` : 'adjust  ' + hint); lastGuide = gkey; }
+  if (gkey !== lastGuide){ if (hint && gkey !== lastLoggedGuide){ lastLoggedGuide = gkey; log(hint === 'turn' ? `turn ${g.dir > 0 ? 'right' : 'left'}  exposing ${g.dir > 0 ? 'left' : 'right'} cheek` : 'adjust  ' + hint); } lastGuide = gkey; }
   $('#r-lum').textContent = lum.toFixed(0);
   $('#r-frames').textContent = frames;
   if (!passing) return;
