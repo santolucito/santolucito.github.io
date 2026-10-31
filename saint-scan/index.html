@@ -172,7 +172,7 @@ function finish(now){
   log('symbolic model  5 regions → 5 features → 4 operators → 4 outputs');
   log('record  ' + graph.nodes.filter(n => n.layer === 3).map(n => n.value).join('  ') + '   images 0', 'mark');
   const r = $('#result'); r.hidden = false;
-  r.innerHTML = `<p>camera off · nothing kept but these numbers</p><button id="again">again</button>`;
+  r.innerHTML = `<p>0 images retained · 4 stats → db</p><button id="again">again</button>`;
   $('#again').onclick = () => location.reload();
   setTimeout(() => r.classList.add('show'), 3600);
 }
