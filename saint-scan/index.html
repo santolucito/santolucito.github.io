@@ -24,7 +24,7 @@ html,body{height:100%}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--mono);font-weight:300;font-size:13px;overflow:hidden;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));box-sizing:border-box}
 *{box-sizing:border-box}
-.app{height:100%;max-width:760px;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:14px;padding-block:18px 20px}
+.app{height:100%;max-width:760px;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:14px;padding-block:18px 20px}
 .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .word{font-weight:400;font-size:13px;letter-spacing:.45em}
 #stored{color:var(--faint);font-size:12px;letter-spacing:.04em}
@@ -36,10 +36,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;paddin
 .sub{color:var(--faint);font-size:12px}
 button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
 .hint{position:absolute;left:0;right:0;bottom:2%;text-align:center;letter-spacing:.16em;color:var(--accent);min-height:1em}
-.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;font-variant-numeric:tabular-nums;border-top:1px solid var(--hair);padding-top:12px}
-.nums div{display:flex;flex-direction:column;gap:3px}
-.nums dt{color:var(--faint);font-size:10.5px;letter-spacing:.12em}
-.nums dd{margin:0;font-size:19px;font-weight:400}
 #log{list-style:none;margin:0;padding:0;height:calc(7 * 1.6em);overflow:hidden;line-height:1.6;font-size:13px;font-variant-numeric:tabular-nums;
   -webkit-mask-image:linear-gradient(to bottom,transparent,#000 45%);mask-image:linear-gradient(to bottom,transparent,#000 45%);
   display:flex;flex-direction:column;justify-content:flex-end}
@@ -69,12 +65,6 @@ button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
     <div class="hint" id="hint" aria-live="polite"></div>
     <div class="result" id="result" hidden></div>
   </div>
-  <dl class="nums">
-    <div><dt>erythema</dt><dd id="r-ei">--</dd></div>
-    <div><dt>melanin</dt><dd id="r-mi">--</dd></div>
-    <div><dt>light</dt><dd id="r-lum">--</dd></div>
-    <div><dt>frames</dt><dd id="r-frames">0</dd></div>
-  </dl>
   <ol id="log"></ol>
 </div>
 <video id="cam" playsinline muted autoplay></video>
@@ -127,7 +117,6 @@ function analyze(sample, geom, now){
   const ei = cheeks.reduce((a, c) => a + 100 * Math.log10(Math.max(c.r, 1) / Math.max(c.g, 1)), 0) / cheeks.length;
   const sd = Math.sqrt(lums.reduce((a, l) => a + (l - lum) ** 2, 0) / lums.length);
   const even = Math.max(0, 100 * (1 - sd / Math.max(lum, 1)));
-  const mi = cheeks.reduce((a, c) => a + 100 * Math.log10(255 / Math.max(c.r, 1)), 0) / cheeks.length;
   const moved = lastCenter ? Math.hypot(geom.fcx - lastCenter.x, geom.fcy - lastCenter.y) : 0;
   lastCenter = {x: geom.fcx, y: geom.fcy};
 
@@ -152,14 +141,10 @@ function analyze(sample, geom, now){
   const gkey = hint + (g && g.dir ? g.dir : '');
   if (hint !== hintMsg){ $('#hint').textContent = hint; hintMsg = hint; }
   if (gkey !== lastGuide){ if (hint && gkey !== lastLoggedGuide){ lastLoggedGuide = gkey; log(hint === 'turn' ? `turn ${g.dir > 0 ? 'right' : 'left'}  exposing ${g.dir > 0 ? 'left' : 'right'} cheek` : 'adjust  ' + hint); } lastGuide = gkey; }
-  $('#r-lum').textContent = lum.toFixed(0);
-  $('#r-frames').textContent = frames;
   if (!passing) return;
 
-  hist.ei.push(ei); hist.even.push(mi); hist.lum.push(lum);
+  hist.ei.push(ei); hist.even.push(even); hist.lum.push(lum);
   sample.forEach((c, i) => { const r = regSum[i]; r.r += c.r; r.g += c.g; r.b += c.b; r.n++; });
-  $('#r-ei').textContent = median(hist.ei.slice(-15)).toFixed(1);
-  $('#r-mi').textContent = median(hist.even.slice(-15)).toFixed(1);
   // fill by visibility: frontal regions when facing forward, each cheek when it is turned toward the camera
   const front = clamp(1 - Math.abs(geom.dyaw) / 0.13, 0, 1);
   const showL = clamp((geom.dyaw - 0.02) / 0.12, 0, 1), showR = clamp((-geom.dyaw - 0.02) / 0.12, 0, 1);
@@ -434,7 +419,6 @@ function rgb2lab({r, g, b}){
   const h = t => t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116;
   return {L: 116 * h(Y) - 16, a: 500 * (h(X) - h(Y)), b: 200 * (h(Y) - h(Z))};
 }
-function itaClass(v){ return v > 55 ? 'very light' : v > 41 ? 'light' : v > 28 ? 'intermediate' : v > 10 ? 'tan' : v > -30 ? 'brown' : 'dark'; }
 function buildGraph(){
   const roi = regSum.map(s => ({r: s.r / Math.max(s.n, 1), g: s.g / Math.max(s.n, 1), b: s.b / Math.max(s.n, 1)}));
   const lab = roi.map(rgb2lab);
@@ -443,28 +427,26 @@ function buildGraph(){
   const mean = a => a.reduce((x, y) => x + y, 0) / a.length;
   const cheeks = [right, left];
   const RG = mean(cheeks.map(i => roi[i].r / Math.max(roi[i].g, 1)));
-  const Rr = mean(cheeks.map(i => roi[i].r / 255));
+  const aMal = mean(cheeks.map(i => lab[i].a)), dA = Math.abs(lab[left].a - lab[right].a);
   const Lm = mean(lab.map(c => c.L)), am = mean(lab.map(c => c.a)), bm = mean(lab.map(c => c.b));
   const dE = mean(lab.map(c => Math.hypot(c.L - Lm, c.a - am, c.b - bm)));
-  const EI = 100 * Math.log10(RG), MI = 100 * Math.log10(1 / Math.max(Rr, 0.01));
-  const ITA = Math.atan((Lm - 50) / Math.max(bm, 0.1)) * 180 / Math.PI;
+  const EI = 100 * Math.log10(RG);
   const N = [];
-  const add = (id, layer, label, value, from = [], sub = '', short = label, shortValue = value) => N.push({id, layer, label, value, from, sub, short, shortValue});
+  const add = (id, layer, label, value, from = [], short = label, shortValue = value) => N.push({id, layer, label, value, from, short, shortValue});
   const roiIds = order.map(([i, nm]) => { add('r' + i, 0, nm, 'a* ' + lab[i].a.toFixed(1)); return 'r' + i; });
   const ck = ['r' + right, 'r' + left];
   add('rg', 1, 'R/G', RG.toFixed(3), ck);
-  add('rr', 1, 'R refl.', Rr.toFixed(3), ck);
-  add('L', 1, 'L*', Lm.toFixed(1), roiIds);
-  add('b', 1, 'b*', bm.toFixed(1), roiIds);
-  add('lab', 1, 'L*a*b* by region', '5 × 3', roiIds, '', 'Lab');
-  add('oEI', 2, 'EI', '100·log₁₀(R/G)', ['rg'], '', 'EI', '100·log(R/G)');
-  add('oMI', 2, 'MI', '100·log₁₀(1/R)', ['rr'], '', 'MI', '100·log(1/R)');
-  add('oITA', 2, 'ITA°', 'atan((L*−50)/b*)', ['L', 'b'], '', 'ITA°', 'atan((L−50)/b)');
-  add('oDE', 2, 'ΔE*ab', 'mean ‖Lab − μ‖', ['lab'], '', 'ΔE', 'mean |Lab−μ|');
-  add('sEI', 3, 'erythema index', EI.toFixed(1), ['oEI'], '', 'erythema');
-  add('sMI', 3, 'melanin index', MI.toFixed(1), ['oMI'], '', 'melanin');
-  add('sITA', 3, 'individual typology angle', ITA.toFixed(1) + '°', ['oITA'], itaClass(ITA), 'ITA°');
-  add('sDE', 3, 'color variation ΔE*ab', dE.toFixed(1), ['oDE'], '', 'ΔE*ab');
+  add('am', 1, 'a* malar', aMal.toFixed(1), ck, 'a*');
+  add('lr', 1, 'a* L, R', lab[left].a.toFixed(1) + ' ' + lab[right].a.toFixed(1), ck, 'a* L,R');
+  add('lab', 1, 'L*a*b* by region', '5 × 3', roiIds, 'Lab');
+  add('oEI', 2, 'EI', '100·log₁₀(R/G)', ['rg'], 'EI', '100·log(R/G)');
+  add('oA', 2, 'a*', 'mean(a*)', ['am'], 'a*', 'mean');
+  add('oDA', 2, 'Δa*', '|a*L − a*R|', ['lr'], 'Δa*', '|L−R|');
+  add('oDE', 2, 'ΔE*ab', 'mean ‖Lab − μ‖', ['lab'], 'ΔE', 'mean |Lab−μ|');
+  add('sEI', 3, 'erythema index', EI.toFixed(1), ['oEI'], 'erythema');
+  add('sA', 3, 'malar redness a*', aMal.toFixed(1), ['oA'], 'a*');
+  add('sDA', 3, 'redness asymmetry Δa*', dA.toFixed(1), ['oDA'], 'Δa*');
+  add('sDE', 3, 'color variation ΔE*ab', dE.toFixed(1), ['oDE'], 'ΔE*ab');
   const byId = Object.fromEntries(N.map(n => [n.id, n]));
   const E = [];
   N.forEach(n => n.from.forEach((f, k) => E.push({a: byId[f], b: n, seed: (n.id.length * 0.37 + k * 0.29 + f.length * 0.11) % 1})));
@@ -497,7 +479,7 @@ function drawGraph(now){
     const big = n.layer === 3 ? fsum : fv;
     ctx.font = `300 ${fs}px "IBM Plex Mono", monospace`; const w1 = ctx.measureText(n.lab).width;
     ctx.font = `400 ${big}px "IBM Plex Mono", monospace`; const w2 = ctx.measureText(n.val).width;
-    const w = Math.max(w1, w2), top = fs + 4, bottom = big * 0.4 + (n.sub ? fs + 4 : 0) + 6;
+    const w = Math.max(w1, w2), top = fs + 4, bottom = big * 0.4 + 6;
     n.in = L.vert ? [n.x, n.y - top - 4] : [n.x - w / 2 - 8, n.y];
     n.out = L.vert ? [n.x, n.y + bottom] : [n.x + w / 2 + 8, n.y];
   }
@@ -523,7 +505,6 @@ function drawGraph(now){
     ctx.font = `${isOp ? 300 : 400} ${isOp ? fs + 0.5 : big}px "IBM Plex Mono", monospace`;
     ctx.fillStyle = n.layer === 3 ? `rgba(${ACC},${a})` : `rgba(${INK},${(isOp ? 0.8 : 0.95) * a})`;
     ctx.fillText(n.val, n.x, n.y + big * 0.4);
-    if (n.sub){ ctx.font = `300 ${fs}px "IBM Plex Mono", monospace`; ctx.fillStyle = `rgba(${INK},${0.55 * a})`; ctx.fillText(n.sub, n.x, n.y + big * 0.4 + fs + 4); }
   }
   ctx.textAlign = 'start';
 }
