@@ -1,0 +1,395 @@
+<title>Saint Morning Scan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+/* Layout: one-screen instrument. Mesh stage on top, live analysis log below; side by side on wide screens.
+   Deliberately single dark theme: it is an instrument display used first thing in the morning. */
+:root{
+  --ink:#15111b;      /* ground: plum-black */
+  --panel:#1e1926;    /* raised surfaces */
+  --rule:#30293a;     /* hairlines */
+  --fg:#f1e8e2;       /* text */
+  --muted:#9d929f;    /* secondary text */
+  --mesh:#f4c9aa;     /* mesh lines: warm skin-light */
+  --accent:#ffad86;   /* scan sweep, progress */
+  --ok:#93d6ba; --warn:#efc56d; --bad:#ee8b82;
+  --display:"Syne", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  --body:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{margin:0;background:var(--ink);color:var(--fg);font-family:var(--body);font-size:14px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));box-sizing:border-box}
+*{box-sizing:border-box}
+.app{height:100%;display:flex;flex-direction:column;gap:12px;padding-block:14px;max-width:1180px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px}
+.word{font-family:var(--display);font-weight:800;letter-spacing:.32em;font-size:18px}
+.sub{font-family:var(--mono);color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.stored{font-family:var(--mono);font-size:12px;color:var(--ok);border:1px solid color-mix(in srgb,var(--ok) 40%,transparent);border-radius:999px;padding:4px 10px}
+main{flex:1;min-height:0;display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1.25fr) minmax(0,1fr);gap:12px}
+@media (min-width:860px){main{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr)}}
+.stage{position:relative;min-height:0;border:1px solid var(--rule);border-radius:14px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 42%, color-mix(in srgb,var(--mesh) 7%,var(--ink)) 0%, var(--ink) 68%)}
+#mesh{position:absolute;inset:0;width:100%;height:100%;display:block}
+.gates{position:absolute;left:10px;right:10px;top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.gate{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:4px 8px;border-radius:6px;background:color-mix(in srgb,var(--ink) 75%,transparent);
+  border:1px solid var(--rule);color:var(--muted);display:flex;align-items:center;gap:6px}
+.gate i{width:7px;height:7px;border-radius:50%;background:var(--muted)}
+.gate[data-s="ok"] i{background:var(--ok)} .gate[data-s="warn"] i{background:var(--warn)} .gate[data-s="bad"] i{background:var(--bad)}
+.gate[data-s="ok"]{color:var(--fg)}
+.prompt{position:absolute;left:0;right:0;bottom:44px;text-align:center;font-family:var(--display);font-weight:600;font-size:clamp(16px,2.4vw,20px);letter-spacing:.02em;text-wrap:balance;padding:0 16px}
+.bar{position:absolute;left:14px;right:14px;bottom:16px;height:4px;border-radius:2px;background:var(--rule);overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .2s linear}
+.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:color-mix(in srgb,var(--ink) 82%,transparent)}
+.card{max-width:420px;display:flex;flex-direction:column;gap:14px}
+.card h1{font-family:var(--display);font-weight:800;font-size:clamp(24px,4vw,32px);margin:0;line-height:1.1;text-wrap:balance}
+.card p{margin:0;color:var(--muted);line-height:1.55}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+button{font:500 14px var(--body);border-radius:10px;padding:11px 16px;cursor:pointer;border:1px solid var(--rule);background:var(--panel);color:var(--fg)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#2a1610}
+button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.fine{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.side{min-height:0;display:flex;flex-direction:column;gap:12px}
+.readouts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ro{border:1px solid var(--rule);border-radius:10px;padding:10px 12px;background:var(--panel);min-width:0}
+.ro .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ro .v{font-family:var(--mono);font-size:22px;font-variant-numeric:tabular-nums;margin-top:4px}
+.ro .v small{font-size:11px;color:var(--muted);margin-left:4px}
+.logwrap{flex:1;min-height:120px;border:1px solid var(--rule);border-radius:10px;background:color-mix(in srgb,var(--panel) 60%,var(--ink));display:flex;flex-direction:column;min-width:0}
+.loghead{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--rule)}
+#log{list-style:none;margin:0;padding:8px 12px;overflow-y:auto;flex:1;font-family:var(--mono);font-size:11.5px;line-height:1.65;font-variant-numeric:tabular-nums}
+#log li{white-space:pre-wrap;word-break:break-word;color:var(--fg)}
+#log li .t{color:var(--muted)} #log li.sys{color:var(--muted)} #log li.ok{color:var(--ok)} #log li.warn{color:var(--warn)} #log li.hi{color:var(--accent)}
+.summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;font-family:var(--mono);font-size:12px}
+.summary div{border-top:1px solid var(--rule);padding-top:6px} .summary b{display:block;font-size:18px;font-weight:500;font-variant-numeric:tabular-nums}
+#cam{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:0;top:0}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+
+<div class="app">
+  <header>
+    <div class="brand"><span class="word">SAINT</span><span class="sub">morning scan · prototype</span></div>
+    <span class="stored" id="stored">images stored: 0</span>
+  </header>
+  <main>
+    <section class="stage" aria-label="Face mesh">
+      <canvas id="mesh"></canvas>
+      <div class="gates">
+        <span class="gate" id="g-light"><i></i>light</span>
+        <span class="gate" id="g-dist"><i></i>distance</span>
+        <span class="gate" id="g-face"><i></i>facing</span>
+        <span class="gate" id="g-still"><i></i>still</span>
+      </div>
+      <div class="prompt" id="prompt"></div>
+      <div class="bar"><span id="bar"></span></div>
+      <div class="overlay" id="overlay">
+        <div class="card" id="intro">
+          <h1>Good morning. Let's take today's reading.</h1>
+          <p>Your camera feeds an analysis that runs on this device. You see a mesh, never your face. Frames are analyzed in memory and discarded; no image is saved or sent.</p>
+          <div class="btns">
+            <button class="primary" id="start">Start scan</button>
+            <button id="demo">Run demo without camera</button>
+          </div>
+          <span class="fine">Prototype. Measurements are uncalibrated.</span>
+        </div>
+      </div>
+    </section>
+    <section class="side">
+      <div class="readouts">
+        <div class="ro"><div class="k">Redness index</div><div class="v" id="r-ei">--<small>EI</small></div></div>
+        <div class="ro"><div class="k">Tone evenness</div><div class="v" id="r-even">--<small>%</small></div></div>
+        <div class="ro"><div class="k">Light level</div><div class="v" id="r-lum">--<small>/255</small></div></div>
+        <div class="ro"><div class="k">Frames analyzed</div><div class="v" id="r-frames">0</div></div>
+      </div>
+      <div class="logwrap">
+        <div class="loghead">Analysis log</div>
+        <ol id="log" aria-live="polite"></ol>
+      </div>
+    </section>
+  </main>
+</div>
+<video id="cam" playsinline muted autoplay></video>
+
+<script>
+const $ = s => document.querySelector(s);
+const canvas = $('#mesh'), ctx = canvas.getContext('2d');
+const video = $('#cam');
+const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
+const MODEL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+const REGIONS = [ // live landmark indices
+  {name:'forehead', idx:151}, {name:'cheek', idx:205}, {name:'cheek', idx:425},
+  {name:'nose', idx:197}, {name:'chin', idx:199}];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let mode = null, phase = 'idle', t0 = performance.now();
+let landmarker = null, edges = [], contours = [], stream = null;
+let pts = null, frameW = 640, frameH = 480, regionPts = [];
+let progress = 0, frames = 0, lastNose = null, lastAnalyze = 0, lastLog = 0, roiTurn = 0, lastT = performance.now();
+const hist = {ei:[], even:[], lum:[]};
+let gates = {light:null, dist:null, face:null, still:null}, gateMsg = '';
+const off = document.createElement('canvas'), octx = off.getContext('2d', {willReadFrequently:true});
+
+function resize(){
+  const r = canvas.getBoundingClientRect(), d = devicePixelRatio || 1;
+  canvas.width = Math.max(1, r.width * d); canvas.height = Math.max(1, r.height * d);
+  ctx.setTransform(d, 0, 0, d, 0, 0);
+}
+addEventListener('resize', resize); resize();
+
+function log(msg, cls = ''){
+  const li = document.createElement('li'); if (cls) li.className = cls;
+  const t = ((performance.now() - t0) / 1000).toFixed(2).padStart(6, '0');
+  const ts = document.createElement('span'); ts.className = 't'; ts.textContent = 't+' + t + '  ';
+  li.append(ts, msg);
+  const ol = $('#log'); ol.append(li);
+  while (ol.children.length > 80) ol.firstChild.remove();
+  ol.scrollTop = ol.scrollHeight;
+}
+const median = a => { if (!a.length) return NaN; const s = [...a].sort((x, y) => x - y); return s[s.length >> 1]; };
+
+function setGate(id, s){ $('#g-' + id).dataset.s = s; }
+function updateGates(g){
+  const prev = gates; gates = g;
+  setGate('light', g.light ? 'ok' : 'warn'); setGate('dist', g.dist === 0 ? 'ok' : 'warn');
+  setGate('face', g.face ? 'ok' : 'warn'); setGate('still', g.still ? 'ok' : 'warn');
+  let msg = '';
+  if (!g.light) msg = g.lum < 70 ? 'Find more light' : 'Too bright, step out of direct light';
+  else if (g.dist < 0) msg = 'Move a little closer';
+  else if (g.dist > 0) msg = 'Move back a little';
+  else if (!g.face) msg = 'Face the camera straight on';
+  else if (!g.still) msg = 'Hold still';
+  if (phase === 'measuring' || phase === 'aligning'){
+    $('#prompt').textContent = msg || 'Measuring. Hold still.';
+    if (msg !== gateMsg){ log(msg ? 'gate · ' + msg.toLowerCase() : 'all gates pass · sampling', msg ? 'warn' : 'ok'); gateMsg = msg; }
+  }
+  return !msg;
+}
+
+function analyze(sample, geom, now){
+  frames++;
+  // sample: array of {r,g,b} per region; geom: {faceW, yaw, nose}
+  const lums = sample.map(c => 0.299 * c.r + 0.587 * c.g + 0.114 * c.b);
+  const lum = lums.reduce((a, b) => a + b, 0) / lums.length;
+  const cheeks = sample.filter((_, i) => REGIONS[i].name === 'cheek');
+  const ei = cheeks.reduce((a, c) => a + 100 * Math.log10(Math.max(c.r, 1) / Math.max(c.g, 1)), 0) / cheeks.length;
+  const sd = Math.sqrt(lums.reduce((a, l) => a + (l - lum) ** 2, 0) / lums.length);
+  const even = Math.max(0, 100 * (1 - sd / Math.max(lum, 1)));
+  const moved = lastNose ? Math.hypot(geom.nose.x - lastNose.x, geom.nose.y - lastNose.y) : 0;
+  lastNose = geom.nose;
+  const g = {lum, light: lum > 70 && lum < 215, dist: geom.faceW < 0.26 ? -1 : geom.faceW > 0.62 ? 1 : 0,
+             face: Math.abs(geom.yaw) < 0.09, still: moved < 0.012};
+  const pass = updateGates(g);
+  $('#r-lum').firstChild.textContent = lum.toFixed(0);
+  $('#r-frames').textContent = frames;
+  if (phase === 'aligning' && pass){ phase = 'measuring'; log('alignment locked · begin 8 s capture window', 'hi'); }
+  if (phase === 'measuring' && pass){
+    hist.ei.push(ei); hist.even.push(even); hist.lum.push(lum);
+    $('#r-ei').firstChild.textContent = median(hist.ei.slice(-15)).toFixed(1);
+    $('#r-even').firstChild.textContent = median(hist.even.slice(-15)).toFixed(0);
+    if (now - lastLog > 380){
+      lastLog = now; const i = roiTurn++ % sample.length, c = sample[i];
+      const tag = ('roi:' + REGIONS[i].name).padEnd(13);
+      log(`${tag} rgb ${[c.r, c.g, c.b].map(v => v.toFixed(0).padStart(3)).join(' ')}  EI ${(100 * Math.log10(c.r / Math.max(c.g, 1))).toFixed(1)}  pose ${(geom.yaw * 100).toFixed(1)}°*`);
+    }
+  }
+}
+
+function finish(){
+  phase = 'done';
+  const ei = median(hist.ei), even = median(hist.even), lum = median(hist.lum);
+  if (stream){ stream.getTracks().forEach(t => t.stop()); stream = null; }
+  log('capture window complete · ' + hist.ei.length + ' accepted samples', 'hi');
+  log(mode === 'live' ? 'camera released · frame buffers cleared' : 'demo stream closed', 'sys');
+  log('record written: {redness_ei, tone_evenness, light, n_samples} · images: 0', 'ok');
+  $('#prompt').textContent = '';
+  const ov = $('#overlay'); ov.hidden = false;
+  ov.innerHTML = `<div class="card"><h1>Got what we need.</h1>
+    <p>Your camera is off. Here is everything this scan kept. No pictures, just numbers.</p>
+    <div class="summary">
+      <div>Redness index<b>${ei.toFixed(1)} EI</b></div><div>Tone evenness<b>${even.toFixed(0)}%</b></div>
+      <div>Light level<b>${lum.toFixed(0)}/255</b></div><div>Samples kept<b>${hist.ei.length}</b></div>
+    </div>
+    <div class="btns"><button class="primary" id="again">Scan again</button></div>
+    <span class="fine">Uncalibrated prototype values. A hydration reading from the Saint probe would join this record.</span></div>`;
+  $('#again').onclick = () => location.reload();
+}
+
+/* ---------- drawing ---------- */
+function draw(now){
+  const W = canvas.clientWidth, H = canvas.clientHeight;
+  ctx.clearRect(0, 0, W, H);
+  if (!pts) return;
+  const s = Math.min(W / frameW, H / frameH) * 1.05, ox = (W - frameW * s) / 2, oy = (H - frameH * s) / 2;
+  const P = pts.map(p => [ox + p.x * frameW * s, oy + p.y * frameH * s, p.z]);
+  let zmin = Infinity, zmax = -Infinity, ymin = Infinity, ymax = -Infinity;
+  for (const p of P){ if (p[2] < zmin) zmin = p[2]; if (p[2] > zmax) zmax = p[2]; if (p[1] < ymin) ymin = p[1]; if (p[1] > ymax) ymax = p[1]; }
+  const span = (zmax - zmin) || 1;
+  const sweepY = phase === 'measuring' && !reduced ? ymin + ((now / 1600) % 1) * (ymax - ymin) : -1e9;
+  // edges in 4 depth buckets (near = brighter)
+  const buckets = [[], [], [], []], hot = [];
+  for (const [a, b] of edges){
+    const pa = P[a], pb = P[b]; if (!pa || !pb) continue;
+    const near = 1 - ((pa[2] + pb[2]) / 2 - zmin) / span; // z smaller = closer
+    const k = Math.min(3, Math.max(0, Math.floor(near * 4)));
+    if (Math.abs((pa[1] + pb[1]) / 2 - sweepY) < 10) hot.push(pa, pb); else buckets[k].push(pa, pb);
+  }
+  const alpha = [0.10, 0.2, 0.34, 0.52];
+  ctx.lineWidth = 0.8;
+  buckets.forEach((arr, k) => {
+    ctx.strokeStyle = `rgba(244,201,170,${alpha[k]})`; ctx.beginPath();
+    for (let i = 0; i < arr.length; i += 2){ ctx.moveTo(arr[i][0], arr[i][1]); ctx.lineTo(arr[i + 1][0], arr[i + 1][1]); }
+    ctx.stroke();
+  });
+  if (hot.length){
+    ctx.strokeStyle = 'rgba(255,173,134,0.95)'; ctx.lineWidth = 1.2; ctx.beginPath();
+    for (let i = 0; i < hot.length; i += 2){ ctx.moveTo(hot[i][0], hot[i][1]); ctx.lineTo(hot[i + 1][0], hot[i + 1][1]); }
+    ctx.stroke();
+  }
+  // contours (eyes, lips, oval)
+  ctx.strokeStyle = 'rgba(241,232,226,0.75)'; ctx.lineWidth = 1.1; ctx.beginPath();
+  for (const [a, b] of contours){ const pa = P[a], pb = P[b]; if (!pa || !pb) continue; ctx.moveTo(pa[0], pa[1]); ctx.lineTo(pb[0], pb[1]); }
+  ctx.stroke();
+  // regions of interest
+  if (phase === 'measuring' || phase === 'aligning'){
+    ctx.font = '500 10px "IBM Plex Mono", monospace';
+    regionPts.forEach((ri, i) => {
+      const p = P[ri]; if (!p) return;
+      const pulse = reduced ? 0 : Math.sin(now / 300 + i) * 1.5;
+      ctx.strokeStyle = phase === 'measuring' ? 'rgba(147,214,186,0.9)' : 'rgba(157,146,159,0.7)';
+      ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(p[0], p[1], 7 + pulse, 0, Math.PI * 2); ctx.stroke();
+      ctx.fillStyle = 'rgba(241,232,226,0.8)'; ctx.fillText(REGIONS[i].name.toUpperCase(), p[0] + 11, p[1] + 3);
+    });
+  }
+}
+
+function tick(now){
+  const dt = Math.min(0.1, (now - lastT) / 1000); lastT = now;
+  if (mode === 'live' && landmarker && video.readyState >= 2 && phase !== 'done') liveStep(now);
+  if (mode === 'demo' && phase !== 'done') demoStep(now);
+  if (phase === 'measuring' && gateMsg === ''){ progress = Math.min(1, progress + dt / 8); }
+  $('#bar').style.width = (progress * 100).toFixed(1) + '%';
+  if (progress >= 1 && phase === 'measuring') finish();
+  draw(now);
+  requestAnimationFrame(tick);
+}
+
+/* ---------- live mode ---------- */
+async function startLive(){
+  $('#overlay').hidden = true; mode = 'live'; t0 = performance.now();
+  log('requesting camera · front-facing', 'sys');
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user', width: {ideal: 640}, height: {ideal: 480}}, audio: false});
+  } catch (e){
+    log('camera unavailable (' + (e.name || 'error') + ') · switching to simulated face', 'warn');
+    stream = null; return startDemo(true);
+  }
+  video.srcObject = stream; await video.play().catch(() => {});
+  frameW = video.videoWidth || 640; frameH = video.videoHeight || 480;
+  log(`camera stream open · ${frameW}×${frameH} · frames stay in memory`, 'sys');
+  log('loading face landmarker · on-device', 'sys');
+  try {
+    const {FaceLandmarker, FilesetResolver} = await import(MP + '/vision_bundle.mjs');
+    const files = await FilesetResolver.forVisionTasks(MP + '/wasm');
+    const opts = d => ({baseOptions: {modelAssetPath: MODEL, delegate: d}, runningMode: 'VIDEO', numFaces: 1});
+    try { landmarker = await FaceLandmarker.createFromOptions(files, opts('GPU')); }
+    catch { landmarker = await FaceLandmarker.createFromOptions(files, opts('CPU')); }
+    edges = FaceLandmarker.FACE_LANDMARKS_TESSELATION.map(c => [c.start, c.end]);
+    contours = [...FaceLandmarker.FACE_LANDMARKS_LIPS, ...FaceLandmarker.FACE_LANDMARKS_LEFT_EYE, ...FaceLandmarker.FACE_LANDMARKS_RIGHT_EYE,
+      ...FaceLandmarker.FACE_LANDMARKS_FACE_OVAL, ...FaceLandmarker.FACE_LANDMARKS_LEFT_EYEBROW, ...FaceLandmarker.FACE_LANDMARKS_RIGHT_EYEBROW].map(c => [c.start, c.end]);
+    regionPts = REGIONS.map(r => r.idx);
+    log('landmarker ready · 478 points per frame', 'sys');
+    phase = 'aligning'; $('#prompt').textContent = 'Look at the screen';
+  } catch (e){
+    log('could not load the face model here · switching to simulated face', 'warn');
+    stream.getTracks().forEach(t => t.stop()); stream = null; return startDemo(true);
+  }
+}
+function liveStep(now){
+  const res = landmarker.detectForVideo(video, now);
+  const raw = res.faceLandmarks && res.faceLandmarks[0];
+  if (!raw){ if (pts && now - lastAnalyze > 1000){ log('no face in frame', 'warn'); lastAnalyze = now; } pts = null; return; }
+  pts = raw.map(p => ({x: 1 - p.x, y: p.y, z: p.z}));
+  if (now - lastAnalyze < 160) return; lastAnalyze = now;
+  const ow = 192, oh = Math.round(ow * frameH / frameW);
+  off.width = ow; off.height = oh; octx.drawImage(video, 0, 0, ow, oh);
+  const data = octx.getImageData(0, 0, ow, oh).data;
+  const sample = REGIONS.map(r => {
+    const p = raw[r.idx], cx = Math.round(p.x * ow), cy = Math.round(p.y * oh);
+    let R = 0, G = 0, B = 0, n = 0;
+    for (let y = cy - 3; y <= cy + 3; y++) for (let x = cx - 3; x <= cx + 3; x++){
+      if (x < 0 || y < 0 || x >= ow || y >= oh) continue;
+      const i = (y * ow + x) * 4; R += data[i]; G += data[i + 1]; B += data[i + 2]; n++;
+    }
+    return {r: R / n, g: G / n, b: B / n};
+  });
+  octx.clearRect(0, 0, ow, oh); // discard the frame copy
+  let xmin = 1, xmax = 0; for (const p of raw){ if (p.x < xmin) xmin = p.x; if (p.x > xmax) xmax = p.x; }
+  const l = raw[234], r = raw[454], nose = raw[1];
+  analyze(sample, {faceW: xmax - xmin, yaw: (nose.x - (l.x + r.x) / 2) / Math.max(r.x - l.x, 1e-3), nose}, now);
+}
+
+/* ---------- demo mode: synthetic face ---------- */
+let demo = null;
+function buildDemoFace(){
+  const V = [], E = [], C = [], idx = {};
+  const halfW = y => 0.78 * (y > 0.12 ? 1 - (y - 0.12) * 0.55 : 1);
+  const inside = (x, y) => (x / halfW(y)) ** 2 + (y / 1.05) ** 2 < 1;
+  const surf = (x, y) => {
+    let z = Math.sqrt(Math.max(0, 1 - (x / halfW(y)) ** 2 - (y / 1.05) ** 2)) * 0.8;
+    const nd = Math.hypot(x / 0.11, (y - 0.08) / 0.32); if (nd < 1) z += 0.2 * (1 - nd) ** 2;
+    for (const ex of [-0.3, 0.3]){ const ed = Math.hypot((x - ex) / 0.17, (y + 0.12) / 0.09); if (ed < 1) z -= 0.07 * (1 - ed); }
+    const ld = Math.hypot(x / 0.2, (y - 0.5) / 0.06); if (ld < 1) z += 0.03 * (1 - ld);
+    return z;
+  };
+  const COLS = 23, ROWS = 31;
+  for (let i = 0; i < ROWS; i++) for (let j = 0; j < COLS; j++){
+    const x = -0.8 + 1.6 * j / (COLS - 1), y = -1.05 + 2.1 * i / (ROWS - 1);
+    if (!inside(x, y)) continue;
+    idx[i + ',' + j] = V.length; V.push([x, y, surf(x, y)]);
+    const me = V.length - 1, L = idx[i + ',' + (j - 1)], U = idx[(i - 1) + ',' + j], UL = idx[(i - 1) + ',' + (j - 1)], UR = idx[(i - 1) + ',' + (j + 1)];
+    if (L !== undefined) E.push([L, me]); if (U !== undefined) E.push([U, me]);
+    if ((i + j) % 2 ? UL !== undefined : UR !== undefined) E.push([(i + j) % 2 ? UL : UR, me]);
+  }
+  const ring = (cx, cy, rx, ry, n) => { const s = V.length;
+    for (let k = 0; k < n; k++){ const a = k / n * Math.PI * 2, x = cx + rx * Math.cos(a), y = cy + ry * Math.sin(a); V.push([x, y, surf(x, y) + 0.01]); C.push([s + k, s + (k + 1) % n]); } };
+  ring(-0.3, -0.12, 0.15, 0.06, 20); ring(0.3, -0.12, 0.15, 0.06, 20); ring(0, 0.5, 0.2, 0.06, 24);
+  const nearest = (x, y) => { let b = 0, bd = 1e9; V.forEach((v, i) => { const d = (v[0] - x) ** 2 + (v[1] - y) ** 2; if (d < bd){ bd = d; b = i; } }); return b; };
+  const regions = [nearest(0, -0.62), nearest(-0.42, 0.18), nearest(0.42, 0.18), nearest(0, 0.0), nearest(0, 0.78)];
+  return {V, E, C, regions};
+}
+function startDemo(fallback){
+  $('#overlay').hidden = true; mode = 'demo'; if (!fallback) t0 = performance.now();
+  demo = buildDemoFace(); edges = demo.E; contours = demo.C; regionPts = demo.regions;
+  frameW = 640; frameH = 480; demo.start = performance.now();
+  log('simulated face · ' + demo.V.length + ' mesh points', 'sys');
+  log('no camera in use · values below are synthetic', 'sys');
+  phase = 'aligning'; $('#prompt').textContent = 'Look at the screen';
+}
+function demoStep(now){
+  const t = (now - demo.start) / 1000;
+  const settle = Math.min(1, t / 3.5);
+  const yaw = (1 - settle) * 0.42 + Math.sin(t * 0.7) * 0.05;
+  const pitch = Math.sin(t * 0.5) * 0.06 - 0.04;
+  const scale = 95 + settle * 70 + Math.sin(t * 0.9) * 2;
+  const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+  pts = demo.V.map(([x, y, z]) => {
+    let X = x * cy + z * sy, Z = -x * sy + z * cy;
+    let Y = y * cp - Z * sp; Z = y * sp + Z * cp;
+    return {x: (320 + X * scale) / 640, y: (235 + Y * scale) / 480, z: -Z};
+  });
+  if (now - lastAnalyze < 160) return; lastAnalyze = now;
+  const jitter = () => (Math.random() - 0.5) * 4;
+  const base = [{r: 200, g: 162, b: 146}, {r: 206, g: 150, b: 138}, {r: 203, g: 152, b: 140}, {r: 214, g: 170, b: 152}, {r: 196, g: 158, b: 144}];
+  const sample = base.map(c => ({r: c.r + jitter(), g: c.g + jitter(), b: c.b + jitter()}));
+  let xmin = 1, xmax = 0; for (const p of pts){ if (p.x < xmin) xmin = p.x; if (p.x > xmax) xmax = p.x; }
+  const yawSigned = Math.sin(yaw) * 0.6;
+  analyze(sample, {faceW: xmax - xmin, yaw: yawSigned, nose: {x: 0.5 + yawSigned * 0.02, y: 0.5 + Math.sin(t * 3) * (t < 4.5 ? 0.05 : 0.002)}}, now);
+}
+
+$('#start').onclick = () => startLive();
+$('#demo').onclick = () => startDemo(false);
+requestAnimationFrame(tick);
+</script>
