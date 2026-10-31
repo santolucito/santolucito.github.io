@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Saint Morning Scan</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,6 +73,8 @@ button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 #cam{position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:0;top:0}
 @media (prefers-reduced-motion:reduce){.bar span{transition:none}}
 </style>
+</head>
+<body>
 
 <div class="app">
   <header>
@@ -393,3 +400,5 @@ $('#start').onclick = () => startLive();
 $('#demo').onclick = () => startDemo(false);
 requestAnimationFrame(tick);
 </script>
+</body>
+</html>
