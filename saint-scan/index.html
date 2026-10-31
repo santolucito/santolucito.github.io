@@ -70,8 +70,8 @@ button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
     <div class="result" id="result" hidden></div>
   </div>
   <dl class="nums">
-    <div><dt>redness</dt><dd id="r-ei">--</dd></div>
-    <div><dt>evenness</dt><dd id="r-even">--</dd></div>
+    <div><dt>erythema</dt><dd id="r-ei">--</dd></div>
+    <div><dt>melanin</dt><dd id="r-mi">--</dd></div>
     <div><dt>light</dt><dd id="r-lum">--</dd></div>
     <div><dt>frames</dt><dd id="r-frames">0</dd></div>
   </dl>
@@ -127,6 +127,7 @@ function analyze(sample, geom, now){
   const ei = cheeks.reduce((a, c) => a + 100 * Math.log10(Math.max(c.r, 1) / Math.max(c.g, 1)), 0) / cheeks.length;
   const sd = Math.sqrt(lums.reduce((a, l) => a + (l - lum) ** 2, 0) / lums.length);
   const even = Math.max(0, 100 * (1 - sd / Math.max(lum, 1)));
+  const mi = cheeks.reduce((a, c) => a + 100 * Math.log10(255 / Math.max(c.r, 1)), 0) / cheeks.length;
   const moved = lastCenter ? Math.hypot(geom.fcx - lastCenter.x, geom.fcy - lastCenter.y) : 0;
   lastCenter = {x: geom.fcx, y: geom.fcy};
 
@@ -155,10 +156,10 @@ function analyze(sample, geom, now){
   $('#r-frames').textContent = frames;
   if (!passing) return;
 
-  hist.ei.push(ei); hist.even.push(even); hist.lum.push(lum);
+  hist.ei.push(ei); hist.even.push(mi); hist.lum.push(lum);
   sample.forEach((c, i) => { const r = regSum[i]; r.r += c.r; r.g += c.g; r.b += c.b; r.n++; });
   $('#r-ei').textContent = median(hist.ei.slice(-15)).toFixed(1);
-  $('#r-even').textContent = median(hist.even.slice(-15)).toFixed(0) + '%';
+  $('#r-mi').textContent = median(hist.even.slice(-15)).toFixed(1);
   // fill by visibility: frontal regions when facing forward, each cheek when it is turned toward the camera
   const front = clamp(1 - Math.abs(geom.dyaw) / 0.13, 0, 1);
   const showL = clamp((geom.dyaw - 0.02) / 0.12, 0, 1), showR = clamp((-geom.dyaw - 0.02) / 0.12, 0, 1);
@@ -183,7 +184,7 @@ function finish(now){
   log(hist.ei.length + ' samples accepted');
   log(mode === 'live' ? 'camera released  buffers cleared' : 'demo stream closed');
   graph = buildGraph();
-  log('symbolic model  5 roi → 5 features → 4 operators → 4 outputs');
+  log('symbolic model  5 regions → 5 features → 4 operators → 4 outputs');
   log('record  ' + graph.nodes.filter(n => n.layer === 3).map(n => n.value).join('  ') + '   images 0', 'mark');
   const r = $('#result'); r.hidden = false;
   r.innerHTML = `<p>camera off · nothing kept but these numbers</p><button id="again">again</button>`;
@@ -437,32 +438,33 @@ function itaClass(v){ return v > 55 ? 'very light' : v > 41 ? 'light' : v > 28 ?
 function buildGraph(){
   const roi = regSum.map(s => ({r: s.r / Math.max(s.n, 1), g: s.g / Math.max(s.n, 1), b: s.b / Math.max(s.n, 1)}));
   const lab = roi.map(rgb2lab);
-  const dex = leftCheek, sin = leftCheek === 1 ? 2 : 1; // mirrored view: subject's left cheek is on the screen right
-  const order = [[0, 'frontalis'], [dex, 'bucc. dex.'], [sin, 'bucc. sin.'], [3, 'nasalis'], [4, 'mentalis']];
+  const right = leftCheek, left = leftCheek === 1 ? 2 : 1; // mirrored view: the subject's left cheek is on the screen right
+  const order = [[0, 'frontal'], [right, 'malar R'], [left, 'malar L'], [3, 'nasal'], [4, 'chin']];
   const mean = a => a.reduce((x, y) => x + y, 0) / a.length;
-  const Ls = lab.map(c => c.L), Lm = mean(Ls), bm = mean(lab.map(c => c.b));
-  const sdL = Math.sqrt(mean(Ls.map(v => (v - Lm) ** 2)));
-  const RG = mean([dex, sin].map(i => roi[i].r / Math.max(roi[i].g, 1)));
-  const da = Math.abs(lab[sin].a - lab[dex].a);
-  const EI = 100 * Math.log10(RG), ITA = Math.atan((Lm - 50) / Math.max(bm, 0.1)) * 180 / Math.PI;
-  const U = 100 * (1 - sdL / Math.max(Lm, 1)), PHI = clamp(0.7 * EI / 20 + 0.3 * da / 6, 0, 1.5);
+  const cheeks = [right, left];
+  const RG = mean(cheeks.map(i => roi[i].r / Math.max(roi[i].g, 1)));
+  const Rr = mean(cheeks.map(i => roi[i].r / 255));
+  const Lm = mean(lab.map(c => c.L)), am = mean(lab.map(c => c.a)), bm = mean(lab.map(c => c.b));
+  const dE = mean(lab.map(c => Math.hypot(c.L - Lm, c.a - am, c.b - bm)));
+  const EI = 100 * Math.log10(RG), MI = 100 * Math.log10(1 / Math.max(Rr, 0.01));
+  const ITA = Math.atan((Lm - 50) / Math.max(bm, 0.1)) * 180 / Math.PI;
   const N = [];
-  const add = (id, layer, label, value, from = [], sub = '', short = label) => N.push({id, layer, label, value, from, sub, short});
+  const add = (id, layer, label, value, from = [], sub = '', short = label, shortValue = value) => N.push({id, layer, label, value, from, sub, short, shortValue});
   const roiIds = order.map(([i, nm]) => { add('r' + i, 0, nm, 'a* ' + lab[i].a.toFixed(1)); return 'r' + i; });
-  add('rg', 1, 'ρR/ρG', RG.toFixed(3), ['r' + dex, 'r' + sin]);
-  add('L', 1, 'L* μ', Lm.toFixed(1), roiIds);
-  add('b', 1, 'b* μ', bm.toFixed(1), roiIds);
-  add('sd', 1, 'σ L*', sdL.toFixed(2), roiIds);
-  add('da', 1, 'Δa* sin−dex', da.toFixed(2), ['r' + dex, 'r' + sin], '', 'Δa*');
-  add('oEI', 2, 'EI', '100·log₁₀ ρ', ['rg']);
-  add('oITA', 2, 'ITA°', 'atan((L*−50)/b*)', ['L', 'b']);
-  N[N.length - 1].shortValue = 'atan((L−50)/b)';
-  add('oU', 2, 'U', '1 − σ/μ', ['sd', 'L']);
-  add('oPHI', 2, 'Φ', 'α·EI + β·Δa*', ['rg', 'da']);
-  add('sEI', 3, 'index erythematis', EI.toFixed(1), ['oEI'], '', 'erythema');
-  add('sITA', 3, 'angulus typologicus', ITA.toFixed(1) + '°', ['oITA'], itaClass(ITA), 'typologia');
-  add('sU', 3, 'uniformitas', U.toFixed(0) + '%', ['oU']);
-  add('sPHI', 3, 'onus inflammationis', PHI.toFixed(2), ['oPHI'], '', 'inflammatio');
+  const ck = ['r' + right, 'r' + left];
+  add('rg', 1, 'R/G', RG.toFixed(3), ck);
+  add('rr', 1, 'R refl.', Rr.toFixed(3), ck);
+  add('L', 1, 'L*', Lm.toFixed(1), roiIds);
+  add('b', 1, 'b*', bm.toFixed(1), roiIds);
+  add('lab', 1, 'L*a*b* by region', '5 × 3', roiIds, '', 'Lab');
+  add('oEI', 2, 'EI', '100·log₁₀(R/G)', ['rg'], '', 'EI', '100·log(R/G)');
+  add('oMI', 2, 'MI', '100·log₁₀(1/R)', ['rr'], '', 'MI', '100·log(1/R)');
+  add('oITA', 2, 'ITA°', 'atan((L*−50)/b*)', ['L', 'b'], '', 'ITA°', 'atan((L−50)/b)');
+  add('oDE', 2, 'ΔE*ab', 'mean ‖Lab − μ‖', ['lab'], '', 'ΔE', 'mean |Lab−μ|');
+  add('sEI', 3, 'erythema index', EI.toFixed(1), ['oEI'], '', 'erythema');
+  add('sMI', 3, 'melanin index', MI.toFixed(1), ['oMI'], '', 'melanin');
+  add('sITA', 3, 'individual typology angle', ITA.toFixed(1) + '°', ['oITA'], itaClass(ITA), 'ITA°');
+  add('sDE', 3, 'color variation ΔE*ab', dE.toFixed(1), ['oDE'], '', 'ΔE*ab');
   const byId = Object.fromEntries(N.map(n => [n.id, n]));
   const E = [];
   N.forEach(n => n.from.forEach((f, k) => E.push({a: byId[f], b: n, seed: (n.id.length * 0.37 + k * 0.29 + f.length * 0.11) % 1})));
@@ -491,7 +493,7 @@ function drawGraph(now){
   const fs = L.small ? 9.5 : 11, fv = L.small ? 12 : 14, fsum = L.small ? 19 : 26;
   // text geometry and anchors
   for (const n of graph.nodes){
-    n.lab = L.small ? n.short : n.label; n.val = L.small && n.shortValue ? n.shortValue : n.value;
+    n.lab = L.small ? n.short : n.label; n.val = L.small ? n.shortValue : n.value;
     const big = n.layer === 3 ? fsum : fv;
     ctx.font = `300 ${fs}px "IBM Plex Mono", monospace`; const w1 = ctx.measureText(n.lab).width;
     ctx.font = `400 ${big}px "IBM Plex Mono", monospace`; const w2 = ctx.measureText(n.val).width;
