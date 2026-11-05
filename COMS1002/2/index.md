@@ -70,6 +70,34 @@ What new challenges arise in programming audio as opposed to non-time domain pro
 
 The goal of this lab is for you to practice live coding in Rattle, learn the basic interface, and make a short recording. 
 
+
+Start from this code. The **outer loop** picks a root note for each phrase, and the **inner loop** picks pitches and rhythms within the phrase.
+
+
+```python
+@live_loop("melody")
+def melody():
+    use_synth("pluck")
+    use_random_seed(42)                        # position A
+    for phrase in range(4):
+        # position B
+        root = choose(["e3", "g3", "a3"])      # outer-loop choice
+        for n in range(3):
+            # position C
+            play(choose(scale(root, "minor_pentatonic")))   # inner-loop choices
+            sleep(choose([0.25, 0.5]))
+```
+
+
+Move `use_random_seed(42)` to each position below. **Before you run it, predict what you'll hear.** Then listen, and write one sentence on what repeats and what changes.
+
+1. Position A (top of the `live_loop`)
+2. Position B (top of the outer loop)
+3. Position C (top of the inner loop)
+4. No seed at all
+
+Then try using two seeds at once. Can you make the root notes change every phrase, but the rhythm within each phrase stay the same?
+
 ### To turn in:
 
 Once you have completed the above tutorial sections you will have a good foundation to start live coding yourself. Record a video of you live coding. It doesn't have to be fancy or long (less than 30 seconds is fine) - though a loop that plays a single note is enough. This is to confirm that you have the tool installed, understand the basic usage, can record your audio and code at the same time, and can post a video online. Post your video recording publicly, and save the link. For the lab, simply submit the link in a .txt file!
@@ -80,16 +108,10 @@ Please be sure you are recording the sound *directly* from your computer, and no
 
 <hr>
 
-## Lecture 1-2: Live coding ethos
-
-We start be examining the design of languages around creativity - how does the structure of a programming language encourage exploration and creativity?
-We then look at the practice of live coding and algoraves.
-How can language design guide us to ensure code does not break on stage?
-We ask - if code is art, what is virtuosity in code?
+## Lecture 1-3: Generative Processes and Random Seeds
 
 
-## Lecture 1-4: TBA
+## Lecture 4-1: TBA
 
-## Lab 5: TBA
 
 
