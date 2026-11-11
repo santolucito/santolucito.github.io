@@ -108,6 +108,8 @@ Live coding beyond music - dance, textiles, games
 ## 10 — November 11
 going beyond the screen - connecting to physical interfaces
 
+[micro:bit + Strudel walkthrough](./microbit/)
+
 *hw* connect some external device for parameter control
 
 ## 11 — November 18
