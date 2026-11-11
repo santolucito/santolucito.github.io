@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>micro:bit + Strudel, no cable · MUSI6610</title>
+<style>
+  :root {
+    --bg: #faf8f3;
+    --panel: #ffffff;
+    --ink: #1d1b18;
+    --muted: #6a645b;
+    --line: #e2dccf;
+    --accent: #c2410c;
+    --accent-ink: #ffffff;
+    --code-bg: #1f1d1a;
+    --code-ink: #f1ece2;
+    --ok-bg: #edf6ec;
+    --ok-line: #9cc79a;
+    --warn-bg: #fdf3e1;
+    --warn-line: #e3b866;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171512;
+      --panel: #201d19;
+      --ink: #ece7dd;
+      --muted: #a39c90;
+      --line: #36322b;
+      --accent: #fb923c;
+      --accent-ink: #1d1b18;
+      --code-bg: #0f0e0c;
+      --code-ink: #ece7dd;
+      --ok-bg: #1a2a1b;
+      --ok-line: #3f6b40;
+      --warn-bg: #2d2413;
+      --warn-line: #7a5d22;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 96px; }
+  .mono, h1, h2, .step-num, nav a, .btn, th {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  header .kicker { color: var(--muted); font-size: 14px; }
+  header .kicker a { color: inherit; }
+  h1 { font-size: clamp(28px, 6vw, 42px); line-height: 1.15; margin: 8px 0 12px; letter-spacing: -0.02em; }
+  h1 span { color: var(--accent); }
+  .lede { font-size: 19px; color: var(--muted); margin: 0 0 24px; }
+  nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 40px; }
+  nav a {
+    font-size: 13px; text-decoration: none; color: var(--ink);
+    border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; background: var(--panel);
+  }
+  nav a:hover { border-color: var(--accent); color: var(--accent); }
+  section { margin: 0 0 56px; }
+  h2 { font-size: 22px; margin: 0 0 12px; display: flex; align-items: baseline; gap: 12px; }
+  .step-num {
+    flex: none; color: var(--accent-ink); background: var(--accent);
+    border-radius: 6px; padding: 0 9px; font-size: 16px; line-height: 1.7;
+  }
+  h3 { font-size: 17px; margin: 28px 0 8px; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); }
+  ol, ul { padding-left: 24px; margin: 0 0 14px; }
+  li { margin-bottom: 6px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9em; }
+  :not(pre) > code { background: var(--line); border-radius: 4px; padding: 1px 5px; }
+  .codebox { margin: 0 0 16px; border-radius: 10px; overflow: hidden; background: var(--code-bg); }
+  .codebar {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+    padding: 6px 8px 6px 14px; color: #a39c90; font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    border-bottom: 1px solid #36322b;
+  }
+  .codebar .actions { display: flex; gap: 6px; }
+  .btn {
+    font-size: 12px; cursor: pointer; border-radius: 6px; padding: 4px 10px;
+    border: 1px solid #4a453c; background: transparent; color: #ece7dd; text-decoration: none;
+  }
+  .btn:hover { border-color: #fb923c; color: #fb923c; }
+  pre { margin: 0; padding: 14px; overflow-x: auto; color: var(--code-ink); font-size: 14px; line-height: 1.5; }
+  .note { border: 1px solid var(--line); border-left-width: 4px; border-radius: 8px; padding: 12px 14px; margin: 0 0 16px; background: var(--panel); }
+  .note > :last-child { margin-bottom: 0; }
+  .note.ok { background: var(--ok-bg); border-color: var(--ok-line); }
+  .note.warn { background: var(--warn-bg); border-color: var(--warn-line); }
+  .note strong:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; }
+  .download {
+    display: inline-block; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--accent); color: var(--accent-ink); text-decoration: none;
+    border-radius: 8px; padding: 10px 16px; margin: 4px 0 14px; font-size: 15px;
+  }
+  .tablewrap { overflow-x: auto; margin: 0 0 16px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  th { font-size: 12px; color: var(--muted); font-weight: normal; text-transform: uppercase; letter-spacing: 0.04em; }
+  .diagram {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px;
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 6px 12px; align-items: center;
+    border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: var(--panel); margin: 0 0 16px;
+  }
+  .diagram .box { border: 1px solid var(--line); border-radius: 8px; padding: 10px; text-align: center; grid-row: span 2; }
+  .diagram .arrow { color: var(--accent); text-align: center; white-space: nowrap; }
+  footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <div class="kicker mono"><a href="../">MUSI6610 · Live Coding: Code as Performance</a> · Week 10 · <a href="./">cable version</a></div>
+  <h1>micro:bit <span>⇄</span> Strudel, no cable</h1>
+  <p class="lede">No USB adapter? Put the program on the board from your phone, then connect your laptop to it over Bluetooth.</p>
+</header>
+
+<div class="note warn">
+  <p><strong>Experimental.</strong> The <a href="./">cable version</a> was tested end to end. This wireless version compiles but has not been run on a board yet, so expect to debug.</p>
+</div>
+
+<section id="need">
+  <h2>What you need</h2>
+  <ul>
+    <li>A micro:bit V2 with a battery pack (or any USB charger or power bank for power).</li>
+    <li>A phone with the free <strong>micro:bit</strong> app from the Micro:bit Educational Foundation (iPhone or Android).</li>
+    <li>A laptop with <strong>Chrome or Edge</strong> and Bluetooth turned on.</li>
+  </ul>
+</section>
+
+<section id="flash">
+  <h2><span class="step-num">1</span> Flash from your phone</h2>
+  <ol>
+    <li>Open this page on your phone and download the program:<br>
+      <a class="download" href="strudel-microbit-ble.hex" download>strudel-microbit-ble.hex</a></li>
+    <li>Open the downloaded file with the micro:bit app (share it to the app, or find it under the app's Flash / My Programs screen).</li>
+    <li>Put the board in pairing mode: hold <strong>A and B</strong>, press and release the <strong>reset</strong> button on the back, and keep holding A and B until the display fills up and then shows a pattern.</li>
+    <li>In the app, choose <strong>Pair</strong> and copy the pattern from the board's display.</li>
+    <li>Tap <strong>Flash</strong>. It takes a minute or two.</li>
+    <li>When it finishes, the board restarts and scrolls a five-letter name such as <code>zuvat</code>. Write it down: that is how you find your board in a room full of them. Press reset to see it again.</li>
+    <li>Close the app or turn off your phone's Bluetooth, so the phone lets go of the board.</li>
+  </ol>
+</section>
+
+<section id="connect">
+  <h2><span class="step-num">2</span> Connect from Strudel</h2>
+  <p>One connection carries both directions: tilt changes the filter, and the pattern drives the LEDs. Open this in Chrome on your laptop and press <strong>Ctrl+Enter</strong>.</p>
+  <div class="codebox">
+    <div class="codebar"><span>Strudel</span><span class="actions"><a class="btn" data-open target="_blank" rel="noopener">Open in Strudel</a><button class="btn" data-copy>Copy</button></span></div>
+<pre><code>// micro:bit over Bluetooth: tilt -&gt; filter, pattern -&gt; LEDs
+if (!window.mbBle) {
+  const UART = '6e400001-b5a3-f393-e0a9-e50e24dcca9e'
+  const dev = await navigator.bluetooth.requestDevice({
+    filters: [{ namePrefix: 'BBC micro:bit' }], optionalServices: [UART] })
+  const svc = await (await dev.gatt.connect()).getPrimaryService(UART)
+  const chars = await svc.getCharacteristics()
+  const rx = chars.find(c =&gt; c.properties.notify || c.properties.indicate)
+  const tx = chars.find(c =&gt; c.properties.write || c.properties.writeWithoutResponse)
+  let buf = ''
+  rx.addEventListener('characteristicvaluechanged', e =&gt; {
+    buf += new TextDecoder().decode(e.target.value)
+    const lines = buf.split('\n'); buf = lines.pop()
+    for (const l of lines) window.mbVal = (parseFloat(l) + 1024) / 2048
+  })
+  await rx.startNotifications()
+  window.mbBle = { send: s =&gt; tx.writeValue(new TextEncoder().encode(s + '\n')).catch(() =&gt; {}) }
+}
+
+$: note("c a f e").s("sawtooth")
+  .lpf(ref(() =&gt; window.mbVal ?? 0).range(200, 4000))
+$: "&lt;heart skull&gt;".onSchedule(hap =&gt; window.mbBle.send(hap.value))</code></pre>
+  </div>
+  <ol>
+    <li>Chrome shows a list of nearby Bluetooth devices. Pick <code>BBC micro:bit [your five letters]</code> and click <strong>Pair</strong>.</li>
+    <li>The board shows a tick when your laptop connects.</li>
+  </ol>
+  <div class="note ok">
+    <p><strong>You should get:</strong> a sawtooth melody that brightens as you tilt right, and LEDs alternating heart and skull.</p>
+  </div>
+  <p>Leave the <code>if (!window.mbBle) { … }</code> block alone and edit the patterns below it. <code>window.mbVal</code> is the tilt from 0 to 1, and <code>window.mbBle.send("text")</code> sends a word to the display. The ideas in <a href="./#etude">the étude section</a> all apply.</p>
+</section>
+
+<section id="help">
+  <h2>Troubleshooting</h2>
+  <div class="tablewrap">
+  <table>
+    <tr><th>What you see</th><th>What to do</th></tr>
+    <tr><td>Your board isn't in Chrome's list</td><td>Make sure your phone has let go of it (close the app), press reset on the board, and check the laptop's Bluetooth is on.</td></tr>
+    <tr><td>Lots of boards in the list</td><td>Match the five letters your board scrolls at startup.</td></tr>
+    <tr><td>The board shows a cross</td><td>The laptop disconnected. Reload the Strudel page and connect again.</td></tr>
+    <tr><td>Phone flashing fails or stalls</td><td>Put the board back in pairing mode and try again, keeping the phone close to it.</td></tr>
+    <tr><td>Nothing happens after Ctrl+Enter</td><td>Strudel is waiting for you to choose a device in the list near the address bar.</td></tr>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <p>MUSI6610, Fall 2026 · Computer Music Center, Columbia University · <a href="../">course page</a></p>
+</footer>
+
+</main>
+<script>
+  // Copy buttons and "Open in Strudel" links are built from the code shown on the page.
+  document.querySelectorAll('.codebox').forEach((box) => {
+    const code = box.querySelector('pre code').textContent + '\n';
+    const copy = box.querySelector('[data-copy]');
+    if (copy) {
+      copy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(code);
+          copy.textContent = 'Copied';
+        } catch (e) {
+          copy.textContent = 'Select and copy';
+        }
+        setTimeout(() => (copy.textContent = 'Copy'), 1500);
+      });
+    }
+    const open = box.querySelector('[data-open]');
+    if (open) {
+      const bytes = new TextEncoder().encode(code);
+      let bin = '';
+      bytes.forEach((b) => (bin += String.fromCharCode(b)));
+      open.href = 'https://strudel.cc/#' + encodeURIComponent(btoa(bin));
+    }
+  });
+</script>
+</body>
+</html>
