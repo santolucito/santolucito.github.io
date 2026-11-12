@@ -13,7 +13,7 @@ In a more practical sense, this is particularly good training for coding intervi
 - Due Nov XX, 11:59pm
 
 Your goal is to experience first-hand the practice of live coding.
-You will be using Sonic Pi and will record a video with audio of you live coding.
+You will be using Rattle and will record a video with audio of you live coding.
 
 During your performance, you must:
 
@@ -25,7 +25,7 @@ Some language features you *must** use include:
 
 - setting a random seed (5 points)
 - sync'ing live loops (5 points)
-- loops inside a live loop, for example ```3.times do...``` (5 points)
+- loops inside a live loop, for example ```for i in range(4):``` (5 points)
 - play samples (5 points)
 - use a synth (5 points)
 
@@ -36,12 +36,12 @@ The recording should last roughly 10 minutes (10 points). Note that in order to 
 - Make a short (30 sec) recording first to make sure your screen share and audio recording work working correctly
 - If you use zoom, make sure to share screen and share computer audio before recoding
 - You do not need to include your camera/face in the recording.
-- Use headphones when recording so that you are sure you are recording the computer audio directly, and not through your microphone. Mute your microphone so we only hear the Sonic Pi audio (unless you intentionally want to use ```live_audio```).
+- Use headphones when recording so that you are sure you are recording the computer audio directly, and not through your microphone. Mute your microphone so we only hear the computer audio (unless you intentionally want to use ```live_audio```).
 
 
 ### What to hand in?
 
-- A link to the public posted video recording of your live code performance in Sonic Pi. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up highlighting interesting moments in the performance or lines of code you thought were creative. Submit this link as a .txt file.
+- A link to the public posted video recording of your live code performance in Rattle. The description field of the video should contain a short (at least 2 paragraphs, more if you like) write-up highlighting interesting moments in the performance or lines of code you thought were creative. Submit this link as a .txt file.
 
 ### How am I graded?
 
@@ -50,7 +50,7 @@ Rubric
 - 60 points - Technical Sophistication. Does your project utilize your programming skills in an effective way? Have you gone significantly beyond any example code you have used? Is this "your" work?
 - 30 points - Documentation. Did you record properly (sound recorded directly from sound card of computer using share sound 10 points). Have you shown your complete code during the performance (10 points)? Have you posted the recording so that is publicly viewable (10 points)?
 Does the documentation highlight both the artistic aspect of your work, as well as the technical sophistication? Your work should be equally well appreciated by both a technical and non-technical audience. 
-- 10 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, you will need to put significant time into practicing live coding. Try to gain a level of fluency with Sonic Pi that allows you to explore new creative ideas during your performance.
+- 10 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, you will need to put significant time into practicing live coding. Try to gain a level of fluency with Rattle that allows you to explore new creative ideas during your performance.
 
 <hr> 
 
