@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tool or Collaborator?</title>
+<title>Tool or Big Red Button?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
@@ -93,7 +93,7 @@ dialog .r{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
 <!-- ============ PRESENTER ============ -->
 <div id="presenter" class="hidden">
   <section class="board">
-    <h1 id="ptitle">Tool, assistant, or collaborator?</h1>
+    <h1 id="ptitle">Tool, collaborator, or Big Red Button?</h1>
     <p class="sub">Scan the code and place each one on the line. Results update live.</p>
     <div class="grid" id="grid"></div>
   </section>
@@ -125,7 +125,7 @@ dialog .r{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
 <!-- ============ PHONE ============ -->
 <div id="voter" class="hidden">
   <h1>Where does each one sit?</h1>
-  <p class="sub">Drag the dot along each line. Left is <b style="color:var(--a)">just a tool</b>, the middle is an <b style="color:var(--b)">assistant</b>, right is a real <b style="color:var(--c)">collaborator</b>. You can change your answers any time.</p>
+  <p class="sub">Drag the dot along each line. Left is a <b style="color:var(--a)">tool</b> (you make every choice), the middle is a <b style="color:var(--b)">collaborator</b> (choices go back and forth), right is a <b style="color:var(--c)">Big Red Button</b> (the system makes the choices). You can change your answers any time.</p>
   <div id="cards"><p class="wait">Connecting…</p></div>
   <div class="bar-bottom"><span id="vstat"><span class="dot busy"></span>Connecting…</span><span id="vcount"></span></div>
 </div>
@@ -266,7 +266,7 @@ function presenter() {
     const max = Math.max(1, ...H.flatMap(x => x.h), ...(prev ? prev.flatMap(x => x.h) : []));
     const showComp = compare && st.prev;
     $("grid").innerHTML =
-      `<div class="axis"><div></div><div class="ticks"><span>Tool</span><span>Assistant</span><span>Collaborator</span></div><div></div></div>` +
+      `<div class="axis"><div></div><div class="ticks"><span>Tool</span><span>Collaborator</span><span>Big Red Button</span></div><div></div></div>` +
       st.items.map((it, i) => {
         const x = H[i];
         const bins = x.h.map((c, b) => {
@@ -362,7 +362,7 @@ function voter(sid) {
       return `<div class="card"><div class="name">${esc(it.label)}<em data-h="${it.id}">${set ? "" : "not placed"}</em></div>
         <div class="track ${set ? "" : "unset"}" data-id="${it.id}" role="slider" tabindex="0" aria-label="${esc(it.label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${set ? Math.round(v * 100) : 50}">
           <div class="rail spec"></div><div class="mid"></div><div class="knob" style="left:${(set ? v : .5) * 100}%"></div></div>
-        <div class="ends"><span>Tool</span><span>Assistant</span><span>Collaborator</span></div></div>`;
+        <div class="ends"><span>Tool</span><span>Collaborator</span><span>Big Red Button</span></div></div>`;
     }).join("");
     document.querySelectorAll(".track").forEach(tr => {
       const id = tr.dataset.id, knob = tr.querySelector(".knob");
