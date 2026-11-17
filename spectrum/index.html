@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tool or Collaborator?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<style>
+/* VOICE: a lecture-hall instrument — loud, legible from the back row, playful.
+   IDEA: a spectrum analyzer: each system is a channel, votes light up its bands.
+   PICTURE: stacked histograms on one shared Tool → Collaborator axis.
+   COLOUR and TYPE: paper white, ink black, a blue→violet→coral spectrum; Space Grotesk.
+   LAYOUT: projector = board left, QR column right; phone = one calm column of tracks. */
+:root{--bg:#f6f4ef;--ink:#16151a;--mute:#6d6a72;--line:#dcd8cf;--card:#fff;--a:#2f5bea;--b:#8a3ffc;--c:#ff5a36}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-bottom:96px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 "Space Grotesk",system-ui,sans-serif;overflow-x:clip}
+button{font:inherit;cursor:pointer;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 16px;min-height:44px}
+button.solid{background:var(--ink);color:var(--bg)}
+button:focus-visible,[role=slider]:focus-visible{outline:3px solid var(--b);outline-offset:3px}
+.hidden{display:none!important}
+.spec{background:linear-gradient(90deg,var(--a),var(--b) 50%,var(--c))}
+
+/* ---------- presenter ---------- */
+#presenter{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) clamp(260px,26vw,380px)}
+.board{padding:clamp(20px,3vw,44px)}
+.board h1{font-size:clamp(30px,3.4vw,52px);line-height:1.05;margin:0 0 6px;text-wrap:balance}
+.board .sub{color:var(--mute);margin:0 0 22px;font-size:clamp(16px,1.3vw,21px)}
+.grid{display:grid;grid-template-columns:clamp(150px,17vw,260px) minmax(0,1fr) 64px;column-gap:18px}
+.axis{display:contents}
+.axis .ticks{grid-column:2;display:flex;justify-content:space-between;font-weight:700;font-size:clamp(15px,1.3vw,20px);padding-bottom:6px}
+.axis .ticks span:nth-child(1){color:var(--a)}.axis .ticks span:nth-child(2){color:var(--b)}.axis .ticks span:nth-child(3){color:var(--c)}
+.row{display:contents}
+.row>*{border-top:1px solid var(--line);padding:8px 0}
+.lab{font-weight:500;font-size:clamp(15px,1.35vw,21px);line-height:1.15;align-self:stretch;display:flex;align-items:center}
+.hist{position:relative;height:clamp(46px,7.2vh,84px);display:flex;align-items:flex-end;gap:2px;background:repeating-linear-gradient(90deg,transparent 0 calc(50% - 1px),var(--line) calc(50% - 1px) calc(50% + 1px),transparent calc(50% + 1px))}
+.bin{flex:1;position:relative;height:100%;display:flex;align-items:flex-end}
+.bar{width:100%;border-radius:3px 3px 0 0;transition:height .45s cubic-bezier(.2,.8,.2,1);
+  -webkit-mask:repeating-linear-gradient(0deg,#000 0 5px,transparent 5px 7px);mask:repeating-linear-gradient(0deg,#000 0 5px,transparent 5px 7px)}
+.ghost{position:absolute;left:0;right:0;bottom:0;border:2px dashed var(--ink);border-bottom:0;opacity:.45;border-radius:3px 3px 0 0;pointer-events:none}
+.med{position:absolute;top:-4px;bottom:0;width:3px;background:var(--ink);border-radius:2px;transform:translateX(-50%);transition:left .45s}
+.cnt{display:flex;align-items:center;justify-content:flex-end;font-variant-numeric:tabular-nums;color:var(--mute);font-size:15px;white-space:nowrap}
+.veil{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:14px}
+.base{grid-column:2;height:6px;border-radius:3px;margin-top:2px}
+.legend{grid-column:2;color:var(--mute);font-size:14px;padding-top:8px;display:flex;gap:18px;flex-wrap:wrap}
+.legend b{display:inline-block;width:3px;height:14px;background:var(--ink);margin-right:8px;vertical-align:-2px;border-radius:2px}
+.legend i{display:inline-block;width:14px;height:12px;border:2px dashed var(--ink);border-bottom:0;opacity:.5;margin-right:6px;vertical-align:-1px}
+
+.join{background:var(--ink);color:var(--bg);padding:clamp(20px,2.4vw,36px);display:flex;flex-direction:column;gap:16px}
+.join h2{margin:0;font-size:clamp(20px,1.7vw,28px);line-height:1.1}
+.qr{background:#fff;border-radius:14px;padding:12px;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.qr svg{width:100%;height:100%;display:block}
+.url{font-size:13px;word-break:break-all;opacity:.75}
+.big{font-size:clamp(40px,4.4vw,68px);font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.big small{display:block;font-size:15px;font-weight:400;opacity:.75;margin-top:4px}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.ctl button{border-color:var(--bg);background:transparent;color:var(--bg);font-size:15px;padding:8px 14px}
+.ctl button.solid{background:var(--bg);color:var(--ink)}
+.mode{font-size:13px;opacity:.8;border:1px solid currentColor;border-radius:8px;padding:8px 10px}
+.mode b{color:#ffb4a3}
+.keys{font-size:12px;opacity:.6}
+dialog{border:2px solid var(--ink);border-radius:16px;padding:22px;width:min(560px,92vw);background:var(--bg);color:var(--ink)}
+dialog textarea{width:100%;min-height:260px;font:16px/1.5 "Space Grotesk",sans-serif;padding:10px;border:2px solid var(--ink);border-radius:10px;background:var(--card);color:var(--ink)}
+dialog .r{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+
+@media(max-width:900px){#presenter{grid-template-columns:1fr}.join{order:-1}.qr{max-width:240px}.grid{grid-template-columns:120px minmax(0,1fr) 44px;column-gap:10px}}
+
+/* ---------- phone ---------- */
+#voter{max-width:620px;margin:0 auto;padding:22px 16px 110px}
+#voter h1{font-size:32px;line-height:1.05;margin:4px 0 8px}
+#voter .sub{color:var(--mute);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px 12px;margin-bottom:12px}
+.card .name{font-weight:700;font-size:18px;line-height:1.2;margin-bottom:12px;display:flex;justify-content:space-between;gap:10px}
+.card .name em{font-style:normal;font-weight:400;font-size:13px;color:var(--mute);white-space:nowrap}
+.track{position:relative;height:48px;touch-action:pan-y;cursor:pointer;user-select:none;-webkit-user-select:none}
+.track .rail{position:absolute;left:0;right:0;top:21px;height:6px;border-radius:3px}
+.track .mid{position:absolute;left:50%;top:14px;height:20px;width:2px;background:var(--line);transform:translateX(-1px)}
+.knob{position:absolute;top:6px;width:36px;height:36px;border-radius:50%;background:var(--ink);border:4px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.25);transform:translateX(-50%);transition:left .08s}
+.track.unset .knob{display:none}
+.track.unset .rail{opacity:.35}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-top:2px}
+.bar-bottom{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:var(--bg);padding:14px 18px calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:15px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#7ee08a;margin-right:8px}
+.dot.busy{background:#ffd23f}.dot.err{background:var(--c)}
+.wait{color:var(--mute);text-align:center;padding:60px 0}
+@media(prefers-reduced-motion:reduce){.bar,.med,.knob{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ PRESENTER ============ -->
+<div id="presenter" class="hidden">
+  <section class="board">
+    <h1 id="ptitle">Tool, assistant, or collaborator?</h1>
+    <p class="sub">Scan the code and place each one on the line. Results update live.</p>
+    <div class="grid" id="grid"></div>
+  </section>
+  <aside class="join">
+    <h2>Scan to place your votes</h2>
+    <div class="qr" id="qr"></div>
+    <div class="url" id="url"></div>
+    <div class="big"><span id="n">0</span><small id="nlab">phones joined · round 1</small></div>
+    <div class="mode" id="mode"></div>
+    <div class="ctl">
+      <button class="solid" id="bReveal">Reveal results</button>
+      <button id="bRound">New round</button>
+      <button id="bCompare" class="hidden">Compare with last round</button>
+      <button id="bEdit">Edit items</button>
+      <button id="bClear">Clear responses</button>
+      <button id="bSim" class="hidden">Simulate a class</button>
+      <button id="bPhone">Open a test phone</button>
+    </div>
+    <div class="keys">Keys: R reveal · F fullscreen</div>
+  </aside>
+  <dialog id="dlg">
+    <h3 style="margin-top:0">Items on the spectrum</h3>
+    <p style="margin-top:0;color:var(--mute)">One per line. Students' screens update right away.</p>
+    <textarea id="ta"></textarea>
+    <div class="r"><button id="dCancel">Cancel</button><button class="solid" id="dSave">Save</button></div>
+  </dialog>
+</div>
+
+<!-- ============ PHONE ============ -->
+<div id="voter" class="hidden">
+  <h1>Where does each one sit?</h1>
+  <p class="sub">Drag the dot along each line. Left is <b style="color:var(--a)">just a tool</b>, the middle is an <b style="color:var(--b)">assistant</b>, right is a real <b style="color:var(--c)">collaborator</b>. You can change your answers any time.</p>
+  <div id="cards"><p class="wait">Connecting…</p></div>
+  <div class="bar-bottom"><span id="vstat"><span class="dot busy"></span>Connecting…</span><span id="vcount"></span></div>
+</div>
+
+<script>
+{
+/* ================= SETUP =================
+   Paste your Firebase Realtime Database URL here (see README).
+   Leave it empty to run in demo mode (works across tabs on one computer only). */
+const FIREBASE_DB = "https://spectrum-poll-default-rtdb.firebaseio.com";
+
+const DEFAULT_ITEMS = [
+  "Mozart's dice music",
+  "Cellular automata → pitch",
+  "Brian Eno's generative systems",
+  "David Cope's EMI",
+  "Max/MSP",
+  "DSP-PBE (filters from examples)",
+  "DDSP timbre transfer",
+  "Suno / Udio"
+];
+const BINS = 20;
+
+const qs = new URLSearchParams(location.search);
+const DB = (qs.get("db") || FIREBASE_DB).replace(/\/+$/, "");
+const LIVE = !!DB;
+const $ = id => document.getElementById(id);
+const ls = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+const rid = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => "abcdefghjkmnpqrstuvwxyz23456789"[b % 31]).join("");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ================= BACKENDS ================= */
+function setPath(obj, parts, val) {
+  let o = obj;
+  for (let i = 0; i < parts.length - 1; i++) { if (typeof o[parts[i]] !== "object" || !o[parts[i]]) o[parts[i]] = {}; o = o[parts[i]]; }
+  const k = parts[parts.length - 1];
+  if (val === null) delete o[k]; else o[k] = val;
+}
+const fb = {
+  async put(path, val) {
+    const r = await fetch(`${DB}/spectrum/${path}.json`, { method: "PUT", body: JSON.stringify(val) });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+  },
+  subscribe(path, cb, onState) {
+    let tree = null;
+    const es = new EventSource(`${DB}/spectrum/${path}.json`);
+    const apply = (type, msg) => {
+      const parts = msg.path.split("/").filter(Boolean);
+      if (type === "put") {
+        if (!parts.length) tree = msg.data;
+        else { if (!tree || typeof tree !== "object") tree = {}; setPath(tree, parts, msg.data); }
+      } else {
+        if (!tree || typeof tree !== "object") tree = {};
+        for (const k in msg.data) setPath(tree, [...parts, k], msg.data[k]);
+      }
+      cb(tree);
+    };
+    es.addEventListener("put", e => { onState && onState("ok"); apply("put", JSON.parse(e.data)); });
+    es.addEventListener("patch", e => apply("patch", JSON.parse(e.data)));
+    es.onerror = () => onState && onState("err");
+    return () => es.close();
+  }
+};
+const demo = (() => {
+  const ch = "BroadcastChannel" in window ? new BroadcastChannel("spectrum-demo") : null;
+  const subs = new Set();
+  const read = () => ls.get("sp-demo", {});
+  const ping = () => { subs.forEach(f => f()); ch && ch.postMessage(1); };
+  ch && (ch.onmessage = () => subs.forEach(f => f()));
+  addEventListener("storage", e => { if (e.key === "sp-demo") subs.forEach(f => f()); });
+  return {
+    async put(path, val) { const t = read(); setPath(t, path.split("/"), val); ls.set("sp-demo", t); ping(); },
+    subscribe(path, cb, onState) {
+      const f = () => { let o = read(); for (const p of path.split("/")) o = o && o[p]; cb(o ?? null); };
+      subs.add(f); setTimeout(() => { onState && onState("ok"); f(); }, 0);
+      return () => subs.delete(f);
+    }
+  };
+})();
+const B = LIVE ? fb : demo;
+
+/* ================= ROUTE ================= */
+const sidParam = qs.get("s");
+if (sidParam) voter(sidParam); else presenter();
+
+/* ================= PRESENTER ================= */
+function presenter() {
+  $("presenter").classList.remove("hidden");
+  let st = ls.get("sp-presenter", null);
+  if (!st || st.live !== LIVE) st = { live: LIVE, sid: rid(6), round: 1, items: DEFAULT_ITEMS.map((l, i) => ({ id: "i" + i, label: l })), next: DEFAULT_ITEMS.length, prev: null };
+  const save = () => ls.set("sp-presenter", st);
+  save();
+  let votes = {}, revealed = false, compare = false, unsub = null;
+
+  const joinUrl = () => {
+    const base = location.href.split(/[?#]/)[0];
+    return base + "?s=" + st.sid + (qs.get("db") ? "&db=" + encodeURIComponent(qs.get("db")) : "");
+  };
+  const pushConfig = () => B.put(st.sid + "/config", { items: st.items, round: st.round }).catch(e => setMode("Couldn't reach the database: " + e.message));
+  const setMode = msg => {
+    $("mode").innerHTML = msg || (LIVE
+      ? "Live · Firebase connected"
+      : "<b>Demo mode.</b> Votes only travel between tabs on this computer. Add your Firebase URL for real phones.");
+  };
+
+  function drawQR() {
+    const url = joinUrl();
+    $("url").textContent = url.replace(/^https?:\/\//, "");
+    if (typeof qrcode !== "function") { $("qr").innerHTML = "<p style='color:#000;padding:10px'>QR library didn't load. Share the link below.</p>"; return; }
+    const q = qrcode(0, "M"); q.addData(url); q.make();
+    const n = q.getModuleCount(); let d = "";
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) d += `M${c} ${r}h1v1h-1z`;
+    $("qr").innerHTML = `<svg viewBox="-1 -1 ${n + 2} ${n + 2}" shape-rendering="crispEdges" role="img" aria-label="QR code to join"><path d="${d}" fill="#16151a"/></svg>`;
+  }
+
+  const mix = t => { // blue → violet → coral
+    const A = [47, 91, 234], Bc = [138, 63, 252], C = [255, 90, 54];
+    const [p, q, u] = t < .5 ? [A, Bc, t * 2] : [Bc, C, (t - .5) * 2];
+    return `rgb(${p.map((x, i) => Math.round(x + (q[i] - x) * u)).join(",")})`;
+  };
+  const hist = (vs, id) => {
+    const h = Array(BINS).fill(0), vals = [];
+    for (const k in vs) { const v = vs[k] && vs[k].a && vs[k].a[id]; if (typeof v === "number" && v >= 0 && v <= 1) { h[Math.min(BINS - 1, Math.floor(v * BINS))]++; vals.push(v); } }
+    vals.sort((a, b) => a - b);
+    const med = vals.length ? (vals.length % 2 ? vals[(vals.length - 1) / 2] : (vals[vals.length / 2 - 1] + vals[vals.length / 2]) / 2) : null;
+    return { h, n: vals.length, med };
+  };
+
+  function render() {
+    const people = Object.values(votes || {}).filter(v => v && v.a && Object.keys(v.a).length).length;
+    $("n").textContent = people;
+    $("nlab").textContent = (people === 1 ? "phone" : "phones") + " joined · round " + st.round;
+    const H = st.items.map(it => hist(votes, it.id));
+    const prev = compare && st.prev ? st.items.map(it => hist(st.prev.votes, it.id)) : null;
+    const max = Math.max(1, ...H.flatMap(x => x.h), ...(prev ? prev.flatMap(x => x.h) : []));
+    const showComp = compare && st.prev;
+    $("grid").innerHTML =
+      `<div class="axis"><div></div><div class="ticks"><span>Tool</span><span>Assistant</span><span>Collaborator</span></div><div></div></div>` +
+      st.items.map((it, i) => {
+        const x = H[i];
+        const bins = x.h.map((c, b) => {
+          const g = prev ? prev[i].h[b] : 0;
+          return `<div class="bin">${revealed ? `<div class="bar" style="height:${(c / max * 100).toFixed(1)}%;background:${mix((b + .5) / BINS)}"></div>` : ""}${revealed && g ? `<div class="ghost" style="height:${(g / max * 100).toFixed(1)}%"></div>` : ""}</div>`;
+        }).join("");
+        const med = revealed && x.med != null ? `<div class="med" style="left:${(x.med * 100).toFixed(1)}%" title="median"></div>` : "";
+        const veil = revealed ? "" : `<div class="veil">${x.n ? "hidden until reveal" : ""}</div>`;
+        return `<div class="row"><div class="lab">${esc(it.label)}</div><div class="hist">${bins}${med}${veil}</div><div class="cnt">${x.n}</div></div>`;
+      }).join("") +
+      `<div></div><div class="base spec"></div><div></div>` +
+      (revealed ? `<div></div><div class="legend"><span><b></b>Median</span>${showComp ? `<span><i></i>Round ${st.round - 1}</span><span>Bars: round ${st.round}</span>` : ""}</div><div></div>` : "");
+    $("bReveal").textContent = revealed ? "Hide results" : "Reveal results";
+    $("bCompare").classList.toggle("hidden", !st.prev);
+    $("bCompare").textContent = compare ? "Hide last round" : "Compare with round " + (st.round - 1);
+  }
+
+  function connect() {
+    unsub && unsub();
+    votes = {};
+    unsub = B.subscribe(st.sid + "/votes", t => { votes = t || {}; render(); }, s => setMode(s === "err" && LIVE ? "Reconnecting to Firebase…" : ""));
+    drawQR(); pushConfig(); render();
+  }
+
+  $("bReveal").onclick = () => { revealed = !revealed; render(); };
+  $("bCompare").onclick = () => { compare = !compare; render(); };
+  $("bRound").onclick = () => {
+    st.prev = { votes: JSON.parse(JSON.stringify(votes || {})) };
+    st.sid = rid(6); st.round++; revealed = false; compare = false; save(); connect();
+  };
+  let clearArm = 0;
+  $("bClear").onclick = () => {
+    if (Date.now() - clearArm > 3000) { clearArm = Date.now(); $("bClear").textContent = "Click again to clear"; setTimeout(() => $("bClear").textContent = "Clear responses", 3000); return; }
+    clearArm = 0; $("bClear").textContent = "Clear responses";
+    B.put(st.sid + "/votes", null);
+  };
+  $("bPhone").onclick = () => window.open(joinUrl(), "_blank");
+  $("bEdit").onclick = () => { $("ta").value = st.items.map(i => i.label).join("\n"); $("dlg").showModal(); };
+  $("dCancel").onclick = () => $("dlg").close();
+  $("dSave").onclick = () => {
+    const labels = $("ta").value.split("\n").map(s => s.trim()).filter(Boolean).slice(0, 14);
+    if (!labels.length) return;
+    st.items = labels.map(l => st.items.find(i => i.label === l) || { id: "i" + (st.next++), label: l });
+    save(); pushConfig(); render(); $("dlg").close();
+  };
+  if (!LIVE) {
+    $("bSim").classList.remove("hidden");
+    $("bSim").onclick = () => {
+      const means = [.06, .12, .3, .45, .1, .4, .5, .78];
+      const gauss = () => { let u = 0; for (let k = 0; k < 6; k++) u += Math.random(); return (u - 3) / 3; };
+      let k = 0;
+      const tick = () => {
+        const a = {};
+        st.items.forEach((it, i) => { a[it.id] = Math.max(0, Math.min(1, (means[i % means.length] ?? .5) + gauss() * .32)); });
+        B.put(st.sid + "/votes/sim" + rid(5), { a, t: Date.now() });
+        if (++k < 32) setTimeout(tick, 90);
+      };
+      tick();
+    };
+  }
+  addEventListener("keydown", e => {
+    if ($("dlg").open || e.target.tagName === "TEXTAREA") return;
+    if (e.key === "r" || e.key === "R") $("bReveal").click();
+    if (e.key === "f" || e.key === "F") { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
+  });
+  setMode(); connect();
+}
+
+/* ================= PHONE ================= */
+function voter(sid) {
+  $("voter").classList.remove("hidden");
+  const cid = ls.get("sp-cid", null) || rid(10); ls.set("sp-cid", cid);
+  const key = "sp-mine-" + sid;
+  let mine = ls.get(key, {}), items = [], timer = null, saving = false, dirty = false;
+
+  const stat = (cls, txt) => { $("vstat").innerHTML = `<span class="dot ${cls}"></span>${txt}`; };
+  const count = () => { const n = items.filter(i => typeof mine[i.id] === "number").length; $("vcount").textContent = items.length ? `${n} of ${items.length} placed` : ""; };
+
+  async function flush() {
+    if (saving) { dirty = true; return; }
+    saving = true; dirty = false; stat("busy", "Saving…");
+    const a = {}; items.forEach(i => { if (typeof mine[i.id] === "number") a[i.id] = Math.round(mine[i.id] * 1000) / 1000; });
+    try { await B.put(`${sid}/votes/${cid}`, { a, t: LIVE ? { ".sv": "timestamp" } : Date.now() }); stat("", "Saved — the screen has your answers"); }
+    catch { stat("err", "Couldn't save, retrying…"); setTimeout(flush, 2000); }
+    saving = false; if (dirty) flush();
+  }
+  const queue = () => { ls.set(key, mine); count(); clearTimeout(timer); timer = setTimeout(flush, 250); };
+
+  function build() {
+    if (!items.length) { $("cards").innerHTML = `<p class="wait">Waiting for the presenter…</p>`; return; }
+    $("cards").innerHTML = items.map(it => {
+      const v = mine[it.id], set = typeof v === "number";
+      return `<div class="card"><div class="name">${esc(it.label)}<em data-h="${it.id}">${set ? "" : "not placed"}</em></div>
+        <div class="track ${set ? "" : "unset"}" data-id="${it.id}" role="slider" tabindex="0" aria-label="${esc(it.label)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${set ? Math.round(v * 100) : 50}">
+          <div class="rail spec"></div><div class="mid"></div><div class="knob" style="left:${(set ? v : .5) * 100}%"></div></div>
+        <div class="ends"><span>Tool</span><span>Assistant</span><span>Collaborator</span></div></div>`;
+    }).join("");
+    document.querySelectorAll(".track").forEach(tr => {
+      const id = tr.dataset.id, knob = tr.querySelector(".knob");
+      const setV = v => {
+        v = Math.max(0, Math.min(1, v)); mine[id] = v;
+        tr.classList.remove("unset"); knob.style.left = v * 100 + "%"; tr.setAttribute("aria-valuenow", Math.round(v * 100));
+        const h = document.querySelector(`[data-h="${id}"]`); if (h) h.textContent = "";
+      };
+      const fromX = e => { const r = tr.getBoundingClientRect(); return (e.clientX - r.left) / r.width; };
+      let drag = false;
+      tr.addEventListener("pointerdown", e => { drag = true; try { tr.setPointerCapture(e.pointerId); } catch {} setV(fromX(e)); });
+      tr.addEventListener("pointermove", e => { if (drag) setV(fromX(e)); });
+      const end = () => { if (drag) { drag = false; queue(); } };
+      tr.addEventListener("pointerup", end); tr.addEventListener("pointercancel", end);
+      tr.addEventListener("keydown", e => {
+        const d = { ArrowLeft: -.05, ArrowDown: -.05, ArrowRight: .05, ArrowUp: .05 }[e.key];
+        if (d) { e.preventDefault(); setV((typeof mine[id] === "number" ? mine[id] : .5) + d); queue(); }
+      });
+    });
+    count();
+  }
+
+  B.subscribe(sid + "/config", cfg => {
+    const next = (cfg && Array.isArray(cfg.items)) ? cfg.items : [];
+    if (JSON.stringify(next) === JSON.stringify(items)) return;
+    items = next; build();
+    if (Object.keys(mine).length) flush(); else stat("", "Connected — drag the dots to answer");
+  }, s => { if (s === "err") stat("err", "Reconnecting…"); });
+}
+}
+</script>
+</body>
+</html>
