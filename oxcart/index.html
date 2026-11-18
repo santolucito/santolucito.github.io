@@ -223,7 +223,7 @@ function sparks(x,y,n=10,col='#f3d37a'){for(let i=0;i<n;i++){const a=Math.random
 function leaves(x,y,n,cols){for(let i=0;i<n;i++)part({kind:'leaf',x:x+(Math.random()-.5)*70,y:y+(Math.random()-.5)*50,vx:(Math.random()-.5)*50,vy:20+Math.random()*30,g:40,life:1.6+Math.random(),s:5+Math.random()*4,rot:Math.random()*6,vr:(Math.random()-.5)*6,col:cols[i%cols.length]})}
 function earn(n,x,y){for(let i=0;i<n;i++)fly({name:'coin',x0:x,y0:y,x1:58,y1:44,delay:i*.16,dur:.55,arc:70,done(){G.coins++;G.coinPop=1;sfx.clink()}})}
 function spend(n,x,y){for(let i=0;i<n;i++){fly({name:'coin',x0:58,y0:44,x1:x,y1:y,delay:i*.16,dur:.5,arc:50,start(){G.coins--;sfx.clink()}})}}
-function setCap(s,say=true){G.caption=s;G.capT=0;if(say)speak(s)}
+function setCap(s){G.caption=s;G.capT=0}
 function setNext(fn){G.next=fn;G.nextT=0}
 function reward(name){G.reward={name,t:0};sfx.tada();sparks(W/2,170,18)}
 function go(name){if(G.nextName)return;G.nextName=name;G.fadeDir=1;G.next=null;G.hint=null}
@@ -263,8 +263,15 @@ function startMusic(){if(musicOn)return;musicOn=true;let i=0,beat=0,tNext=AC.cur
     while(tNext<AC.currentTime+.4){const n=TUNE[i%TUNE.length];tone(440*Math.pow(2,(n[0]-69)/12),.9,{type:'triangle',v:.045,at:tNext});
       if(beat%6===0||Math.floor(beat/6)!==Math.floor((beat-1)/6))tone(440*Math.pow(2,(BASS[Math.floor(beat/6)%8]-69)/12),1.6,{type:'sine',v:.05,at:tNext});
       beat+=n[1];tNext+=n[1]*B;i++}},120)}
-function speak(s){if(!G.sound||!('speechSynthesis'in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(s);u.rate=.88;u.pitch=1.05;u.volume=.9;speechSynthesis.speak(u)}catch(e){}}
-function toggleSound(){G.sound=!G.sound;if(master)master.gain.value=G.sound?1:0;if(!G.sound){try{speechSynthesis.cancel()}catch(e){}}}
+const FS_OK=!!(document.fullscreenEnabled||document.webkitFullscreenEnabled);
+const isFS=()=>!!(document.fullscreenElement||document.webkitFullscreenElement);
+function toggleFullscreen(){try{
+  if(isFS()){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}
+  else{const el=document.documentElement,r=(el.requestFullscreen||el.webkitRequestFullscreen).call(el,{navigationUI:'hide'});
+    const lock=()=>{try{const p=screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape');if(p&&p.catch)p.catch(()=>{})}catch(e){}};
+    if(r&&r.then)r.then(lock).catch(()=>{});else lock()}
+}catch(e){}}
+function toggleSound(){G.sound=!G.sound;if(master)master.gain.value=G.sound?1:0;}
 
 /* ---------- shared actors ---------- */
 const SLOT=[[40,46],[70,46],[100,46],[130,46],[48,23],[76,23],[104,23],[127,23]];
@@ -297,7 +304,7 @@ SCENES.title=()=>({
     txt(g,'Ox Cart to Market',0,-16,62,INK);txt(g,'a paper cut-out farm year',0,34,25,RED,'center',true);g.restore();
     txt(g,'Year '+G.year+(G.jar?'  ·  '+G.jar+' coins saved':''),W/2,222,20,INK);
     const k=1+Math.sin(t*4)*.04;g.save();g.translate(W/2,290);g.scale(k,k);sh(g);rect(g,RED,-92,-30,184,60,30);txt(g,'Play',0,1,34,PAPER);g.restore()},
-  down(){setCap('',false);go('barn')}
+  down(){setCap('');go('barn')}
 });
 
 /* ---- barn: load the cart ---- */
@@ -583,6 +590,10 @@ function drawHUD(g){PX=SC;
   if(G.caption){G.capT+=1/60;const k=ease(clamp(G.capT*3,0,1));g.save();g.font='30px '+FONT;const w=Math.min(W-240,g.measureText(G.caption).width+56),fs=g.measureText(G.caption).width+56>W-240?30*(W-296)/g.measureText(G.caption).width:30;
     g.translate(W/2,42-(1-k)*90);g.rotate(-.012);sh(g);rect(g,PAPER,-w/2,-27,w,54,6);txt(g,G.caption,0,1,fs,INK);g.restore()}
   if(G.showCoins){G.coinPop=Math.max(0,G.coinPop-.08);const k=1+G.coinPop*.18;g.save();g.translate(70,44);g.scale(k,k);g.rotate(.02);sh(g);rect(g,PAPER,-56,-28,112,56,8);put(g,'coin',-28,0,1.5,0,.5,.5);txt(g,String(G.coins),22,2,34,INK);g.restore()}
+  // full-screen button
+  if(FS_OK){const on=isFS();g.save();g.translate(W-104,42);sh(g);circ(g,PAPER,0,0,25);flat(g,()=>{g.strokeStyle=INK;g.lineWidth=3.2;g.lineCap='round';g.lineJoin='round';
+    const c=(sx,sy)=>{const a=on?4:11,b=on?11:4;g.beginPath();g.moveTo(sx*a,sy*b);g.lineTo(sx*a,sy*a);g.lineTo(sx*b,sy*a);g.stroke()};
+    c(-1,-1);c(1,-1);c(-1,1);c(1,1)});g.restore()}
   // sound button
   g.save();g.translate(W-42,42);sh(g);circ(g,PAPER,0,0,25);flat(g,()=>{poly(g,INK,[-12,-5,-6,-5,2,-12,2,12,-6,5,-12,5]);
     if(G.sound){g.strokeStyle=INK;g.lineWidth=2.5;g.lineCap='round';g.beginPath();g.arc(2,0,8,-.8,.8);g.stroke();g.beginPath();g.arc(2,0,13,-.8,.8);g.stroke()}else line(g,RED,3.5,[-14,-14,14,14])});g.restore();
@@ -622,10 +633,15 @@ let pid=null;
 stage.addEventListener('pointerdown',e=>{e.preventDefault();audioInit();if(pid!==null&&e.pointerId!==pid)return;pid=e.pointerId;try{stage.setPointerCapture(pid)}catch(_){}
   const[x,y]=toLogical(e);G.px=x;G.py=y;
   if(Math.hypot(x-(W-42),y-42)<34){toggleSound();pid=null;return}
+  if(FS_OK&&Math.hypot(x-(W-104),y-42)<34){fsDown=true;pid=null;return}
   if(G.fadeDir>0)return;
   if(G.next&&Math.hypot(x-(W-84),y-(H-84))<78){const f=G.next;G.next=null;sfx.pop();f();return}
   G.held=true;if(G.scene.down)G.scene.down(x,y)});
 stage.addEventListener('pointermove',e=>{if(e.pointerId!==pid)return;const[x,y]=toLogical(e),dx=x-G.px,dy=y-G.py;G.px=x;G.py=y;if(G.scene.move)G.scene.move(x,y,dx,dy)});
+// fullscreen must start on pointerup: browsers only count a touch as a user gesture once the finger lifts
+let fsDown=false;
+stage.addEventListener('pointerup',e=>{if(!fsDown)return;fsDown=false;const[x,y]=toLogical(e);if(Math.hypot(x-(W-104),y-42)<40){sfx.pop();toggleFullscreen()}});
+document.addEventListener('fullscreenchange',()=>setTimeout(resize,60));document.addEventListener('webkitfullscreenchange',()=>setTimeout(resize,60));
 const end=e=>{if(e.pointerId!==pid)return;pid=null;G.held=false;if(G.scene.up)G.scene.up()};
 stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
 stage.addEventListener('contextmenu',e=>e.preventDefault());
