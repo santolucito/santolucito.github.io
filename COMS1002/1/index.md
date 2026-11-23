@@ -68,7 +68,7 @@ The recording should last roughly 10 minutes (10 points). Note that in order to 
 Rubric
 
 - 60 points - Technical Sophistication. Does your project utilize your programming skills in an effective way? Have you gone significantly beyond any example code you have used? Is this "your" work?
-- 30 points - Documentation. Did you record properly (sound recorded directly from sound card of computer using share sound, 10 points). Have you shown your complete code *and* your visuals during the performance (10 points)? Have you posted the recording so that is publicly viewable (10 points)?
+- 30 points - Documentation. Did you record properly (sound recorded directly from sound card of computer using share sound, 10 points). Have you shown your complete code *and* your visuals during the performance (10 points)? Have you posted the recording so that is publicly viewable (5 points)? Does the video description include the write-up described above (5 points)?
 Does the documentation highlight both the artistic aspect of your work, as well as the technical sophistication? Your work should be equally well appreciated by both a technical and non-technical audience.
 - 10 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, you will need to put significant time into practicing live coding. Try to gain a level of fluency with Rattle that allows you to explore new creative ideas — in sound and in image — during your performance.
 

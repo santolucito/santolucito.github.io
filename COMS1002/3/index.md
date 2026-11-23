@@ -72,7 +72,7 @@ Submit the link in a .txt file along with your `controller.py`.
 Rubric
 
 - 60 points - Technical Sophistication. Does your project utilize your programming skills in an effective way? Have you gone significantly beyond any example code you have used? Is this "your" work?
-- 30 points - Documentation. Did you record properly (sound recorded directly from the computer, 10 points)? Have you shown your code, your visuals, and the board in use during the performance (10 points)? Have you posted the recording so that it is publicly viewable (10 points)?
+- 30 points - Documentation. Did you record properly (sound recorded directly from the computer, 10 points)? Have you shown your code, your visuals, and the board in use during the performance (10 points)? Have you posted the recording so that it is publicly viewable (5 points)? Does the video description include the write-up described above (5 points)?
 Does the documentation highlight both the artistic aspect of your work, as well as the technical sophistication? Your work should be equally well appreciated by both a technical and non-technical audience.
 - 10 points - Creativity. This is a subjective measure. You need to get comfortable with your work being judged in a subjective manner when working in Computing in Arts. To score full points here, spend time practicing with the board until you can play it with intention, not just wave it around.
 
