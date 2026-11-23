@@ -43,16 +43,15 @@ In this module we use Sonic Pi to explore live coding and audio.
 
 <hr>
 
-## [Module 2: Interactive Animations](./1)
+## [Module 2: Visuals](./1)
 
-In this module we use Processing to explore generative art and visuals.
+In this module we use Rattle to live code visuals alongside audio.
 
 <hr>
 
-## [Module 3: Professional Animation and Machine Learning](./3)
+## [Module 3: Hardware](./3)
 
-In this module we use Blender for professional quality animations.
-We also explore the impact of machine learning on computational art.
+In this module we use Rattle with micro:bits to turn live coding into a physical instrument.
 
 <hr>
 
@@ -61,7 +60,7 @@ We also explore the impact of machine learning on computational art.
 
 > Will any of this help me get a job?
 
-Probably. In module 1, we tackle live coding - the performative practice of writing code in front of an audience. While the art aspect of live coding may not be widely "marketable", having the confidence to write code on the spot (especially in front of people you want to impress - audience or employer) is critical to any tech job. In module 2, we work with processing.py. While our focus is on generative art, this is has significant amount of overlap in the skill set used for data visualization (for example, the gorgeous graphics produced by the New York Times on a daily basis). In module 3, we work with machine learning - currently a hot topic in the job market. 
+Probably. In module 1, we tackle live coding - the performative practice of writing code in front of an audience. While the art aspect of live coding may not be widely "marketable", having the confidence to write code on the spot (especially in front of people you want to impress - audience or employer) is critical to any tech job. In module 2, we live code visuals. While our focus is on generative art, this has a significant amount of overlap with the skill set used for data visualization (for example, the gorgeous graphics produced by the New York Times on a daily basis). In module 3, we work with hardware - reading sensors and turning physical input into output, the same skills behind interactive installations, wearables, and embedded systems. 
 
 More generally, hopefully through this class you will come to realize that any experience that you gain with computing (in any context) will be broadly applicable to many paths to gainful employment. Computing is a mindset and way of thinking more so than it is a skill set. 
 
