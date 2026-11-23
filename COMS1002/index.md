@@ -2,15 +2,23 @@
 layout: default
 title: COMS1002
 course_name: "Computing in Context: Computing and the Arts"
-course_description: "An introduction to computing through the arts — writing code to generate and manipulate multimedia, and examining authorship and the roles of artist, audience, and programmer in computational art."
+course_description: "An introduction to computing through the arts — live coding sound, visuals, and hardware in Rattle, and examining authorship and the roles of artist, audience, and programmer in computational art."
 ---
  
 # Computing in Context: Computing and the Arts
 
+This course is built around live coding: writing code in front of an audience, and treating the act of programming as part of the art.
+We use one tool, [Rattle](https://forg-lab.github.io/rattle/), all semester, and each module adds a layer to what you perform with:
+
+1. **Audio** — live code music.
+2. **Visuals** — live code music and the picture that goes with it.
+3. **Hardware** — play your piece with a micro:bit in your hand.
+
 Key Learning Objectives:
 
 - Write code to generate and manipulate multimedia
-- Discuss issues of authorship in AI generated/assisted art
+- Perform with code - live code sound, visuals, and physical interfaces in real time
+- Discuss issues of authorship in algorithmic, generative, and AI-assisted art
 - Understand the various roles in computational art - who is the audience, who is the artist, who is the programmer?
 - Contextualize computational art in its place. How is computational art presented, and how does that presentation changes its meaning?
 
@@ -26,20 +34,20 @@ Other learning objectives:
 
 ## Pre-context labs
 
-[Lab 2: coding poetry and poeticizing code](/Lab2.md)
+[Lab 2: coding poetry and poeticizing code](Lab2.md)
 
-[Lab 3: Generative Art v0.1](/Lab3.md)
+[Lab 3: Generative Art v0.1](Lab3.md)
 
-[Lab 4: Geometry](/Lab4.md)
+[Lab 4: Geometry](Lab4.md)
 
-[Lab 5: Computationally Collaborative Creativity ](/Lab5.md)
+[Lab 5: Computationally Collaborative Creativity](Lab5.md)
 
-[https://drive.google.com/drive/folders/1ktZQ_AKUgNduw1WvXostOjNLuAkNUYO6?usp=drive_link][https://drive.google.com/drive/folders/1ktZQ_AKUgNduw1WvXostOjNLuAkNUYO6?usp=drive_link]
+[Pre-context lab materials (Google Drive)](https://drive.google.com/drive/folders/1ktZQ_AKUgNduw1WvXostOjNLuAkNUYO6?usp=drive_link)
 
 
 ## [Module 1: Audio](./2)
 
-In this module we use Sonic Pi to explore live coding and audio.
+In this module we use Rattle to explore live coding and audio.
 
 <hr>
 
