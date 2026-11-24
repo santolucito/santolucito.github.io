@@ -20,6 +20,7 @@ During your performance, you must:
 - Code, live, in real-time. **Show your code**.
 - Improvise, though you can plan most of the piece ahead of time. Even with most of the code pre written in a separate window, you should be experiment with new values for random seeds, loops, pitch values, etc during the "performance"
 - Generally, adhere to the Live Code Manifesto
+- Rerun and stop your code with the keyboard, not the buttons: `Cmd+Enter` (`Ctrl+Enter` on Windows) reruns your code while it keeps playing, and `Cmd+.` (`Ctrl+.`) stops everything. Do not click the Run/Stop buttons (2 points)
 
 Some language features you *must** use include:
 
@@ -29,10 +30,11 @@ Some language features you *must** use include:
 - play samples (5 points)
 - use a synth (5 points)
 
-The recording should last roughly 10 minutes (10 points). Note that in order to achieve this length, you will need to improvise a bit with your code in real-time. Do not plan out all 10 minutes exactly ahead of time, but instead have "goalposts" as discussed in class (10 points). Demonstrate familiarity with a core subset of the language (10 points). Make sure to have a focus on building a "soundscape" as a opposed to replicating your favorite sound (5 points).
+The recording should last roughly 10 minutes (8 points). Note that in order to achieve this length, you will need to improvise a bit with your code in real-time. Do not plan out all 10 minutes exactly ahead of time, but instead have "goalposts" as discussed in class (10 points). Demonstrate familiarity with a core subset of the language (10 points). Make sure to have a focus on building a "soundscape" as a opposed to replicating your favorite sound (5 points).
 
 ### Key tips
 
+- Practice with the hotkeys from day one: `Cmd+Enter` to rerun, `Cmd+.` to stop. Rerunning swaps in your new code without stopping the music; clicking Stop and then Run restarts everything and breaks the flow of the performance.
 - Make a short (30 sec) recording first to make sure your screen share and audio recording work working correctly
 - If you use zoom, make sure to share screen and share computer audio before recoding
 - You do not need to include your camera/face in the recording.
@@ -70,6 +72,8 @@ What new challenges arise in programming audio as opposed to non-time domain pro
 
 The goal of this lab is for you to practice live coding in Rattle, learn the basic interface, and make a short recording. 
 
+
+**Use the hotkeys, not the buttons.** Rerun your code with `Cmd+Enter` (`Ctrl+Enter` on Windows) — the music keeps playing and your new code takes over. Stop everything with `Cmd+.` (`Ctrl+.`). Get in the habit now; the projects require it.
 
 Start from this code. The **outer loop** picks a root note for each phrase, and the **inner loop** picks pitches and rhythms within the phrase.
 

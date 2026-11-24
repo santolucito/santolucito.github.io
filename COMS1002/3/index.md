@@ -33,6 +33,7 @@ During your performance, you must:
 - Code, live, in real-time. **Show your code**, your visuals, **and the board in your hand**.
 - Improvise, though you can plan most of the piece ahead of time. You should change both your code and the way you use the board during the "performance"
 - Generally, adhere to the Live Code Manifesto
+- Rerun and stop your code with the keyboard, not the buttons: `Cmd+Enter` (`Ctrl+Enter` on Windows) reruns your code while it keeps playing, and `Cmd+.` (`Ctrl+.`) stops everything. Do not click the Run/Stop buttons (2 points)
 
 Audio and visual features you *must* use (carried over from Projects 1 and 2):
 
@@ -49,10 +50,11 @@ Hardware features you *must* use:
 - at least one trigger with `hit()` (button, shake, or logo) (5 points)
 - **modify `controller.py`** to send at least one new channel that it does not send already — for example the compass heading, the temperature, the microphone's sound level (micro:bit V2), or a sensor wired to a pin — and use it in your piece (5 points)
 
-The recording should last roughly 10 minutes (10 points). Do not plan out all 10 minutes exactly ahead of time, but instead have "goalposts" as discussed in class (5 points). Design the mapping so that the board feels like an instrument — for example, letting tilt choose *where in a scale* a figure sits rather than just turning a filter knob (5 points). Make sure gesture, sound, and picture belong together as one performance (5 points).
+The recording should last roughly 10 minutes (8 points). Do not plan out all 10 minutes exactly ahead of time, but instead have "goalposts" as discussed in class (5 points). Design the mapping so that the board feels like an instrument — for example, letting tilt choose *where in a scale* a figure sits rather than just turning a filter knob (5 points). Make sure gesture, sound, and picture belong together as one performance (5 points).
 
 ### Key tips
 
+- Practice with the hotkeys from day one: `Cmd+Enter` to rerun, `Cmd+.` to stop. Rerunning swaps in your new code without stopping the music; clicking Stop and then Run restarts everything and breaks the flow of the performance.
 - Flash the board and test the connection well before you record. The panel in the bottom-left corner of Rattle shows each channel as it arrives — if it moves when you tilt the board, everything is working.
 - Channels carry values from **0 to 1**. Scale on the board (`unit()` in `controller.py` does this), then map in Rattle with `mb(name, lo, hi)`. A new channel that sits at `1.00` and never moves is sending raw values above 1.
 - Use a scale that cannot play a wrong note (e.g. pentatonic) when a tilt picks the notes.
@@ -118,6 +120,8 @@ The goal of this lab is to get a micro:bit talking to Rattle, play it, and make 
 5. In [Rattle](https://forg-lab.github.io/rattle/), click **micro:bit** in the header and pick the board. Tilt it and watch `tilt_x` and `tilt_y` move in the panel in the bottom-left corner.
 
 **Part 2: play it.** Run this code, turn on **visuals**, and play the board.
+
+**Use the hotkeys, not the buttons.** Rerun your code with `Cmd+Enter` (`Ctrl+Enter` on Windows) — the music keeps playing and your new code takes over. Stop everything with `Cmd+.` (`Ctrl+.`). Get in the habit now; the projects require it.
 
 ```python
 use_bpm(112)
